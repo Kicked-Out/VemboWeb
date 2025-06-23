@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { PeriodService } from "../styles/periodService";
+import { PeriodService } from "../services/periodService";
 import { useEffect, useState } from "react";
 import type { PeriodDTO } from "../DTOs/periodDTO";
+// import type { UnitDTO } from "../DTOs/unitDTO";
+// import { UnitService } from "../services/unitService";
 
 export default function Home() {
     // PeriodService Usage Example
@@ -33,6 +35,34 @@ export default function Home() {
 
         fetchPeriodById(3);
     }, []);
+
+    // const [units, setUnits] = useState<UnitDTO[]>([]);
+
+    // useEffect(() => {
+    //     const getUnits = async () => {
+    //         const data = await UnitService.getAll();
+
+    //         console.log("Fetched units:", data);
+
+    //         setUnits(data);
+    //     };
+
+    //     getUnits();
+    // }, []);
+
+    // const [unit, setUnit] = useState<UnitDTO | null>(null);
+
+    // useEffect(() => {
+    //     const getUnit = async () => {
+    //         const data = await UnitService.getById(2);
+
+    //         console.log("Fetched unit by Id:", data);
+
+    //         setUnit(data);
+    //     };
+
+    //     getUnit();
+    // }, []);
 
     return (
         // ТО СЯ МОНА МІНЯТИ, DIZI
