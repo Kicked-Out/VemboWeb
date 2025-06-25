@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { PeriodService } from "../services/periodService";
 import { useEffect, useState } from "react";
 import type { PeriodDTO } from "../DTOs/periodDTO";
+import { LevelService } from "../services/levelService";
+import type { LevelDTO } from "../DTOs/levelDTO";
 // import type { UnitDTO } from "../DTOs/unitDTO";
 // import { UnitService } from "../services/unitService";
 
@@ -62,6 +64,34 @@ export default function Home() {
     //     };
 
     //     getUnit();
+    // }, []);
+
+    // const [levels, setLevels] = useState<LevelDTO[]>([]);
+
+    // useEffect(() => {
+    //     const getLevels = async () => {
+    //         const data = await LevelService.getAll();
+
+    //         console.log("Fetched levels:", data);
+
+    //         setLevels(data);
+    //     };
+
+    //     getLevels();
+    // }, []);
+
+    // const [level, getLevel] = useState<LevelDTO | null>(null);
+
+    // useEffect(() => {
+    //     const getLevel = async () => {
+    //         const data = await LevelService.getById(1);
+
+    //         console.log("Fetched level by Id:", data);
+
+    //         setLevels(data);
+    //     };
+
+    //     getLevel();
     // }, []);
 
     return (
