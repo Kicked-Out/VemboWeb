@@ -8,6 +8,8 @@ import { LessonService } from "../services/lessonService";
 import type { LessonDTO } from "../DTOs/lessonDTO";
 import ExerciseService from "../services/exerciseService";
 import type { ExerciseDTO } from "../DTOs/exerciseDTO";
+import type { TopicDTO } from "../DTOs/topicDTO";
+import TopicService from "../services/topicService";
 // import type { UnitDTO } from "../DTOs/unitDTO";
 // import { UnitService } from "../services/unitService";
 
@@ -70,33 +72,33 @@ export default function Home() {
     //     getUnit();
     // }, []);
 
-    // const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
+    const [topics, setTopics] = useState<TopicDTO[]>([]);
 
-    // useEffect(() => {
-    //     const getExercises = async () => {
-    //         const data = await ExerciseService.getAll();
+    useEffect(() => {
+        const getTopics = async () => {
+            const data = await TopicService.getAll();
 
-    //         setExercises(data);
+            console.log("Fetched topics:", data);
 
-    //         console.log("Fetched exercises:", data);
-    //     };
+            setTopics(data);
+        };
 
-    //     getExercises();
-    // }, []);
+        getTopics();
+    }, []);
 
-    // const [exercise, setExercise] = useState<ExerciseDTO | null>(null);
+    const [topic, setTopic] = useState<TopicDTO | null>(null);
 
-    // useEffect(() => {
-    //     const getExercise = async () => {
-    //         const data = await ExerciseService.getById(1);
+    useEffect(() => {
+        const getTopic = async () => {
+            const data = await TopicService.getById(1);
 
-    //         setExercise(data);
+            console.log("Fetched topic by Id:", data);
 
-    //         console.log("Fetched exercise by Id:", data);
-    //     };
+            setTopic(data);
+        };
 
-    //     getExercise();
-    // }, []);
+        getTopic();
+    }, []);
 
     return (
         // ТО СЯ МОНА МІНЯТИ, DIZI
