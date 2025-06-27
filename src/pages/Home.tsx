@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import type { PeriodDTO } from "../DTOs/periodDTO";
 import { LevelService } from "../services/levelService";
 import type { LevelDTO } from "../DTOs/levelDTO";
+import { LessonService } from "../services/lessonService";
+import type { LessonDTO } from "../DTOs/lessonDTO";
 // import type { UnitDTO } from "../DTOs/unitDTO";
 // import { UnitService } from "../services/unitService";
 
@@ -11,32 +13,32 @@ export default function Home() {
     // PeriodService Usage Example
 
     // Get All Periods
-    const [periods, setPeriods] = useState<PeriodDTO[]>([]);
+    // const [periods, setPeriods] = useState<PeriodDTO[]>([]);
 
-    useEffect(() => {
-        const fetchPeriods = async () => {
-            const data = await PeriodService.getAll();
-            console.log("Fetched periods:", data);
+    // useEffect(() => {
+    //     const fetchPeriods = async () => {
+    //         const data = await PeriodService.getAll();
+    //         console.log("Fetched periods:", data);
 
-            setPeriods(data);
-        };
+    //         setPeriods(data);
+    //     };
 
-        fetchPeriods();
-    }, []);
+    //     fetchPeriods();
+    // }, []);
 
-    // Get Period By ID
-    const [period, setPeriod] = useState<PeriodDTO | null>(null);
+    // // Get Period By ID
+    // const [period, setPeriod] = useState<PeriodDTO | null>(null);
 
-    useEffect(() => {
-        const fetchPeriodById = async (id: number) => {
-            const data = await PeriodService.getById(id);
+    // useEffect(() => {
+    //     const fetchPeriodById = async (id: number) => {
+    //         const data = await PeriodService.getById(id);
 
-            console.log("Fetched period by Id:", data);
-            setPeriod(data);
-        };
+    //         console.log("Fetched period by Id:", data);
+    //         setPeriod(data);
+    //     };
 
-        fetchPeriodById(3);
-    }, []);
+    //     fetchPeriodById(3);
+    // }, []);
 
     // const [units, setUnits] = useState<UnitDTO[]>([]);
 
@@ -93,6 +95,34 @@ export default function Home() {
 
     //     getLevel();
     // }, []);
+
+    const [lessons, setLessons] = useState<LessonDTO[]>([]);
+
+    useEffect(() => {
+        const getLessons = async () => {
+            const data: LessonDTO[] = await LessonService.getAll();
+
+            console.log(data);
+
+            setLessons(data);
+        };
+
+        getLessons();
+    }, []);
+
+    const [lesson, setLesson] = useState<LessonDTO | null>(null);
+
+    useEffect(() => {
+        const getLesson = async () => {
+            const data: LessonDTO | null = await LessonService.getById(1);
+
+            console.log(data);
+
+            setLesson(data);
+        };
+
+        getLesson();
+    }, []);
 
     return (
         // ТО СЯ МОНА МІНЯТИ, DIZI
