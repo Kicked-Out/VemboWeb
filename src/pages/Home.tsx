@@ -6,6 +6,8 @@ import { LevelService } from "../services/levelService";
 import type { LevelDTO } from "../DTOs/levelDTO";
 import { LessonService } from "../services/lessonService";
 import type { LessonDTO } from "../DTOs/lessonDTO";
+import ExerciseService from "../services/exerciseService";
+import type { ExerciseDTO } from "../DTOs/exerciseDTO";
 // import type { UnitDTO } from "../DTOs/unitDTO";
 // import { UnitService } from "../services/unitService";
 
@@ -68,61 +70,33 @@ export default function Home() {
     //     getUnit();
     // }, []);
 
-    // const [levels, setLevels] = useState<LevelDTO[]>([]);
+    // const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
 
     // useEffect(() => {
-    //     const getLevels = async () => {
-    //         const data = await LevelService.getAll();
+    //     const getExercises = async () => {
+    //         const data = await ExerciseService.getAll();
 
-    //         console.log("Fetched levels:", data);
+    //         setExercises(data);
 
-    //         setLevels(data);
+    //         console.log("Fetched exercises:", data);
     //     };
 
-    //     getLevels();
+    //     getExercises();
     // }, []);
 
-    // const [level, getLevel] = useState<LevelDTO | null>(null);
+    // const [exercise, setExercise] = useState<ExerciseDTO | null>(null);
 
     // useEffect(() => {
-    //     const getLevel = async () => {
-    //         const data = await LevelService.getById(1);
+    //     const getExercise = async () => {
+    //         const data = await ExerciseService.getById(1);
 
-    //         console.log("Fetched level by Id:", data);
+    //         setExercise(data);
 
-    //         setLevels(data);
+    //         console.log("Fetched exercise by Id:", data);
     //     };
 
-    //     getLevel();
+    //     getExercise();
     // }, []);
-
-    const [lessons, setLessons] = useState<LessonDTO[]>([]);
-
-    useEffect(() => {
-        const getLessons = async () => {
-            const data: LessonDTO[] = await LessonService.getAll();
-
-            console.log(data);
-
-            setLessons(data);
-        };
-
-        getLessons();
-    }, []);
-
-    const [lesson, setLesson] = useState<LessonDTO | null>(null);
-
-    useEffect(() => {
-        const getLesson = async () => {
-            const data: LessonDTO | null = await LessonService.getById(1);
-
-            console.log(data);
-
-            setLesson(data);
-        };
-
-        getLesson();
-    }, []);
 
     return (
         // ТО СЯ МОНА МІНЯТИ, DIZI
