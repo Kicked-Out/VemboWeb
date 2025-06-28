@@ -1,0 +1,26 @@
+[
+    {
+        "Id": 9,
+        "Title": "Антисанітарія",
+        "IsCorrect": true,
+        "QuestionId": 3
+    },
+    {
+        "Id": 10,
+        "Title": "Велика кількість парків",
+        "IsCorrect": false,
+        "QuestionId": 3
+    },
+    {
+        "Id": 11,
+        "Title": "Високі зарплати",
+        "IsCorrect": false,
+        "QuestionId": 3
+    },
+    {
+        "Id": 12,
+        "Title": "Чисте повітря",
+        "IsCorrect": false,
+        "QuestionId": 3
+    }
+]
