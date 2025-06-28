@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
-import { PeriodService } from "../services/periodService";
+// import { PeriodService } from "../services/periodService";
 import { useEffect, useState } from "react";
-import type { PeriodDTO } from "../DTOs/periodDTO";
-import { LevelService } from "../services/levelService";
-import type { LevelDTO } from "../DTOs/levelDTO";
-import { LessonService } from "../services/lessonService";
-import type { LessonDTO } from "../DTOs/lessonDTO";
-import ExerciseService from "../services/exerciseService";
-import type { ExerciseDTO } from "../DTOs/exerciseDTO";
-import type { TopicDTO } from "../DTOs/topicDTO";
-import TopicService from "../services/topicService";
+// import type { PeriodDTO } from "../DTOs/periodDTO";
+// import { LevelService } from "../services/levelService";
+// import type { LevelDTO } from "../DTOs/levelDTO";
+// import { LessonService } from "../services/lessonService";
+// import type { LessonDTO } from "../DTOs/lessonDTO";
+// import ExerciseService from "../services/exerciseService";
+// import type { ExerciseDTO } from "../DTOs/exerciseDTO";
+// import type { TopicDTO } from "../DTOs/topicDTO";
+// import TopicService from "../services/topicService";
+import type { QuestionDTO } from "../DTOs/questionDTO";
+import { QuestionService } from "../services/questionService";
 // import type { UnitDTO } from "../DTOs/unitDTO";
 // import { UnitService } from "../services/unitService";
 
@@ -72,32 +74,32 @@ export default function Home() {
     //     getUnit();
     // }, []);
 
-    const [topics, setTopics] = useState<TopicDTO[]>([]);
+    const [questions, setQuestions] = useState<QuestionDTO[]>([]);
 
     useEffect(() => {
-        const getTopics = async () => {
-            const data = await TopicService.getAll();
+        const getQuestions = async () => {
+            const data = await QuestionService.getAllFromExercise(1);
 
-            console.log("Fetched topics:", data);
+            console.log("Fetched questions:", data);
 
-            setTopics(data);
+            setQuestions(data);
         };
 
-        getTopics();
+        getQuestions();
     }, []);
 
-    const [topic, setTopic] = useState<TopicDTO | null>(null);
+    const [question, setQuestion] = useState<QuestionDTO | null>(null);
 
     useEffect(() => {
-        const getTopic = async () => {
-            const data = await TopicService.getById(1);
+        const getQuestion = async () => {
+            const data = await QuestionService.getByIdFromExercise(1, 1);
 
-            console.log("Fetched topic by Id:", data);
+            console.log("Fetched question by Id:", data);
 
-            setTopic(data);
+            setQuestion(data);
         };
 
-        getTopic();
+        getQuestion();
     }, []);
 
     return (
