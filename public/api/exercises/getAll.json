@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "exerciseType": "single-choice",
+        "title": "Виберіть правильну відповідь.",
+        "lessonId": 1,
+        "order": 1
+    },
+    {
+        "id": 2,
+        "exerciseType": "single-choice",
+        "title": "Виберіть правильну відповідь.",
+        "lessonId": 1,
+        "order": 2
+    },
+    {
+        "id": 3,
+        "exerciseType": "single-choice",
+        "title": "Виберіть правильну відповідь.",
+        "lessonId": 1,
+        "order": 3
+    },
+    {
+        "id": 4,
+        "exerciseType": "single-choice",
+        "title": "Виберіть правильну відповідь.",
+        "lessonId": 1,
+        "order": 4
+    },
+    {
+        "id": 5,
+        "exerciseType": "single-choice",
+        "title": "Виберіть правильну відповідь.",
+        "lessonId": 1,
+        "order": 5
+    },
+    {
+        "id": 6,
+        "exerciseType": "multiple-choice",
+        "title": "Виберіть кілька правильних відповідей.",
+        "lessonId": 1,
+        "order": 6
+    },
+    {
+        "id": 7,
+        "exerciseType": "multiple-choice",
+        "title": "Виберіть кілька правильних відповідей.",
+        "lessonId": 1,
+        "order": 7
+    },
+    {
+        "id": 8,
+        "exerciseType": "multiple-choice",
+        "title": "Виберіть кілька правильних відповідей.",
+        "lessonId": 1,
+        "order": 8
+    },
+    {
+        "id": 9,
+        "exerciseType": "multiple-choice",
+        "title": "Виберіть кілька правильних відповідей.",
+        "lessonId": 1,
+        "order": 9
+    },
+    {
+        "id": 10,
+        "exerciseType": "multiple-choice",
+        "title": "Виберіть кілька правильних відповідей.",
+        "lessonId": 1,
+        "order": 10
+    },
+    {
+        "id": 11,
+        "exerciseType": "single-choice",
+        "title": "Виберіть правильну відповідь.",
+        "lessonId": 1,
+        "order": 11
+    },
+    {
+        "id": 12,
+        "exerciseType": "multiple-choice",
+        "title": "Виберіть кілька правильних відповідей.",
+        "lessonId": 1,
+        "order": 12
+    },
+    {
+        "id": 13,
+        "exerciseType": "multiple-choice",
+        "title": "Виберіть кілька правильних відповідей.",
+        "lessonId": 1,
+        "order": 13
+    },
+    {
+        "id": 14,
+        "exerciseType": "multiple-choice",
+        "title": "Виберіть кілька правильних відповідей.",
+        "lessonId": 1,
+        "order": 14
+    },
+    {
+        "id": 15,
+        "exerciseType": "multiple-choice",
+        "title": "Виберіть кілька правильних відповідей.",
+        "lessonId": 1,
+        "order": 15
+    },
+    {
+        "id": 16,
+        "exerciseType": "multiple-choice",
+        "title": "Виберіть кілька правильних відповідей.",
+        "lessonId": 1,
+        "order": 16
+    }
+]
