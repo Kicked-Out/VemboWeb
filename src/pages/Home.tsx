@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 // import { PeriodService } from "../services/periodService";
 import { useEffect, useState } from "react";
+import type { AnswerDTO } from "../DTOs/answerDTO";
+import { AnswerService } from "../services/answerService";
 // import type { PeriodDTO } from "../DTOs/periodDTO";
 // import { LevelService } from "../services/levelService";
 // import type { LevelDTO } from "../DTOs/levelDTO";
@@ -10,8 +12,8 @@ import { useEffect, useState } from "react";
 // import type { ExerciseDTO } from "../DTOs/exerciseDTO";
 // import type { TopicDTO } from "../DTOs/topicDTO";
 // import TopicService from "../services/topicService";
-import type { QuestionDTO } from "../DTOs/questionDTO";
-import { QuestionService } from "../services/questionService";
+// import type { QuestionDTO } from "../DTOs/questionDTO";
+// import { QuestionService } from "../services/questionService";
 // import type { UnitDTO } from "../DTOs/unitDTO";
 // import { UnitService } from "../services/unitService";
 
@@ -73,34 +75,6 @@ export default function Home() {
 
     //     getUnit();
     // }, []);
-
-    const [questions, setQuestions] = useState<QuestionDTO[]>([]);
-
-    useEffect(() => {
-        const getQuestions = async () => {
-            const data = await QuestionService.getAllFromExercise(1);
-
-            console.log("Fetched questions:", data);
-
-            setQuestions(data);
-        };
-
-        getQuestions();
-    }, []);
-
-    const [question, setQuestion] = useState<QuestionDTO | null>(null);
-
-    useEffect(() => {
-        const getQuestion = async () => {
-            const data = await QuestionService.getByIdFromExercise(1, 1);
-
-            console.log("Fetched question by Id:", data);
-
-            setQuestion(data);
-        };
-
-        getQuestion();
-    }, []);
 
     return (
         // ТО СЯ МОНА МІНЯТИ, DIZI

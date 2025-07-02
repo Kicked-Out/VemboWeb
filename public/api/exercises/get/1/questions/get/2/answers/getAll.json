@@ -1,0 +1,26 @@
+[
+    {
+        "Id": 5,
+        "Title": "Мали мало землі",
+        "IsCorrect": true,
+        "QuestionId": 2
+    },
+    {
+        "Id": 6,
+        "Title": "Мали багато землі",
+        "IsCorrect": false,
+        "QuestionId": 2
+    },
+    {
+        "Id": 7,
+        "Title": "Не платили податки",
+        "IsCorrect": false,
+        "QuestionId": 2
+    },
+    {
+        "Id": 8,
+        "Title": "Мали кращі умови",
+        "IsCorrect": false,
+        "QuestionId": 2
+    }
+]
