@@ -97,3 +97,7 @@ button {
     border-color: rgb(159, 199, 212);
     color: white;
 }
+
+.flex {
+    display: flex;
+}
