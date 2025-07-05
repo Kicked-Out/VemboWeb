@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import NavBar from "./components/navigation/navBar";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
+import Registration from "./pages/Registration";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/lesson" element={<Lesson />} />
+                    <Route path="/registration" element={<Registration />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
 
