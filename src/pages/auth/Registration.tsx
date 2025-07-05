@@ -1,4 +1,5 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 export default function Registration() {
     type Inputs = {
@@ -54,6 +55,28 @@ export default function Registration() {
 
                 <input type="submit" value={"Create Profile"} />
             </form>
+
+            <p>
+                Already have an account? <Link to="/login">Sign In</Link>
+            </p>
+
+            <div>
+                <hr />
+                Or
+                <hr />
+            </div>
+
+            <div>
+                <div>
+                    <div>Google</div>
+
+                    <div>Facebook</div>
+                </div>
+
+                <div>
+                    <div>Apple</div>
+                </div>
+            </div>
         </div>
     );
 }
