@@ -77,10 +77,7 @@ export default function Home() {
     // }, []);
 
     return (
-        // ТО СЯ МОНА МІНЯТИ, DIZI
         <div>
-            <h1>Hello. It's me. VEMBO</h1>
-
             <Link to="/lesson">Go To Lesson</Link>
         </div>
     );
