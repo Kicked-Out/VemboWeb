@@ -1,0 +1,26 @@
+[
+    {
+        "Id": 41,
+        "Title": "Поміщики",
+        "IsCorrect": false,
+        "QuestionId": 26
+    },
+    {
+        "Id": 42,
+        "Title": "Робітники",
+        "IsCorrect": true,
+        "QuestionId": 26
+    },
+    {
+        "Id": 43,
+        "Title": "Військові",
+        "IsCorrect": false,
+        "QuestionId": 26
+    },
+    {
+        "Id": 44,
+        "Title": "Дворяни",
+        "IsCorrect": false,
+        "QuestionId": 26
+    }
+]

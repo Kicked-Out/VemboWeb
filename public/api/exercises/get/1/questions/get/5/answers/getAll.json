@@ -1,0 +1,26 @@
+[
+    {
+        "Id": 17,
+        "Title": "Зростали ціни",
+        "IsCorrect": true,
+        "QuestionId": 5
+    },
+    {
+        "Id": 18,
+        "Title": "Знижувались ціни",
+        "IsCorrect": false,
+        "QuestionId": 5
+    },
+    {
+        "Id": 19,
+        "Title": "Зникали податки",
+        "IsCorrect": false,
+        "QuestionId": 5
+    },
+    {
+        "Id": 20,
+        "Title": "Збільшилась зарплата",
+        "IsCorrect": false,
+        "QuestionId": 5
+    }
+]
