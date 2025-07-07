@@ -6,7 +6,8 @@ import NotFound from "./pages/NotFound";
 import NavBar from "./components/navigation/navBar";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
-import Registration from "./pages/Registration";
+import Registration from "./pages/auth/Registration";
+import Login from "./pages/auth/Login";
 
 function App() {
     return (
@@ -17,10 +18,11 @@ function App() {
                 <Header />
 
                 <Routes>
+                    <Route path="*" element={<NotFound />} />
                     <Route path="/" element={<Home />} />
                     <Route path="/lesson" element={<Lesson />} />
-                    <Route path="/registration" element={<Registration />} />
-                    <Route path="*" element={<NotFound />} />
+                    <Route path="/register" element={<Registration />} />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
 
                 <Footer />
