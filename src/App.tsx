@@ -5,6 +5,7 @@ import Lesson from "./pages/Lesson";
 import NotFound from "./pages/NotFound";
 import NavBar from "./components/navigation/navBar";
 import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
 
 function App() {
     return (
@@ -19,6 +20,8 @@ function App() {
                     <Route path="/lesson" element={<Lesson />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
+
+                <Footer />
             </div>
         </div>
     );
