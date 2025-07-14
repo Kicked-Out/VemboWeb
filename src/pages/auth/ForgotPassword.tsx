@@ -1,6 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 
-export default function RestorePassword() {
+export default function ForgotPassword() {
     type Inputs = {
         email: string;
     }
