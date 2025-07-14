@@ -27,9 +27,9 @@ export default function Registration() {
             <h1>Profile Creating</h1>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...(register("name"), { required: false })} placeholder="Name (Optional)" />
+                <input {...register("name", { required: false })} placeholder="Name (Optional)" />
 
-                <input {...(register("email"), { required: true })} placeholder="Email" />
+                <input {...register("email", { required: true })} placeholder="Email" type="email" />
 
                 <input
                     {...register("password", {
