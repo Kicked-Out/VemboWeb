@@ -1,8 +1,8 @@
 export interface ExerciseDTO {
-    Id: number;
-    ExerciseType: string;
-    Title: string;
-    LessonId: number;
-    Difficulty: string;
-    Order: number;
+    id: number;
+    exerciseType: string;
+    title: string;
+    lessonId: number;
+    difficulty: string;
+    order: number;
 }

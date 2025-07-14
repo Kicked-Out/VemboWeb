@@ -1,232 +1,232 @@
 [
     {
         "id": 1,
-        "title": "Скільки годин працювали робітники?",
+        "title": "How many hours did the workers work?",
         "exerciseId": 1
     },
     {
         "id": 2,
-        "title": "Чому селяни були незадоволені?",
+        "title": "Why were the peasants dissatisfied?",
         "exerciseId": 2
     },
     {
         "id": 3,
-        "title": "Що турбувало мешканців міст?",
+        "title": "What were the concerns of city residents?",
         "exerciseId": 3
     },
     {
         "id": 4,
-        "title": "Хто найбільше страждав від безземелля?",
+        "title": "Who suffered the most from landlessness?",
         "exerciseId": 4
     },
     {
         "id": 5,
-        "title": "Як війна впливала на побут?",
+        "title": "How did the war affect everyday life?",
         "exerciseId": 5
     },
     {
         "id": 6,
-        "title": "Хто працював понад 12 годин?",
+        "title": "Who worked more than 12 hours?",
         "exerciseId": 6
     },
     {
         "id": 7,
-        "title": "Де жили робітники?",
+        "title": "Where did the workers live?",
         "exerciseId": 6
     },
     {
         "id": 8,
-        "title": "Хто отримував найнижчу оплату?",
+        "title": "Who received the lowest pay?",
         "exerciseId": 6
     },
     {
         "id": 9,
-        "title": "Хто не мав медичної допомоги?",
+        "title": "Who did not have medical care?",
         "exerciseId": 6
     },
     {
         "id": 10,
-        "title": "Що заважало селянам купити землю?",
+        "title": "What prevented peasants from buying land?",
         "exerciseId": 7
     },
     {
         "id": 11,
-        "title": "Що викликало голод у селах?",
+        "title": "What caused the famine in the villages?",
         "exerciseId": 7
     },
     {
         "id": 12,
-        "title": "Що призводило до втрати врожаю?",
+        "title": "What caused the crop failure?What caused the loss of fertility?",
         "exerciseId": 7
     },
     {
         "id": 13,
-        "title": "Які податки платили селяни?",
+        "title": "What taxes did the peasants pay?",
         "exerciseId": 7
     },
     {
         "id": 14,
-        "title": "Хто страждав від антисанітарії?",
+        "title": "Who suffered from unsanitary conditions?",
         "exerciseId": 8
     },
     {
         "id": 15,
-        "title": "Де не було каналізації?",
+        "title": "Where was there no sewerage?",
         "exerciseId": 8
     },
     {
         "id": 16,
-        "title": "Де виникали епідемії?",
+        "title": "Where did the epidemics occur?",
         "exerciseId": 8
     },
     {
         "id": 17,
-        "title": "Чому в містах бракувало лікарень?",
+        "title": "Why did cities lack hospitals?",
         "exerciseId": 8
     },
     {
         "id": 18,
-        "title": "Хто працював з дитячого віку?",
+        "title": "Who has been working since childhood?",
         "exerciseId": 9
     },
     {
         "id": 19,
-        "title": "Хто не мав права голосу?",
+        "title": "Who doesn't have the right to vote?",
         "exerciseId": 9
     },
     {
         "id": 20,
-        "title": "Хто працював без вихідних?",
+        "title": "Who worked seven days a week?",
         "exerciseId": 9
     },
     {
         "id": 21,
-        "title": "Хто не мав освіти?",
+        "title": "Who had no education?",
         "exerciseId": 9
     },
     {
         "id": 22,
-        "title": "Що вимагали робітники під час страйків?",
+        "title": "What did the workers demand during the strikes?",
         "exerciseId": 10
     },
     {
         "id": 23,
-        "title": "Які права просили селяни?",
+        "title": "What rights did the peasants ask for?",
         "exerciseId": 10
     },
     {
         "id": 24,
-        "title": "Що хотіли змінити міщани?",
+        "title": "What did the townspeople want to change?",
         "exerciseId": 10
     },
     {
         "id": 25,
-        "title": "Які проблеми об’єднували людей?",
+        "title": "What issues united people?",
         "exerciseId": 10
     },
     {
         "id": 26,
-        "title": "Хто брав участь у протестах?",
+        "title": "Who participated in the protests?",
         "exerciseId": 11
     },
     {
         "id": 27,
-        "title": "Хто страждав від зростання цін?",
+        "title": "Who suffered from rising prices?",
         "exerciseId": 12
     },
     {
         "id": 28,
-        "title": "Хто першим відчув продовольчу кризу?",
+        "title": "Who was the first to feel the food crisis?",
         "exerciseId": 12
     },
     {
         "id": 29,
-        "title": "Хто не мав запасів їжі?",
+        "title": "Who had no food supplies?",
         "exerciseId": 12
     },
     {
         "id": 30,
-        "title": "Хто втрачав через мобілізацію?",
+        "title": "Who lost because of mobilization?",
         "exerciseId": 12
     },
     {
         "id": 31,
-        "title": "Хто вважався 'нижчим класом'?",
+        "title": "Who was considered the 'lower class'?",
         "exerciseId": 13
     },
     {
         "id": 32,
-        "title": "Хто жив у бараках біля фабрик?",
+        "title": "Who lived in the barracks near the factories?",
         "exerciseId": 13
     },
     {
         "id": 33,
-        "title": "Хто не міг купити ліки?",
+        "title": "Who couldn't buy medicine?",
         "exerciseId": 13
     },
     {
         "id": 34,
-        "title": "Хто харчувався один раз на день?",
+        "title": "Who ate once a day?",
         "exerciseId": 13
     },
     {
         "id": 35,
-        "title": "Хто не міг володіти землею?",
+        "title": "Who could not own land?",
         "exerciseId": 14
     },
     {
         "id": 36,
-        "title": "Хто платив найбільше податків?",
+        "title": "Who paid the most taxes?",
         "exerciseId": 14
     },
     {
         "id": 37,
-        "title": "Хто не міг судитися з поміщиками?",
+        "title": "Who could not sue the landlords?",
         "exerciseId": 14
     },
     {
         "id": 38,
-        "title": "Хто не мав представництва у владі?",
+        "title": "Who did not have representation in the government?",
         "exerciseId": 14
     },
     {
         "id": 39,
-        "title": "Хто не міг змінити місце проживання?",
+        "title": "Who could not change their place of residence?",
         "exerciseId": 15
     },
     {
         "id": 40,
-        "title": "Хто потрапляв у боргову кабалу?",
+        "title": "Who fell into debt bondage?",
         "exerciseId": 15
     },
     {
         "id": 41,
-        "title": "Хто не мав захисту від звільнення?",
+        "title": "Who did not have protection from dismissal?",
         "exerciseId": 15
     },
     {
         "id": 42,
-        "title": "Хто не мав пенсії?",
+        "title": "Who didn't have a pension?",
         "exerciseId": 15
     },
     {
         "id": 43,
-        "title": "Які проблеми викликали протести?",
+        "title": "What problems did the protests cause?",
         "exerciseId": 16
     },
     {
         "id": 44,
-        "title": "Які верстви не довіряли владі?",
+        "title": "Which groups did not trust the authorities?",
         "exerciseId": 16
     },
     {
         "id": 45,
-        "title": "Що погіршило умови життя під час війни?",
+        "title": "What worsened living conditions during the war?",
         "exerciseId": 16
     },
     {
         "id": 46,
-        "title": "Що об’єднувало різні верстви населення?",
+        "title": "What united different segments of the population?",
         "exerciseId": 16
     }
 ]

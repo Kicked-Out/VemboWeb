@@ -1,26 +1,26 @@
 [
     {
         "id": 1,
-        "title": "Українська революція (1917–1921)",
-        "description": "Цей період охоплює ключові події української революції, починаючи з Лютневої революції 1917 року і закінчуючи боротьбою за державність у 1921 році.",
+        "title": "The Ukrainian Revolution (1917-1921)",
+        "description": "This period covers the key events of the Ukrainian Revolution, starting with the February Revolution of 1917 and ending with the struggle for statehood in 1921.",
         "imageUrl": "https://theres.nothing.com/image1.png"
     },
     {
         "id": 2,
-        "title": "Західноукраїнська Народна Республіка (1918–1919)",
-        "description": "Цей період присвячений історії Західноукраїнської Народної Республіки, її боротьбі за незалежність та інтеграції з Українською Народною Республікою.",
+        "title": "Western Ukrainian People's Republic (1918-1919)",
+        "description": "This period is devoted to the history of the Western Ukrainian People's Republic, its struggle for independence and integration with the Ukrainian People's Republic.",
         "imageUrl": "https://theres.nothing.com/image2.png"
     },
     {
         "id": 3,
-        "title": "Друга світова війна",
-        "description": "Найкривавіша війна в історії людства, що тривала з 1939 по 1945 рік і охоплювала більшість країн світу.",
+        "title": "The Second World War",
+        "description": "The bloodiest war in the history of mankind, which lasted from 1939 to 1945 and covered most countries of the world.",
         "imageUrl": "https://theres.nothing.com/image4.png"
     },
     {
         "id": 4,
-        "title": "Перша світова війна",
-        "description": "Війна, що тривала з 1914 по 1918 рік, стала однією з найбільших і найруйнівніших конфліктів в історії людства.",
+        "title": "The First World War",
+        "description": "The war, which lasted from 1914 to 1918, was one of the largest and most destructive conflicts in human history.",
         "imageUrl": "https://theres.nothing.com/image3.png"
     }
 ]

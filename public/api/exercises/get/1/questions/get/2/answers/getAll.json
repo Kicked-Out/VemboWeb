@@ -1,25 +1,25 @@
 [
     {
         "Id": 5,
-        "Title": "Мали мало землі",
+        "Title": "They had little land",
         "IsCorrect": true,
         "QuestionId": 2
     },
     {
         "Id": 6,
-        "Title": "Мали багато землі",
+        "Title": "They had a lot of land",
         "IsCorrect": false,
         "QuestionId": 2
     },
     {
         "Id": 7,
-        "Title": "Не платили податки",
+        "Title": "Did not pay taxes",
         "IsCorrect": false,
         "QuestionId": 2
     },
     {
         "Id": 8,
-        "Title": "Мали кращі умови",
+        "Title": "They had better conditions",
         "IsCorrect": false,
         "QuestionId": 2
     }

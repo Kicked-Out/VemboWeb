@@ -1,5 +1,5 @@
 export interface LessonDTO {
-    Id: number;
-    LevelId: number;
-    Order: number;
+    id: number;
+    levelId: number;
+    order: number;
 }
