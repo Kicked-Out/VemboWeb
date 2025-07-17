@@ -1,0 +1,6 @@
+reviews:
+    enabled: true
+    review_status: true
+    branches:
+        include:
+            - "**"
