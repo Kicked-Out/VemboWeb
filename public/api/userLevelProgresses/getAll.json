@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "userId": 1,
+        "levelId": 1,
+        "isComppleted": true
+    },
+    {
+        "id": 2,
+        "userId": 1,
+        "levelId": 2,
+        "isComppleted": true
+    },
+    {
+        "id": 3,
+        "userId": 1,
+        "levelId": 3,
+        "isComppleted": false
+    }
+]

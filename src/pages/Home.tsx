@@ -53,13 +53,13 @@ export default function Home() {
     return (
         <div>
             {units.map((unit) => (
-                <div className="unit">
+                <div key={unit.id} className="unit">
                     <h2>
                         Topic {unit.id}: {unit.title}
                     </h2>
                     <p>{unit.description}</p>
                     {levels.map((level) => (
-                        <div className="level-container">
+                        <div key={level.id} className="level-container">
                             <div
                                 className="start-btn"
                                 onClick={() => {
