@@ -23,9 +23,11 @@ export default function Login() {
             <h1>Login</h1>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...(register("emailOrName"), { required: true })} placeholder="Email or Name" />
+                <input {...register("emailOrName", { required: true })} placeholder="Email or Name" />
 
-                <input {...(register("password"), { required: true })} placeholder="Password" type="password" />
+                <input {...register("password", { required: true })} placeholder="Password" type="password" />
+
+                <Link to="/forgot_password">Forgot?</Link>
 
                 <input type="submit" value="Sign In" />
             </form>
