@@ -1,25 +1,25 @@
 [
     {
         "id": 1,
-        "title": "Соціальні проблеми населення",
+        "title": "Social problems of the population",
         "unitId": 1,
         "order": 1
     },
     {
         "id": 2,
-        "title": "Економічна ситуація напередодні революції",
+        "title": "The economic situation on the eve of the revolution",
         "unitId": 1,
         "order": 2
     },
     {
         "id": 3,
-        "title": "Політична криза та авторитаризм",
+        "title": "Political crisis and authoritarianism",
         "unitId": 1,
         "order": 3
     },
     {
         "id": 4,
-        "title": "Початки українського національного руху",
+        "title": "The beginnings of the Ukrainian national movement",
         "unitId": 1,
         "order": 4
     }

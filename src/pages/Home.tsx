@@ -1,84 +1,85 @@
-import { Link } from "react-router-dom";
-// import { PeriodService } from "../services/periodService";
+import { Link, Links } from "react-router-dom";
 import { useEffect, useState } from "react";
 import type { AnswerDTO } from "../DTOs/answerDTO";
 import { AnswerService } from "../services/answerService";
-// import type { PeriodDTO } from "../DTOs/periodDTO";
-// import { LevelService } from "../services/levelService";
-// import type { LevelDTO } from "../DTOs/levelDTO";
-// import { LessonService } from "../services/lessonService";
-// import type { LessonDTO } from "../DTOs/lessonDTO";
-// import ExerciseService from "../services/exerciseService";
-// import type { ExerciseDTO } from "../DTOs/exerciseDTO";
-// import type { TopicDTO } from "../DTOs/topicDTO";
-// import TopicService from "../services/topicService";
-// import type { QuestionDTO } from "../DTOs/questionDTO";
-// import { QuestionService } from "../services/questionService";
-// import type { UnitDTO } from "../DTOs/unitDTO";
-// import { UnitService } from "../services/unitService";
+import { LevelService } from "../services/levelService";
+import type { LevelDTO } from "../DTOs/levelDTO";
+import { LessonService } from "../services/lessonService";
+import type { LessonDTO } from "../DTOs/lessonDTO";
+import type { TopicDTO } from "../DTOs/topicDTO";
+import TopicService from "../services/topicService";
+import type { UnitDTO } from "../DTOs/unitDTO";
+import { UnitService } from "../services/unitService";
+import { PeriodService } from "../services/periodService";
 
 export default function Home() {
-    // PeriodService Usage Example
+    const [units, setUnits] = useState<UnitDTO[]>([]);
 
-    // Get All Periods
-    // const [periods, setPeriods] = useState<PeriodDTO[]>([]);
+    useEffect(() => {
+        const getUnits = async () => {
+            const data = await UnitService.getAll();
 
-    // useEffect(() => {
-    //     const fetchPeriods = async () => {
-    //         const data = await PeriodService.getAll();
-    //         console.log("Fetched periods:", data);
+            console.log("Fetched units:", data);
 
-    //         setPeriods(data);
-    //     };
+            setUnits(data);
+        };
 
-    //     fetchPeriods();
-    // }, []);
+        getUnits();
+    }, []);
 
-    // // Get Period By ID
-    // const [period, setPeriod] = useState<PeriodDTO | null>(null);
+    const [levels, setLevels] = useState<LevelDTO[]>([]);
 
-    // useEffect(() => {
-    //     const fetchPeriodById = async (id: number) => {
-    //         const data = await PeriodService.getById(id);
+    useEffect(() => {
+        const getLevels = async () => {
+            const data = await LevelService.getAll();
 
-    //         console.log("Fetched period by Id:", data);
-    //         setPeriod(data);
-    //     };
+            console.log("Fetched levels:", data);
 
-    //     fetchPeriodById(3);
-    // }, []);
+            setLevels(data);
+        };
 
-    // const [units, setUnits] = useState<UnitDTO[]>([]);
+        getLevels();
+    }, []);
 
-    // useEffect(() => {
-    //     const getUnits = async () => {
-    //         const data = await UnitService.getAll();
+    const [btnActive, setBtnActive] = useState<boolean>(false);
+    const [btnActiveId, setBtnActiveId] = useState<number>(0);
 
-    //         console.log("Fetched units:", data);
-
-    //         setUnits(data);
-    //     };
-
-    //     getUnits();
-    // }, []);
-
-    // const [unit, setUnit] = useState<UnitDTO | null>(null);
-
-    // useEffect(() => {
-    //     const getUnit = async () => {
-    //         const data = await UnitService.getById(2);
-
-    //         console.log("Fetched unit by Id:", data);
-
-    //         setUnit(data);
-    //     };
-
-    //     getUnit();
-    // }, []);
+    const btnPressHandler = (id: number) => {
+        console.log("clicked!");
+        setBtnActiveId(id);
+        setBtnActive(!btnActive);
+    };
 
     return (
         <div>
-            <Link to="/lesson">Go To Lesson</Link>
+            {units.map((unit) => (
+                <div className="unit">
+                    <h2>
+                        Topic {unit.id}: {unit.title}
+                    </h2>
+                    <p>{unit.description}</p>
+                    {levels.map((level) => (
+                        <div className="level-container">
+                            <div
+                                className="start-btn"
+                                onClick={() => {
+                                    btnPressHandler(level.id);
+                                }}
+                            >
+                                Crystal
+                            </div>
+
+                            <div className={btnActive && level.id === btnActiveId ? "level-content" : "hidden"}>
+                                {level.title}
+                                <p>Level 1 of 4</p>
+                                <Link to="/lesson" className="play-btn">
+                                    Start +10 XP
+                                </Link>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ))}
         </div>
     );
 }
