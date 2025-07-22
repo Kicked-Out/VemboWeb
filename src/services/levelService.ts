@@ -1,41 +1,18 @@
 import type { LevelDTO } from "../DTOs/levelDTO";
+import ItemFetcher from "../helpers/itemFetcher";
 
 export class LevelService {
     private static baseUrl: string = "/api";
 
     public static async getAll(): Promise<LevelDTO[]> {
-        try {
-            const response = await fetch(`${this.baseUrl}/levels/getAll.json`);
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/levels/getAll.json`);
 
-            if (response.ok) {
-                const data: LevelDTO[] = await response.json();
-
-                return data;
-            } else {
-                return [];
-            }
-        } catch (error) {
-            console.error("Failed to Fetch:", error);
-
-            return [];
-        }
+        return data;
     }
 
     public static async getById(id: number): Promise<LevelDTO | null> {
-        try {
-            const response = await fetch(`${this.baseUrl}/levels/get/${id}.json`);
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/levels/get/${id}.json`);
 
-            if (response.ok) {
-                const data: LevelDTO = await response.json();
-
-                return data;
-            } else {
-                return null;
-            }
-        } catch (error) {
-            console.error(error);
-
-            return null;
-        }
+        return data;
     }
 }
