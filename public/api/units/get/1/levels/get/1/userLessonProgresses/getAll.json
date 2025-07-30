@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "userId": 1,
+        "lessonId": 1,
+        "isComplete": true
+    },
+    {
+        "id": 2,
+        "userId": 1,
+        "lessonId": 2,
+        "isComplete": true
+    },
+    {
+        "id": 3,
+        "userId": 1,
+        "lessonId": 3,
+        "isComplete": true
+    },
+    {
+        "id": 4,
+        "userId": 1,
+        "lessonId": 4,
+        "isComplete": false
+    }
+]

@@ -10,8 +10,24 @@ export class LessonService {
         return data;
     }
 
+    public static async getAllByLevelId(levelId: number): Promise<LessonDTO[]> {
+        const data: LessonDTO[] = await ItemFetcher.fetchItems(
+            `${this.baseUrl}/levels/get/${levelId}/lessons/getAll.json`
+        );
+
+        return data;
+    }
+
     public static async getById(id: number): Promise<LessonDTO | null> {
         const data = await ItemFetcher.fetchItem(`${this.baseUrl}/lessons/get/${id}.json`);
+
+        return data;
+    }
+
+    public static async getByLevelAndLessonIds(levelId: number, lessonId: number): Promise<LessonDTO | null> {
+        const data: LessonDTO | null = await ItemFetcher.fetchItem(
+            `${this.baseUrl}/levels/get/${levelId}/lessons/get/${lessonId}.json`
+        );
 
         return data;
     }

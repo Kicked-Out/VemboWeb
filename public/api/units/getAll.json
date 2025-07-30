@@ -1,30 +1,30 @@
 [
     {
-        "id": "1",
-        "title": "Prerequisites for the Revolution and the State of the Russian Empire",
+        "id": 1,
+        "title": "Causes of the Russian Revolution",
         "description": "Social, economic, and political crises in the Russian Empire on the eve of 1917. The impact of the First World War. Ukrainian national movement before the revolution.",
-        "topicId": "1",
-        "order": "1"
+        "topicId": 1,
+        "order": 1
     },
     {
-        "id": "2",
+        "id": 2,
         "title": "The February Revolution and the Overthrow of Tsarism",
         "description": "Events of the February Revolution of 1917 in Petrograd. Abdication of Nicholas II. Formation of the Provisional Government. The impact of these events on Ukrainian lands.",
-        "topicId": "1",
-        "order": "2"
+        "topicId": 1,
+        "order": 2
     },
     {
-        "id": "3",
+        "id": 3,
         "title": "Formation of the Ukrainian Central Rada",
         "description": "The establishment of the Central Rada in Kyiv, its first actions and ideology. The main figures: Hrushevsky, Vynnychenko, Petliura. Formation of autonomist aspirations.",
-        "topicId": "1",
-        "order": "3"
+        "topicId": 1,
+        "order": 3
     },
     {
-        "id": "4",
+        "id": 4,
         "title": "First steps towards Ukraine's autonomy",
         "description": "The history of the creation of the First Universal. The reaction of the Provisional Government. Growth of Ukrainian self-awareness and formation of political demands for autonomy.",
-        "topicId": "1",
-        "order": "4"
+        "topicId": 1,
+        "order": 4
     }
 ]

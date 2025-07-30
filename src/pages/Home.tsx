@@ -1,85 +1,55 @@
-import { Link, Links } from "react-router-dom";
 import { useEffect, useState } from "react";
-import type { AnswerDTO } from "../DTOs/answerDTO";
-import { AnswerService } from "../services/answerService";
-import { LevelService } from "../services/levelService";
-import type { LevelDTO } from "../DTOs/levelDTO";
-import { LessonService } from "../services/lessonService";
-import type { LessonDTO } from "../DTOs/lessonDTO";
-import type { TopicDTO } from "../DTOs/topicDTO";
-import TopicService from "../services/topicService";
-import type { UnitDTO } from "../DTOs/unitDTO";
-import { UnitService } from "../services/unitService";
-import { PeriodService } from "../services/periodService";
+import UnitContainer from "../components/containers/unitContainer";
+import type { UserDTO } from "../DTOs/auth/userDTO";
+import type { userStatisticDTO } from "../DTOs/userStatisticDTO";
+import AuthService from "../services/authService";
+import UserStatisticService from "../services/userStatisticService";
+import type { UserPeriodProgressDTO } from "../DTOs/userProgressDTO/userPeriodProgressDTO";
+import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
 
 export default function Home() {
-    const [units, setUnits] = useState<UnitDTO[]>([]);
+    const [user, setUser] = useState<UserDTO>();
+    const [userStatistic, setUserStatistic] = useState<userStatisticDTO | null>();
 
     useEffect(() => {
-        const getUnits = async () => {
-            const data = await UnitService.getAll();
+        const getUser = async () => {
+            const data = await AuthService.get();
 
-            console.log("Fetched units:", data);
-
-            setUnits(data);
+            setUser(data);
         };
 
-        getUnits();
+        getUser();
     }, []);
-
-    const [levels, setLevels] = useState<LevelDTO[]>([]);
 
     useEffect(() => {
-        const getLevels = async () => {
-            const data = await LevelService.getAll();
+        const getUserStatistic = async () => {
+            const data = await UserStatisticService.getByUserId(user!.id);
 
-            console.log("Fetched levels:", data);
-
-            setLevels(data);
+            setUserStatistic(data);
         };
 
-        getLevels();
-    }, []);
+        getUserStatistic();
+    }, [user]);
 
-    const [btnActive, setBtnActive] = useState<boolean>(false);
-    const [btnActiveId, setBtnActiveId] = useState<number>(0);
+    const periodId = userStatistic?.currentPeriodId;
 
-    const btnPressHandler = (id: number) => {
-        console.log("clicked!");
-        setBtnActiveId(id);
-        setBtnActive(!btnActive);
-    };
+    const [userPeriodProgress, setUserPeriodProgress] = useState<UserPeriodProgressDTO | null>();
+
+    useEffect(() => {
+        const getUserPeriodProgress = async () => {
+            const data = await UserPeriodProgressService.getByPeriodId(periodId!);
+
+            setUserPeriodProgress(data);
+        };
+
+        getUserPeriodProgress();
+    }, [userStatistic]);
+
+    const completedCount = userPeriodProgress ? userPeriodProgress.completedCount : 0;
 
     return (
         <div>
-            {units.map((unit) => (
-                <div key={unit.id} className="unit">
-                    <h2>
-                        Topic {unit.id}: {unit.title}
-                    </h2>
-                    <p>{unit.description}</p>
-                    {levels.map((level) => (
-                        <div key={level.id} className="level-container">
-                            <div
-                                className="start-btn"
-                                onClick={() => {
-                                    btnPressHandler(level.id);
-                                }}
-                            >
-                                Crystal
-                            </div>
-
-                            <div className={btnActive && level.id === btnActiveId ? "level-content" : "hidden"}>
-                                {level.title}
-                                <p>Level 1 of 4</p>
-                                <Link to="/lesson" className="play-btn">
-                                    Start +10 XP
-                                </Link>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            ))}
+            <UnitContainer periodId={periodId ? periodId : 0} periodCompletedCount={completedCount} />
         </div>
     );
 }
