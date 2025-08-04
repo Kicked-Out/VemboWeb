@@ -15,4 +15,12 @@ export class UserLevelProgressService {
 
         return data;
     }
+
+    public static async getByLevelId(levelId: number): Promise<UserLevelProgressDTO | null> {
+        const userLevelProgresses = await this.getAll();
+
+        const data = userLevelProgresses.filter((userLevelProgress) => userLevelProgress.levelId === levelId)[0];
+
+        return data;
+    }
 }

@@ -10,6 +10,14 @@ export class UserPeriodProgressService {
         return data;
     }
 
+    public static async getByPeriodId(periodId: number): Promise<UserPeriodProgressDTO | null> {
+        const data = await ItemFetcher.fetchItem(
+            `${this.baseUrl}/periods/get/${periodId}/userPeriodProgresses/get.json`
+        );
+
+        return data;
+    }
+
     public static async getById(id: number): Promise<UserPeriodProgressDTO | null> {
         const data = await ItemFetcher.fetchItem(`${this.baseUrl}/userPeriodProgresses/get/${id}.json`);
 
