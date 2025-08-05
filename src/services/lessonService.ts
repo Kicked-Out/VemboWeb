@@ -1,41 +1,34 @@
 import type { LessonDTO } from "../DTOs/lessonDTO";
+import ItemFetcher from "../helpers/itemFetcher";
 
 export class LessonService {
     private static baseUrl = "/api";
 
     public static async getAll(): Promise<LessonDTO[]> {
-        try {
-            const response = await fetch(`${this.baseUrl}/lessons/getAll.json`);
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/lessons/getAll.json`);
 
-            if (response.ok) {
-                const data: LessonDTO[] = await response.json();
+        return data;
+    }
 
-                return data;
-            } else {
-                return [];
-            }
-        } catch (error) {
-            console.error("Fetch failed:", error);
+    public static async getAllByLevelId(levelId: number): Promise<LessonDTO[]> {
+        const data: LessonDTO[] = await ItemFetcher.fetchItems(
+            `${this.baseUrl}/levels/get/${levelId}/lessons/getAll.json`
+        );
 
-            return [];
-        }
+        return data;
     }
 
     public static async getById(id: number): Promise<LessonDTO | null> {
-        try {
-            const response = await fetch(`${this.baseUrl}/lessons/get/${id}.json`);
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/lessons/get/${id}.json`);
 
-            if (response.ok) {
-                const data: LessonDTO = await response.json();
+        return data;
+    }
 
-                return data;
-            } else {
-                return null;
-            }
-        } catch (error) {
-            console.error("Fetch failed:", error);
+    public static async getByLevelAndLessonIds(levelId: number, lessonId: number): Promise<LessonDTO | null> {
+        const data: LessonDTO | null = await ItemFetcher.fetchItem(
+            `${this.baseUrl}/levels/get/${levelId}/lessons/get/${lessonId}.json`
+        );
 
-            return null;
-        }
+        return data;
     }
 }

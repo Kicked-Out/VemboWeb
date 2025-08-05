@@ -1,42 +1,19 @@
 import type { PeriodDTO } from "../DTOs/periodDTO";
+import ItemFetcher from "../helpers/itemFetcher";
 
 // PeriodService Example
 export class PeriodService {
     private static baseUrl: string = "/api";
 
     public static async getAll(): Promise<PeriodDTO[]> {
-        try {
-            const response = await fetch(`${this.baseUrl}/periods/getAll.json`);
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/periods/getAll.json`);
 
-            if (response.ok) {
-                const data: PeriodDTO[] = await response.json();
-
-                return data;
-            }
-
-            return [];
-        } catch (error) {
-            console.error("Fetch error:", error);
-
-            return [];
-        }
+        return data;
     }
 
     public static async getById(id: number): Promise<PeriodDTO | null> {
-        try {
-            const response = await fetch(`${this.baseUrl}/periods/get/${id}.json`);
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/periods/get/${id}.json`);
 
-            if (response.ok) {
-                const data: PeriodDTO = await response.json();
-
-                return data;
-            }
-
-            return null;
-        } catch (error) {
-            console.error("Fetch error:", error);
-
-            return null;
-        }
+        return data;
     }
 }

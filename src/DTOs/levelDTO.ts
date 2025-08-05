@@ -1,6 +1,6 @@
 export interface LevelDTO {
-    Id: number;
-    Title: string;
-    UnitId: number;
-    Order: number;
+    id: number;
+    title: string;
+    unitId: number;
+    order: number;
 }

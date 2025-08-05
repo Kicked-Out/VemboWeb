@@ -8,6 +8,8 @@ import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import Registration from "./pages/auth/Registration";
 import Login from "./pages/auth/Login";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 function App() {
     return (
@@ -23,6 +25,8 @@ function App() {
                     <Route path="/lesson" element={<Lesson />} />
                     <Route path="/register" element={<Registration />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/forgot_password" element={<ForgotPassword/>} />
+                    <Route path="/reset_password" element={<ResetPassword/>} />
                 </Routes>
 
                 <Footer />

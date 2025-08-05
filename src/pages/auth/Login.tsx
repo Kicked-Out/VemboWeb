@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -8,24 +7,22 @@ export default function Login() {
         password: string;
     };
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<Inputs>();
+    const { register, handleSubmit } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
     };
 
     return (
-        <div>
+        <div className="">
             <h1>Login</h1>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...(register("emailOrName"), { required: true })} placeholder="Email or Name" />
+                <input {...register("emailOrName", { required: true })} placeholder="Email or Name" />
 
-                <input {...(register("password"), { required: true })} placeholder="Password" type="password" />
+                <input {...register("password", { required: true })} placeholder="Password" type="password" />
+
+                <Link to="/forgot_password">Forgot?</Link>
 
                 <input type="submit" value="Sign In" />
             </form>

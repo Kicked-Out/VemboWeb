@@ -1,25 +1,25 @@
 [
     {
         "Id": 13,
-        "Title": "Робітники",
+        "Title": "Workers",
         "IsCorrect": false,
         "QuestionId": 4
     },
     {
         "Id": 14,
-        "Title": "Селяни",
+        "Title": "Vilagers",
         "IsCorrect": true,
         "QuestionId": 4
     },
     {
         "Id": 15,
-        "Title": "Міщани",
+        "Title": "Burghers",
         "IsCorrect": false,
         "QuestionId": 4
     },
     {
         "Id": 16,
-        "Title": "Поміщики",
+        "Title": "Landlords",
         "IsCorrect": false,
         "QuestionId": 4
     }

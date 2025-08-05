@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "userId": 1,
+        "exerciseId": 1,
+        "userAnswer": "8 hours"
+    },
+    {
+        "id": 2,
+        "userId": 1,
+        "exerciseId": 5,
+        "userAnswer": "Prices were reduced"
+    },
+    {
+        "id": 3,
+        "userId": 1,
+        "exerciseId": 9,
+        "userAnswer": "Factory owners"
+    },
+    {
+        "id": 4,
+        "userId": 1,
+        "exerciseId": 12,
+        "userAnswer": "Too much fertilizer"
+    },
+    {
+        "id": 5,
+        "userId": 1,
+        "exerciseId": 15,
+        "userAnswer": "In forests"
+    },
+    {
+        "id": 6,
+        "userId": 1,
+        "exerciseId": 19,
+        "userAnswer": "Nobles"
+    },
+    {
+        "id": 7,
+        "userId": 1,
+        "exerciseId": 21,
+        "userAnswer": "University students"
+    },
+    {
+        "id": 8,
+        "userId": 1,
+        "exerciseId": 27,
+        "userAnswer": "Aristocrats"
+    },
+    {
+        "id": 9,
+        "userId": 1,
+        "exerciseId": 33,
+        "userAnswer": "Doctors"
+    },
+    {
+        "id": 10,
+        "userId": 1,
+        "exerciseId": 40,
+        "userAnswer": "Generals"
+    }
+]

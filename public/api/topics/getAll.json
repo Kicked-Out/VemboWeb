@@ -1,29 +1,29 @@
 [
     {
         "id": 1,
-        "title": "Лютнева революція та початок українського руху (1917)",
-        "description": "Падіння царизму в Росії, утворення Центральної Ради та перші кроки до автономії України. Активізація політичних, культурних та національних ініціатив.",
+        "title": "The February Revolution and the Beginning of the Ukrainian Movement (1917)",
+        "description": "The fall of tsarism in Russia, the formation of the Central Rada, and the first steps toward Ukraine's autonomy. Intensification of political, cultural, and national initiatives.",
         "periodId": 1,
         "imageUrl": "https://theres.nothing.com/topic/1/image.png"
     },
     {
-        "id": 1,
-        "title": "Проголошення УНР і боротьба за владу (1917–1918)",
-        "description": "Чотири Універсали Центральної Ради, проголошення Української Народної Республіки, конфлікти з більшовиками, підписання Брест-Литовського мирного договору.",
+        "id": 2,
+        "title": "Proclamation of the UPR and the Struggle for Power (1917-1918)",
+        "description": "The Four Universals of the Central Rada, the proclamation of the Ukrainian People's Republic, conflicts with the Bolsheviks, and the signing of the Brest-Lithuania Peace Treaty.",
         "periodId": 1,
         "imageUrl": "https://theres.nothing.com/topic/2/image.png"
     },
     {
         "id": 3,
-        "title": "Гетьманат і Директорія (1918–1919)",
-        "description": "Перехід влади до Павла Скоропадського, встановлення Гетьманату, повалення гетьманату і повернення Директорії, політична нестабільність і внутрішні протистояння.",
+        "title": "Hetmanate and Directory (1918-1919)",
+        "description": "The transfer of power to Pavlo Skoropadskyi, the establishment of the Hetmanate, the overthrow of the Hetmanate and the return of the Directory, political instability and internal confrontations.",
         "periodId": 1,
         "imageUrl": "https://theres.nothing.com/topic/3/image.png"
     },
     {
         "id": 4,
-        "title": "Визвольні змагання та остаточна поразка (1919–1921)",
-        "description": "Союз УНР і ЗУНР, польсько-українська війна, радянська агресія, поразка визвольних змагань і втрата незалежності. Кінець періоду активної боротьби за державність.",
+        "title": "Liberation struggle and final defeat (1919-1921)",
+        "description": "The Union of the UPR and ZUNR, the Polish-Ukrainian war, Soviet aggression, the defeat of the liberation struggle, and the loss of independence. The end of the period of active struggle for statehood.",
         "periodId": 1,
         "imageUrl": "https://theres.nothing.com/topic/4/image.png"
     }

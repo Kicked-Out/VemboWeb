@@ -1,25 +1,25 @@
 [
     {
         "Id": 9,
-        "Title": "Антисанітарія",
+        "Title": "Unsanitary conditions",
         "IsCorrect": true,
         "QuestionId": 3
     },
     {
         "Id": 10,
-        "Title": "Велика кількість парків",
+        "Title": "A large number of parks",
         "IsCorrect": false,
         "QuestionId": 3
     },
     {
         "Id": 11,
-        "Title": "Високі зарплати",
+        "Title": "High salaries",
         "IsCorrect": false,
         "QuestionId": 3
     },
     {
         "Id": 12,
-        "Title": "Чисте повітря",
+        "Title": "Clean air",
         "IsCorrect": false,
         "QuestionId": 3
     }

@@ -1,84 +1,55 @@
-import { Link } from "react-router-dom";
-// import { PeriodService } from "../services/periodService";
 import { useEffect, useState } from "react";
-import type { AnswerDTO } from "../DTOs/answerDTO";
-import { AnswerService } from "../services/answerService";
-// import type { PeriodDTO } from "../DTOs/periodDTO";
-// import { LevelService } from "../services/levelService";
-// import type { LevelDTO } from "../DTOs/levelDTO";
-// import { LessonService } from "../services/lessonService";
-// import type { LessonDTO } from "../DTOs/lessonDTO";
-// import ExerciseService from "../services/exerciseService";
-// import type { ExerciseDTO } from "../DTOs/exerciseDTO";
-// import type { TopicDTO } from "../DTOs/topicDTO";
-// import TopicService from "../services/topicService";
-// import type { QuestionDTO } from "../DTOs/questionDTO";
-// import { QuestionService } from "../services/questionService";
-// import type { UnitDTO } from "../DTOs/unitDTO";
-// import { UnitService } from "../services/unitService";
+import UnitContainer from "../components/containers/unitContainer";
+import type { UserDTO } from "../DTOs/auth/userDTO";
+import type { userStatisticDTO } from "../DTOs/userStatisticDTO";
+import AuthService from "../services/authService";
+import UserStatisticService from "../services/userStatisticService";
+import type { UserPeriodProgressDTO } from "../DTOs/userProgressDTO/userPeriodProgressDTO";
+import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
 
 export default function Home() {
-    // PeriodService Usage Example
+    const [user, setUser] = useState<UserDTO>();
+    const [userStatistic, setUserStatistic] = useState<userStatisticDTO | null>();
 
-    // Get All Periods
-    // const [periods, setPeriods] = useState<PeriodDTO[]>([]);
+    useEffect(() => {
+        const getUser = async () => {
+            const data = await AuthService.get();
 
-    // useEffect(() => {
-    //     const fetchPeriods = async () => {
-    //         const data = await PeriodService.getAll();
-    //         console.log("Fetched periods:", data);
+            setUser(data);
+        };
 
-    //         setPeriods(data);
-    //     };
+        getUser();
+    }, []);
 
-    //     fetchPeriods();
-    // }, []);
+    useEffect(() => {
+        const getUserStatistic = async () => {
+            const data = await UserStatisticService.getByUserId(user!.id);
 
-    // // Get Period By ID
-    // const [period, setPeriod] = useState<PeriodDTO | null>(null);
+            setUserStatistic(data);
+        };
 
-    // useEffect(() => {
-    //     const fetchPeriodById = async (id: number) => {
-    //         const data = await PeriodService.getById(id);
+        getUserStatistic();
+    }, [user]);
 
-    //         console.log("Fetched period by Id:", data);
-    //         setPeriod(data);
-    //     };
+    const periodId = userStatistic?.currentPeriodId;
 
-    //     fetchPeriodById(3);
-    // }, []);
+    const [userPeriodProgress, setUserPeriodProgress] = useState<UserPeriodProgressDTO | null>();
 
-    // const [units, setUnits] = useState<UnitDTO[]>([]);
+    useEffect(() => {
+        const getUserPeriodProgress = async () => {
+            const data = await UserPeriodProgressService.getByPeriodId(periodId!);
 
-    // useEffect(() => {
-    //     const getUnits = async () => {
-    //         const data = await UnitService.getAll();
+            setUserPeriodProgress(data);
+        };
 
-    //         console.log("Fetched units:", data);
+        getUserPeriodProgress();
+    }, [userStatistic]);
 
-    //         setUnits(data);
-    //     };
-
-    //     getUnits();
-    // }, []);
-
-    // const [unit, setUnit] = useState<UnitDTO | null>(null);
-
-    // useEffect(() => {
-    //     const getUnit = async () => {
-    //         const data = await UnitService.getById(2);
-
-    //         console.log("Fetched unit by Id:", data);
-
-    //         setUnit(data);
-    //     };
-
-    //     getUnit();
-    // }, []);
+    const completedCount = userPeriodProgress ? userPeriodProgress.completedCount : 0;
 
     return (
         <div>
-            <Link to="/lesson">Go To Lesson</Link>
+            <UnitContainer periodId={periodId ? periodId : 0} periodCompletedCount={completedCount} />
         </div>
     );
 }

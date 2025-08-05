@@ -1,0 +1,16 @@
+reviews:
+    enabled: true
+    language: uk
+    review_status: true
+    branches:
+        include:
+            - "**"
+
+summarization:
+    enabled: true
+    pull_requests: true
+    language: uk
+
+github:
+    comment_summary: true
+    update_pr_description: true

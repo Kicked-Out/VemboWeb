@@ -6,6 +6,10 @@ body,
     padding: 0;
 }
 
+.hidden {
+    display: none;
+}
+
 .container {
     display: flex;
     width: 100%;
@@ -115,4 +119,27 @@ button {
 
 .flex {
     display: flex;
+}
+
+.button {
+    display: flex;
+    width: 230px;
+    height: 60px;
+    padding: 20px 211px;
+    border-radius: 15px;
+    border: 2px solid var(--Glacier-Blue, #71b4d4);
+    box-shadow: 1px 4px 1px 0px #71b4d4;
+    background: var(--Ice-White, #f5faff);
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.password-field {
+    display: flex;
+    height: 60px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    align-self: stretch;
 }
