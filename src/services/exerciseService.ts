@@ -10,6 +10,12 @@ export default class ExerciseService {
         return data;
     }
 
+    public static async getAllByLessonId(lessonId: number): Promise<ExerciseDTO[]> {
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/lessons/get/${lessonId}/exercises/getAll.json`);
+
+        return data;
+    }
+
     public static async getById(id: number): Promise<ExerciseDTO | null> {
         const data = await ItemFetcher.fetchItem(`${this.baseUrl}/exercises/get/${id}.json`);
 

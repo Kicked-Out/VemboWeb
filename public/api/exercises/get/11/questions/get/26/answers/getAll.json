@@ -1,0 +1,26 @@
+[
+    {
+        "id": 41,
+        "title": "Landlords",
+        "isCorrect": false,
+        "questionId": 26
+    },
+    {
+        "id": 42,
+        "title": "Workers",
+        "isCorrect": true,
+        "questionId": 26
+    },
+    {
+        "id": 43,
+        "title": "Military",
+        "isCorrect": false,
+        "questionId": 26
+    },
+    {
+        "id": 44,
+        "title": "Nobles",
+        "isCorrect": false,
+        "questionId": 26
+    }
+]
