@@ -1,0 +1,26 @@
+[
+    {
+        "id": 9,
+        "title": "Unsanitary conditions",
+        "isCorrect": true,
+        "questionId": 3
+    },
+    {
+        "id": 10,
+        "title": "A large number of parks",
+        "isCorrect": false,
+        "questionId": 3
+    },
+    {
+        "id": 11,
+        "title": "High salaries",
+        "isCorrect": false,
+        "questionId": 3
+    },
+    {
+        "id": 12,
+        "title": "Clean air",
+        "isCorrect": false,
+        "questionId": 3
+    }
+]

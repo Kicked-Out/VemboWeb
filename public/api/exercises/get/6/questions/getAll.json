@@ -1,0 +1,22 @@
+[
+    {
+        "id": 6,
+        "title": "Who worked more than 12 hours?",
+        "exerciseId": 6
+    },
+    {
+        "id": 7,
+        "title": "Where did the workers live?",
+        "exerciseId": 6
+    },
+    {
+        "id": 8,
+        "title": "Who received the lowest pay?",
+        "exerciseId": 6
+    },
+    {
+        "id": 9,
+        "title": "Who did not have medical care?",
+        "exerciseId": 6
+    }
+]

@@ -2,7 +2,8 @@
     "id": 1,
     "userId": 1,
     "streak": 1,
-    "vbucks": 30,
+    "vBucks": 30,
     "hearts": 5,
-    "currentPeriodId": 1
+    "currentPeriodId": 1,
+    "currentLessonId": 1
 }

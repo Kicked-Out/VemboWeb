@@ -1,0 +1,26 @@
+[
+    {
+        "id": 17,
+        "title": "Prices were rising",
+        "isCorrect": true,
+        "questionId": 5
+    },
+    {
+        "id": 18,
+        "title": "Prices were reduced",
+        "isCorrect": false,
+        "questionId": 5
+    },
+    {
+        "id": 19,
+        "title": "The taxes",
+        "isCorrect": false,
+        "questionId": 5
+    },
+    {
+        "id": 20,
+        "title": "Salaries have increased",
+        "isCorrect": false,
+        "questionId": 5
+    }
+]
