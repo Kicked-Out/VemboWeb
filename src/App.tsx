@@ -12,6 +12,7 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import { Provider } from "react-redux";
 import { store } from "./slices/store";
+import Profile from "./pages/Profile";
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                             <Route path="unit/:unitId/level/:levelId" element={<Lesson />} />
                             <Route path="unit/:unitId/legendary/:legendaryId" element={<Lesson />} />
                         </Route>
+                        <Route path="/profile" element={<Profile />} />
                         <Route path="/register" element={<Registration />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/forgot_password" element={<ForgotPassword />} />

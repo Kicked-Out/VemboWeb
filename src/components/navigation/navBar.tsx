@@ -10,6 +10,9 @@ export default function NavBar() {
                 <Link to="/">Learn</Link>
             </div>
             <div>
+                <Link to="/practice">Peactice</Link>
+            </div>
+            <div>
                 <Link to="/leaderboards">Leaderboards</Link>
             </div>
             <div>

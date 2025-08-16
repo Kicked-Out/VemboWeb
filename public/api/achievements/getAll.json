@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "code": "wildfire",
+        "title": "Wildfire",
+        "description": "Reach a ${targetValue} day streak",
+        "iconUrl": ""
+    },
+    {
+        "id": 2,
+        "code": "sage",
+        "title": "Sage",
+        "description": "Earn ${targetValue} XP",
+        "iconUrl": ""
+    },
+    {
+        "id": 3,
+        "code": "scholar",
+        "title": "Scholar",
+        "description": "Learn ${targetValue} new words in a single course",
+        "iconUrl": ""
+    },
+    {
+        "id": 4,
+        "code": "champion",
+        "title": "Champion",
+        "description": "Advance to the ${targetValue} League",
+        "iconUrl": ""
+    },
+    {
+        "id": 5,
+        "code": "sharpshooter",
+        "title": "Sharpshooter",
+        "description": "Complete ${targetValue} lessons with no mistakes",
+        "iconUrl": ""
+    },
+    {
+        "id": 6,
+        "code": "winner",
+        "title": "Winner",
+        "description": "Finish #1 in the leaderboard",
+        "iconUrl": ""
+    },
+    {
+        "id": 7,
+        "code": "friendly",
+        "title": "Friendly",
+        "description": "Follow ${targetValue} friends",
+        "iconUrl": ""
+    },
+    {
+        "id": 8,
+        "code": "weekend_warrior",
+        "title": "Weekend Warrior",
+        "description": "Complete a lesson on Saturday and Sunday",
+        "iconUrl": ""
+    },
+    {
+        "id": 9,
+        "code": "photogenic",
+        "title": "Photogenic",
+        "description": "Add a profile picture",
+        "iconUrl": ""
+    }
+]
