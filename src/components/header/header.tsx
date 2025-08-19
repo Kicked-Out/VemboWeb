@@ -10,9 +10,11 @@ import {
     giveVBucks,
     selectCurrentPeriodId,
     selectHearts,
+    selectStreak,
     selectVBucks,
     setCurrentPeriodId,
     setHearts,
+    setStreak,
 } from "../../slices/userStatisticsSlice";
 
 export default function Header() {
@@ -43,12 +45,14 @@ export default function Header() {
 
     const dispatch = useDispatch();
     const hearts = useSelector(selectHearts);
+    const streak = useSelector(selectStreak);
     const vBucks = useSelector(selectVBucks);
     const currentPeriodId = useSelector(selectCurrentPeriodId);
 
     useEffect(() => {
         if (userStatistic) {
             dispatch(setHearts({ hearts: userStatistic.hearts }));
+            dispatch(setStreak({ streak: userStatistic.streak }));
             dispatch(giveVBucks({ vBucks: userStatistic.vBucks }));
             dispatch(setCurrentPeriodId({ currentPeriodId: userStatistic.currentPeriodId }));
         }

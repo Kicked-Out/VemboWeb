@@ -10,38 +10,42 @@ import Registration from "./pages/auth/Registration";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
-import { Provider } from "react-redux";
-import { store } from "./slices/store";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "./slices/store";
 import Profile from "./pages/Profile";
+import { useEffect } from "react";
+import { initSlice } from "./slices/authSlice";
 
-function App() {
+export default function App() {
+    const dispatch = useDispatch<AppDispatch>();
+
+    useEffect(() => {
+        dispatch(initSlice());
+    }, [dispatch]);
+
     return (
         <div className="grid-container">
             <NavBar />
 
             <div className="container">
-                <Provider store={store}>
-                    <Header />
+                <Header />
 
-                    <Routes>
-                        <Route path="*" element={<NotFound />} />
-                        <Route path="/" element={<Home />} />
-                        <Route path="/lesson" element={<Lesson />}>
-                            <Route path="unit/:unitId/level/:levelId" element={<Lesson />} />
-                            <Route path="unit/:unitId/legendary/:legendaryId" element={<Lesson />} />
-                        </Route>
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/register" element={<Registration />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/forgot_password" element={<ForgotPassword />} />
-                        <Route path="/reset_password" element={<ResetPassword />} />
-                    </Routes>
+                <Routes>
+                    <Route path="*" element={<NotFound />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/lesson" element={<Lesson />}>
+                        <Route path="unit/:unitId/level/:levelId" element={<Lesson />} />
+                        <Route path="unit/:unitId/legendary/:legendaryId" element={<Lesson />} />
+                    </Route>
+                    <Route path="/profile/:nickName" element={<Profile />} />
+                    <Route path="/register" element={<Registration />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/forgot_password" element={<ForgotPassword />} />
+                    <Route path="/reset_password" element={<ResetPassword />} />
+                </Routes>
 
-                    {/* <Footer /> */}
-                </Provider>
+                {/* <Footer /> */}
             </div>
         </div>
     );
 }
-
-export default App;

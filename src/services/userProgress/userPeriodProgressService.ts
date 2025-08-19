@@ -23,4 +23,12 @@ export class UserPeriodProgressService {
 
         return data;
     }
+
+    public static async getWithMostXPByUserId(userId: string): Promise<UserPeriodProgressDTO | null> {
+        const data = await ItemFetcher.fetchItem(
+            `${this.baseUrl}/users/get/${userId}/userPeriodProgresses/getWithMostXP.json`
+        );
+
+        return data;
+    }
 }

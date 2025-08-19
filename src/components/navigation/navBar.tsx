@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { selectUserData } from "../../slices/authSlice";
+import { useSelector } from "react-redux";
 
 export default function NavBar() {
+    const user = useSelector(selectUserData);
+
     return (
         <nav className="navbar">
             <div>
@@ -22,7 +26,7 @@ export default function NavBar() {
                 <Link to="/shop">Shop</Link>
             </div>
             <div>
-                <Link to="/profile">Profile</Link>
+                <Link to={`/profile/${user?.nickNameSlug}`}>Profile</Link>
             </div>
             <div>
                 <Link to="/more">More</Link>

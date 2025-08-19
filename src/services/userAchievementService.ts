@@ -9,4 +9,10 @@ export class UserAchievementService {
 
         return data;
     }
+
+    public static async getByUserId(userId: string): Promise<UserAchievementDTO[]> {
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/users/get/${userId}/userAchievements/getAll.json`);
+
+        return data;
+    }
 }

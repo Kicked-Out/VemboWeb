@@ -9,4 +9,10 @@ export class UserService {
 
         return data;
     }
+
+    public static async getByNickNameSlug(nickNameSlug: string): Promise<UserDTO | null> {
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/users/getByNickNameSlug/${nickNameSlug}.json`);
+
+        return data;
+    }
 }

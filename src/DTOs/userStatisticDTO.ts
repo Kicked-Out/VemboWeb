@@ -1,6 +1,6 @@
 export interface UserStatisticDTO {
     id: number;
-    userId: number;
+    userId: string;
     streak: number;
     vBucks: number;
     hearts: number;

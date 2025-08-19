@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import type { UserDTO } from "../DTOs/auth/userDTO";
-import { UserService } from "../services/userService";
 import { useSelector } from "react-redux";
 import { selectUserStatistics } from "../slices/selectors";
 import type { PeriodDTO } from "../DTOs/periodDTO";
@@ -11,46 +9,88 @@ import { UserAchievementService } from "../services/userAchievementService";
 import { AchievementService } from "../services/achievementService";
 import { AchievementLevelService } from "../services/achievementLevelService";
 import type { UserAchievementDTO } from "../DTOs/userAchievementDTO";
+import { Link, useParams } from "react-router-dom";
+import { UserService } from "../services/userService";
+import type { UserDTO } from "../DTOs/auth/userDTO";
+import UserStatisticService from "../services/userStatisticService";
+import type { UserStatisticDTO } from "../DTOs/userStatisticDTO";
+import { selectUserData } from "../slices/authSlice";
+import PrimaryButton from "../components/buttons/PrimaryButton";
+import SecondaryButton from "../components/buttons/SecondaryButton";
+import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
 
 export default function Profile() {
-    const [user, setUser] = useState<UserDTO>();
-    const userStats = useSelector(selectUserStatistics);
+    const { nickName } = useParams();
+    const authUser = useSelector(selectUserData);
+    const authStats = useSelector(selectUserStatistics);
+    const [user, setUser] = useState<UserDTO | null>(null);
+    const [userStats, setUserStats] = useState<UserStatisticDTO | null>(null);
     const [period, setPeriod] = useState<PeriodDTO | null>(null);
     const [userAchievements, setUserAchievements] = useState<UserAchievementDTO[]>([]);
     const [achievements, setAchievements] = useState<AchievementDTO[]>([]);
     const [achievementLevels, setAchievementLevels] = useState<AchievementLevelDTO[]>([]);
 
     useEffect(() => {
-        const getUsers = async () => {
-            const data = await UserService.get();
+        if (authUser === null) return;
+
+        const load = async () => {
+            if (authUser.nickNameSlug === nickName) {
+                setUser(authUser);
+                setUserStats(authStats);
+                return;
+            }
+
+            const data = await UserService.getByNickNameSlug(nickName!);
+
+            if (!data) return;
 
             setUser(data);
         };
 
-        getUsers();
-    }, []);
+        load();
+    }, [nickName, authUser, authStats]);
 
     useEffect(() => {
-        if (!userStats.currentPeriodId) return;
+        if (!authStats) return;
+        if (!user) return;
 
-        const getCurrentPeriod = async () => {
-            const data = await PeriodService.getById(userStats.currentPeriodId);
+        if (authStats.userId !== user.id) {
+            const getUserStats = async () => {
+                const data = await UserStatisticService.getByUserId(user.id);
 
-            setPeriod(data);
+                if (!data) return;
+
+                setUserStats(data);
+            };
+
+            getUserStats();
+        }
+    }, [user, authStats]);
+
+    useEffect(() => {
+        if (!user) return;
+
+        const getPeriodWithMostXP = async () => {
+            const userPeriodData = await UserPeriodProgressService.getWithMostXPByUserId(user.id);
+            const periodData = await PeriodService.getById(userPeriodData?.periodId || 0);
+
+            setPeriod(periodData);
         };
 
-        getCurrentPeriod();
-    }, [userStats]);
+        getPeriodWithMostXP();
+    }, [user]);
 
     useEffect(() => {
+        if (!user) return;
+
         const getUserAchievements = async () => {
-            const data = await UserAchievementService.getAll();
+            const data = await UserAchievementService.getByUserId(user.id);
 
             setUserAchievements(data.slice(0, 3));
         };
 
         getUserAchievements();
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         const getAchievements = async () => {
@@ -101,6 +141,14 @@ export default function Profile() {
                         </div>
                         <p>Current Period: {period?.title}</p>
                     </div>
+
+                    {authUser !== user ? (
+                        <div className="btn-block">
+                            <PrimaryButton title="Follow" onClick={() => {}} />
+                            <SecondaryButton title="Report" onClick={() => {}} />
+                            <SecondaryButton title="Block" onClick={() => {}} />
+                        </div>
+                    ) : null}
                 </div>
 
                 <hr />
@@ -112,12 +160,12 @@ export default function Profile() {
                         <img className="icon" />
 
                         <div className="statistic-info">
-                            <p>{userStats.streak}</p>
+                            <p>{userStats?.streak}</p>
                             <p>Day Streak</p>
                         </div>
 
                         <div className="statistic-info">
-                            <p>{userStats.vBucks}</p>
+                            <p>{userStats?.vBucks}</p>
                             <p>Total XP</p>
                         </div>
 
@@ -130,7 +178,9 @@ export default function Profile() {
 
                 <div className="category-block">
                     <h2 className="category-title">Achievements</h2>
-                    <a className="category-link">VIEW ALL</a>
+                    <Link className="category-link" to="achievements">
+                        VIEW ALL
+                    </Link>
                 </div>
 
                 <div className="profile-achievements">
