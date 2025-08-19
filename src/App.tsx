@@ -15,6 +15,7 @@ import type { AppDispatch } from "./slices/store";
 import Profile from "./pages/Profile";
 import { useEffect } from "react";
 import { initSlice } from "./slices/authSlice";
+import Achievements from "./pages/Achievements";
 
 export default function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -38,6 +39,7 @@ export default function App() {
                         <Route path="unit/:unitId/legendary/:legendaryId" element={<Lesson />} />
                     </Route>
                     <Route path="/profile/:nickName" element={<Profile />} />
+                    <Route path="/profile/:nickName/achievements" element={<Achievements />} />
                     <Route path="/register" element={<Registration />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/forgot_password" element={<ForgotPassword />} />
