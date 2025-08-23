@@ -2,10 +2,10 @@ import type { LevelDTO } from "../DTOs/levelDTO";
 import ItemFetcher from "../helpers/itemFetcher";
 
 export class LevelService {
-    private static baseUrl: string = "/api";
+    private static baseUrl: string = "https://localhost:7213/api";
 
     public static async getAll(): Promise<LevelDTO[]> {
-        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/levels/getAll.json`);
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/Level`);
 
         return data;
     }
@@ -17,7 +17,7 @@ export class LevelService {
     }
 
     public static async getById(id: number): Promise<LevelDTO | null> {
-        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/levels/get/${id}.json`);
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/Level/${id}`);
 
         return data;
     }

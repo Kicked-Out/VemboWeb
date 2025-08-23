@@ -1,7 +1,10 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import AuthService from "../../services/authService";
+import type { RegisterDTO } from "../../DTOs/auth/registerDTO";
 
 export default function Registration() {
+    const navigate = useNavigate();
     type Inputs = {
         name: string;
         email: string;
@@ -16,8 +19,25 @@ export default function Registration() {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
         console.log(data);
+        const registerDTO: RegisterDTO = {
+            nickName: data.name,
+            email: data.email,
+            password: data.password,
+        };
+
+        try {
+            const result = await AuthService.register(registerDTO);
+
+            if (result) {
+                localStorage.setItem("token", result);
+
+                navigate("/");
+            }
+        } catch (err) {
+            console.error("Auth error", err);
+        }
     };
 
     const password = watch("password");

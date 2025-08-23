@@ -1,7 +1,11 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import type { LoginDTO } from "../../DTOs/auth/loginDTO";
+import AuthService from "../../services/authService";
 
 export default function Login() {
+    const navigate = useNavigate();
+
     type Inputs = {
         emailOrName: string;
         password: string;
@@ -9,8 +13,19 @@ export default function Login() {
 
     const { register, handleSubmit } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data);
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        const loginDTO: LoginDTO = {
+            email: data.emailOrName,
+            password: data.password,
+        };
+
+        const result = await AuthService.login(loginDTO);
+
+        if (result) {
+            localStorage.setItem("token", result);
+
+            navigate("/");
+        }
     };
 
     return (

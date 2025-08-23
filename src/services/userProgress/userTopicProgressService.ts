@@ -2,10 +2,10 @@ import type { UserTopicProgressDTO } from "../../DTOs/userProgressDTO/userTopicP
 import ItemFetcher from "../../helpers/itemFetcher";
 
 export class UserTopicProgressService {
-    private static baseUrl = "/api";
+    private static baseUrl = "https://localhost:7213/api";
 
     public static async getAll(): Promise<UserTopicProgressDTO[]> {
-        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/userTopicProgresses/getAll.json`);
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/UserTopicProgress`);
 
         return data;
     }
@@ -19,7 +19,7 @@ export class UserTopicProgressService {
     }
 
     public static async getById(id: number): Promise<UserTopicProgressDTO | null> {
-        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/userTopicProgresses/get/${id}.json`);
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/UserTopicProgress/${id}`);
 
         return data;
     }

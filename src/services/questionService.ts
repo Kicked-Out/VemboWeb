@@ -2,18 +2,16 @@ import type { QuestionDTO } from "../DTOs/questionDTO";
 import ItemFetcher from "../helpers/itemFetcher";
 
 export class QuestionService {
-    private static baseUrl = "/api";
+    private static baseUrl = "/api/Question";
 
-    public static async getAllFromExercise(exerciseId: number): Promise<QuestionDTO[]> {
-        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/exercises/get/${exerciseId}/questions/getAll.json`);
+    public static async getAllByExercise(exerciseId: number): Promise<QuestionDTO[]> {
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/Exercise/${exerciseId}`);
 
         return data;
     }
 
-    public static async getByIdFromExercise(exerciseId: number, questionId: number): Promise<QuestionDTO | null> {
-        const data = await ItemFetcher.fetchItem(
-            `${this.baseUrl}/exercises/get/${exerciseId}/questions/get/${questionId}.json`
-        );
+    public static async getById(id: number): Promise<QuestionDTO | null> {
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/${id}`);
 
         return data;
     }

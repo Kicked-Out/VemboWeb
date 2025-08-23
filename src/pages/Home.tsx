@@ -4,10 +4,29 @@ import type { UserPeriodProgressDTO } from "../DTOs/userProgressDTO/userPeriodPr
 import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
 import { useSelector } from "react-redux";
 import { selectCurrentPeriodId } from "../slices/userStatisticsSlice";
+import { useNavigate } from "react-router-dom";
+import AuthService from "../services/authService";
 
 export default function Home() {
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+
     const currentPeriodId = useSelector(selectCurrentPeriodId);
     const [userPeriodProgress, setUserPeriodProgress] = useState<UserPeriodProgressDTO | null>();
+
+    const checkIsTokenValid = async () => {
+        const isTokenValid = await AuthService.validateToken();
+
+        return isTokenValid;
+    };
+
+    useEffect(() => {
+        const isTokenValid = checkIsTokenValid();
+
+        if (!token || !isTokenValid) {
+            navigate("/login");
+        }
+    }, [token]);
 
     useEffect(() => {
         if (!currentPeriodId) return;
