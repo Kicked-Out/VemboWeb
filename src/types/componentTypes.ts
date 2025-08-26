@@ -149,3 +149,28 @@ export interface DialogComponent {
 export interface VBucksBlockComponent {
     vBucks: number;
 }
+
+export interface authBtnComponent {
+    path: string;
+    title: string;
+}
+
+export interface primaryBtnComponent {
+    title: string;
+    onClick: (data?: any) => void;
+}
+
+export interface socialBtnComponent {
+    title: string;
+    social: string;
+    alt: string;
+}
+
+export interface showPassBtnComponent {
+    onClick: () => void;
+}
+
+export interface returnBtnComponent {
+    path: string;
+    title: string;
+}

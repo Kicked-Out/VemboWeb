@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
 import UnitContainer from "../components/containers/unitContainer";
-import type { UserDTO } from "../DTOs/auth/userDTO";
-import type { userStatisticDTO } from "../DTOs/userStatisticDTO";
-import AuthService from "../services/authService";
-import UserStatisticService from "../services/userStatisticService";
 import type { UserPeriodProgressDTO } from "../DTOs/userProgressDTO/userPeriodProgressDTO";
 import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
 import { useSelector } from "react-redux";

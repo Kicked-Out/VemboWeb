@@ -1,0 +1,763 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+
+@font-face {
+    font-family: "Atma";
+    src: url("../assets/fonts/Atma-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@layer base {
+
+  :root {
+    --active-button: #71B4D4;
+    --background: #ffffff;
+    --foreground: #0F2038;
+
+    --card: #ffffff;
+    --card-foreground: #0F2038;
+
+    --popover: #ffffff;
+    --popover-foreground: #0F2038;
+
+    --primary: #0F2038;
+    --primary-foreground: #F5FAFF;
+
+    --secondary: #f1f5f9;
+    --secondary-foreground: #0F2038;
+
+    --muted: #f1f5f9;
+    --muted-foreground: #65758b;
+
+    --accent: #f1f5f9;
+    --accent-foreground: #0F2038;
+
+    --destructive: #ef4343;
+    --destructive-foreground: #F5FAFF;
+
+    --border: #e1e7ef;
+    --input: #e1e7ef;
+    --ring: #0F2038;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: #fafafa;
+
+    --sidebar-foreground: #3f3f46;
+
+    --sidebar-primary: #18181b;
+
+    --sidebar-primary-foreground: #fafafa;
+
+    --sidebar-accent: #f4f4f5;
+
+    --sidebar-accent-foreground: #18181b;
+
+    --sidebar-border: #e5e7eb;
+
+    --sidebar-ring: #3780f6;
+
+    --white: #F5FAFF;
+  }
+
+  .dark {
+    --background: #0F2038;
+    --foreground: #F5FAFF;
+    --active-button: #71B4D4;
+
+    --card: #0F2038;
+    --card-foreground: #F5FAFF;
+
+    --popover: #0F2038;
+    --popover-foreground: #F5FAFF;
+
+    --primary: #F5FAFF;
+    --primary-foreground: #0F2038;
+
+    --secondary: #0F2038;
+    --secondary-foreground: #F5FAFF;
+
+    --muted: #0F2038;
+    --muted-foreground: #B4DEFF;
+
+    --accent: #0F2038;
+    --accent-foreground: #F5FAFF;
+
+    --destructive: #811d1d;
+    --destructive-foreground: #F5FAFF;
+
+    --border: #0F2038;
+    --input: #0F2038;
+    --ring: #cbd5e1;
+    --sidebar-background: #18181b;
+    --sidebar-foreground: #f4f4f5;
+    --sidebar-primary: #1d4fd7;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #27272a;
+    --sidebar-accent-foreground: #f4f4f5;
+    --sidebar-border: #27272a;
+    --sidebar-ring: #3780f6;
+  }
+}
+
+:root{
+  --dark:#0f2038;
+  --white:#F5FAFF;
+  --text-dark:#71B4D4;
+  --light-blue:#b4deff;
+  --medium-blue:#466984;
+  --gray-blue:#678ba7;
+  --color-border:#71b4d4;
+
+  --border: 210 40% 96%;
+  --input: 210 40% 96%;
+  --ring: 210 40% 96%;
+  --background: 210 40% 8%;
+  --foreground: 210 40% 98%;
+  --radius: 0.5rem;
+}
+
+/* ===== Base / resets ===== */
+* {
+  font-family: "Rubik", sans-serif;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--dark);
+  color: var(--white);
+  font-family: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+.auth-page{
+  width: 100%;
+  min-height: 100vh;
+  background: var(--dark);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+@media (min-width:768px){
+  .auth-page{
+    padding: 40px;
+  }
+}
+
+/* ===== Form ===== */
+.signup-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+/* ===== Text Section ===== */
+.signup-hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+  width:100%;
+}
+
+/* ===== Title ===== */
+.signup-title{
+  text-align:center;
+  font-weight:600;
+  line-height:1.2;
+  width:100%;
+  font-size: 2.25rem;
+  margin: 0;
+}
+@media (max-width:767.98px){
+  .signup-title{
+    font-size: 2.25rem;
+  }
+}
+
+.text-white{
+  color: var(--white);
+}
+
+.text-light-blue{
+  color: var(--light-blue);
+}
+
+/* ===== Subtitle ===== */
+.signup-subtitle{
+  width:100%;
+  text-align:center;
+  font-weight:600;
+  line-height:1.2;
+  font-size:1.25rem;
+  margin: 0;
+}
+@media (min-width:768px){
+  .signup-subtitle{
+    font-size:1.5rem;
+  }
+}
+
+.text-medium-blue{ color: var(--medium-blue); }
+
+/* ===== Form Container ===== */
+.form-block{
+  display:flex;
+  flex-direction:column;
+  gap:32px;
+  width:100%;
+}
+
+/* ===== Form Fields ===== */
+.form-fields{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  width:100%;
+}
+
+.input-group{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  height:60px;
+  width:100%;
+}
+
+/* ===== Container (Input with border) ===== */
+.input-container{
+  position:relative;
+  flex:1;
+  width:100%;
+}
+
+.input-box{
+  position:absolute;
+  left:0; top:0;
+  width:100%; height:60px;
+  background:#fff;
+  border:2px solid var(--color-border);
+  border-radius:15px;
+}
+
+/* ===== Input ===== */
+.input{
+  position:relative;
+  z-index:10;
+  width:100%;
+  height:60px;
+  background:transparent;
+  border:none;
+  outline:none;
+  padding:0 12px;
+  font-family:inherit;
+  font-size:1.25rem;
+  color: var(--medium-blue);
+}
+
+.input::placeholder{
+  color: var(--medium-blue);
+}
+
+.input--with-toggle{
+  padding-right: 48px;
+}
+
+/* ===== Button ShowPassword ===== */
+.password-toggle{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform: translateY(-50%);
+  z-index:11;
+}
+
+/* ===== --- "OR" --- ===== */
+.or{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  width:100%;
+}
+
+.or-line{
+  width:224px;
+  height:5px;
+  background: var(--medium-blue);
+}
+
+.or-text{
+  font-weight:600;
+  font-size:1.25rem;
+  color: var(--medium-blue);
+}
+
+/* ===== Social Button ===== */
+.social-row{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+  width:100%;
+}
+@media (min-width:768px){
+  .social-row{
+    flex-direction:row;
+    gap:40px;
+  }
+}
+
+/* ===== Terms & Policy ===== */
+.terms{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  width:100%;
+  max-width:482px;
+}
+
+.terms p{
+  font-weight:600;
+  font-size:1rem;
+  color: var(--gray-blue);
+  text-align:center;
+  line-height:1.25rem;
+  display:flex;
+  align-items:center;
+  margin:0;
+}
+
+.terms .p-1line{
+  height:40px;
+}
+
+.terms .p-2lines{
+  max-width:398px;
+  height:65px;
+}
+
+/* ===== Утиліти, які використано у розмітці ===== */
+.relative{
+  position:relative;
+}
+
+.centered{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.rounded-15{
+  border-radius:15px;
+}
+
+
+
+
+/* ===== AuthButton ===== */
+.auth-btn{
+  position:absolute;
+  top:20px; right:20px;
+  display:flex; align-items:center; justify-content:center;
+  width:140px; height:45px;
+  border:2px solid var(--color-border);
+  background:#fff;
+  border-radius:15px;
+  border-bottom-width: 3px;
+  font-family:inherit;
+  font-weight:600;
+  font-size:1.5rem;
+  color:var(--medium-blue);
+  text-transform:uppercase;
+  text-decoration:none;
+  transition:transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+@media (min-width:768px){
+  .auth-btn{ top:40px; right:40px; }
+}
+
+.auth-btn:hover{
+  background:var(--active-button);
+  color:var(--white);
+  border-color:#466984;
+  border-bottom-width: 3px;
+}
+
+.auth-btn:active{ transform:scale(.95); }
+
+/* ===== PrimaryButton ===== */
+.btn-primary{
+  display:flex; align-items:center; justify-content:center;
+  height:60px; width:100%;
+  border:2px solid var(--color-border);
+  background:var(--light-blue);
+  border-radius:15px;
+  border-bottom-width: 6px;
+  font-weight:600;
+  font-size:1.5rem;
+  color:var(--dark);
+  transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.btn-primary:hover{
+  background:var(--active-button);
+  border-color:#466984;
+  border-bottom-width: 6px;
+}
+
+.btn-primary:active{
+  transform:scale(.95);
+}
+
+/* ===== SocialButton ===== */
+.btn-social{
+  display:flex; align-items:center; justify-content:center;
+  gap:8px;
+  width:100%; height:60px;
+  border:2px solid var(--color-border);
+  background:#fff;
+  color:var(--medium-blue);
+  border-radius:15px;
+  border-bottom-width: 6px;
+  transition:transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+@media (min-width:768px){
+  .btn-social{
+    width:230px;
+  }
+}
+
+.btn-social:hover{
+  background:var(--active-button);
+  color:var(--white);
+  border-color:#466984;
+  border-bottom-width: 6px;
+}
+
+.btn-social:active{
+  transform:scale(.95);
+}
+
+.social-icon{
+  width:24px;
+  height:24px;
+}
+
+.social-text{
+  font-weight:600;
+  font-size:1.25rem;
+  font-family:inherit;
+}
+
+/* ===== ShowPasswordButton ===== */
+.password-toggle-btn{
+  display:flex; align-items:center; justify-content:center;
+  /* height:60px; */
+  background:transparent;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  transition:transform .2s ease;
+}
+
+.password-toggle-btn:hover{
+  transform:scale(1.1);
+}
+
+.password-toggle-btn:active{
+  transform:scale(.95);
+}
+
+.eye-active, .eye-inactive{
+  display:block;
+  width:32px;
+  height:32px;
+}
+
+.btn-return{
+  display:flex; align-items:center; justify-content:center;
+  gap:10px;
+  width:100%; max-width:455px; height:60px;
+  border:2px solid var(--color-border);
+  background:var(--light-blue);
+  color:var(--dark);
+  border-radius:15px;
+  box-shadow:1px 4px 1px 0 var(--color-border);
+  font-weight:600;
+  font-size:1.5rem;
+  line-height:1.25rem;
+  text-decoration:none;
+  transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease;
+  box-sizing:border-box;
+}
+@media (min-width:768px){
+  .btn-return{
+    font-size:2rem;
+  }
+}
+.btn-return:hover{
+  background:var(--active-button);
+  border-color:#466984;
+  box-shadow:1px 4px 1px 0 #466984;
+  color:var(--white);
+}
+.btn-return:active{
+  transform:scale(.95);
+}
+
+.forgot-link{
+  position:absolute;
+  right:12px; top:0;
+  height:60px;
+  display:flex; align-items:center;
+  font-weight:500; font-size:1rem;
+  color:var(--medium-blue);
+  text-decoration:none;
+  z-index:10;
+  transition:transform .2s ease, text-decoration-color .2s ease;
+}
+
+.forgot-link:active{
+  transform:scale(.95);
+}
+
+
+
+
+/* Forgot Password Section */
+/* ===== Широкий контейнер сторінки (до 780px) ===== */
+.content-wide{
+  width:100%;
+  max-width:780px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:44px;
+}
+
+.section-wide{
+  width:100%;
+  max-width:772px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+}
+
+/* Title/Subtitle */
+.header-block{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:24px;
+  width:100%;
+}
+
+.page-title-lg{
+  width:100%;
+  color:var(--white);
+  text-align:center;
+  font-weight:600;
+  line-height:1.4;
+  font-size:2.25rem;
+  margin: 0;
+}
+@media (min-width:768px){
+  .page-title-lg{
+    font-size:3rem;
+  }
+}
+
+.page-subtitle-lg{
+  width:100%;
+  max-width:772px;
+  color:var(--white);
+  text-align:center;
+  font-weight:600;
+  line-height:1.4;
+  font-size:1.5rem;
+  margin: 0;
+}
+@media (min-width:768px){
+  .page-subtitle-lg{
+    font-size:2.25rem;
+  }
+}
+
+.form-section-left{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:32px;
+}
+
+.form-fields-left{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:24px;
+}
+
+/* Bottom Links */
+.bottom-links{
+  width:100%;
+  max-width:776px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.link-white{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  color:var(--white);
+  font-family:inherit;
+  font-size:1.5rem;
+  font-weight:400;
+  line-height:1.25rem;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.link-white:hover{
+  text-decoration:underline;
+}
+
+/* + "Resend letter" + */
+.btn-text{
+  background:transparent;
+  border:none;
+  color:var(--white);
+  font-family:inherit;
+  font-size:1.5rem;
+  font-weight:400;
+  line-height:1.25rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  transition:transform .2s ease, text-decoration-color .2s ease;
+}
+
+.btn-text:hover{
+  text-decoration:underline;
+}
+
+.btn-text:active{
+  transform:scale(.95);
+}
+
+
+
+
+/* Email confirmation Section */
+.auth-page-full{
+  width:100%;
+  height:100vh;
+  background:var(--dark);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+}
+
+.content-narrow{
+  width:100%;
+  max-width:500px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+}
+
+/* Ilustration */
+.confirm-illustration{
+  width:150px;
+  display:block;
+}
+
+@media (min-width:768px){
+  .confirm-illustration{
+    width:520px;
+  }
+}
+
+/* Text Blok */
+.confirm-text{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  width:100%;
+}
+
+
+
+
+/* Password Updated Section */
+.auth-overlay{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100vh;
+  background:var(--dark);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0;
+  padding:0;
+}
+
+.text-accent{
+  color: var(--text-dark);
+}
+
+.message-narrow{
+  max-width:694px;
+  width:100%;
+}
