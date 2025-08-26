@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import "./styles/styles.css";
+// import "./styles/styles.css";
+import "./styles/global.css";
 import Home from "./pages/Home";
 import Lesson from "./pages/Lesson";
 import NotFound from "./pages/NotFound";
@@ -10,8 +11,10 @@ import Registration from "./pages/auth/Registration";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
+import PasswordUpdated from "./pages/auth/PasswordUpdated";
 import { Provider } from "react-redux";
 import { store } from "./slices/store";
+import EmailConfirmation from "./pages/auth/EmailConfirmation";
 
 function App() {
     return (
@@ -31,8 +34,10 @@ function App() {
                         </Route>
                         <Route path="/register" element={<Registration />} />
                         <Route path="/login" element={<Login />} />
-                        <Route path="/forgot_password" element={<ForgotPassword />} />
-                        <Route path="/reset_password" element={<ResetPassword />} />
+                        <Route path="/forgot-password" element={<ForgotPassword />} />
+                        <Route path="/email-confirmation" element={<EmailConfirmation/>}/>
+                        <Route path="/reset-password" element={<ResetPassword />} />
+                        <Route path="/password-updated" element={<PasswordUpdated/>} />
                     </Routes>
 
                     {/* <Footer /> */}
