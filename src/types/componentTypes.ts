@@ -6,6 +6,7 @@ import type { UserLevelProgressDTO } from "../DTOs/userProgressDTO/userLevelProg
 export interface LevelNodeComponent {
     id: number;
     title: string;
+    levelTypeId: number;
     unitCompletedCount: number | undefined;
     currentLevel: number;
     levelAmount: number;

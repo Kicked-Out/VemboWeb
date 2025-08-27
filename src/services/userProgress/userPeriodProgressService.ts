@@ -11,9 +11,7 @@ export class UserPeriodProgressService {
     }
 
     public static async getByPeriodId(periodId: number): Promise<UserPeriodProgressDTO | null> {
-        const data = await ItemFetcher.fetchItem(
-            `${this.baseUrl}/periods/get/${periodId}/userPeriodProgresses/get.json`
-        );
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/Period/${periodId}`);
 
         return data;
     }
@@ -25,9 +23,7 @@ export class UserPeriodProgressService {
     }
 
     public static async getWithMostXPByUserId(userId: string): Promise<UserPeriodProgressDTO | null> {
-        const data = await ItemFetcher.fetchItem(
-            `${this.baseUrl}/users/get/${userId}/userPeriodProgresses/getWithMostXP.json`
-        );
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/WithMostXP/User/${userId}`);
 
         return data;
     }

@@ -7,29 +7,36 @@ export default function NavBar() {
 
     return (
         <nav className="navbar">
-            <div>
-                <Link to="/">Vembo</Link>
-            </div>
-            <div>
-                <Link to="/">Learn</Link>
-            </div>
-            <div>
-                <Link to="/practice">Peactice</Link>
-            </div>
-            <div>
-                <Link to="/leaderboards">Leaderboards</Link>
-            </div>
-            <div>
-                <Link to="/quests">Quests</Link>
-            </div>
-            <div>
-                <Link to="/shop">Shop</Link>
-            </div>
-            <div>
-                <Link to={`/profile/${user?.nickNameSlug}`}>Profile</Link>
-            </div>
-            <div>
-                <Link to="/more">More</Link>
+            <Link to="/" className="nav-title">
+                Vembo
+            </Link>
+            <Link to="/" className="nav-btn">
+                <img className="nav-icon" src="src/assets/icons/glacier.png" />
+                Learn
+            </Link>
+            <Link to="/practice" className="nav-btn">
+                <img className="nav-icon" src="src/assets/icons/practice.png" />
+                Practice
+            </Link>
+            <Link to="/leaderboards" className="nav-btn">
+                <img className="nav-icon" src="src/assets/icons/leaderboards.png" />
+                Leaderboards
+            </Link>
+            <Link to="/quests" className="nav-btn">
+                <img className="nav-icon" src="src/assets/icons/chest.png" />
+                Quests
+            </Link>
+            <Link to="/shop" className="nav-btn">
+                <img className="nav-icon" src="src/assets/icons/shop.png" />
+                Shop
+            </Link>
+            <Link to={`/profile/${user?.nickNameSlug}`} className="nav-btn">
+                <img className="nav-icon" src="src/assets/icons/icon.png" />
+                Profile
+            </Link>
+            <div className="nav-btn">
+                <img className="nav-icon" src="src/assets/icons/more.png" />
+                More
             </div>
         </nav>
     );

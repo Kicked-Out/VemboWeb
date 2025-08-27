@@ -1,11 +1,84 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "Atma";
+    src: url("../assets/fonts/Atma-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root {
+    --frost-blue: #b4deff;
+    --ice-white: #f5faff;
+    --glacier-blue: #71b4d4;
+    --steel-blue: #466984;
+    --polar-navy: #0f2038;
+    --yellow: #ffd500;
+    --peach: #ff6b6b;
+    --mint: #2ee6c3;
+    --purple: #a259ff;
+    --orange: #ff7a00;
+    --white: #ffffff;
+    --gray: #37464f;
+
+    --background: var(--polar-navy);
+    --text-color-light: var(--white);
+    --text-color-dark: var(--polar-navy);
+
+    --navbar-border-color: var(var(--ice-white));
+    --nav-title-color: var(--frost-blue);
+    --nav-btn-border-color: var(--polar-navy);
+    --nav-btn-border-color-active: var(--glacier-blue);
+    --nav-btn-border-color-hover: rgba(255, 255, 255, 0.01);
+    --nav-btn-background-hover: rgba(255, 255, 255, 0.17);
+
+    --guidebook-btn-border-color: rgba(15, 32, 56, 0.63);
+
+    --unit-title-element-color: var(--gray);
+
+    --level-btn-background: var(--gray);
+    --level-btn-shadow: #2c383f;
+    --level-btn-item: #52656d;
+}
+
 html,
 body,
 #root {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: "Rubik", sans-serif;
+    background-color: var(--background);
+    color: var(--text-color-light);
+    letter-spacing: 0;
 }
 
 h1,
@@ -14,7 +87,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 800;
+    font-weight: 700;
 }
 
 .hidden {
@@ -24,9 +97,8 @@ h6 {
 .container {
     display: flex;
     width: 100%;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    flex-direction: column;
 }
 
 .header {
@@ -37,6 +109,230 @@ h6 {
 
 .header-item {
     margin: 20px;
+}
+
+.grid-container {
+    display: grid;
+    width: 100%;
+    min-height: 100vh;
+    grid-template-columns: 320px 5fr 3fr;
+}
+
+/* -------------- */
+/* Navigation Bar */
+/* -------------- */
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    border-right: 1px solid var(--ice-white);
+}
+
+.nav-title {
+    margin-top: 8px;
+    margin-left: 51px;
+    font-size: 48px;
+    line-height: normal;
+    font-family: "Atma", sans-serif;
+    color: var(--nav-title-color);
+}
+
+.nav-btn {
+    display: flex;
+    width: 277px;
+    height: 63px;
+    margin: 4px;
+    align-self: center;
+    align-items: center;
+    font-size: 20px;
+    font-family: "Rubik", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 15px;
+    border-width: 2px;
+    border-color: var(--nav-btn-border-color);
+    box-sizing: border-box;
+}
+
+.nav-btn:hover {
+    border-color: var(--nav-btn-border-color-hover);
+    background-color: var(--nav-btn-background-hover);
+}
+
+.nav-btn:active {
+    border-color: var(--nav-btn-border-color-active);
+}
+
+.nav-icon {
+    margin-left: 19px;
+    margin-right: 24px;
+    width: 52px;
+}
+
+/* ---------------- */
+/* Unit Header Card */
+/* ---------------- */
+
+.unit-header-card {
+    width: 744px;
+    height: 171px;
+    overflow: hidden;
+    margin-top: 32px;
+    background-color: var(--mint);
+    color: var(--text-color-dark);
+    border-radius: 20px;
+}
+
+.current-path {
+    display: flex;
+    margin-top: 32px;
+    margin-left: 28px;
+    align-items: center;
+}
+
+.current-path__icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    opacity: 79%;
+}
+
+.current-path__title {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    opacity: 79%;
+}
+
+.unit-header {
+    display: flex;
+    margin-top: 8px;
+    margin-left: 28px;
+    margin-right: 34px;
+    justify-content: space-between;
+}
+
+.unit-header__title {
+    width: 371px;
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 700;
+}
+
+.unit-header__guidebook-btn {
+    display: flex;
+    width: 186px;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    border-radius: 21px;
+    border-width: 2px 2px 5px 2px;
+    border-style: solid;
+    border-color: var(--guidebook-btn-border-color);
+}
+
+.guidebook-btn__icon {
+    width: 40px;
+    height: 40px;
+}
+
+.guidebook-btn__title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* ---------- */
+/* Unit Title */
+/* ---------- */
+
+.unit-title-container {
+    display: flex;
+    margin-top: 58px;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.unit-title-container__hr {
+    flex: 1;
+    height: 3px;
+    border: none;
+    background-color: var(--unit-title-element-color);
+    margin: 0 auto;
+}
+
+.unit-title-container__h2 {
+    font-size: 20px;
+    text-align: center;
+    color: var(--unit-title-element-color);
+    text-transform: uppercase;
+    text-wrap: nowrap;
+    line-height: 24px;
+}
+
+/* ------------ */
+/* Level Button */
+/* ------------ */
+
+.level-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.level-btn {
+    position: relative;
+    width: 87px;
+    height: 81px;
+    margin-top: 60px;
+}
+
+.level-btn-top {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 87px;
+    height: 72px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background-color: var(--level-btn-background);
+    box-shadow: 0 9px var(--level-btn-shadow);
+    z-index: 2;
+}
+
+.level-btn-top:hover {
+    top: 2px;
+    box-shadow: 0 7px var(--level-btn-shadow);
+}
+
+.level-btn-top:active {
+    top: 9px;
+    box-shadow: none;
+}
+
+.level-btn-icon {
+    min-width: 45px;
+    min-height: 31px;
+    max-width: 60px;
+    max-height: 48px;
+}
+
+/* ----------- */
+/* Hui zna sho */
+/* ----------- */
+
+.content {
+    display: flex;
+    width: 600px;
+    height: 450px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .progress-bar {
@@ -62,19 +358,6 @@ h6 {
     background-color: lightblue;
     border-radius: 50px;
     transition: width 0.3s ease-in-out;
-}
-
-.navbar {
-    position: absolute;
-    width: 250px;
-    height: 100%;
-}
-.content {
-    display: flex;
-    width: 600px;
-    height: 450px;
-    flex-direction: column;
-    align-items: center;
 }
 
 .exercise {

@@ -105,7 +105,7 @@ export default function Lesson() {
         if (!exercise) return;
 
         const getQuestionsAndAnswers = async () => {
-            const fetchedQuestions = await QuestionService.getAllFromExercise(exercise.id);
+            const fetchedQuestions = await QuestionService.getAllByExercise(exercise.id);
 
             if (fetchedQuestions.length === 1) {
                 dispatch(selectQuestion({ selectedQuestion: fetchedQuestions[0] }));
@@ -116,7 +116,7 @@ export default function Lesson() {
             const fetchedAnswers = [];
 
             for (const question of fetchedQuestions) {
-                const fetchedAnswer = await AnswerService.getAllFromExerciseAndQuestion(exercise.id, question.id);
+                const fetchedAnswer = await AnswerService.getAllByQuestionId(question.id);
 
                 fetchedAnswers.push(...fetchedAnswer);
             }

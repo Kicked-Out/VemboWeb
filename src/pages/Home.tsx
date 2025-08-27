@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentPeriodId } from "../slices/userStatisticsSlice";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/authService";
+import UnitHeaderCard from "../components/cards/unitHeaderCard";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -44,6 +45,8 @@ export default function Home() {
 
     return (
         <div>
+            <UnitHeaderCard />
+
             <UnitContainer periodId={currentPeriodId} periodCompletedCount={completedCount} />
         </div>
     );

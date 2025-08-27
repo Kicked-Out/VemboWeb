@@ -20,7 +20,7 @@ export class AchievementLevelService {
         achievementId: number,
         levelId: number
     ): Promise<AchievementLevelDTO | null> {
-        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/Achievement/${achievementId}/Level/${levelId}.json`);
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/Achievement/${achievementId}/Level/${levelId}`);
 
         return data;
     }

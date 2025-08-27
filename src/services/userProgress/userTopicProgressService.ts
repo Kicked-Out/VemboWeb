@@ -2,24 +2,22 @@ import type { UserTopicProgressDTO } from "../../DTOs/userProgressDTO/userTopicP
 import ItemFetcher from "../../helpers/itemFetcher";
 
 export class UserTopicProgressService {
-    private static baseUrl = "https://localhost:7213/api";
+    private static baseUrl = "https://localhost:7213/api/UserTopicProgress";
 
     public static async getAll(): Promise<UserTopicProgressDTO[]> {
-        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/UserTopicProgress`);
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/`);
 
         return data;
     }
 
     public static async getAllByPeriodId(periodId: number): Promise<UserTopicProgressDTO[]> {
-        const data = await ItemFetcher.fetchItems(
-            `${this.baseUrl}/periods/get/${periodId}/userTopicProgresses/getAll.json`
-        );
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/Period/${periodId}`);
 
         return data;
     }
 
     public static async getById(id: number): Promise<UserTopicProgressDTO | null> {
-        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/UserTopicProgress/${id}`);
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/${id}`);
 
         return data;
     }

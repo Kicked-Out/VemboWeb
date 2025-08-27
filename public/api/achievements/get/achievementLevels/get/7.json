@@ -1,1 +1,7 @@
-{ "Id": 7, "AchievementId": 1, "Level": 7, "TargetValue": 125, "RewardXP": 350 }
+{
+    "Id": 7,
+    "AchievementId": 1,
+    "Level": 7,
+    "TargetValue": 125,
+    "RewardXP": 350
+}

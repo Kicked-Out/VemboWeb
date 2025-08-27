@@ -13,24 +13,50 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "./slices/store";
 import Profile from "./pages/Profile";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { initSlice } from "./slices/authSlice";
 import Achievements from "./pages/Achievements";
+import UserStatisticService from "./services/userStatisticService";
+import type { UserDTO } from "./DTOs/auth/userDTO";
+import type { UserStatisticDTO } from "./DTOs/userStatisticDTO";
+import AuthService from "./services/authService";
 
 export default function App() {
     const dispatch = useDispatch<AppDispatch>();
+    const [user, setUser] = useState<UserDTO>();
+    const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
 
     useEffect(() => {
         dispatch(initSlice());
     }, [dispatch]);
+
+    useEffect(() => {
+        const getUser = async () => {
+            const data = await AuthService.get();
+
+            setUser(data);
+        };
+
+        getUser();
+    }, []);
+
+    useEffect(() => {
+        const getUserStatistic = async () => {
+            if (!user) return;
+
+            const data = await UserStatisticService.getByUserId(user.id);
+
+            setUserStatistic(data);
+        };
+
+        getUserStatistic();
+    }, [user]);
 
     return (
         <div className="grid-container">
             <NavBar />
 
             <div className="container">
-                <Header />
-
                 <Routes>
                     <Route path="*" element={<NotFound />} />
                     <Route path="/" element={<Home />} />
@@ -48,6 +74,8 @@ export default function App() {
 
                 {/* <Footer /> */}
             </div>
+
+            <Header />
         </div>
     );
 }

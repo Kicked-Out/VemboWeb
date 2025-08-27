@@ -26,9 +26,11 @@ export default function Unit({ unit, topicCompletedCount }: UnitComponent) {
 
     return (
         <div className="unit">
-            <h2>
-                Unit {unit.id}: {unit.title}
-            </h2>
+            <div className="unit-title-container">
+                <hr className="unit-title-container__hr" />
+                <h2 className="unit-title-container__h2">{unit.title}</h2>
+                <hr className="unit-title-container__hr" />
+            </div>
 
             <LevelNodes unitId={unit.id} unitCompletedCount={completedCount} />
         </div>

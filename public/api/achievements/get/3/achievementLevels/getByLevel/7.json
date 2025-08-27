@@ -1,1 +1,7 @@
-{ "id": 32, "achievementId": 3, "level": 7, "targetValue": 750, "rewardXP": 350 }
+{
+    "id": 32,
+    "achievementId": 3,
+    "level": 7,
+    "targetValue": 750,
+    "rewardXP": 350
+}

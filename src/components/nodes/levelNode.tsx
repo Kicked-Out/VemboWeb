@@ -7,9 +7,18 @@ import type { UserLevelProgressDTO } from "../../DTOs/userProgressDTO/userLevelP
 import { UserLevelProgressService } from "../../services/userProgress/userLevelProgressService";
 import LevelContentDispatcher from "../levelContents/levelContentDispatcher";
 
-export default function LevelNode({ id, title, unitCompletedCount }: LevelNodeComponent) {
+export default function LevelNode({ id, title, levelTypeId, unitCompletedCount }: LevelNodeComponent) {
     const [btnActive, setBtnActive] = useState<boolean>(false);
     const [btnActiveId, setBtnActiveId] = useState<number>(0);
+    const levelTypes: Record<number, string> = {
+        1: "default",
+        2: "practice",
+        3: "review",
+    };
+
+    const getLevelImage = () => {
+        return levelTypes[levelTypeId] || "default";
+    };
 
     const btnPressHandler = (id: number) => {
         setBtnActiveId(id);
@@ -39,7 +48,7 @@ export default function LevelNode({ id, title, unitCompletedCount }: LevelNodeCo
 
         const getCurrentLesson = async () => {
             const lastUserLessonData = await UserLessonProgressService.getCurrentByLevelId(id);
-            const lessonId = lastUserLessonData.id;
+            const lessonId = lastUserLessonData!.id;
 
             const lesson = await LessonService.getById(lessonId);
 
@@ -70,14 +79,23 @@ export default function LevelNode({ id, title, unitCompletedCount }: LevelNodeCo
             : userLevelProgress?.completedCount;
 
     return (
-        <div key={id} className="level-container">
+        <div key={id} className="level-item">
             <div
-                className="start-btn"
+                className="level-btn"
                 onClick={() => {
                     btnPressHandler(id);
                 }}
             >
-                Level Block
+                <div className="level-btn-top">
+                    <img
+                        className="level-btn-icon"
+                        src={`../src/assets/icons/levels/${getLevelImage()}_${
+                            levelCompletedCount! >= 1 ? "active" : "inactive"
+                        }.png`}
+                    />
+                </div>
+
+                <div className="level-btn-down"></div>
             </div>
 
             <LevelContentDispatcher

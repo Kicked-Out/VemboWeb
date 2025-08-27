@@ -24,6 +24,7 @@ export default function LevelNodes({ unitId, unitCompletedCount }: levelNodesCom
                     key={level.id}
                     id={level.id}
                     title={level.title}
+                    levelTypeId={level.levelTypeId}
                     unitCompletedCount={unitCompletedCount}
                     currentLevel={1}
                     levelAmount={levels.length}

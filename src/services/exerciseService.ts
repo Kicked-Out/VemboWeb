@@ -2,7 +2,7 @@ import type { ExerciseDTO } from "../DTOs/exerciseDTO";
 import ItemFetcher from "../helpers/itemFetcher";
 
 export default class ExerciseService {
-    private static baseUrl = "https://localhost:7213/api/Exersice";
+    private static baseUrl = "https://localhost:7213/api/Exercise";
 
     public static async getAll(): Promise<ExerciseDTO[]> {
         const data = await ItemFetcher.fetchItems(`${this.baseUrl}`);
