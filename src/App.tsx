@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import "./styles/styles.css";
+// import "./styles/styles.css";
+import "./styles/global.css";
 import Home from "./pages/Home";
 import Lesson from "./pages/Lesson";
 import NotFound from "./pages/NotFound";
 import NavBar from "./components/navigation/navBar";
 import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
 import Registration from "./pages/auth/Registration";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -20,12 +20,13 @@ import UserStatisticService from "./services/userStatisticService";
 import type { UserDTO } from "./DTOs/auth/userDTO";
 import type { UserStatisticDTO } from "./DTOs/userStatisticDTO";
 import AuthService from "./services/authService";
+import PasswordUpdated from "./pages/auth/PasswordUpdated";
+import EmailConfirmation from "./pages/auth/EmailConfirmation";
 
 export default function App() {
     const dispatch = useDispatch<AppDispatch>();
     const [user, setUser] = useState<UserDTO>();
     const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
-
     useEffect(() => {
         dispatch(initSlice());
     }, [dispatch]);
@@ -70,6 +71,8 @@ export default function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/forgot_password" element={<ForgotPassword />} />
                     <Route path="/reset_password" element={<ResetPassword />} />
+                    <Route path="/password-updated/" element={<PasswordUpdated />} />
+                    <Route path="/email-confirmation/" element={<EmailConfirmation />} />
                 </Routes>
 
                 {/* <Footer /> */}
