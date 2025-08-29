@@ -1,55 +1,31 @@
 import { useEffect, useState } from "react";
 import UnitContainer from "../components/containers/unitContainer";
-import type { UserDTO } from "../DTOs/auth/userDTO";
-import type { userStatisticDTO } from "../DTOs/userStatisticDTO";
-import AuthService from "../services/authService";
-import UserStatisticService from "../services/userStatisticService";
 import type { UserPeriodProgressDTO } from "../DTOs/userProgressDTO/userPeriodProgressDTO";
 import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
+import { useSelector } from "react-redux";
+import { selectCurrentPeriodId } from "../slices/userStatisticsSlice";
 
 export default function Home() {
-    const [user, setUser] = useState<UserDTO>();
-    const [userStatistic, setUserStatistic] = useState<userStatisticDTO | null>();
-
-    useEffect(() => {
-        const getUser = async () => {
-            const data = await AuthService.get();
-
-            setUser(data);
-        };
-
-        getUser();
-    }, []);
-
-    useEffect(() => {
-        const getUserStatistic = async () => {
-            const data = await UserStatisticService.getByUserId(user!.id);
-
-            setUserStatistic(data);
-        };
-
-        getUserStatistic();
-    }, [user]);
-
-    const periodId = userStatistic?.currentPeriodId;
-
+    const currentPeriodId = useSelector(selectCurrentPeriodId);
     const [userPeriodProgress, setUserPeriodProgress] = useState<UserPeriodProgressDTO | null>();
 
     useEffect(() => {
         const getUserPeriodProgress = async () => {
-            const data = await UserPeriodProgressService.getByPeriodId(periodId!);
+            if (!currentPeriodId) return;
+
+            const data = await UserPeriodProgressService.getByPeriodId(currentPeriodId);
 
             setUserPeriodProgress(data);
         };
 
         getUserPeriodProgress();
-    }, [userStatistic]);
+    }, [currentPeriodId]);
 
     const completedCount = userPeriodProgress ? userPeriodProgress.completedCount : 0;
 
     return (
         <div>
-            <UnitContainer periodId={periodId ? periodId : 0} periodCompletedCount={completedCount} />
+            <UnitContainer periodId={currentPeriodId} periodCompletedCount={completedCount} />
         </div>
     );
 }

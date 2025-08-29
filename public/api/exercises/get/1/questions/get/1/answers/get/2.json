@@ -1,6 +1,6 @@
 {
-    "Id": 2,
-    "Title": "10 hours",
-    "IsCorrect": false,
-    "QuestionId": 1
+    "id": 2,
+    "title": "12 hours",
+    "isCorrect": false,
+    "questionId": 1
 }

@@ -1,17 +1,15 @@
 import { instance } from "../api/axios.api";
 import type { ChangePasswordDTO } from "../DTOs/auth/changePasswordDTO";
 import type { ForgotPasswordDTO } from "../DTOs/auth/forgotPasswordDTO";
-import type { LoginDTO } from "../DTOs/auth/LoginDTO";
-import type { RegisterDTO } from "../DTOs/auth/RegisterDTO";
+import type { LoginDTO } from "../DTOs/auth/loginDTO";
+import type { RegisterDTO } from "../DTOs/auth/registerDTO";
 import type { resetPasswordDTO } from "../DTOs/auth/resetPasswordDTO";
-import type { UserDTO } from "../DTOs/auth/UserDTO";
+import type { UserDTO } from "../DTOs/auth/userDTO";
 import { removeToken } from "../helpers/localStorage.helper";
 
 export default class AuthService {
     public static async login(userData: LoginDTO): Promise<string | undefined> {
         const result = await instance.post<string>("users/login", userData);
-
-        console.log(result);
 
         return result.data;
     }
