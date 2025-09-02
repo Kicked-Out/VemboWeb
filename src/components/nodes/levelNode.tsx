@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { LevelNodeComponent } from "../../types/componentTypes";
 import type { LessonDTO } from "../../DTOs/lessonDTO";
 import { LessonService } from "../../services/lessonService";
@@ -7,13 +7,14 @@ import type { UserLevelProgressDTO } from "../../DTOs/userProgressDTO/userLevelP
 import { UserLevelProgressService } from "../../services/userProgress/userLevelProgressService";
 import LevelContentDispatcher from "../levelContents/levelContentDispatcher";
 
-export default function LevelNode({ id, title, levelTypeId, unitCompletedCount }: LevelNodeComponent) {
+export default function LevelNode({ id, title, levelTypeId, unitCompletedCount, x }: LevelNodeComponent) {
     const [btnActive, setBtnActive] = useState<boolean>(false);
     const [btnActiveId, setBtnActiveId] = useState<number>(0);
     const levelTypes: Record<number, string> = {
         1: "default",
         2: "practice",
         3: "review",
+        4: "chest",
     };
 
     const getLevelImage = () => {
@@ -78,24 +79,60 @@ export default function LevelNode({ id, title, levelTypeId, unitCompletedCount }
             ? unitCompletedCount
             : userLevelProgress?.completedCount;
 
-    return (
+    const [btnSize, setBtnSize] = useState<{ width: number }>({ width: 0 });
+    const btnRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!btnRef.current) return;
+
+        const resizeObserver = new ResizeObserver((entries) => {
+            const rect = entries[0].contentRect;
+            setBtnSize({ width: rect.width });
+        });
+
+        resizeObserver.observe(btnRef.current);
+
+        return () => resizeObserver.disconnect();
+    }, []);
+
+    return getLevelImage() === "chest" ? (
+        <div
+            ref={btnRef}
+            className="chest-btn"
+            onClick={() => {
+                btnPressHandler(id);
+            }}
+            style={{ left: `${x}px` }}
+        >
+            <img
+                className="chest-icon"
+                src={`../src/assets/icons/levels/${getLevelImage()}_${
+                    levelCompletedCount! >= 1 ? "active" : "inactive"
+                }.png`}
+            />
+        </div>
+    ) : (
         <div key={id} className="level-item">
             <div
+                ref={btnRef}
                 className="level-btn"
                 onClick={() => {
                     btnPressHandler(id);
                 }}
+                style={{ left: `${x}px` }}
             >
-                <div className="level-btn-top">
+                <div className={`level-btn-top ${levelCompletedCount! >= 0 ? "level-btn-top-active" : ""}`}>
+                    {levelCompletedCount! >= 1 ? (
+                        <img className="level-btn-lighting" src="../src/assets/icons/levels/active_btn_lighting.png" />
+                    ) : null}
+
                     <img
                         className="level-btn-icon"
                         src={`../src/assets/icons/levels/${getLevelImage()}_${
-                            levelCompletedCount! >= 1 ? "active" : "inactive"
+                            levelCompletedCount! >= 0 ? "active" : "inactive"
                         }.png`}
                     />
                 </div>
-
-                <div className="level-btn-down"></div>
             </div>
 
             <LevelContentDispatcher

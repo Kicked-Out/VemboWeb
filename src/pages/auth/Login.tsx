@@ -138,7 +138,7 @@ export default function Login() {
                             </div>
 
                             {/* Login Button */}
-                            <PrimaryButton title="LOG IN" />
+                            <PrimaryButton title="LOG IN" onClick={onSubmit} />
                         </div>
 
                         {/* Social Login Section */}

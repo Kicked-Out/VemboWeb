@@ -1,11 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-// import "./styles/styles.css";
-import "./styles/global.css";
+import "./styles/styles.css";
+// import "./styles/global.css";
 import Home from "./pages/Home";
 import Lesson from "./pages/Lesson";
 import NotFound from "./pages/NotFound";
 import NavBar from "./components/navigation/navBar";
-import Header from "./components/header/header";
 import Registration from "./pages/auth/Registration";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -22,11 +21,13 @@ import type { UserStatisticDTO } from "./DTOs/userStatisticDTO";
 import AuthService from "./services/authService";
 import PasswordUpdated from "./pages/auth/PasswordUpdated";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
+import Sidebar from "./components/header/sidebar";
 
 export default function App() {
     const dispatch = useDispatch<AppDispatch>();
     const [user, setUser] = useState<UserDTO>();
     const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
+
     useEffect(() => {
         dispatch(initSlice());
     }, [dispatch]);
@@ -69,7 +70,7 @@ export default function App() {
                     <Route path="/profile/:nickName/achievements" element={<Achievements />} />
                     <Route path="/register" element={<Registration />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/forgot_password" element={<ForgotPassword />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/reset_password" element={<ResetPassword />} />
                     <Route path="/password-updated/" element={<PasswordUpdated />} />
                     <Route path="/email-confirmation/" element={<EmailConfirmation />} />
@@ -78,7 +79,7 @@ export default function App() {
                 {/* <Footer /> */}
             </div>
 
-            <Header />
+            <Sidebar />
         </div>
     );
 }

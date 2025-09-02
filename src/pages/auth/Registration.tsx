@@ -84,7 +84,9 @@
 import AuthButton, { PrimaryButton, ShowPasswordButton, SocialButton } from "../../components/ui/primary-button";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import type { RegisterDTO } from "../../DTOs/auth/registerDTO";
+import AuthService from "../../services/authService";
 
 export default function SignUp() {
     const [showPassword, setShowPassword] = useState(false);
@@ -99,12 +101,7 @@ export default function SignUp() {
 
     const navigate = useNavigate();
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm<Inputs>();
+    const { register, handleSubmit, watch } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         console.log(data);
@@ -222,7 +219,7 @@ export default function SignUp() {
                             </div>
 
                             {/* Create Account Button */}
-                            <PrimaryButton title="CREATE ACCOUNT" />
+                            <PrimaryButton title="CREATE ACCOUNT" onClick={onSubmit} />
                         </div>
 
                         {/* Social Login Section */}

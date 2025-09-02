@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react";
-import AuthService from "../../services/authService";
-import UserStatisticService from "../../services/userStatisticService";
-import type { UserDTO } from "../../DTOs/auth/userDTO";
-import type { UserStatisticDTO } from "../../DTOs/userStatisticDTO";
-import type { PeriodDTO } from "../../DTOs/periodDTO";
-import { PeriodService } from "../../services/periodService";
+import type { UserDTO } from "../../../DTOs/auth/userDTO";
+import type { UserStatisticDTO } from "../../../DTOs/userStatisticDTO";
+import AuthService from "../../../services/authService";
+import UserStatisticService from "../../../services/userStatisticService";
 import { useDispatch, useSelector } from "react-redux";
 import {
     giveVBucks,
-    selectCurrentPeriodId,
     selectHearts,
     selectStreak,
     selectVBucks,
     setCurrentPeriodId,
     setHearts,
     setStreak,
-} from "../../slices/userStatisticsSlice";
+} from "../../../slices/userStatisticsSlice";
 
-export default function Header() {
+export default function StatisticCard() {
     const [user, setUser] = useState<UserDTO>();
     const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
 
@@ -47,7 +44,7 @@ export default function Header() {
     const hearts = useSelector(selectHearts);
     const streak = useSelector(selectStreak);
     const vBucks = useSelector(selectVBucks);
-    const currentPeriodId = useSelector(selectCurrentPeriodId);
+    // const currentPeriodId = useSelector(selectCurrentPeriodId);
 
     useEffect(() => {
         if (userStatistic) {
@@ -58,26 +55,25 @@ export default function Header() {
         }
     }, [userStatistic]);
 
-    const [period, setPeriod] = useState<PeriodDTO | null>();
-
-    useEffect(() => {
-        if (!currentPeriodId) return;
-
-        const getPeriod = async () => {
-            const data = await PeriodService.getById(currentPeriodId);
-
-            setPeriod(data);
-        };
-
-        getPeriod();
-    }, [currentPeriodId, userStatistic]);
-
     return (
-        <header className="flex header">
-            <div className="header-item period">Period: {period?.title}</div>
-            <div className="header-item streak">Streak: {userStatistic?.streak}</div>
-            <div className="header-item coins">VBucks: {vBucks}</div>
-            <div className="header-item lives">Lives: {hearts}</div>
-        </header>
+        <div className="stats">
+            <div className="stats-item">
+                <img
+                    className="stats-img"
+                    src={`/src/assets/icons/fire${userStatistic && userStatistic?.streak >= 0 ? "2" : ""}.png`}
+                />
+                <p className="stats-value">{userStatistic?.streak}</p>
+            </div>
+
+            <div className="stats-item">
+                <img className="stats-img" src="/src/assets/icons/vembo_coin.png" />
+                <p className="stats-value">{userStatistic?.vBucks}</p>
+            </div>
+
+            <div className="stats-item">
+                <img className="stats-img" src="/src/assets/icons/heart.png" />
+                <p className="stats-value heart">{userStatistic?.hearts}</p>
+            </div>
+        </div>
     );
 }

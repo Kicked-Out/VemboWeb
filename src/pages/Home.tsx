@@ -7,10 +7,13 @@ import { selectCurrentPeriodId } from "../slices/userStatisticsSlice";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/authService";
 import UnitHeaderCard from "../components/cards/unitHeaderCard";
+import type { UnitDTO } from "../DTOs/unitDTO";
 
 export default function Home() {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
+    const [currentTopicOrder, setCurrentTopicOrder] = useState<number>(1);
+    const [currentUnit, setCurrentUnit] = useState<UnitDTO | null>(null);
 
     const currentPeriodId = useSelector(selectCurrentPeriodId);
     const [userPeriodProgress, setUserPeriodProgress] = useState<UserPeriodProgressDTO | null>();
@@ -45,9 +48,14 @@ export default function Home() {
 
     return (
         <div>
-            <UnitHeaderCard />
+            <UnitHeaderCard currentTopicOrder={currentTopicOrder} currentUnit={currentUnit} />
 
-            <UnitContainer periodId={currentPeriodId} periodCompletedCount={completedCount} />
+            <UnitContainer
+                periodId={currentPeriodId}
+                periodCompletedCount={completedCount}
+                onUnitInView={setCurrentUnit}
+                updateCurrentTopicOrder={setCurrentTopicOrder}
+            />
         </div>
     );
 }

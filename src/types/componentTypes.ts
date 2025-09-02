@@ -1,7 +1,6 @@
 import type { AnswerDTO } from "../DTOs/answerDTO";
 import type { QuestionDTO } from "../DTOs/questionDTO";
 import type { UnitDTO } from "../DTOs/unitDTO";
-import type { UserLevelProgressDTO } from "../DTOs/userProgressDTO/userLevelProgressDTO";
 
 export interface LevelNodeComponent {
     id: number;
@@ -10,6 +9,7 @@ export interface LevelNodeComponent {
     unitCompletedCount: number | undefined;
     currentLevel: number;
     levelAmount: number;
+    x: number;
 }
 
 export interface levelNodesComponent {
@@ -35,11 +35,14 @@ export interface LevelContentDispatcherComponent {
 export interface UnitComponent {
     unit: UnitDTO;
     topicCompletedCount: number | undefined;
+    onUnitInView: (unit: UnitDTO) => void;
 }
 
 export interface UnitContainerComponent {
     periodId: number;
     periodCompletedCount: number | undefined;
+    onUnitInView: (unit: UnitDTO) => void;
+    updateCurrentTopicOrder: (order: number) => void;
 }
 
 export interface Progress {
@@ -174,4 +177,9 @@ export interface showPassBtnComponent {
 export interface returnBtnComponent {
     path: string;
     title: string;
+}
+
+export interface unitHeaderCardComponent {
+    currentTopicOrder: number;
+    currentUnit: UnitDTO | null;
 }
