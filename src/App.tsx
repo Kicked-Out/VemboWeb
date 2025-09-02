@@ -22,7 +22,7 @@ import AuthService from "./services/authService";
 import PasswordUpdated from "./pages/auth/PasswordUpdated";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
 import Sidebar from "./components/header/sidebar";
-import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -67,15 +67,13 @@ function App() {
                         <Route path="unit/:unitId/level/:levelId" element={<Lesson />} />
                         <Route path="unit/:unitId/legendary/:legendaryId" element={<Lesson />} />
                     </Route>
-                    <Route path="/profile/:nickName" element={<Profile />} />
-                    <Route path="/profile/:nickName/achievements" element={<Achievements />} />
                     <Route path="/register" element={<Registration />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="/reset_password" element={<ResetPassword />} />
-                    <Route path="/password-updated/" element={<PasswordUpdated />} />
-                    <Route path="/email-confirmation/" element={<EmailConfirmation />} />
-                    <Route path="/about" element={<About />} />
+                    <Route path="/email-confirmation" element={<EmailConfirmation />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
+                    <Route path="/password-updated" element={<PasswordUpdated />} />
+                    <Route path="/contact" element={<Contact />} />
                 </Routes>
             </div>
 
