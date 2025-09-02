@@ -15,6 +15,7 @@ import PasswordUpdated from "./pages/auth/PasswordUpdated";
 import { Provider } from "react-redux";
 import { store } from "./slices/store";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
+import Contact from "./pages/Contact";
 
 function App() {
     return (
@@ -38,6 +39,7 @@ function App() {
                         <Route path="/email-confirmation" element={<EmailConfirmation/>}/>
                         <Route path="/reset-password" element={<ResetPassword />} />
                         <Route path="/password-updated" element={<PasswordUpdated/>} />
+                        <Route path="/contact" element={<Contact />} />
                     </Routes>
 
                     {/* <Footer /> */}
