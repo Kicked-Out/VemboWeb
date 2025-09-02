@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import "./styles/styles.css";
-// import "./styles/global.css";
+// import "./styles/styles.css";
+import "./styles/global.css";
 import Home from "./pages/Home";
 import Lesson from "./pages/Lesson";
 import NotFound from "./pages/NotFound";
@@ -22,8 +22,9 @@ import AuthService from "./services/authService";
 import PasswordUpdated from "./pages/auth/PasswordUpdated";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
 import Sidebar from "./components/header/sidebar";
+import About from "./pages/About";
 
-export default function App() {
+function App() {
     const dispatch = useDispatch<AppDispatch>();
     const [user, setUser] = useState<UserDTO>();
     const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
@@ -74,12 +75,13 @@ export default function App() {
                     <Route path="/reset_password" element={<ResetPassword />} />
                     <Route path="/password-updated/" element={<PasswordUpdated />} />
                     <Route path="/email-confirmation/" element={<EmailConfirmation />} />
+                    <Route path="/about" element={<About />} />
                 </Routes>
-
-                {/* <Footer /> */}
             </div>
 
             <Sidebar />
         </div>
     );
 }
+
+export default App;

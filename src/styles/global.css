@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
-
 @font-face {
     font-family: "Atma";
     src: url("../assets/fonts/Atma-Regular.ttf") format("truetype");
@@ -32,6 +30,13 @@
     font-family: "Rubik";
     src: url("../assets/fonts/Rubik-Bold.ttf") format("truetype");
     font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-ExtraBold.ttf") format("truetype");
+    font-weight: 800;
     font-style: normal;
 }
 
@@ -760,4 +765,58 @@ body {
 .message-narrow{
   max-width:694px;
   width:100%;
+}
+
+/* About Page */
+.about-title{
+  color:#FFF;
+  font-family:"Rubik";
+  font-size:40px;
+  font-style:normal;
+  font-weight:700;
+  line-height:normal;
+  letter-spacing:-0.4px;
+}
+
+.about-divider{
+  width:100%;
+  height:3px;
+  margin-top:24px;
+  margin-bottom:48px;
+  background-color:#71B4D4;
+}
+
+.about-grid{
+  display:flex;
+  gap:160px;
+}
+
+.about-column{
+  display:flex;
+  width:487px;
+  flex-direction:column;
+  gap:48px;
+}
+
+.about-row{
+  width:100%;
+}
+
+.about-subtitle{
+  font-family:"Rubik", sans-serif;
+  font-size:32px;
+  font-weight:600;
+  line-height:normal;
+  letter-spacing:-0.32px;
+  color:#71B4D4;
+}
+
+.about-description{
+  color:#FFF;
+  font-family:"Rubik";
+  font-size:32px;
+  font-style:normal;
+  font-weight:500;
+  line-height:normal;
+  letter-spacing:-0.32px;
 }
