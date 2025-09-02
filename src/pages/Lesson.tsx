@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { ExerciseDTO } from "../DTOs/exerciseDTO";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentLessonId, selectHearts, takeHeart } from "../slices/userStatisticsSlice";
+import { selectCurrentLessonId, takeHeart } from "../slices/userStatisticsSlice";
 import type { LessonDTO } from "../DTOs/lessonDTO";
 import { LessonService } from "../services/lessonService";
 import ExerciseService from "../services/exerciseService";
@@ -45,7 +45,6 @@ export default function Lesson() {
     const exerciseAmount = useSelector(selectExerciseAmount);
     const rightAnswers = useSelector(selectRightAnswers);
     const isExercise = useSelector(selectIsNext);
-    const hearts = useSelector(selectHearts);
     const selectedQuestion = useSelector(selectSelectedQuestion);
     const selectedAnswer = useSelector(selectSelectedAnswer);
     const [exercise, setExercise] = useState<ExerciseDTO | null>(null);

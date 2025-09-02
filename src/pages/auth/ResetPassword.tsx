@@ -58,12 +58,11 @@ export default function ResetPassword() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
         watch,
     } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-            navigate("/password-updated");
+    const onSubmit: SubmitHandler<Inputs> = () => {
+        navigate("/password-updated");
     };
 
     const newPassword = watch("newPassword");

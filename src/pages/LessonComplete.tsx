@@ -16,7 +16,7 @@ export default function LessonComplete() {
         accuracy: 100,
     };
     const isStreakNotUpdated = true;
-    let streak = 1;
+    const streak = 1;
     const isLastLevel = true;
     const completedQuests: Quest[] = [
         {

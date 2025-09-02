@@ -106,7 +106,6 @@ export default function SignUp() {
         register,
         handleSubmit,
         watch,
-        formState: { errors },
     } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -205,7 +204,7 @@ export default function SignUp() {
                             </div>
 
                             {/* Create Account Button */}
-                            <PrimaryButton title="CREATE ACCOUNT" />
+                            <PrimaryButton title="CREATE ACCOUNT" onClick={handleSubmit(onSubmit)} />
                             </div>
 
                             {/* Social Login Section */}

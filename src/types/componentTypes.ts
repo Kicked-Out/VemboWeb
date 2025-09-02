@@ -1,7 +1,6 @@
 import type { AnswerDTO } from "../DTOs/answerDTO";
 import type { QuestionDTO } from "../DTOs/questionDTO";
 import type { UnitDTO } from "../DTOs/unitDTO";
-import type { UserLevelProgressDTO } from "../DTOs/userProgressDTO/userLevelProgressDTO";
 
 export interface LevelNodeComponent {
     id: number;
@@ -157,7 +156,7 @@ export interface authBtnComponent {
 
 export interface primaryBtnComponent {
     title: string;
-    onClick: (data?: any) => void;
+    onClick?: (e?: unknown) => void | Promise<void>;
 }
 
 export interface socialBtnComponent {

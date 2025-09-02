@@ -12,7 +12,9 @@ export class UserLessonProgressService {
     }
 
     public static async getAllByLevelId(levelId: number) {
-        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/levels/get/1/userLessonProgresses/getAll.json`);
+        const data = await ItemFetcher.fetchItems(
+            `${this.baseUrl}/levels/get/${levelId}/userLessonProgresses/getAll.json`,
+        );
 
         return data;
     }

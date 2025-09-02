@@ -6,7 +6,6 @@ import Lesson from "./pages/Lesson";
 import NotFound from "./pages/NotFound";
 import NavBar from "./components/navigation/navBar";
 import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
 import Registration from "./pages/auth/Registration";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -40,7 +39,6 @@ function App() {
                         <Route path="/password-updated" element={<PasswordUpdated/>} />
                     </Routes>
 
-                    {/* <Footer /> */}
                 </Provider>
             </div>
         </div>
