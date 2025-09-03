@@ -6,7 +6,6 @@ import Lesson from "./pages/Lesson";
 import NotFound from "./pages/NotFound";
 import NavBar from "./components/navigation/navBar";
 import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
 import Registration from "./pages/auth/Registration";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -16,6 +15,7 @@ import { Provider } from "react-redux";
 import { store } from "./slices/store";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
 import About from "./pages/About";
+import Terms from "./pages/Terms";
 
 function App() {
     return (
@@ -40,6 +40,7 @@ function App() {
                         <Route path="/reset-password" element={<ResetPassword />} />
                         <Route path="/password-updated" element={<PasswordUpdated/>} />
                         <Route path="/about" element={<About />} />
+                        <Route path="/terms" element={<Terms />} />
                     </Routes>
 
                     {/* <Footer /> */}
