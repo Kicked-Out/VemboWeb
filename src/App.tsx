@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-// import "./styles/styles.css";
+import "./styles/styles.css";
 import "./styles/global.css";
 import Home from "./pages/Home";
 import Lesson from "./pages/Lesson";
@@ -14,6 +14,7 @@ import PasswordUpdated from "./pages/auth/PasswordUpdated";
 import { Provider } from "react-redux";
 import { store } from "./slices/store";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
+import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Terms from "./pages/Terms";
 
@@ -23,28 +24,23 @@ function App() {
             <NavBar />
 
             <div className="container">
-                <Provider store={store}>
-                    <Header />
-
-                    <Routes>
-                        <Route path="*" element={<NotFound />} />
-                        <Route path="/" element={<Home />} />
-                        <Route path="/lesson" element={<Lesson />}>
-                            <Route path="unit/:unitId/level/:levelId" element={<Lesson />} />
-                            <Route path="unit/:unitId/legendary/:legendaryId" element={<Lesson />} />
-                        </Route>
-                        <Route path="/register" element={<Registration />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/forgot-password" element={<ForgotPassword />} />
-                        <Route path="/email-confirmation" element={<EmailConfirmation/>}/>
-                        <Route path="/reset-password" element={<ResetPassword />} />
-                        <Route path="/password-updated" element={<PasswordUpdated/>} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/terms" element={<Terms />} />
-                    </Routes>
-
-                    {/* <Footer /> */}
-                </Provider>
+                <Routes>
+                    <Route path="*" element={<NotFound />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/lesson" element={<Lesson />}>
+                        <Route path="unit/:unitId/level/:levelId" element={<Lesson />} />
+                        <Route path="unit/:unitId/legendary/:legendaryId" element={<Lesson />} />
+                    </Route>
+                    <Route path="/register" element={<Registration />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/email-confirmation" element={<EmailConfirmation/>}/>
+                    <Route path="/reset-password" element={<ResetPassword />} />
+                    <Route path="/password-updated" element={<PasswordUpdated/>} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/terms" element={<Terms />} />
+                    <Route path="/contact" element={<Contact />} />
+                </Routes>
             </div>
         </div>
     );
