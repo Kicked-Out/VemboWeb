@@ -24,6 +24,7 @@ import Contact from "./pages/Contact";
 import { selectIsNavbarHidden, selectIsSidebarHidden } from "./slices/menuSlice";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
+import Terms from "./pages/Terms";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -96,6 +97,7 @@ function App() {
                     <Route path="/profile/:nickName" element={<Profile />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/terms" element={<Terms />} />
                 </Routes>
             </div>
 
