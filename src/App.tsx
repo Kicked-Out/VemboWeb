@@ -9,12 +9,10 @@ import Registration from "./pages/auth/Registration";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "./slices/store";
-import Profile from "./pages/Profile";
 import { useEffect, useState } from "react";
 import { initSlice } from "./slices/authSlice";
-import Achievements from "./pages/Achievements";
 import UserStatisticService from "./services/userStatisticService";
 import type { UserDTO } from "./DTOs/auth/userDTO";
 import type { UserStatisticDTO } from "./DTOs/userStatisticDTO";
@@ -23,11 +21,33 @@ import PasswordUpdated from "./pages/auth/PasswordUpdated";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
 import Sidebar from "./components/header/sidebar";
 import Contact from "./pages/Contact";
+import { selectIsNavbarHidden, selectIsSidebarHidden } from "./slices/menuSlice";
+import About from "./pages/About";
+import Profile from "./pages/Profile";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
     const [user, setUser] = useState<UserDTO>();
     const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
+    const isNavbarHidden = useSelector(selectIsNavbarHidden);
+    const isSidebarHidden = useSelector(selectIsSidebarHidden);
+    const [gridTemplateFirstColumn, setGridTemplateFirstColumn] = useState("320px");
+    const [gridTemplateThirdColumn, setGridTemplateThirdColumn] = useState("3fr");
+    const gridTemplateColumns = `${gridTemplateFirstColumn} ${gridTemplateThirdColumn}`;
+
+    useEffect(() => {
+        if (isNavbarHidden) {
+            setGridTemplateFirstColumn("1fr");
+        } else {
+            setGridTemplateFirstColumn("320px 5fr");
+        }
+
+        if (isSidebarHidden) {
+            setGridTemplateThirdColumn("auto");
+        } else {
+            setGridTemplateThirdColumn("3fr");
+        }
+    });
 
     useEffect(() => {
         dispatch(initSlice());
@@ -56,8 +76,8 @@ function App() {
     }, [user]);
 
     return (
-        <div className="grid-container">
-            <NavBar />
+        <div className="grid-container" style={{ gridTemplateColumns: `${gridTemplateColumns}` }}>
+            <NavBar isHidden={isNavbarHidden} />
 
             <div className="container">
                 <Routes>
@@ -73,11 +93,13 @@ function App() {
                     <Route path="/email-confirmation" element={<EmailConfirmation />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/password-updated" element={<PasswordUpdated />} />
+                    <Route path="/profile/:nickName" element={<Profile />} />
+                    <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                 </Routes>
             </div>
 
-            <Sidebar />
+            <Sidebar isHidden={isSidebarHidden} />
         </div>
     );
 }

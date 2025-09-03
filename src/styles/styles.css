@@ -108,7 +108,7 @@ h6 {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .container {
@@ -179,7 +179,7 @@ h6 {
     background-color: var(--nav-btn-background-hover);
 }
 
-.nav-btn:active {
+.nav-btn-selected {
     border-color: var(--nav-btn-border-color-active);
 }
 
@@ -831,11 +831,7 @@ h6 {
 
 button {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    min-width: 230px;
-    max-width: 500px;
-    min-height: 40px;
     margin: 10px 0px;
     padding: 10px 60px;
     font-size: 24px;

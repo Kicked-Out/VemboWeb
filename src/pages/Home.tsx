@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import UnitContainer from "../components/containers/unitContainer";
 import type { UserPeriodProgressDTO } from "../DTOs/userProgressDTO/userPeriodProgressDTO";
 import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentPeriodId } from "../slices/userStatisticsSlice";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/authService";
 import UnitHeaderCard from "../components/cards/unitHeaderCard";
 import type { UnitDTO } from "../DTOs/unitDTO";
+import { showNavbar, showSidebar } from "../slices/menuSlice";
 
 export default function Home() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const [currentTopicOrder, setCurrentTopicOrder] = useState<number>(1);
@@ -17,6 +19,11 @@ export default function Home() {
 
     const currentPeriodId = useSelector(selectCurrentPeriodId);
     const [userPeriodProgress, setUserPeriodProgress] = useState<UserPeriodProgressDTO | null>();
+
+    useEffect(() => {
+        dispatch(showNavbar());
+        dispatch(showSidebar());
+    });
 
     const checkIsTokenValid = async () => {
         const isTokenValid = await AuthService.validateToken();

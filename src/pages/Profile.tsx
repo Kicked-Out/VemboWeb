@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUserStatistics } from "../slices/selectors";
 import type { PeriodDTO } from "../DTOs/periodDTO";
 import { PeriodService } from "../services/periodService";
@@ -18,8 +18,10 @@ import { selectUserData } from "../slices/authSlice";
 import PrimaryButton from "../components/buttons/PrimaryButton";
 import SecondaryButton from "../components/buttons/SecondaryButton";
 import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
+import { showNavbar, showSidebar } from "../slices/menuSlice";
 
 export default function Profile() {
+    const dispatch = useDispatch();
     const { nickName } = useParams();
     const authUser = useSelector(selectUserData);
     const authStats = useSelector(selectUserStatistics);
@@ -29,6 +31,11 @@ export default function Profile() {
     const [userAchievements, setUserAchievements] = useState<UserAchievementDTO[]>([]);
     const [achievements, setAchievements] = useState<AchievementDTO[]>([]);
     const [achievementLevels, setAchievementLevels] = useState<AchievementLevelDTO[]>([]);
+
+    useEffect(() => {
+        dispatch(showNavbar());
+        dispatch(showSidebar());
+    });
 
     useEffect(() => {
         if (authUser === null) return;

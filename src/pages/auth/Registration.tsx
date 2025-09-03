@@ -82,15 +82,23 @@
 // }
 
 import AuthButton, { PrimaryButton, ShowPasswordButton, SocialButton } from "../../components/ui/primary-button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import type { RegisterDTO } from "../../DTOs/auth/registerDTO";
 import AuthService from "../../services/authService";
+import { useDispatch } from "react-redux";
+import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
 
 export default function SignUp() {
+    const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    useEffect(() => {
+        dispatch(hideNavbar());
+        dispatch(hideSidebar());
+    });
 
     type Inputs = {
         name: string;

@@ -183,3 +183,11 @@ export interface unitHeaderCardComponent {
     currentTopicOrder: number;
     currentUnit: UnitDTO | null;
 }
+
+export interface NavbarComponent {
+    isHidden: boolean;
+}
+
+export interface SidebarComponent {
+    isHidden: boolean;
+}

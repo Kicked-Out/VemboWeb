@@ -9,10 +9,16 @@ import Reward from "../components/lessonContents/Reward";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectStreak, setStreak } from "../slices/userStatisticsSlice";
+import { hideNavbar, hideSidebar } from "../slices/menuSlice";
 
 export default function LessonComplete() {
     const [step, setStep] = useState<number>(0);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(hideNavbar());
+        dispatch(hideSidebar());
+    });
 
     const progress: Progress = {
         totalXP: 30,

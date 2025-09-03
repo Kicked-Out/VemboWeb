@@ -6,6 +6,7 @@ import { UserLessonProgressService } from "../../services/userProgress/userLesso
 import type { UserLevelProgressDTO } from "../../DTOs/userProgressDTO/userLevelProgressDTO";
 import { UserLevelProgressService } from "../../services/userProgress/userLevelProgressService";
 import LevelContentDispatcher from "../levelContents/levelContentDispatcher";
+import { Link } from "react-router-dom";
 
 export default function LevelNode({ id, title, levelTypeId, unitCompletedCount, x }: LevelNodeComponent) {
     const [btnActive, setBtnActive] = useState<boolean>(false);
@@ -121,7 +122,10 @@ export default function LevelNode({ id, title, levelTypeId, unitCompletedCount, 
                 }}
                 style={{ left: `${x}px` }}
             >
-                <div className={`level-btn-top ${levelCompletedCount! >= 0 ? "level-btn-top-active" : ""}`}>
+                <Link
+                    to="/lesson"
+                    className={`level-btn-top ${levelCompletedCount! >= 0 ? "level-btn-top-active" : ""}`}
+                >
                     {levelCompletedCount! >= 1 ? (
                         <img className="level-btn-lighting" src="../src/assets/icons/levels/active_btn_lighting.png" />
                     ) : null}
@@ -132,10 +136,10 @@ export default function LevelNode({ id, title, levelTypeId, unitCompletedCount, 
                             levelCompletedCount! >= 0 ? "active" : "inactive"
                         }.png`}
                     />
-                </div>
+                </Link>
             </div>
 
-            <LevelContentDispatcher
+            {/* <LevelContentDispatcher
                 id={id}
                 title={title}
                 btnActive={btnActive}
@@ -143,7 +147,7 @@ export default function LevelNode({ id, title, levelTypeId, unitCompletedCount, 
                 levelCompletedCount={levelCompletedCount}
                 currentLessonOrder={currentLesson?.order}
                 lessonAmount={lessons.length}
-            />
+            /> */}
         </div>
     );
 }

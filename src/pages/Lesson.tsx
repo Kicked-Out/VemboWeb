@@ -32,6 +32,7 @@ import AnswerButtonBlock from "../components/buttonBlocks/AnswerButtonBlock";
 import ExerciseButtonBar from "../components/buttonBars/ExerciseButtonBar";
 import HeartsRanOutDialog from "../components/dialogs/HeartsRanOutDialog";
 import KeepLearningDialog from "../components/dialogs/KeepLearningDialog";
+import { hideNavbar, hideSidebar } from "../slices/menuSlice";
 
 export default function Lesson() {
     const { unitId, levelId, legendaryId } = useParams();
@@ -58,6 +59,11 @@ export default function Lesson() {
     const [isWrong, setIsWrong] = useState<boolean>(false);
     const [isHeartsRanOutDialogShown, setIsHeartsRanOutDialogShown] = useState<boolean>(false);
     const [isKeepLearningDialogShown, setIsKeepLearningDialogShown] = useState<boolean>(false);
+
+    useEffect(() => {
+        dispatch(hideNavbar());
+        dispatch(hideSidebar());
+    });
 
     useEffect(() => {
         dispatch(setStartedTime({ startedAt: new Date().toISOString() }));

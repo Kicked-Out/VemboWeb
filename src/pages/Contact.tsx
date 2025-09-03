@@ -1,6 +1,16 @@
+import { useDispatch } from "react-redux";
 import "../styles/contact.css";
+import { useEffect } from "react";
+import { hideSidebar, showNavbar } from "../slices/menuSlice";
 
 export default function Contact() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(showNavbar());
+        dispatch(hideSidebar());
+    });
+
     return (
         <div className="contact-page">
             <h1 className="contact-title">Contact us</h1>
@@ -12,11 +22,7 @@ export default function Contact() {
                 Looking to partner with us?
                 <span className="contact-email"> partnerships@vembo.com</span>
             </p>
-            <img
-                src="/images/contact-bear.png"
-                alt="Vembo bear"
-                className="contact-bear"
-            />
+            <img src="/images/contact-bear.png" alt="Vembo bear" className="contact-bear" />
         </div>
     );
 }

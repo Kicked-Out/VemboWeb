@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectUserData } from "../slices/authSlice";
 import { useEffect, useState } from "react";
@@ -10,14 +10,21 @@ import { UserService } from "../services/userService";
 import { UserAchievementService } from "../services/userAchievementService";
 import { AchievementService } from "../services/achievementService";
 import { AchievementLevelService } from "../services/achievementLevelService";
+import { hideSidebar, showNavbar, showSidebar } from "../slices/menuSlice";
 
 export default function Achievements() {
+    const dispatch = useDispatch();
     const { nickName } = useParams();
     const authUser = useSelector(selectUserData);
     const [user, setUser] = useState<UserDTO | null>(null);
     const [userAchievements, setUserAchievements] = useState<UserAchievementDTO[]>([]);
     const [achievements, setAchievements] = useState<AchievementDTO[]>([]);
     const [achievementLevels, setAchievementLevels] = useState<AchievementLevelDTO[]>([]);
+
+    useEffect(() => {
+        dispatch(showNavbar());
+        dispatch(hideSidebar());
+    });
 
     useEffect(() => {
         if (authUser === null) return;
