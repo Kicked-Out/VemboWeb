@@ -1,3 +1,5 @@
+import InsightButton from "../../buttons/InsightButton";
+
 export default function InsightCard() {
     return (
         <div className="insight-card">
@@ -11,9 +13,7 @@ export default function InsightCard() {
                 <img className="insight-card__bear-img" src="/src/assets/icons/insight/vembo-insight-card.png" />
             </div>
 
-            <button className="insight-btn">
-                <p>Get Insight</p>
-            </button>
+            <InsightButton />
         </div>
     );
 }

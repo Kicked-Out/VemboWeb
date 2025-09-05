@@ -398,12 +398,18 @@ h6 {
 /* ============================================================================================================================================================================ */
 
 .chest-btn {
+    display: flex;
+    align-items: end;
     position: relative;
     left: 0px;
     width: 100px;
     height: 83px;
     margin-top: 42px;
     z-index: 1;
+}
+
+.chest-active {
+    cursor: pointer;
 }
 
 /* ============================================================================================================================================================================ */
@@ -511,6 +517,7 @@ h6 {
     font-size: 20px;
     font-weight: 800;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 /* ============================================================================================================================================================================ */
@@ -575,11 +582,16 @@ h6 {
     font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 /* ============================================================================================================================================================================ */
 /* ============================================================================ Daily Quests Card ============================================================================= */
 /* ============================================================================================================================================================================ */
+
+.daily-quests-card {
+    padding-bottom: 7px;
+}
 
 .daily-quests-card__content {
     display: flex;
@@ -620,6 +632,7 @@ h6 {
 .daily-quest__progress-container {
     display: flex;
     margin-top: 12px;
+    margin-bottom: 24px;
     align-items: center;
 }
 
@@ -627,27 +640,51 @@ h6 {
     position: relative;
     width: 300px;
     height: 20px;
+    --progress: 0%;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
     background-color: #2f3b4d;
 }
 
 .daily-quest__progress {
-    width: 70%;
-    height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--progress);
+    height: 100%;
     border-radius: 50px;
     background-color: #fef400;
+    z-index: 0;
 }
 
 .daily-quest__progress-info {
     position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
-    text-align: center;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* transform: translateX(-50%); */
     font-size: 16px;
     font-weight: 800;
     line-height: 20px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.daily-quest__progress-info--empty {
+    color: #969ca1;
+    z-index: 1;
+}
+
+.daily-quest__progress-info--filled {
     color: #aa572a;
+    z-index: 2;
+    -webkit-clip-path: inset(0 calc(100% - var(--progress)) 0 0 round 50px);
+    clip-path: inset(0 calc(100% - var(--progress)) 0 0 round 50px);
 }
 
 .daily-quest__reward-img {
@@ -702,6 +739,7 @@ h6 {
     border-radius: 13px;
     background-color: var(--ice-white);
     margin-bottom: 28px;
+    cursor: pointer;
 }
 
 .insight-secondary-btn {
@@ -712,6 +750,7 @@ h6 {
     font-weight: 700;
     color: var(--white);
     border: none;
+    cursor: pointer;
 }
 
 /* ============================================================================================================================================================================ */
@@ -831,6 +870,7 @@ h6 {
 
 button {
     display: flex;
+    align-items: center;
     justify-content: center;
     margin: 10px 0px;
     padding: 10px 60px;

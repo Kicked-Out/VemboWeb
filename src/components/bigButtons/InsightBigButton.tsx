@@ -1,4 +1,4 @@
-export default function InsightButton() {
+export default function InsightBigButton() {
     return (
         <div className="insight-btn">
             <div className="insight-block">

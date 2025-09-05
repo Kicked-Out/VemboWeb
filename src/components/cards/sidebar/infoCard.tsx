@@ -1,9 +1,17 @@
+import { Link } from "react-router-dom";
+
 export default function InfoCard() {
     return (
         <div className="info-card">
-            <a className="info-card__link">About</a>
-            <a className="info-card__link">Terms</a>
-            <a className="info-card__link">Contact Us</a>
+            <Link to="/about" className="info-card__link">
+                About
+            </Link>
+            <Link to="/terms" className="info-card__link">
+                Terms
+            </Link>
+            <Link to="/contact" className="info-card__link">
+                Contact Us
+            </Link>
         </div>
     );
 }

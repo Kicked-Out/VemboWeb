@@ -1,3 +1,6 @@
+import InsightPrimaryButton from "../../buttons/InsightPrimaryButton";
+import InsightSecondaryButton from "../../buttons/InsightSecondaryButton";
+
 export default function AdBlockerCard() {
     return (
         <div className="adblocker-card">
@@ -11,9 +14,9 @@ export default function AdBlockerCard() {
                 </p>
             </div>
 
-            <button className="insight-primary-btn">Level Up With Insight</button>
+            <InsightPrimaryButton />
 
-            <button className="insight-secondary-btn">Disable Ad Blocker</button>
+            <InsightSecondaryButton />
         </div>
     );
 }

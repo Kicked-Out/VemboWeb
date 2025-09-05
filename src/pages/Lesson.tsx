@@ -35,18 +35,17 @@ import KeepLearningDialog from "../components/dialogs/KeepLearningDialog";
 import { hideNavbar, hideSidebar } from "../slices/menuSlice";
 
 export default function Lesson() {
+    const dispatch = useDispatch();
     const { unitId, levelId, legendaryId } = useParams();
     const [lesson, setLesson] = useState<LessonDTO | null>(null);
     const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
     const [questions, setQuestions] = useState<QuestionDTO[]>([]);
     const [answers, setAnswers] = useState<AnswerDTO[]>([]);
-    const dispatch = useDispatch();
     const currentLessonId = useSelector(selectCurrentLessonId);
     const currentExercise = useSelector(selectCurrentExercise);
     const exerciseAmount = useSelector(selectExerciseAmount);
     const rightAnswers = useSelector(selectRightAnswers);
     const isExercise = useSelector(selectIsNext);
-    const hearts = useSelector(selectHearts);
     const selectedQuestion = useSelector(selectSelectedQuestion);
     const selectedAnswer = useSelector(selectSelectedAnswer);
     const [exercise, setExercise] = useState<ExerciseDTO | null>(null);

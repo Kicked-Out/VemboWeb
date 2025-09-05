@@ -58,21 +58,18 @@ export default function StatisticCard() {
     return (
         <div className="stats">
             <div className="stats-item">
-                <img
-                    className="stats-img"
-                    src={`/src/assets/icons/fire${userStatistic && userStatistic?.streak >= 0 ? "2" : ""}.png`}
-                />
-                <p className="stats-value">{userStatistic?.streak}</p>
+                <img className="stats-img" src={`/src/assets/icons/fire${streak > 0 ? "2" : ""}.png`} />
+                <p className="stats-value">{streak}</p>
             </div>
 
             <div className="stats-item">
                 <img className="stats-img" src="/src/assets/icons/vembo_coin.png" />
-                <p className="stats-value">{userStatistic?.vBucks}</p>
+                <p className="stats-value">{vBucks}</p>
             </div>
 
             <div className="stats-item">
                 <img className="stats-img" src="/src/assets/icons/heart.png" />
-                <p className="stats-value heart">{userStatistic?.hearts}</p>
+                <p className="stats-value heart">{hearts}</p>
             </div>
         </div>
     );

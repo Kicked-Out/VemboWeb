@@ -65,7 +65,6 @@ export interface ProgressSummaryComponents {
 }
 
 export interface StreakUpdateComponents {
-    streak: number;
     onNext: () => void;
 }
 
@@ -190,4 +189,26 @@ export interface NavbarComponent {
 
 export interface SidebarComponent {
     isHidden: boolean;
+}
+
+export interface LevelButtonComponent {
+    id: number;
+    x: number;
+    levelTypeId: number;
+    levelCompletedCount: number | undefined;
+}
+
+export interface ChestButtonComponent {
+    id: number;
+    x: number;
+    levelTypeId: number;
+    levelCompletedCount: number | undefined;
+}
+
+export interface DailyQuestComponent {
+    title?: string;
+    progress?: number;
+    minValue?: number;
+    maxValue?: number;
+    chestLevel?: number;
 }

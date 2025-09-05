@@ -1,14 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { UserStatisticDTO } from "../DTOs/userStatisticDTO";
 
-interface UserStatisticsSlice {
-    streak: number;
-    vBucks: number;
-    hearts: number;
-    currentPeriodId: number;
-    currentLessonId: number;
-}
-
 const initialState: UserStatisticDTO = {
     id: 0,
     userId: "1",
@@ -40,6 +32,10 @@ export const userStatisticsSlice = createSlice({
 
         setStreak: (state, action) => {
             state.streak = action.payload.streak;
+        },
+
+        addStreak: (state) => {
+            state.streak += 1;
         },
 
         giveVBucks: (state, action) => {
@@ -77,6 +73,7 @@ export const {
     giveHeart,
     takeHeart,
     setStreak,
+    addStreak,
     giveVBucks,
     takeVBucks,
     setCurrentPeriodId,

@@ -8,7 +8,7 @@ import LegendaryOffer from "../components/lessonContents/LegendaryOffer";
 import Reward from "../components/lessonContents/Reward";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectStreak, setStreak } from "../slices/userStatisticsSlice";
+import { selectStreak } from "../slices/userStatisticsSlice";
 import { hideNavbar, hideSidebar } from "../slices/menuSlice";
 
 export default function LessonComplete() {
@@ -18,7 +18,7 @@ export default function LessonComplete() {
     useEffect(() => {
         dispatch(hideNavbar());
         dispatch(hideSidebar());
-    });
+    }, []);
 
     const progress: Progress = {
         totalXP: 30,
@@ -44,10 +44,6 @@ export default function LessonComplete() {
         },
     ];
 
-    useEffect(() => {
-        dispatch(setStreak({ streak: 1 }));
-    });
-
     const navigate = useNavigate();
 
     const onNextHandle = () => {
@@ -60,7 +56,7 @@ export default function LessonComplete() {
 
     const steps = [
         <ProgressSummary data={progress} onNext={onNextHandle} />,
-        isStreakNotUpdated && <StreakUpdate streak={streak} onNext={onNextHandle} />,
+        isStreakNotUpdated && <StreakUpdate onNext={onNextHandle} />,
         streak === 1 && <GoalPrompt onNext={onNextHandle} />,
         <QuestResults questsCompleted={0} onNext={onNextHandle} />,
         ...completedQuests.map((completedQuest) => (
