@@ -12,13 +12,16 @@ import type { UserAchievementDTO } from "../DTOs/userAchievementDTO";
 import { Link, useParams } from "react-router-dom";
 import { UserService } from "../services/userService";
 import type { UserDTO } from "../DTOs/auth/userDTO";
-import UserStatisticService from "../services/userStatisticService";
-import type { UserStatisticDTO } from "../DTOs/userStatisticDTO";
 import { selectUserData } from "../slices/authSlice";
-import PrimaryButton from "../components/buttons/PrimaryButton";
-import SecondaryButton from "../components/buttons/SecondaryButton";
 import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
-import { showNavbar, showSidebar } from "../slices/menuSlice";
+import {
+    hideInsightCard,
+    hideLeaderboardCard,
+    showAdBlockerCard,
+    showDailyQuestCard,
+    showNavbar,
+    showSidebar,
+} from "../slices/menuSlice";
 
 export default function Profile() {
     const dispatch = useDispatch();
@@ -26,7 +29,7 @@ export default function Profile() {
     const authUser = useSelector(selectUserData);
     const authStats = useSelector(selectUserStatistics);
     const [user, setUser] = useState<UserDTO | null>(null);
-    const [userStats, setUserStats] = useState<UserStatisticDTO | null>(null);
+    const userStats = useSelector(selectUserStatistics);
     const [period, setPeriod] = useState<PeriodDTO | null>(null);
     const [userAchievements, setUserAchievements] = useState<UserAchievementDTO[]>([]);
     const [achievements, setAchievements] = useState<AchievementDTO[]>([]);
@@ -35,7 +38,11 @@ export default function Profile() {
     useEffect(() => {
         dispatch(showNavbar());
         dispatch(showSidebar());
-    });
+        dispatch(hideInsightCard());
+        dispatch(hideLeaderboardCard());
+        dispatch(showDailyQuestCard());
+        dispatch(showAdBlockerCard());
+    }, []);
 
     useEffect(() => {
         if (authUser === null) return;
@@ -43,7 +50,6 @@ export default function Profile() {
         const load = async () => {
             if (authUser.nickNameSlug === nickName) {
                 setUser(authUser);
-                setUserStats(authStats);
                 return;
             }
 
@@ -56,23 +62,6 @@ export default function Profile() {
 
         load();
     }, [nickName, authUser, authStats]);
-
-    useEffect(() => {
-        if (!authStats) return;
-        if (!user) return;
-
-        if (authStats.userId !== user.id) {
-            const getUserStats = async () => {
-                const data = await UserStatisticService.getByUserId(user.id);
-
-                if (!data) return;
-
-                setUserStats(data);
-            };
-
-            getUserStats();
-        }
-    }, [user, authStats]);
 
     useEffect(() => {
         if (!user) return;
@@ -93,7 +82,7 @@ export default function Profile() {
         const getUserAchievements = async () => {
             const data = await UserAchievementService.getByUserId(user.id);
 
-            setUserAchievements(data.slice(0, 3));
+            setUserAchievements(data.slice(0, 2));
         };
 
         getUserAchievements();
@@ -103,7 +92,7 @@ export default function Profile() {
         const getAchievements = async () => {
             const data = await AchievementService.getAll();
 
-            setAchievements(data.slice(0, 3));
+            setAchievements(data.slice(0, 2));
         };
 
         getAchievements();
@@ -136,49 +125,130 @@ export default function Profile() {
     return (
         <div className="container">
             <div className="profile-block">
-                <img className="profile-image" />
+                <img className="profile-image" src="/src/assets/icons/profile/profile_img.png" />
 
-                <div className="profile-conteint">
+                <div className="profile-content">
                     <h1 className="profile-nickname">{user?.nickName}</h1>
+                    <h2 className="profile-created-at">Joined March 2024</h2>
 
-                    <div className="flex">
+                    {/* <div className="flex">
                         <div className="profile-connections">
                             <p className="blue-text">0 Following</p>
                             <p className="blue-text">0 Followers</p>
                         </div>
                         <p>Current Period: {period?.title}</p>
-                    </div>
+                    </div> */}
 
-                    {authUser !== user ? (
+                    {/* {authUser !== user ? (
                         <div className="btn-block">
                             <PrimaryButton title="Follow" onClick={() => {}} />
                             <SecondaryButton title="Report" onClick={() => {}} />
                             <SecondaryButton title="Block" onClick={() => {}} />
                         </div>
-                    ) : null}
+                    ) : null} */}
                 </div>
 
-                <hr />
+                <hr className="profile-divider" />
 
                 <h2 className="category-title">Statistics</h2>
 
                 <div className="profile-statistics">
+                    {userStats && userStats.streak === 0 ? (
+                        <div className="streak-card">
+                            <div className="streak-background inactive-streak-card">
+                                <img
+                                    className="streak-lightning"
+                                    src="/src/assets/icons/profile/statistics/card_lightning.png"
+                                />
+
+                                <img
+                                    className="small-streak-star"
+                                    src="/src/assets/icons/profile/statistics/small_streak_star.png"
+                                />
+                                <img
+                                    className="streak-star"
+                                    src="/src/assets/icons/profile/statistics/streak_star.png"
+                                />
+                            </div>
+
+                            <div className="streak-content">
+                                <img
+                                    className="streak-icon inactive-streak-icon"
+                                    src="/src/assets/icons/profile/statistics/streak_fire_active.png"
+                                />
+
+                                <div className="streak-info">
+                                    <p className="inactive-streak-title">{userStats ? userStats.streak : 0}</p>
+                                    <p className="inactive-streak-subtitle">Day Streak</p>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="streak-card">
+                            <div className="streak-background">
+                                <img
+                                    className="streak-lightning"
+                                    src="/src/assets/icons/profile/statistics/card_lightning.png"
+                                />
+
+                                <img
+                                    className="small-streak-star"
+                                    src="/src/assets/icons/profile/statistics/small_streak_star.png"
+                                />
+                                <img
+                                    className="streak-star"
+                                    src="/src/assets/icons/profile/statistics/streak_star.png"
+                                />
+                            </div>
+
+                            <div className="streak-content">
+                                <img
+                                    className="streak-icon"
+                                    src="/src/assets/icons/profile/statistics/streak_fire_active.png"
+                                />
+
+                                <div className="streak-info">
+                                    <p className="streak-title">{userStats?.streak}</p>
+                                    <p className="streak-subtitle">Day Streak</p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     <div className="statistic-card">
-                        <img className="icon" />
+                        <img className="statistic-icon" src="/src/assets/icons/profile/statistics/total_xp.png" />
 
                         <div className="statistic-info">
-                            <p>{userStats?.streak}</p>
-                            <p>Day Streak</p>
+                            <p className="statistic-title">{userStats ? userStats.vBucks : 0}</p>
+                            <p className="statistic-subtitle">Total XP</p>
+                        </div>
+                    </div>
+
+                    <div className="statistic-card">
+                        <img
+                            className="statistic-icon"
+                            src="/src/assets/icons/profile/statistics/small_ice_league.png"
+                        />
+
+                        <div className="statistic-info">
+                            <p className="statistic-title">Ice</p>
+                            <p className="statistic-subtitle">Current league</p>
                         </div>
 
-                        <div className="statistic-info">
-                            <p>{userStats?.vBucks}</p>
-                            <p>Total XP</p>
+                        <div className="statistic-small-card">
+                            <p className="statistic-small-title">Week 1</p>
                         </div>
+                    </div>
+
+                    <div className="statistic-card">
+                        <img
+                            className="statistic-icon"
+                            src="/src/assets/icons/profile/statistics/top_three_finishes.png"
+                        />
 
                         <div className="statistic-info">
-                            <p>Silver</p>
-                            <p>Current league</p>
+                            <p className="statistic-title">0</p>
+                            <p className="statistic-subtitle">Top 3 finishes</p>
                         </div>
                     </div>
                 </div>
@@ -200,23 +270,26 @@ export default function Profile() {
                         return (
                             <div key={userAchievement.id} className="profile-achievement">
                                 <div className="achievement-image-container">
-                                    <img className="achievement-image" />
-                                    <p className="achievement-image-title">LEVEL {userAchievement.currentLevel}</p>
+                                    <img
+                                        className="achievement-icon"
+                                        src="/src/assets/icons/profile/achievements/historian_ages_icon.png"
+                                    />
+                                    {/* <p className="achievement-image-title">LEVEL {userAchievement.currentLevel}</p> */}
                                 </div>
 
                                 <div className="achievement-block">
                                     <div className="achievement-title-container">
                                         <h2 className="achievement-title">{achievementData?.title}</h2>
-                                        <p>
+                                        <p className="achievement-progress-text">
                                             {userAchievement.progress}/{achievementLevelData?.targetValue}
                                         </p>
                                     </div>
 
-                                    <div className="progress-bar">
-                                        <div className="progress"></div>
+                                    <div className="achievement-progress-bar">
+                                        <div className="achievement-progress"></div>
                                     </div>
 
-                                    <p>
+                                    <p className="achievement-description">
                                         {achievementData?.description.replace(
                                             "${targetValue}",
                                             `${achievementLevelData?.targetValue}`

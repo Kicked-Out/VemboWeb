@@ -8,7 +8,7 @@ export default function NotFound() {
     useEffect(() => {
         dispatch(hideNavbar());
         dispatch(hideSidebar());
-    });
+    }, []);
 
     return (
         <div>

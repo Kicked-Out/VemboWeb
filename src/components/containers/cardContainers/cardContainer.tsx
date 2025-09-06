@@ -6,18 +6,29 @@ import AdBlockerCard from "../../cards/sidebar/adblockerCard";
 import InfoCard from "../../cards/sidebar/infoCard";
 import { useSelector } from "react-redux";
 import { selectStreak } from "../../../slices/userStatisticsSlice";
+import {
+    selectIsAdBlockerCardHidden,
+    selectIsDailyQuestCardHidden,
+    selectIsInsightCardHidden,
+    selectIsLeaderboardCardHidden,
+} from "../../../slices/menuSlice";
 
 export default function CardContainer() {
     const streak = useSelector(selectStreak);
+    const isInsightCardHidden = useSelector(selectIsInsightCardHidden);
+    const isLeaderboardCardHidden = useSelector(selectIsLeaderboardCardHidden);
+    const isDailyQuestCardHidden = useSelector(selectIsDailyQuestCardHidden);
+    const isAdBlockerCardHidden = useSelector(selectIsAdBlockerCardHidden);
 
     return (
         <div className="card-container">
-            <InsightCard />
+            {!isInsightCardHidden ? <InsightCard /> : null}
 
-            {streak == 0 ? <InactiveLeaderboardCard /> : <LeaderboardCard />}
+            {!isLeaderboardCardHidden ? streak == 0 ? <InactiveLeaderboardCard /> : <LeaderboardCard /> : null}
 
-            <DailyQuestsCard />
-            <AdBlockerCard />
+            {!isDailyQuestCardHidden ? <DailyQuestsCard /> : null}
+            {!isAdBlockerCardHidden ? <AdBlockerCard /> : null}
+
             <InfoCard />
         </div>
     );

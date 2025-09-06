@@ -4,24 +4,32 @@ interface MenuSlice {
     selectedPage: number;
     isNavbarHidden: boolean;
     isSidebarHidden: boolean;
+    isInsightCardHidden: boolean;
+    isLeaderboardCardHidden: boolean;
+    isDailyQuestCardHidden: boolean;
+    isAdBlockerCardHidden: boolean;
     firstLevelStatus: number;
     chestStatus: number;
     secondLevelStatus: number;
-    firstAchievementInfo: number;
-    secondAchievementInfo: number;
-    thirdAchievementInfo: number;
+    firstQuestInfo: number;
+    secondQuestInfo: number;
+    thirdQuestInfo: number;
 }
 
 const initialState: MenuSlice = {
     selectedPage: 0,
     isNavbarHidden: false,
     isSidebarHidden: false,
+    isInsightCardHidden: false,
+    isLeaderboardCardHidden: false,
+    isDailyQuestCardHidden: false,
+    isAdBlockerCardHidden: false,
     firstLevelStatus: 1,
     chestStatus: 0,
     secondLevelStatus: 0,
-    firstAchievementInfo: 0,
-    secondAchievementInfo: 0,
-    thirdAchievementInfo: 0,
+    firstQuestInfo: 0,
+    secondQuestInfo: 0,
+    thirdQuestInfo: 0,
 };
 
 export const menuSlice = createSlice({
@@ -48,6 +56,38 @@ export const menuSlice = createSlice({
             state.isSidebarHidden = false;
         },
 
+        hideInsightCard: (state) => {
+            state.isInsightCardHidden = true;
+        },
+
+        showInsightCard: (state) => {
+            state.isInsightCardHidden = false;
+        },
+
+        hideLeaderboardCard: (state) => {
+            state.isLeaderboardCardHidden = true;
+        },
+
+        showLeaderboardCard: (state) => {
+            state.isLeaderboardCardHidden = false;
+        },
+
+        hideDailyQuestCard: (state) => {
+            state.isDailyQuestCardHidden = true;
+        },
+
+        showDailyQuestCard: (state) => {
+            state.isDailyQuestCardHidden = false;
+        },
+
+        hideAdBlockerCard: (state) => {
+            state.isAdBlockerCardHidden = true;
+        },
+
+        showAdBlockerCard: (state) => {
+            state.isAdBlockerCardHidden = false;
+        },
+
         setFirstLevelStatus: (state, action) => {
             state.firstLevelStatus = action.payload.firstLevelStatus;
         },
@@ -60,28 +100,32 @@ export const menuSlice = createSlice({
             state.secondLevelStatus = action.payload.secondLevelStatus;
         },
 
-        setFirstAchievementInfo: (state, action) => {
-            state.firstAchievementInfo = action.payload.firstAchievementInfo;
+        setFirstQuestInfo: (state, action) => {
+            state.firstQuestInfo = action.payload.firstAchievementInfo;
         },
 
-        setSecondAchievementInfo: (state, action) => {
-            state.secondAchievementInfo = action.payload.secondAchievementInfo;
+        setSecondQuestInfo: (state, action) => {
+            state.secondQuestInfo = action.payload.secondAchievementInfo;
         },
 
-        setThirdAchievementInfo: (state, action) => {
-            state.thirdAchievementInfo = action.payload.thirdAchievementInfo;
+        setThirdQuestInfo: (state, action) => {
+            state.thirdQuestInfo = action.payload.thirdAchievementInfo;
         },
     },
     selectors: {
         selectSelectedPage: (x) => x.selectedPage,
         selectIsNavbarHidden: (x) => x.isNavbarHidden,
         selectIsSidebarHidden: (x) => x.isSidebarHidden,
+        selectIsInsightCardHidden: (x) => x.isInsightCardHidden,
+        selectIsLeaderboardCardHidden: (x) => x.isLeaderboardCardHidden,
+        selectIsDailyQuestCardHidden: (x) => x.isDailyQuestCardHidden,
+        selectIsAdBlockerCardHidden: (x) => x.isAdBlockerCardHidden,
         selectFirstLevelStatus: (x) => x.firstLevelStatus,
         selectChestStatus: (x) => x.chestStatus,
         selectSecondLevelStatus: (x) => x.secondLevelStatus,
-        selectFirstAchievementInfo: (x) => x.firstAchievementInfo,
-        selectSecondAchievementInfo: (x) => x.secondAchievementInfo,
-        selectThirdAchievementInfo: (x) => x.thirdAchievementInfo,
+        selectFirstQuestInfo: (x) => x.firstQuestInfo,
+        selectSecondQuestInfo: (x) => x.secondQuestInfo,
+        selectThirdQuestInfo: (x) => x.thirdQuestInfo,
     },
 });
 
@@ -91,24 +135,36 @@ export const {
     showNavbar,
     hideSidebar,
     showSidebar,
+    hideInsightCard,
+    showInsightCard,
+    hideLeaderboardCard,
+    showLeaderboardCard,
+    hideDailyQuestCard,
+    showDailyQuestCard,
+    hideAdBlockerCard,
+    showAdBlockerCard,
     setFirstLevelStatus,
     setChestStatus,
     setSecondLevelStatus,
-    setFirstAchievementInfo,
-    setSecondAchievementInfo,
-    setThirdAchievementInfo,
+    setFirstQuestInfo,
+    setSecondQuestInfo,
+    setThirdQuestInfo,
 } = menuSlice.actions;
 
 export const {
     selectSelectedPage,
     selectIsNavbarHidden,
     selectIsSidebarHidden,
+    selectIsInsightCardHidden,
+    selectIsLeaderboardCardHidden,
+    selectIsDailyQuestCardHidden,
+    selectIsAdBlockerCardHidden,
     selectFirstLevelStatus,
     selectChestStatus,
     selectSecondLevelStatus,
-    selectFirstAchievementInfo,
-    selectSecondAchievementInfo,
-    selectThirdAchievementInfo,
+    selectFirstQuestInfo,
+    selectSecondQuestInfo,
+    selectThirdQuestInfo,
 } = menuSlice.selectors;
 
 export default menuSlice.reducer;

@@ -8,7 +8,7 @@ export default function Terms() {
     useEffect(() => {
         dispatch(showNavbar());
         dispatch(hideSidebar());
-    });
+    }, []);
 
     return (
         <div className="terms-page">

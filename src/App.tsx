@@ -25,6 +25,7 @@ import { selectIsNavbarHidden, selectIsSidebarHidden } from "./slices/menuSlice"
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Terms from "./pages/Terms";
+import Achievements from "./pages/Achievements";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -95,6 +96,7 @@ function App() {
                     <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/password-updated" element={<PasswordUpdated />} />
                     <Route path="/profile/:nickName" element={<Profile />} />
+                    <Route path="/profile/:nickName/achievements" element={<Achievements />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/terms" element={<Terms />} />
