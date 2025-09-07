@@ -1,22 +1,121 @@
+/* ============================================================================================================================================================================ */
+/* ================================================================================== Basics ================================================================================== */
+/* ============================================================================================================================================================================ */
+
+@import "tailwindcss";
+
+@font-face {
+    font-family: "Atma";
+    src: url("../assets/fonts/Atma-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../assets/fonts/Rubik-ExraBold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+}
+
+:root {
+    --frost-blue: #b4deff;
+    --ice-white: #f5faff;
+    --glacier-blue: #71b4d4;
+    --steel-blue: #466984;
+    --polar-navy: #0f2038;
+    --yellow: #ffd500;
+    --peach: #ff6b6b;
+    --mint: #2ee6c3;
+    --purple: #a259ff;
+    --orange: #ff7a00;
+    --white: #ffffff;
+    --gray: #37464f;
+
+    --background: var(--polar-navy);
+    --text-color-light: var(--white);
+    --text-color-dark: var(--polar-navy);
+
+    --navbar-border-color: var(var(--ice-white));
+    --nav-title-color: var(--frost-blue);
+    --nav-btn-border-color: var(--polar-navy);
+    --nav-btn-border-color-active: var(--glacier-blue);
+    --nav-btn-border-color-hover: rgba(255, 255, 255, 0.01);
+    --nav-btn-background-hover: rgba(255, 255, 255, 0.17);
+
+    --guidebook-btn-border-color: rgba(15, 32, 56, 0.63);
+
+    --unit-title-element-color: var(--gray);
+
+    --level-btn-background: var(--gray);
+    --level-btn-shadow: #2c383f;
+    --level-btn-item: #52656d;
+
+    --level-btn-background-active: var(--glacier-blue);
+    --level-btn-shadow-active: var(--steel-blue);
+    --level-btn-item-active: var(--steel-blue);
+
+    --insight-background: linear-gradient(#2ee6c3, #3c4dff, #a259ff);
+}
+
 html,
 body,
 #root {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: "Rubik", sans-serif;
+    background-color: var(--background);
+    color: var(--text-color-light);
+    letter-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .container {
     display: flex;
     width: 100%;
-    height: 100vh;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    flex-direction: column;
 }
 
 .header {
@@ -27,6 +126,662 @@ body,
 
 .header-item {
     margin: 20px;
+}
+
+.grid-container {
+    display: grid;
+    width: 100%;
+    min-height: 100vh;
+    grid-template-columns: 320px 5fr 3fr;
+}
+
+/* ============================================================================================================================================================================ */
+/* ============================================================================== Navigation Bar ============================================================================== */
+/* ============================================================================================================================================================================ */
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    border-right: 1px solid var(--ice-white);
+}
+
+.nav-title {
+    margin-top: 8px;
+    margin-left: 51px;
+    font-size: 48px;
+    line-height: normal;
+    font-family: "Atma", sans-serif;
+    color: var(--nav-title-color);
+}
+
+.nav-btn {
+    display: flex;
+    width: 277px;
+    height: 63px;
+    margin: 4px;
+    align-self: center;
+    align-items: center;
+    font-size: 20px;
+    font-family: "Rubik", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 15px;
+    border-width: 2px;
+    border-color: var(--nav-btn-border-color);
+    box-sizing: border-box;
+}
+
+.nav-btn:hover {
+    border-color: var(--nav-btn-border-color-hover);
+    background-color: var(--nav-btn-background-hover);
+}
+
+.nav-btn-selected {
+    border-color: var(--nav-btn-border-color-active);
+}
+
+.nav-icon {
+    margin-left: 19px;
+    margin-right: 24px;
+    width: 52px;
+}
+
+/* ============================================================================================================================================================================ */
+/* ============================================================================= Unit Header Card ============================================================================= */
+/* ============================================================================================================================================================================ */
+
+.unit-header-card__container {
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+}
+
+.unit-header-card__shadow {
+    height: 32px;
+    background-color: var(--background);
+}
+
+.unit-header-card {
+    width: 744px;
+    height: 171px;
+    overflow: hidden;
+    background-color: var(--mint);
+    color: var(--text-color-dark);
+    border-radius: 20px;
+}
+
+.current-path {
+    display: flex;
+    margin-top: 32px;
+    margin-left: 28px;
+    align-items: center;
+}
+
+.current-path__icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    opacity: 79%;
+}
+
+.current-path__title {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    opacity: 79%;
+}
+
+.unit-header {
+    display: flex;
+    margin-top: 8px;
+    margin-left: 28px;
+    margin-right: 34px;
+    justify-content: space-between;
+}
+
+.unit-header__title {
+    width: 371px;
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 700;
+}
+
+.unit-header__guidebook-btn {
+    display: flex;
+    width: 186px;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    border-radius: 21px;
+    border-width: 2px 2px 5px 2px;
+    border-style: solid;
+    border-color: var(--guidebook-btn-border-color);
+}
+
+.guidebook-btn__icon {
+    width: 40px;
+    height: 40px;
+}
+
+.guidebook-btn__title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* ============================================================================================================================================================================ */
+/* ================================================================================ Unit Title ================================================================================ */
+/* ============================================================================================================================================================================ */
+
+.unit-container {
+    position: relative;
+    top: -82px;
+}
+
+.unit-title-container {
+    display: flex;
+    margin-top: 58px;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.unit-title-container__hr {
+    flex: 1;
+    height: 3px;
+    border: none;
+    background-color: var(--unit-title-element-color);
+    margin: 0 auto;
+}
+
+.unit-title-container__h2 {
+    font-size: 20px;
+    text-align: center;
+    color: var(--unit-title-element-color);
+    text-transform: uppercase;
+    text-wrap: nowrap;
+    line-height: 24px;
+}
+
+/* ============================================================================================================================================================================ */
+/* =============================================================================== Level Button =============================================================================== */
+/* ============================================================================================================================================================================ */
+
+.level-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.level-btn {
+    position: relative;
+    left: 0px;
+    display: flex;
+    width: 87px;
+    height: 81px;
+    margin-top: 28px;
+    z-index: 1;
+}
+
+.level-btn-top {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 87px;
+    height: 72px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background-color: var(--level-btn-background);
+    box-shadow: 0 9px var(--level-btn-shadow);
+    cursor: pointer;
+}
+
+.level-btn-top-active {
+    background-color: var(--level-btn-background-active);
+    box-shadow: 0 9px var(--level-btn-shadow-active);
+}
+
+.level-btn-top:hover {
+    top: 2px;
+    box-shadow: 0 7px var(--level-btn-shadow);
+}
+
+.level-btn-top-active:hover {
+    background-color: var(--level-btn-background-active);
+    box-shadow: 0 7px var(--level-btn-shadow-active);
+}
+
+.level-btn-top:active {
+    top: 9px;
+    box-shadow: none;
+}
+
+.level-btn-lighting {
+    position: absolute;
+    width: 72px;
+    height: 62px;
+}
+
+.level-btn-icon {
+    min-width: 45px;
+    min-height: 31px;
+    max-width: 60px;
+    max-height: 48px;
+    z-index: 1;
+}
+
+.level-btn-icon {
+    min-width: 45px;
+    min-height: 31px;
+    max-width: 60px;
+    max-height: 48px;
+}
+
+/* ============================================================================================================================================================================ */
+/* ================================================================================ Level Card ================================================================================ */
+/* ============================================================================================================================================================================ */
+
+.level-content {
+    position: absolute;
+    width: 320px;
+    height: 150px;
+    z-index: 2;
+}
+
+/* ============================================================================================================================================================================ */
+/* =============================================================================== Chest Button =============================================================================== */
+/* ============================================================================================================================================================================ */
+
+.chest-btn {
+    display: flex;
+    align-items: end;
+    position: relative;
+    left: 0px;
+    width: 100px;
+    height: 83px;
+    margin-top: 42px;
+    z-index: 1;
+}
+
+.chest-active {
+    cursor: pointer;
+}
+
+/* ============================================================================================================================================================================ */
+/* ================================================================================== Sidebar ================================================================================= */
+/* ============================================================================================================================================================================ */
+
+.sidebar {
+    align-self: flex-end;
+    position: sticky;
+    bottom: 32px;
+    width: 475px;
+    margin-top: 32px;
+}
+
+/* ============================================================================================================================================================================ */
+/* ================================================================================= Statistic ================================================================================ */
+/* ============================================================================================================================================================================ */
+
+.stats {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.stats-item {
+    display: flex;
+    align-items: center;
+}
+
+.stats-icon {
+    width: 35px;
+}
+
+.stats-value {
+    margin-left: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #71b4d4;
+}
+
+.heart {
+    color: #f44336;
+}
+
+/* ============================================================================================================================================================================ */
+/* =================================================================================== Cards ================================================================================== */
+/* ============================================================================================================================================================================ */
+
+.card-container {
+    display: flex;
+    margin-top: 32px;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ============================================================================================================================================================================ */
+/* =============================================================================== Insight Card =============================================================================== */
+/* ============================================================================================================================================================================ */
+
+.insight-card,
+.leaderboard-card,
+.daily-quests-card {
+    border: 1px solid var(--glacier-blue);
+    border-radius: 20px;
+    padding: 25px;
+    padding-top: 29px;
+    padding-bottom: 29px;
+}
+
+.insight-card__block {
+    display: flex;
+}
+
+.insight-card__img {
+    width: 120px;
+    height: 33px;
+    margin-bottom: 11px;
+}
+
+.insight-card__bear-img {
+    width: 112px;
+    height: 131px;
+    margin-top: 16px;
+}
+
+.insight-card__title,
+.leaderboard-card__title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.insight-card__info {
+    font-size: 20px;
+}
+
+.insight-btn {
+    width: 100%;
+    height: 70px;
+    margin: 0;
+    margin-top: 5px;
+    background-color: #3c4dff;
+    border: none;
+    border-bottom: 4px solid #3f22ec;
+    border-radius: 13px;
+    color: var(--ice-white);
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* ============================================================================================================================================================================ */
+/* ============================================================================= Leaderboard Card ============================================================================= */
+/* ============================================================================================================================================================================ */
+
+.leaderboard-inactive-card__content {
+    display: flex;
+    margin-top: 44px;
+}
+
+.leaderboard-card__block {
+    display: flex;
+    align-items: center;
+}
+
+.leaderboard-card__content {
+    margin-bottom: 32px;
+    align-items: center;
+}
+
+.leaderboard-card__rank {
+    color: var(--glacier-blue);
+}
+
+.leaderboard-card__league-title {
+    margin-bottom: 12px;
+    color: #466984;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.leaderboard-inactive-card__img {
+    width: 56px;
+    height: 62px;
+    margin-right: 24px;
+}
+
+.leaderboard-card__badge-img {
+    position: relative;
+    width: 102px;
+    height: 112px;
+    margin-right: 0;
+    margin-left: auto;
+    margin-bottom: 32px;
+}
+
+.leaderboard-card__info {
+    width: 277px;
+    font-size: 20px;
+}
+
+.leaderboard-card__btn {
+    width: 100%;
+    height: 84px;
+    margin-bottom: 32px;
+    border: 1px solid #71b4d4;
+    border-bottom-width: 5px;
+    border-radius: 13px;
+    color: #71b4d4;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* ============================================================================================================================================================================ */
+/* ============================================================================ Daily Quests Card ============================================================================= */
+/* ============================================================================================================================================================================ */
+
+.daily-quests-card {
+    padding-bottom: 7px;
+}
+
+.daily-quests-card__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 44px;
+}
+
+.daily-quests-card__title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.daily-quests-card__view-all {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--glacier-blue);
+    text-transform: uppercase;
+}
+
+.daily-quest {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.daily-quest__title {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.daily-quest__img {
+    width: 50px;
+    height: 66px;
+}
+
+.daily-quest__progress-container {
+    display: flex;
+    margin-top: 12px;
+    margin-bottom: 24px;
+    align-items: center;
+}
+
+.daily-quest__progress-field {
+    position: relative;
+    width: 300px;
+    height: 20px;
+    --progress: 0%;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    background-color: #2f3b4d;
+}
+
+.daily-quest__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--progress);
+    height: 100%;
+    border-radius: 50px;
+    background-color: #fef400;
+    z-index: 0;
+}
+
+.daily-quest__progress-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* transform: translateX(-50%); */
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 20px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.daily-quest__progress-info--empty {
+    color: #969ca1;
+    z-index: 1;
+}
+
+.daily-quest__progress-info--filled {
+    color: #aa572a;
+    z-index: 2;
+    -webkit-clip-path: inset(0 calc(100% - var(--progress)) 0 0 round 50px);
+    clip-path: inset(0 calc(100% - var(--progress)) 0 0 round 50px);
+}
+
+.daily-quest__reward-img {
+    width: 43px;
+    height: 47px;
+    z-index: 1;
+}
+
+/* ============================================================================================================================================================================ */
+/* ============================================================================= Ad Blocker Card ============================================================================== */
+/* ============================================================================================================================================================================ */
+
+.adblocker-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), var(--insight-background);
+    border-radius: 20px;
+    padding: 24px;
+    padding-top: 0px;
+}
+
+.adblocker-card__img {
+    width: 189px;
+    height: 130px;
+    margin-bottom: 15px;
+}
+
+.adblocker-card__title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.adblocker-card__info {
+    width: 368px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.insight-primary-btn {
+    width: 100%;
+    height: 70px;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--polar-navy);
+    border: none;
+    border-bottom: 4px solid #b4deff;
+    border-radius: 13px;
+    background-color: var(--ice-white);
+    margin-bottom: 28px;
+    cursor: pointer;
+}
+
+.insight-secondary-btn {
+    margin: 0;
+    margin-bottom: 6px;
+    height: 24px;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+}
+
+/* ============================================================================================================================================================================ */
+/* ================================================================================ Info Card ================================================================================= */
+/* ============================================================================================================================================================================ */
+
+.info-card {
+    display: flex;
+    justify-content: center;
+    gap: 16;
+}
+
+.info-card__link {
+    margin-left: 8px;
+    margin-right: 8px;
+    color: var(--steel-blue);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* ============================================================================================================================================================================ */
+/* ================================================================================ Hui Zna Sho =============================================================================== */
+/* ============================================================================================================================================================================ */
+
+.content {
+    display: flex;
+    width: 600px;
+    height: 450px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .progress-bar {
@@ -52,19 +807,6 @@ body,
     background-color: lightblue;
     border-radius: 50px;
     transition: width 0.3s ease-in-out;
-}
-
-.navbar {
-    position: absolute;
-    width: 250px;
-    height: 100%;
-}
-.content {
-    display: flex;
-    width: 600px;
-    height: 450px;
-    flex-direction: column;
-    align-items: center;
 }
 
 .exercise {
@@ -128,12 +870,8 @@ body,
 
 button {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    min-width: 230px;
-    max-width: 500px;
-    min-height: 40px;
-    max-height: 60px;
     margin: 10px 0px;
     padding: 10px 60px;
     font-size: 24px;

@@ -32,20 +32,20 @@ import AnswerButtonBlock from "../components/buttonBlocks/AnswerButtonBlock";
 import ExerciseButtonBar from "../components/buttonBars/ExerciseButtonBar";
 import HeartsRanOutDialog from "../components/dialogs/HeartsRanOutDialog";
 import KeepLearningDialog from "../components/dialogs/KeepLearningDialog";
+import { hideNavbar, hideSidebar } from "../slices/menuSlice";
 
 export default function Lesson() {
+    const dispatch = useDispatch();
     const { unitId, levelId, legendaryId } = useParams();
     const [lesson, setLesson] = useState<LessonDTO | null>(null);
     const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
     const [questions, setQuestions] = useState<QuestionDTO[]>([]);
     const [answers, setAnswers] = useState<AnswerDTO[]>([]);
-    const dispatch = useDispatch();
     const currentLessonId = useSelector(selectCurrentLessonId);
     const currentExercise = useSelector(selectCurrentExercise);
     const exerciseAmount = useSelector(selectExerciseAmount);
     const rightAnswers = useSelector(selectRightAnswers);
     const isExercise = useSelector(selectIsNext);
-    const hearts = useSelector(selectHearts);
     const selectedQuestion = useSelector(selectSelectedQuestion);
     const selectedAnswer = useSelector(selectSelectedAnswer);
     const [exercise, setExercise] = useState<ExerciseDTO | null>(null);
@@ -58,6 +58,11 @@ export default function Lesson() {
     const [isWrong, setIsWrong] = useState<boolean>(false);
     const [isHeartsRanOutDialogShown, setIsHeartsRanOutDialogShown] = useState<boolean>(false);
     const [isKeepLearningDialogShown, setIsKeepLearningDialogShown] = useState<boolean>(false);
+
+    useEffect(() => {
+        dispatch(hideNavbar());
+        dispatch(hideSidebar());
+    });
 
     useEffect(() => {
         dispatch(setStartedTime({ startedAt: new Date().toISOString() }));
@@ -105,7 +110,7 @@ export default function Lesson() {
         if (!exercise) return;
 
         const getQuestionsAndAnswers = async () => {
-            const fetchedQuestions = await QuestionService.getAllFromExercise(exercise.id);
+            const fetchedQuestions = await QuestionService.getAllByExercise(exercise.id);
 
             if (fetchedQuestions.length === 1) {
                 dispatch(selectQuestion({ selectedQuestion: fetchedQuestions[0] }));
@@ -116,7 +121,7 @@ export default function Lesson() {
             const fetchedAnswers = [];
 
             for (const question of fetchedQuestions) {
-                const fetchedAnswer = await AnswerService.getAllFromExerciseAndQuestion(exercise.id, question.id);
+                const fetchedAnswer = await AnswerService.getAllByQuestionId(question.id);
 
                 fetchedAnswers.push(...fetchedAnswer);
             }

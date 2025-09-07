@@ -81,17 +81,24 @@
 //     );
 // }
 
-
-
-
 import AuthButton, { PrimaryButton, ShowPasswordButton, SocialButton } from "../../components/ui/primary-button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import type { RegisterDTO } from "../../DTOs/auth/registerDTO";
+import AuthService from "../../services/authService";
+import { useDispatch } from "react-redux";
+import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
 
 export default function SignUp() {
+    const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    useEffect(() => {
+        dispatch(hideNavbar());
+        dispatch(hideSidebar());
+    });
 
     type Inputs = {
         name: string;
@@ -102,16 +109,27 @@ export default function SignUp() {
 
     const navigate = useNavigate();
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm<Inputs>();
+    const { register, handleSubmit, watch } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
         console.log(data);
-        navigate("/");
+        const registerDTO: RegisterDTO = {
+            nickName: data.name,
+            email: data.email,
+            password: data.password,
+        };
+
+        try {
+            const result = await AuthService.register(registerDTO);
+
+            if (result) {
+                localStorage.setItem("token", result);
+
+                navigate("/");
+            }
+        } catch (err) {
+            console.error("Auth error", err);
+        }
     };
 
     const password = watch("password");
@@ -174,8 +192,9 @@ export default function SignUp() {
                                     <div className="input-box" />
                                     <input
                                         {...register("password", {
-                                        required: true,
-                                        minLength: { value: 8, message: "Password must be at least 8 characters" }, })}
+                                            required: true,
+                                            minLength: { value: 8, message: "Password must be at least 8 characters" },
+                                        })}
                                         placeholder="Password"
                                         type={showPassword ? "text" : "password"}
                                         className="input input--with-toggle"
@@ -192,24 +211,27 @@ export default function SignUp() {
                                     <div className="input-box" />
                                     <input
                                         {...register("confirmPassword", {
-                                        required: true,
-                                        validate: (value: string) => value === password || "Passwords do not match", })}
+                                            required: true,
+                                            validate: (value: string) => value === password || "Passwords do not match",
+                                        })}
                                         placeholder="Confirm Password"
                                         type={showConfirmPassword ? "text" : "password"}
                                         className="input input--with-toggle"
                                     />
                                     <div className="password-toggle">
-                                        <ShowPasswordButton onClick={() => setShowConfirmPassword(!showConfirmPassword)} />
+                                        <ShowPasswordButton
+                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                        />
                                     </div>
                                 </div>
                             </div>
 
                             {/* Create Account Button */}
-                            <PrimaryButton title="CREATE ACCOUNT" />
-                            </div>
+                            <PrimaryButton title="CREATE ACCOUNT" onClick={onSubmit} />
+                        </div>
 
-                            {/* Social Login Section */}
-                            <div className="form-block">
+                        {/* Social Login Section */}
+                        <div className="form-block">
                             {/* OR Divider */}
                             <div className="or">
                                 <div className="or-line" />
@@ -239,11 +261,10 @@ export default function SignUp() {
 
                 {/* Terms and Policy */}
                 <div className="terms">
-                    <p className="p-1line">
-                        By signing up to Vembo, you agree to our Terms and Privacy Policy.
-                    </p>
+                    <p className="p-1line">By signing up to Vembo, you agree to our Terms and Privacy Policy.</p>
                     <p className="p-2lines">
-                        This site is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of Service apply.
+                        This site is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of
+                        Service apply.
                     </p>
                 </div>
             </form>

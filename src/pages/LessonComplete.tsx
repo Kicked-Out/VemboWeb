@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProgressSummary from "../components/lessonContents/ProgressSumary";
 import type { Progress, Quest } from "../types/componentTypes";
 import StreakUpdate from "../components/lessonContents/StreakUpdate";
@@ -7,16 +7,25 @@ import QuestResults from "../components/lessonContents/QuestResults";
 import LegendaryOffer from "../components/lessonContents/LegendaryOffer";
 import Reward from "../components/lessonContents/Reward";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { selectStreak } from "../slices/userStatisticsSlice";
+import { hideNavbar, hideSidebar } from "../slices/menuSlice";
 
 export default function LessonComplete() {
     const [step, setStep] = useState<number>(0);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(hideNavbar());
+        dispatch(hideSidebar());
+    }, []);
 
     const progress: Progress = {
         totalXP: 30,
         accuracy: 100,
     };
     const isStreakNotUpdated = true;
-    let streak = 1;
+    let streak = useSelector(selectStreak);
     const isLastLevel = true;
     const completedQuests: Quest[] = [
         {
@@ -47,7 +56,7 @@ export default function LessonComplete() {
 
     const steps = [
         <ProgressSummary data={progress} onNext={onNextHandle} />,
-        isStreakNotUpdated && <StreakUpdate streak={streak} onNext={onNextHandle} />,
+        isStreakNotUpdated && <StreakUpdate onNext={onNextHandle} />,
         streak === 1 && <GoalPrompt onNext={onNextHandle} />,
         <QuestResults questsCompleted={0} onNext={onNextHandle} />,
         ...completedQuests.map((completedQuest) => (

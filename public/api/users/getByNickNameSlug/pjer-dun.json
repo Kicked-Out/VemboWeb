@@ -1,0 +1,12 @@
+{
+    "id": "2",
+    "nickName": "Pjer Dun",
+    "nickNameSlug": "pjer-dun",
+    "email": "pjerdun@gmail.com",
+    "isPremium": true,
+    "premiumStartedAt": "2018-01-18T03:50:22.000Z",
+    "premiumExpiresAt": "2018-01-18T09:57:02.000Z",
+    "createdAt": "2018-01-18T03:50:22.000Z",
+    "nativeLanguage": "Ukrainian",
+    "selectedRegion": "Ukraine"
+}

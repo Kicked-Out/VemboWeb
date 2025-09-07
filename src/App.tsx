@@ -5,23 +5,80 @@ import Home from "./pages/Home";
 import Lesson from "./pages/Lesson";
 import NotFound from "./pages/NotFound";
 import NavBar from "./components/navigation/navBar";
-import Header from "./components/header/header";
 import Registration from "./pages/auth/Registration";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch } from "./slices/store";
+import { useEffect, useState } from "react";
+import { initSlice } from "./slices/authSlice";
+import UserStatisticService from "./services/userStatisticService";
+import type { UserDTO } from "./DTOs/auth/userDTO";
+import type { UserStatisticDTO } from "./DTOs/userStatisticDTO";
+import AuthService from "./services/authService";
 import PasswordUpdated from "./pages/auth/PasswordUpdated";
-import { Provider } from "react-redux";
-import { store } from "./slices/store";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
+import Sidebar from "./components/header/sidebar";
 import Contact from "./pages/Contact";
+import { selectIsNavbarHidden, selectIsSidebarHidden } from "./slices/menuSlice";
 import About from "./pages/About";
+import Profile from "./pages/Profile";
 import Terms from "./pages/Terms";
 
 function App() {
+    const dispatch = useDispatch<AppDispatch>();
+    const [user, setUser] = useState<UserDTO>();
+    const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
+    const isNavbarHidden = useSelector(selectIsNavbarHidden);
+    const isSidebarHidden = useSelector(selectIsSidebarHidden);
+    const [gridTemplateFirstColumn, setGridTemplateFirstColumn] = useState("320px");
+    const [gridTemplateThirdColumn, setGridTemplateThirdColumn] = useState("3fr");
+    const gridTemplateColumns = `${gridTemplateFirstColumn} ${gridTemplateThirdColumn}`;
+
+    useEffect(() => {
+        if (isNavbarHidden) {
+            setGridTemplateFirstColumn("1fr");
+        } else {
+            setGridTemplateFirstColumn("320px 5fr");
+        }
+
+        if (isSidebarHidden) {
+            setGridTemplateThirdColumn("auto");
+        } else {
+            setGridTemplateThirdColumn("3fr");
+        }
+    });
+
+    useEffect(() => {
+        dispatch(initSlice());
+    }, [dispatch]);
+
+    useEffect(() => {
+        const getUser = async () => {
+            const data = await AuthService.get();
+
+            setUser(data);
+        };
+
+        getUser();
+    }, []);
+
+    useEffect(() => {
+        const getUserStatistic = async () => {
+            if (!user) return;
+
+            const data = await UserStatisticService.getByUserId(user.id);
+
+            setUserStatistic(data);
+        };
+
+        getUserStatistic();
+    }, [user]);
+
     return (
-        <div className="grid-container">
-            <NavBar />
+        <div className="grid-container" style={{ gridTemplateColumns: `${gridTemplateColumns}` }}>
+            <NavBar isHidden={isNavbarHidden} />
 
             <div className="container">
                 <Routes>
@@ -34,14 +91,17 @@ function App() {
                     <Route path="/register" element={<Registration />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="/email-confirmation" element={<EmailConfirmation/>}/>
+                    <Route path="/email-confirmation" element={<EmailConfirmation />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
-                    <Route path="/password-updated" element={<PasswordUpdated/>} />
+                    <Route path="/password-updated" element={<PasswordUpdated />} />
+                    <Route path="/profile/:nickName" element={<Profile />} />
                     <Route path="/about" element={<About />} />
-                    <Route path="/terms" element={<Terms />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/terms" element={<Terms />} />
                 </Routes>
             </div>
+
+            <Sidebar isHidden={isSidebarHidden} />
         </div>
     );
 }
