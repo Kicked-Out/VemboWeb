@@ -9,7 +9,7 @@ export default function Contact() {
     useEffect(() => {
         dispatch(showNavbar());
         dispatch(hideSidebar());
-    });
+    }, []);
 
     return (
         <div className="contact-page">

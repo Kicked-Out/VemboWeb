@@ -4,7 +4,7 @@ import InsightSecondaryButton from "../../buttons/InsightSecondaryButton";
 export default function AdBlockerCard() {
     return (
         <div className="adblocker-card">
-            <img className="adblocker-card__img" src="src/assets/icons/adblocker/bear.png" />
+            <img className="adblocker-card__img" src="/src/assets/icons/adblocker/bear.png" />
 
             <div className="adblocker-card__content">
                 <h2 className="adblocker-card__title">Using an ad blocker?</h2>

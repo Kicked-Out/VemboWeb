@@ -8,7 +8,7 @@ export default function About() {
     useEffect(() => {
         dispatch(showNavbar());
         dispatch(hideSidebar());
-    });
+    }, []);
 
     return (
         <div className="about-page">

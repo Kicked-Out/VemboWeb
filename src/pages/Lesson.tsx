@@ -62,7 +62,7 @@ export default function Lesson() {
     useEffect(() => {
         dispatch(hideNavbar());
         dispatch(hideSidebar());
-    });
+    }, []);
 
     useEffect(() => {
         dispatch(setStartedTime({ startedAt: new Date().toISOString() }));

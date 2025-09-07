@@ -8,7 +8,14 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../services/authService";
 import UnitHeaderCard from "../components/cards/unitHeaderCard";
 import type { UnitDTO } from "../DTOs/unitDTO";
-import { showNavbar, showSidebar } from "../slices/menuSlice";
+import {
+    showAdBlockerCard,
+    showDailyQuestCard,
+    showInsightCard,
+    showLeaderboardCard,
+    showNavbar,
+    showSidebar,
+} from "../slices/menuSlice";
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -23,7 +30,11 @@ export default function Home() {
     useEffect(() => {
         dispatch(showNavbar());
         dispatch(showSidebar());
-    });
+        dispatch(showInsightCard());
+        dispatch(showLeaderboardCard());
+        dispatch(showDailyQuestCard());
+        dispatch(showAdBlockerCard());
+    }, []);
 
     const checkIsTokenValid = async () => {
         const isTokenValid = await AuthService.validateToken();

@@ -94,6 +94,8 @@ export default function Achievements() {
     return (
         <div className="container">
             <div className="achievements">
+                <h1 className="achievements-title">All Achievements</h1>
+
                 {userAchievements.map((userAchievement) => {
                     const achievementData = achievements.find((a) => a.id === userAchievement.achievementId);
                     const achievementLevelData = achievementLevels.find(
@@ -103,23 +105,26 @@ export default function Achievements() {
                     return (
                         <div key={userAchievement.id} className="profile-achievement">
                             <div className="achievement-image-container">
-                                <img className="achievement-image" />
-                                <p className="achievement-image-title">LEVEL {userAchievement.currentLevel}</p>
+                                <img
+                                    className="achievement-icon"
+                                    src="/src/assets/icons/profile/achievements/historian_ages_icon.png"
+                                />
+                                {/* <p className="achievement-image-title">LEVEL {userAchievement.currentLevel}</p> */}
                             </div>
 
                             <div className="achievement-block">
                                 <div className="achievement-title-container">
                                     <h2 className="achievement-title">{achievementData?.title}</h2>
-                                    <p>
+                                    <p className="achievement-progress-text">
                                         {userAchievement.progress}/{achievementLevelData?.targetValue}
                                     </p>
                                 </div>
 
-                                <div className="progress-bar">
-                                    <div className="progress"></div>
+                                <div className="achievement-progress-bar">
+                                    <div className="achievement-progress"></div>
                                 </div>
 
-                                <p>
+                                <p className="achievement-description">
                                     {achievementData?.description.replace(
                                         "${targetValue}",
                                         `${achievementLevelData?.targetValue}`

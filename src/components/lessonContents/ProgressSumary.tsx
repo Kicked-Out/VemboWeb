@@ -3,10 +3,10 @@ import type { ProgressSummaryComponents } from "../../types/componentTypes";
 import { addStreak } from "../../slices/userStatisticsSlice";
 import {
     setChestStatus,
-    setFirstAchievementInfo,
+    setFirstQuestInfo,
     setFirstLevelStatus,
-    setSecondAchievementInfo,
-    setThirdAchievementInfo,
+    setSecondQuestInfo,
+    setThirdQuestInfo,
 } from "../../slices/menuSlice";
 
 export default function ProgressSummary({ data, onNext }: ProgressSummaryComponents) {
@@ -17,9 +17,9 @@ export default function ProgressSummary({ data, onNext }: ProgressSummaryCompone
         dispatch(setChestStatus({ chestStatus: 1 }));
         dispatch(addStreak());
 
-        dispatch(setFirstAchievementInfo({ firstAchievementInfo: 10 }));
-        dispatch(setSecondAchievementInfo({ secondAchievementInfo: 3 }));
-        dispatch(setThirdAchievementInfo({ thirdAchievementInfo: 1 }));
+        dispatch(setFirstQuestInfo({ firstQuestInfo: 10 }));
+        dispatch(setSecondQuestInfo({ secondQuestInfo: 3 }));
+        dispatch(setThirdQuestInfo({ thirdQuestInfo: 1 }));
 
         onNext();
     };
