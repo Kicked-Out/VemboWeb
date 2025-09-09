@@ -139,6 +139,7 @@ export interface ExerciseButtonBarComponent {
     isVerified: boolean;
     resultTitle: string;
     rightAnswer: AnswerDTO | null | undefined;
+    disabled?: boolean;
     checkAnswerHandler: () => void;
     continueHandler: () => void;
 }
@@ -206,9 +207,19 @@ export interface ChestButtonComponent {
 }
 
 export interface DailyQuestComponent {
+    icon?: string;
     title?: string;
     progress?: number;
     minValue?: number;
     maxValue?: number;
     chestLevel?: number;
+}
+
+export interface DailyQuestCardComponent {
+    icon: string;
+    title: string;
+    progress: number;
+    currentValue: number;
+    targetValue: number;
+    chestLevel: number;
 }

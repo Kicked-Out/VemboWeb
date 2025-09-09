@@ -14,6 +14,7 @@ interface MenuSlice {
     firstQuestInfo: number;
     secondQuestInfo: number;
     thirdQuestInfo: number;
+    isLessonTopBottomRowsHidden: boolean;
 }
 
 const initialState: MenuSlice = {
@@ -30,6 +31,7 @@ const initialState: MenuSlice = {
     firstQuestInfo: 0,
     secondQuestInfo: 0,
     thirdQuestInfo: 0,
+    isLessonTopBottomRowsHidden: false,
 };
 
 export const menuSlice = createSlice({
@@ -101,15 +103,23 @@ export const menuSlice = createSlice({
         },
 
         setFirstQuestInfo: (state, action) => {
-            state.firstQuestInfo = action.payload.firstAchievementInfo;
+            state.firstQuestInfo = action.payload.firstQuestInfo;
         },
 
         setSecondQuestInfo: (state, action) => {
-            state.secondQuestInfo = action.payload.secondAchievementInfo;
+            state.secondQuestInfo = action.payload.secondQuestInfo;
         },
 
         setThirdQuestInfo: (state, action) => {
-            state.thirdQuestInfo = action.payload.thirdAchievementInfo;
+            state.thirdQuestInfo = action.payload.thirdQuestInfo;
+        },
+
+        hideLessonTopBottomRows: (state) => {
+            state.isLessonTopBottomRowsHidden = false;
+        },
+
+        showLessonTopBottomRows: (state) => {
+            state.isLessonTopBottomRowsHidden = true;
         },
     },
     selectors: {
@@ -126,6 +136,7 @@ export const menuSlice = createSlice({
         selectFirstQuestInfo: (x) => x.firstQuestInfo,
         selectSecondQuestInfo: (x) => x.secondQuestInfo,
         selectThirdQuestInfo: (x) => x.thirdQuestInfo,
+        selectIsLessonTopBottomRowsHidden: (x) => x.isLessonTopBottomRowsHidden,
     },
 });
 
@@ -149,6 +160,8 @@ export const {
     setFirstQuestInfo,
     setSecondQuestInfo,
     setThirdQuestInfo,
+    hideLessonTopBottomRows,
+    showLessonTopBottomRows,
 } = menuSlice.actions;
 
 export const {
@@ -165,6 +178,7 @@ export const {
     selectFirstQuestInfo,
     selectSecondQuestInfo,
     selectThirdQuestInfo,
+    selectIsLessonTopBottomRowsHidden,
 } = menuSlice.selectors;
 
 export default menuSlice.reducer;

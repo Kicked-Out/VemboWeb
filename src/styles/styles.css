@@ -107,8 +107,95 @@ h6 {
     font-weight: 700;
 }
 
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0px;
+    padding: 10px 60px;
+    font-size: 24px;
+    border-radius: 15px;
+    border-width: 2px 2px 5px 2px;
+    border-style: solid;
+}
+
+/* .progress-bar {
+    display: flex;
+    position: relative;
+    width: 50%;
+    height: 20px;
+}
+
+.bar {
+    display: inline;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(204, 217, 221);
+    border-radius: 50px;
+}
+
+.progress {
+    display: inline;
+    position: absolute;
+    height: 100%;
+    background-color: lightblue;
+    border-radius: 50px;
+    transition: width 0.3s ease-in-out;
+} */
+
+/* .footer {
+    display: flex;
+    width: 80%;
+    height: 20%;
+    justify-content: space-between;
+} */
+
+.secondary-btn {
+    background-color: #ffffff;
+    border-color: #71b4d4;
+    color: #466984;
+}
+
+.primary-btn {
+    background-color: #b4deff;
+    border-color: #71b4d4;
+    color: #0f2038;
+}
+
+.password-field {
+    display: flex;
+    height: 60px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    align-self: stretch;
+}
+
+.flex {
+    display: flex;
+}
+
+.button {
+    display: flex;
+    width: 230px;
+    height: 60px;
+    padding: 20px 211px;
+    border-radius: 15px;
+    border: 2px solid var(--Glacier-Blue, #71b4d4);
+    box-shadow: 1px 4px 1px 0px #71b4d4;
+    background: var(--Ice-White, #f5faff);
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
 .hidden {
     display: none !important;
+}
+
+.collapsed {
+    opacity: 0 !important;
 }
 
 .container {
@@ -612,13 +699,15 @@ h6 {
     text-transform: uppercase;
 }
 
-.daily-quest {
+.daily-quest,
+.daily-quest-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.daily-quest__title {
+.daily-quest__title,
+.daily-quest-card__title {
     margin-left: 10px;
     font-size: 20px;
     font-weight: 500;
@@ -646,7 +735,8 @@ h6 {
     background-color: #2f3b4d;
 }
 
-.daily-quest__progress {
+.daily-quest__progress,
+.daily-quest-card__progress {
     position: absolute;
     top: 0;
     left: 0;
@@ -657,7 +747,8 @@ h6 {
     z-index: 0;
 }
 
-.daily-quest__progress-info {
+.daily-quest__progress-info,
+.daily-quest-card__progress-info {
     position: absolute;
     top: 0;
     left: 0;
@@ -675,19 +766,22 @@ h6 {
     pointer-events: none;
 }
 
-.daily-quest__progress-info--empty {
+.daily-quest__progress-info--empty,
+.daily-quest-card__progress-info--empty {
     color: #969ca1;
     z-index: 1;
 }
 
-.daily-quest__progress-info--filled {
+.daily-quest__progress-info--filled,
+.daily-quest-card__progress-info--filled {
     color: #aa572a;
     z-index: 2;
     -webkit-clip-path: inset(0 calc(100% - var(--progress)) 0 0 round 50px);
     clip-path: inset(0 calc(100% - var(--progress)) 0 0 round 50px);
 }
 
-.daily-quest__reward-img {
+.daily-quest__reward-img,
+.daily-quest-card__reward-img {
     width: 43px;
     height: 47px;
     z-index: 1;
@@ -1099,57 +1193,107 @@ h6 {
 }
 
 /* =========================================================================================================================================================================== */
-/* =============================================================================== Hui Zna Sho =============================================================================== */
+/* ============================================================================= Lesson Container ============================================================================ */
 /* =========================================================================================================================================================================== */
 
-.content {
+.lesson-container {
+    display: grid;
+    /* grid-template-rows: 115px 1fr 225px; */
+    width: 100%;
+    height: 100%;
+    justify-items: center;
+}
+
+.lesson-progress-container {
     display: flex;
-    width: 600px;
-    height: 450px;
-    flex-direction: column;
+    width: 80%;
+    height: 31px;
+    margin-top: 84px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lesson-progress-bar-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.lesson-progress-bar {
+    width: 80%;
+    height: 22px;
+    border-radius: 22px;
+    background-color: #466984;
+}
+
+.lesson-progress {
+    width: auto;
+    height: 100%;
+    border-radius: 22px;
+    background-color: var(--glacier-blue);
+}
+
+.heart-container {
+    display: flex;
+    gap: 16px;
     align-items: center;
 }
 
-.progress-bar {
+.heart-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.heart-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #f44336;
+}
+
+.lesson-content {
     display: flex;
-    position: relative;
-    width: 50%;
-    height: 20px;
-}
-
-.bar {
-    display: inline;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(204, 217, 221);
-    border-radius: 50px;
-}
-
-.progress {
-    display: inline;
-    position: absolute;
-    height: 100%;
-    background-color: lightblue;
-    border-radius: 50px;
-    transition: width 0.3s ease-in-out;
+    width: 55%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .exercise {
     display: flex;
-    width: 100%;
-    height: 60%;
+    margin-top: 68px;
+    gap: 0px 29px;
     flex-direction: column;
     align-items: center;
 }
 
+.exercise-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+}
+
+.question-title {
+    font-size: 36px;
+    margin-bottom: 68px;
+    font-weight: 700;
+    color: white;
+}
+
 .answers-row {
     display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    flex-grow: 1;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.answers-row > .answers-line {
+    display: flex;
+    gap: 44px;
     justify-content: center;
+}
+
+.answers-column > .answers-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .questions,
@@ -1159,6 +1303,7 @@ h6 {
     height: 100%;
     align-items: center;
     flex-grow: 1;
+    gap: 35px;
     flex-direction: column;
     justify-content: center;
 }
@@ -1166,95 +1311,428 @@ h6 {
 .answer,
 .question {
     display: flex;
-    margin: 5px;
+    margin: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 56px;
+    padding-right: 56px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #466984;
-    background-color: #ffffff;
-    border-color: #71b4d4;
+    border: none;
+    color: white;
+    font-size: 36px;
+    font-weight: 700;
+    border-bottom: 5px solid #374f62;
+    background-color: var(--steel-blue);
+    cursor: pointer;
 }
 
 .answer-selected,
 .question-selected {
     display: flex;
-    margin: 5px;
+    margin: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 56px;
+    padding-right: 56px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #0f2038;
+    border: none;
+    color: white;
+    font-size: 36px;
+    font-weight: 700;
+    border-bottom: 5px solid #085980;
     background-color: #71b4d4;
-    border-color: #466984;
-}
-
-.footer {
-    display: flex;
-    width: 80%;
-    height: 20%;
-    justify-content: space-between;
-}
-
-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px 0px;
-    padding: 10px 60px;
-    font-size: 24px;
-    border-radius: 15px;
-    border-width: 2px 2px 5px 2px;
-    border-style: solid;
-}
-
-.secondary-btn {
-    background-color: #ffffff;
-    border-color: #71b4d4;
-    color: #466984;
-}
-
-.primary-btn {
-    background-color: #b4deff;
-    border-color: #71b4d4;
-    color: #0f2038;
+    cursor: pointer;
 }
 
 .right-answer-btn,
 .right-question-btn {
-    background-color: #ffffff;
-    border-color: #2ee6c3;
-    color: #0f2038;
+    display: flex;
+    margin: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 56px;
+    padding-right: 56px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    color: white;
+    font-size: 36px;
+    font-weight: 700;
+    border-bottom: 5px solid #0e5e85;
+    background-color: #0085c5;
 }
 
 .wrong-answer-btn,
 .wrong-question-btn {
-    background-color: #ffffff;
-    border-color: #ff6b6b;
-    color: #0f2038;
-}
-
-.flex {
     display: flex;
-}
-
-.button {
-    display: flex;
-    width: 230px;
-    height: 60px;
-    padding: 20px 211px;
-    border-radius: 15px;
-    border: 2px solid var(--Glacier-Blue, #71b4d4);
-    box-shadow: 1px 4px 1px 0px #71b4d4;
-    background: var(--Ice-White, #f5faff);
+    margin: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 56px;
+    padding-right: 56px;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    border: none;
+    color: white;
+    font-size: 36px;
+    font-weight: 700;
+    border-bottom: 5px solid #0e5e85;
+    background-color: #0085c5;
+    background-color: #ff6b6b;
+    border-color: #d14141;
+    color: white;
 }
 
-.password-field {
+.answer,
+.answer-selected,
+.right-answer-btn,
+.wrong-answer-btn {
+    text-wrap: nowrap;
+}
+
+.questions > .question,
+.questions > .question-selected,
+.questions > .right-question-btn,
+.questions > .wrong-question-btn {
+    width: 250px;
+    height: 90px;
+    font-size: 20px;
+}
+
+.answers-column > .answers-line {
+    width: 250px;
+    gap: 35px;
+}
+
+.answers-column > .answers-line > .answer,
+.answers-column > .answers-line > .answer-selected,
+.answers-column > .answers-line > .right-answer-btn,
+.answers-column > .answers-line > .wrong-answer-btn {
+    width: 250px;
+    height: 90px;
+    font-size: 20px;
+}
+
+.lesson-bar {
     display: flex;
-    height: 60px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid var(--steel-blue);
+}
+
+.verified-bar-color {
+    background-color: #1b3964;
+}
+
+.result-content {
+    display: flex;
+    width: 21%;
+    gap: 24px;
+    align-items: center;
+}
+
+.result-icon-container {
+    display: flex;
+    min-width: 106px;
+    min-height: 106px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-result-color {
+    background-color: #6cb500;
+}
+
+.wrong-result-color {
+    background-color: #ff4945;
+}
+
+.result-icon {
+    width: 91px;
+    height: 91px;
+}
+
+.result-title {
+    margin-bottom: 8px;
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+}
+
+.result-explanation {
+    width: 500px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: normal;
+    color: white;
+}
+
+.report-btn {
+    display: flex;
+    margin-top: 16px;
+    gap: 8px;
+    align-items: center;
+}
+
+.report-btn__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0c264c;
+}
+
+.report-btn__icon {
+    width: 30px;
+    height: 30px;
+}
+
+.check-btn,
+.continue-btn {
+    border: none;
+    border-bottom: 5px solid #0e73a4;
+    border-radius: 15px;
+    background-color: var(--glacier-blue);
+    font-size: 32px;
+    font-weight: 700;
+    color: #273846;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.check-btn:disabled {
+    border-bottom: 5px solid #3b566b;
+    background-color: var(--steel-blue);
+    color: #273846;
+    cursor: auto;
+}
+
+.continue-btn-right-colors {
+    background-color: #6cb500;
+    border-bottom-color: #2f950a;
+    color: var(--ice-white);
+}
+
+.continue-btn-wrong-colors {
+    background-color: #ff4945;
+    border-bottom-color: #950a28;
+    color: var(--ice-white);
+}
+
+/* =========================================================================================================================================================================== */
+/* ======================================================================== Lesson Complete Container ======================================================================== */
+/* =========================================================================================================================================================================== */
+
+.lesson-complete-title-block {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+}
+
+.lesson-complete-icon {
+    width: 456px;
+}
+
+.lesson-complete-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--frost-blue);
+}
+
+.summary-items {
+    display: flex;
+    margin-top: 64px;
+    margin-bottom: 72px;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    width: 279px;
+    height: 146px;
+    padding: 8px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    justify-content: space-between;
+}
+
+.totalxp-summary-color {
+    background-color: var(--frost-blue);
+}
+
+.accuracy-summary-color {
+    background-color: var(--mint);
+}
+
+.summary-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--polar-navy);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.summary-result-block {
+    display: flex;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--polar-navy);
+}
+
+.summary-result-icon {
+    height: 58px;
+    margin-right: 12px;
+}
+
+.summary-result-title {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.totalxp-result-title-color {
+    color: #ffd500;
+}
+
+.accuracy-result-title-color {
+    color: var(--mint);
+}
+
+.lesson-complete-btn-block {
+    display: flex;
+    margin-top: 72px;
+    gap: 44px;
+    align-items: center;
+    justify-content: center;
+}
+
+.lesson-complete-btn {
+    width: 280px;
+    height: 76px;
+    margin: 0;
+    border: none;
+    border-bottom: 7px solid #008269;
+    border-radius: 15px;
+    background-color: var(--mint);
+    font-size: 24px;
+    font-weight: 600;
+    color: #0f2038;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.lesson-complete-btn:hover {
+    border-bottom-width: 5px;
+}
+
+.lesson-complete-btn:active {
+    border-bottom: 7px solid #2ee6c3;
+    background-color: #008269;
+    color: var(--ice-white);
+}
+
+/* =========================================================================================================================================================================== */
+/* ========================================================================== Daily Quests Container ========================================================================= */
+/* =========================================================================================================================================================================== */
+
+.daily-quest-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.daily-quest-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #fecb00;
+}
+
+.daily-quests {
+    display: flex;
+    flex-direction: column;
+    width: 741px;
+    margin-top: 64px;
+    gap: 24px;
+}
+
+.daily-quest-card {
+    display: flex;
+    width: 100%;
+    height: 130px;
+    padding-top: 22px;
+    padding-bottom: 17px;
+    padding-left: 34px;
+    padding-right: 74px;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #71b4d4;
+    border-radius: 20px;
+}
+
+.daily-quest-card__img {
+    width: 70px;
+    height: 92px;
+}
+
+.daily-quest-card__progress-container {
+    display: flex;
+    /* margin-top: 12px; */
+    /* margin-bottom: 17px; */
+    align-items: center;
+}
+
+.daily-quest-card__progress-field {
+    position: relative;
+    width: 484px;
+    height: 20px;
+    --progress: 0%;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    background-color: #2f3b4d;
+}
+
+/* =========================================================================================================================================================================== */
+/* ============================================================================= Reward Container ============================================================================ */
+/* =========================================================================================================================================================================== */
+
+.reward-container {
+    display: flex;
+    width: 724px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.reward-icon {
+    width: 326px;
+    height: 300px;
+    margin: 22px;
+}
+
+.reward-title {
+    font-size: 40px;
+    font-weight: 600;
+    color: white;
+}
+
+.reward-description {
+    font-size: 32px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
 }
