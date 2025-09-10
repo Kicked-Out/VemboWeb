@@ -9,9 +9,12 @@ import { selectStreak } from "../../../slices/userStatisticsSlice";
 import {
     selectIsAdBlockerCardHidden,
     selectIsDailyQuestCardHidden,
+    selectIsInfoCardHidden,
     selectIsInsightCardHidden,
     selectIsLeaderboardCardHidden,
+    selectIsWhatAreLeaderboardsCardHidden,
 } from "../../../slices/menuSlice";
+import WhatAreLeaderboardsCard from "../../cards/sidebar/whatAreLeaderBoards";
 
 export default function CardContainer() {
     const streak = useSelector(selectStreak);
@@ -19,6 +22,8 @@ export default function CardContainer() {
     const isLeaderboardCardHidden = useSelector(selectIsLeaderboardCardHidden);
     const isDailyQuestCardHidden = useSelector(selectIsDailyQuestCardHidden);
     const isAdBlockerCardHidden = useSelector(selectIsAdBlockerCardHidden);
+    const isWhatAreLeaderboardCardHidden = useSelector(selectIsWhatAreLeaderboardsCardHidden);
+    const isInfoCardHidden = useSelector(selectIsInfoCardHidden);
 
     return (
         <div className="card-container">
@@ -28,8 +33,9 @@ export default function CardContainer() {
 
             {!isDailyQuestCardHidden ? <DailyQuestsCard /> : null}
             {!isAdBlockerCardHidden ? <AdBlockerCard /> : null}
+            {!isWhatAreLeaderboardCardHidden ? <WhatAreLeaderboardsCard /> : null}
 
-            <InfoCard />
+            {!isInfoCardHidden ? <InfoCard /> : null}
         </div>
     );
 }

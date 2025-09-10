@@ -21,11 +21,12 @@ import PasswordUpdated from "./pages/auth/PasswordUpdated";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
 import Sidebar from "./components/header/sidebar";
 import Contact from "./pages/Contact";
-import { selectIsNavbarHidden, selectIsSidebarHidden } from "./slices/menuSlice";
+import { selectIsNavbarHidden, selectIsSidebarHidden, selectIsWhatAreLeaderboardsCardHidden } from "./slices/menuSlice";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Terms from "./pages/Terms";
 import Achievements from "./pages/Achievements";
+import Leaderboards from "./pages/Leaderboards";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -36,6 +37,7 @@ function App() {
     const [gridTemplateFirstColumn, setGridTemplateFirstColumn] = useState("320px");
     const [gridTemplateThirdColumn, setGridTemplateThirdColumn] = useState("3fr");
     const gridTemplateColumns = `${gridTemplateFirstColumn} ${gridTemplateThirdColumn}`;
+    const isWhatAreLeaderboardsCard = useSelector(selectIsWhatAreLeaderboardsCardHidden);
 
     useEffect(() => {
         if (isNavbarHidden) {
@@ -78,7 +80,17 @@ function App() {
     }, [user]);
 
     return (
-        <div className="grid-container" style={{ gridTemplateColumns: `${gridTemplateColumns}` }}>
+        <div
+            className="grid-container"
+            style={{
+                gridTemplateColumns: `${gridTemplateColumns}`,
+                ["--grid-background" as any]: `${
+                    !isWhatAreLeaderboardsCard
+                        ? "linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%)"
+                        : "none"
+                }`,
+            }}
+        >
             <NavBar isHidden={isNavbarHidden} />
 
             <div className="container">
@@ -89,6 +101,7 @@ function App() {
                         <Route path="unit/:unitId/level/:levelId" element={<Lesson />} />
                         <Route path="unit/:unitId/legendary/:legendaryId" element={<Lesson />} />
                     </Route>
+                    <Route path="/practice" element={<Lesson />} />
                     <Route path="/register" element={<Registration />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -100,6 +113,7 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/terms" element={<Terms />} />
+                    <Route path="/leaderboards" element={<Leaderboards />} />
                 </Routes>
             </div>
 

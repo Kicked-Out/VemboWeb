@@ -4,10 +4,13 @@ interface MenuSlice {
     selectedPage: number;
     isNavbarHidden: boolean;
     isSidebarHidden: boolean;
+    isStatisticCardHidden: boolean;
     isInsightCardHidden: boolean;
     isLeaderboardCardHidden: boolean;
     isDailyQuestCardHidden: boolean;
     isAdBlockerCardHidden: boolean;
+    isWhatAreLeaderboardsCardHidden: boolean;
+    isInfoCardHidden: boolean;
     firstLevelStatus: number;
     chestStatus: number;
     secondLevelStatus: number;
@@ -21,10 +24,13 @@ const initialState: MenuSlice = {
     selectedPage: 0,
     isNavbarHidden: false,
     isSidebarHidden: false,
+    isStatisticCardHidden: false,
     isInsightCardHidden: false,
     isLeaderboardCardHidden: false,
     isDailyQuestCardHidden: false,
     isAdBlockerCardHidden: false,
+    isWhatAreLeaderboardsCardHidden: false,
+    isInfoCardHidden: false,
     firstLevelStatus: 1,
     chestStatus: 0,
     secondLevelStatus: 0,
@@ -58,6 +64,14 @@ export const menuSlice = createSlice({
             state.isSidebarHidden = false;
         },
 
+        hideStatisticCard: (state) => {
+            state.isStatisticCardHidden = true;
+        },
+
+        showStatisticCard: (state) => {
+            state.isStatisticCardHidden = false;
+        },
+
         hideInsightCard: (state) => {
             state.isInsightCardHidden = true;
         },
@@ -88,6 +102,22 @@ export const menuSlice = createSlice({
 
         showAdBlockerCard: (state) => {
             state.isAdBlockerCardHidden = false;
+        },
+
+        hideWhatAreLeaderboardsCard: (state) => {
+            state.isWhatAreLeaderboardsCardHidden = true;
+        },
+
+        showWhatAreLeaderboardsCard: (state) => {
+            state.isWhatAreLeaderboardsCardHidden = false;
+        },
+
+        hideInfoCard: (state) => {
+            state.isInfoCardHidden = true;
+        },
+
+        showInfoCard: (state) => {
+            state.isInfoCardHidden = false;
         },
 
         setFirstLevelStatus: (state, action) => {
@@ -126,10 +156,13 @@ export const menuSlice = createSlice({
         selectSelectedPage: (x) => x.selectedPage,
         selectIsNavbarHidden: (x) => x.isNavbarHidden,
         selectIsSidebarHidden: (x) => x.isSidebarHidden,
+        selectIsStatisticCardHidden: (x) => x.isStatisticCardHidden,
         selectIsInsightCardHidden: (x) => x.isInsightCardHidden,
         selectIsLeaderboardCardHidden: (x) => x.isLeaderboardCardHidden,
         selectIsDailyQuestCardHidden: (x) => x.isDailyQuestCardHidden,
         selectIsAdBlockerCardHidden: (x) => x.isAdBlockerCardHidden,
+        selectIsWhatAreLeaderboardsCardHidden: (x) => x.isWhatAreLeaderboardsCardHidden,
+        selectIsInfoCardHidden: (x) => x.isInfoCardHidden,
         selectFirstLevelStatus: (x) => x.firstLevelStatus,
         selectChestStatus: (x) => x.chestStatus,
         selectSecondLevelStatus: (x) => x.secondLevelStatus,
@@ -146,6 +179,8 @@ export const {
     showNavbar,
     hideSidebar,
     showSidebar,
+    hideStatisticCard,
+    showStatisticCard,
     hideInsightCard,
     showInsightCard,
     hideLeaderboardCard,
@@ -154,6 +189,10 @@ export const {
     showDailyQuestCard,
     hideAdBlockerCard,
     showAdBlockerCard,
+    hideWhatAreLeaderboardsCard,
+    showWhatAreLeaderboardsCard,
+    hideInfoCard,
+    showInfoCard,
     setFirstLevelStatus,
     setChestStatus,
     setSecondLevelStatus,
@@ -168,10 +207,13 @@ export const {
     selectSelectedPage,
     selectIsNavbarHidden,
     selectIsSidebarHidden,
+    selectIsStatisticCardHidden,
     selectIsInsightCardHidden,
     selectIsLeaderboardCardHidden,
     selectIsDailyQuestCardHidden,
     selectIsAdBlockerCardHidden,
+    selectIsWhatAreLeaderboardsCardHidden,
+    selectIsInfoCardHidden,
     selectFirstLevelStatus,
     selectChestStatus,
     selectSecondLevelStatus,
