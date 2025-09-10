@@ -19,6 +19,7 @@ import type { UserStatisticDTO } from "./DTOs/userStatisticDTO";
 import AuthService from "./services/authService";
 import PasswordUpdated from "./pages/auth/PasswordUpdated";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
+import Shop from "./pages/Shop";
 import Sidebar from "./components/header/sidebar";
 import Contact from "./pages/Contact";
 import { selectIsNavbarHidden, selectIsSidebarHidden } from "./slices/menuSlice";
@@ -97,6 +98,7 @@ function App() {
                     <Route path="/password-updated" element={<PasswordUpdated />} />
                     <Route path="/profile/:nickName" element={<Profile />} />
                     <Route path="/profile/:nickName/achievements" element={<Achievements />} />
+                    <Route path="/shop" element={<Shop />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/terms" element={<Terms />} />
