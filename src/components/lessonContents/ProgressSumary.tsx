@@ -1,6 +1,29 @@
+import { useDispatch } from "react-redux";
 import type { ProgressSummaryComponents } from "../../types/componentTypes";
+import { addStreak } from "../../slices/userStatisticsSlice";
+import {
+    setChestStatus,
+    setFirstQuestInfo,
+    setFirstLevelStatus,
+    setSecondQuestInfo,
+    setThirdQuestInfo,
+} from "../../slices/menuSlice";
 
 export default function ProgressSummary({ data, onNext }: ProgressSummaryComponents) {
+    const dispatch = useDispatch();
+
+    const completeLevelHandle = () => {
+        dispatch(setFirstLevelStatus({ firstLevelStatus: 2 }));
+        dispatch(setChestStatus({ chestStatus: 1 }));
+        dispatch(addStreak());
+
+        dispatch(setFirstQuestInfo({ firstQuestInfo: 10 }));
+        dispatch(setSecondQuestInfo({ secondQuestInfo: 3 }));
+        dispatch(setThirdQuestInfo({ thirdQuestInfo: 1 }));
+
+        onNext();
+    };
+
     return (
         <div>
             <div className="titleBlock">
@@ -21,7 +44,7 @@ export default function ProgressSummary({ data, onNext }: ProgressSummaryCompone
             </div>
 
             <div className="bottom-bar align-right">
-                <button className="primary-btn" onClick={onNext}>
+                <button className="primary-btn" onClick={completeLevelHandle}>
                     Continue
                 </button>
             </div>
