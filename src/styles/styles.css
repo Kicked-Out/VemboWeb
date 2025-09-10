@@ -1893,11 +1893,127 @@ button {
     right: 20px;
 }
 
+/* =========================================================================================================================================================================== */
+/* =============================================================================== Leaderboards ============================================================================== */
+/* =========================================================================================================================================================================== */
+
 .leaderboards {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    padding: 75px;
+    gap: 40px;
     align-items: center;
     justify-content: center;
     background: linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.leagues-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leagues-block {
+    display: flex;
+    margin: 24px;
+    margin-top: 0px;
+    gap: 11px;
+    align-items: center;
+    justify-content: center;
+}
+
+.current-league {
+    width: 99px;
+    height: 110px;
+}
+
+.locked-league {
+    width: 66px;
+    height: 78px;
+}
+
+.current-league-block {
+    text-align: center;
+}
+
+.current-league-title {
+    margin-bottom: 16px;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--glacier-blue);
+    line-height: normal;
+}
+
+.current-league-description {
+    margin-bottom: 4px;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--ice-white);
+    line-height: normal;
+}
+
+.next-league-time-remaining {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--glacier-blue);
+    line-height: normal;
+}
+
+.users-block {
+    display: flex;
+    width: 692px;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-top-img {
+    width: 26px;
+    height: 35px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.user-top {
+    width: 26px;
+    margin-right: 22px;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--glacier-blue);
+    line-height: normal;
+}
+
+.user-avatar {
+    --user-avatar-background: var(--glacier-blue);
+    width: 60px;
+    height: 60px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: var(--user-avatar-background);
+}
+
+.user-nickname {
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    line-height: normal;
+}
+
+.user-totalxp {
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    line-height: normal;
 }

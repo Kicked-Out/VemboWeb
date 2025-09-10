@@ -12,6 +12,12 @@ export class UserService {
         return data;
     }
 
+    public static async getById(id: string): Promise<UserDTO | null> {
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/${id}`);
+
+        return data;
+    }
+
     public static async getByNickNameSlug(nickNameSlug: string): Promise<UserDTO | null> {
         const data = await ItemFetcher.fetchItem(`${this.baseUrl}/NickNameSlug/${nickNameSlug}`);
 
