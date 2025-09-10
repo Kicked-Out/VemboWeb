@@ -111,6 +111,7 @@ function App() {
                     <Route path="/password-updated" element={<PasswordUpdated />} />
                     <Route path="/profile/:nickName" element={<Profile />} />
                     <Route path="/profile/:nickName/achievements" element={<Achievements />} />
+                    <Route path="/shop" element={<Shop />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/terms" element={<Terms />} />
