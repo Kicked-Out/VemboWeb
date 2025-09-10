@@ -15,6 +15,7 @@ import PasswordUpdated from "./pages/auth/PasswordUpdated";
 import { Provider } from "react-redux";
 import { store } from "./slices/store";
 import EmailConfirmation from "./pages/auth/EmailConfirmation";
+import Shop from "./pages/Shop";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                     <Routes>
                         <Route path="*" element={<NotFound />} />
                         <Route path="/" element={<Home />} />
+                        <Route path="/shop" element={<Shop />} />
                         <Route path="/lesson" element={<Lesson />}>
                             <Route path="unit/:unitId/level/:levelId" element={<Lesson />} />
                             <Route path="unit/:unitId/legendary/:legendaryId" element={<Lesson />} />
