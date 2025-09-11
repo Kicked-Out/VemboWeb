@@ -2017,3 +2017,178 @@ button {
     color: white;
     line-height: normal;
 }
+
+/* =========================================================================================================================================================================== */
+/* ============================================================================== Locked Quests ============================================================================== */
+/* =========================================================================================================================================================================== */
+
+.locked-quests {
+    width: 741px;
+    margin-top: 49px;
+}
+
+.welcome-quests-card {
+    position: relative;
+    width: 100%;
+    padding: 44px;
+    padding-top: 108px;
+    padding-bottom: 57px;
+    border-radius: 20px;
+    background-color: var(--purple);
+}
+
+.welcome-quests-card__info {
+    display: flex;
+    width: 505px;
+    gap: 24px;
+    flex-direction: column;
+}
+
+.welcome-quests-card__title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--polar-navy);
+    line-height: normal;
+}
+
+.welcome-quests-card__description {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--polar-navy);
+    line-height: normal;
+}
+
+.welcome-quests-card__img {
+    position: absolute;
+    width: 220px;
+    height: 204px;
+    bottom: 38px;
+    right: 21px;
+}
+
+.daily-quests-container {
+    margin-top: 40px;
+}
+
+.daily-quests-container__title-block {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.daily-quests-container__title {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    line-height: normal;
+}
+
+.daily-quests-time-remaining {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.daily-quests-time-remaining__icon {
+    width: 22px;
+    height: 22px;
+}
+
+.daily-quests-time-remaining__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--orange);
+    line-height: normal;
+}
+
+.daily-quests-block {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+}
+
+.locked-daily-quest-card {
+    display: flex;
+    width: 100%;
+    padding-top: 37px;
+    padding-bottom: 37px;
+    padding-left: 34px;
+    padding-right: 34px;
+    gap: 44px;
+    align-items: center;
+    border-radius: 20px;
+    border: 2px solid var(--ice-white);
+    background-color: var(--glacier-blue);
+}
+
+.locked-daily-quest-card__icon {
+    width: 45px;
+    height: 57px;
+}
+
+.locked-daily-quest-card__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #204453;
+    line-height: normal;
+}
+
+.locked-monthly-badges-card {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    position: relative;
+    padding-top: 24px;
+    padding-bottom: 40px;
+    padding-left: 32px;
+    padding-right: 32px;
+    border: 1px solid var(--glacier-blue);
+    border-radius: 29px;
+}
+
+.locked-monthly-badges-card__title {
+    width: 249px;
+    margin-bottom: 28px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ice-white);
+    line-height: normal;
+}
+
+.locked-monthly-badges-card__description {
+    width: 270px;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ice-white);
+    font-weight: normal;
+}
+
+.locked-monthly-badges-card__img {
+    position: absolute;
+    width: 147px;
+    height: 201px;
+    top: 0;
+    right: 0;
+}
+
+.locked-monthly-badges-btn {
+    width: 320px;
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 39px;
+    padding-right: 39px;
+    align-self: center;
+    border: 2px solid var(--glacier-blue);
+    border-bottom-width: 6px;
+    border-radius: 24px;
+    background-color: var(--polar-navy);
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    line-height: normal;
+    text-transform: uppercase;
+    cursor: pointer;
+}

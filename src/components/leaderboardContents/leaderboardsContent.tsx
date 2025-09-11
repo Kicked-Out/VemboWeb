@@ -65,7 +65,7 @@ export default function LeaderboardsContent() {
 
             <div className="users-block">
                 {users.map((user, index) => (
-                    <div key={user.id} className="user">
+                    <a key={user.id} href={`/profile/${user.nickName}`} className="user">
                         <div className="user-info">
                             {index + 1 >= 1 && index + 1 <= 3 ? (
                                 <img
@@ -87,7 +87,7 @@ export default function LeaderboardsContent() {
                         <p className="user-totalxp">
                             {userLeaderboards.find((userLeaderboards) => userLeaderboards.userId === user.id)?.xp}
                         </p>
-                    </div>
+                    </a>
                 ))}
             </div>
         </div>

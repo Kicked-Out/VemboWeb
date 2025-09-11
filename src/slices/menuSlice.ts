@@ -11,6 +11,7 @@ interface MenuSlice {
     isAdBlockerCardHidden: boolean;
     isWhatAreLeaderboardsCardHidden: boolean;
     isInfoCardHidden: boolean;
+    isMonthlyBadgesCardHidden: boolean;
     firstLevelStatus: number;
     chestStatus: number;
     secondLevelStatus: number;
@@ -31,6 +32,7 @@ const initialState: MenuSlice = {
     isAdBlockerCardHidden: false,
     isWhatAreLeaderboardsCardHidden: false,
     isInfoCardHidden: false,
+    isMonthlyBadgesCardHidden: false,
     firstLevelStatus: 1,
     chestStatus: 0,
     secondLevelStatus: 0,
@@ -120,6 +122,14 @@ export const menuSlice = createSlice({
             state.isInfoCardHidden = false;
         },
 
+        hideMonthlyBadgesCard: (state) => {
+            state.isMonthlyBadgesCardHidden = true;
+        },
+
+        showMonthlyBadgesCard: (state) => {
+            state.isMonthlyBadgesCardHidden = false;
+        },
+
         setFirstLevelStatus: (state, action) => {
             state.firstLevelStatus = action.payload.firstLevelStatus;
         },
@@ -163,6 +173,7 @@ export const menuSlice = createSlice({
         selectIsAdBlockerCardHidden: (x) => x.isAdBlockerCardHidden,
         selectIsWhatAreLeaderboardsCardHidden: (x) => x.isWhatAreLeaderboardsCardHidden,
         selectIsInfoCardHidden: (x) => x.isInfoCardHidden,
+        selectIsMonthlyBadgesCardHidden: (x) => x.isMonthlyBadgesCardHidden,
         selectFirstLevelStatus: (x) => x.firstLevelStatus,
         selectChestStatus: (x) => x.chestStatus,
         selectSecondLevelStatus: (x) => x.secondLevelStatus,
@@ -193,6 +204,8 @@ export const {
     showWhatAreLeaderboardsCard,
     hideInfoCard,
     showInfoCard,
+    hideMonthlyBadgesCard,
+    showMonthlyBadgesCard,
     setFirstLevelStatus,
     setChestStatus,
     setSecondLevelStatus,
@@ -214,6 +227,7 @@ export const {
     selectIsAdBlockerCardHidden,
     selectIsWhatAreLeaderboardsCardHidden,
     selectIsInfoCardHidden,
+    selectIsMonthlyBadgesCardHidden,
     selectFirstLevelStatus,
     selectChestStatus,
     selectSecondLevelStatus,
