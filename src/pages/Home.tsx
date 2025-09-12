@@ -9,6 +9,7 @@ import AuthService from "../services/authService";
 import UnitHeaderCard from "../components/cards/unitHeaderCard";
 import type { UnitDTO } from "../DTOs/unitDTO";
 import {
+    hideMonthlyBadgesCard,
     hideWhatAreLeaderboardsCard,
     showAdBlockerCard,
     showDailyQuestCard,
@@ -39,6 +40,7 @@ export default function Home() {
         dispatch(showDailyQuestCard());
         dispatch(showAdBlockerCard());
         dispatch(hideWhatAreLeaderboardsCard());
+        dispatch(hideMonthlyBadgesCard());
         dispatch(showInfoCard());
     }, []);
 

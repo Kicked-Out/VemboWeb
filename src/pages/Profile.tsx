@@ -17,11 +17,14 @@ import { UserPeriodProgressService } from "../services/userProgress/userPeriodPr
 import {
     hideInsightCard,
     hideLeaderboardCard,
+    hideMonthlyBadgesCard,
     hideWhatAreLeaderboardsCard,
     showAdBlockerCard,
     showDailyQuestCard,
+    showInfoCard,
     showNavbar,
     showSidebar,
+    showStatisticCard,
 } from "../slices/menuSlice";
 
 export default function Profile() {
@@ -39,11 +42,14 @@ export default function Profile() {
     useEffect(() => {
         dispatch(showNavbar());
         dispatch(showSidebar());
+        dispatch(showStatisticCard());
         dispatch(hideInsightCard());
         dispatch(hideLeaderboardCard());
         dispatch(showDailyQuestCard());
         dispatch(showAdBlockerCard());
         dispatch(hideWhatAreLeaderboardsCard());
+        dispatch(hideMonthlyBadgesCard());
+        dispatch(showInfoCard());
     }, []);
 
     useEffect(() => {

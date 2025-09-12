@@ -6,9 +6,11 @@ import {
     hideInfoCard,
     hideInsightCard,
     hideLeaderboardCard,
+    hideMonthlyBadgesCard,
     hideSidebar,
     hideStatisticCard,
     selectFirstLevelStatus,
+    showNavbar,
     showWhatAreLeaderboardsCard,
 } from "../slices/menuSlice";
 import type { UserLeaderboardDTO } from "../DTOs/userLeaderboardDTO";
@@ -23,6 +25,8 @@ export default function Leaderboards() {
     const isFirstLevelStatus = useSelector(selectFirstLevelStatus);
 
     useEffect(() => {
+        dispatch(showNavbar());
+
         if (isFirstLevelStatus === 1) {
             dispatch(hideStatisticCard());
             dispatch(hideInsightCard());
@@ -30,6 +34,7 @@ export default function Leaderboards() {
             dispatch(hideDailyQuestCard());
             dispatch(hideAdBlockerCard());
             dispatch(showWhatAreLeaderboardsCard());
+            dispatch(hideMonthlyBadgesCard());
             dispatch(hideInfoCard());
         } else {
             dispatch(hideSidebar());

@@ -28,6 +28,7 @@ import Terms from "./pages/Terms";
 import Achievements from "./pages/Achievements";
 import Leaderboards from "./pages/Leaderboards";
 import Shop from "./pages/Shop";
+import Quests from "./pages/Quests";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -117,6 +118,7 @@ function App() {
                     <Route path="/terms" element={<Terms />} />
                     <Route path="/leaderboards" element={<Leaderboards />} />
                     <Route path="/shop" element={<Shop />} />
+                    <Route path="/quests" element={<Quests />} />
                 </Routes>
             </div>
 

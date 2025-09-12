@@ -7,23 +7,30 @@ import InfoCard from "../../cards/sidebar/infoCard";
 import { useSelector } from "react-redux";
 import { selectStreak } from "../../../slices/userStatisticsSlice";
 import {
+    selectFirstLevelStatus,
     selectIsAdBlockerCardHidden,
     selectIsDailyQuestCardHidden,
     selectIsInfoCardHidden,
     selectIsInsightCardHidden,
     selectIsLeaderboardCardHidden,
+    selectIsMonthlyBadgesCardHidden,
     selectIsWhatAreLeaderboardsCardHidden,
 } from "../../../slices/menuSlice";
 import WhatAreLeaderboardsCard from "../../cards/sidebar/whatAreLeaderBoards";
+import LockedMonthlyBadgesCard from "../../cards/sidebar/lockedMonthlyBadgesCard";
+import MonthlyBadgesCard from "../../cards/sidebar/monthlyBadgesCard";
 
 export default function CardContainer() {
     const streak = useSelector(selectStreak);
+    const firstLevelStatus = useSelector(selectFirstLevelStatus);
+
     const isInsightCardHidden = useSelector(selectIsInsightCardHidden);
     const isLeaderboardCardHidden = useSelector(selectIsLeaderboardCardHidden);
     const isDailyQuestCardHidden = useSelector(selectIsDailyQuestCardHidden);
     const isAdBlockerCardHidden = useSelector(selectIsAdBlockerCardHidden);
     const isWhatAreLeaderboardCardHidden = useSelector(selectIsWhatAreLeaderboardsCardHidden);
     const isInfoCardHidden = useSelector(selectIsInfoCardHidden);
+    const isMonthlyBadgesCardHidden = useSelector(selectIsMonthlyBadgesCardHidden);
 
     return (
         <div className="card-container">
@@ -34,6 +41,13 @@ export default function CardContainer() {
             {!isDailyQuestCardHidden ? <DailyQuestsCard /> : null}
             {!isAdBlockerCardHidden ? <AdBlockerCard /> : null}
             {!isWhatAreLeaderboardCardHidden ? <WhatAreLeaderboardsCard /> : null}
+            {!isMonthlyBadgesCardHidden ? (
+                firstLevelStatus === 1 ? (
+                    <LockedMonthlyBadgesCard />
+                ) : (
+                    <MonthlyBadgesCard />
+                )
+            ) : null}
 
             {!isInfoCardHidden ? <InfoCard /> : null}
         </div>
