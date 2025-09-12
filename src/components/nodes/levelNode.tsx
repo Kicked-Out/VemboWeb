@@ -8,7 +8,7 @@ import { UserLevelProgressService } from "../../services/userProgress/userLevelP
 import { useSelector } from "react-redux";
 import { selectFirstLevelStatus, selectSecondLevelStatus } from "../../slices/menuSlice";
 import ChestButton from "../unitContents/chestButton";
-import LevelButton from "../unitContents/levelButton";
+import LevelButton from "../unitContents/LevelButton";
 
 export default function LevelNode({ id, levelTypeId, unitCompletedCount, x }: LevelNodeComponent) {
     const levelTypes: Record<number, string> = {
@@ -45,7 +45,8 @@ export default function LevelNode({ id, levelTypeId, unitCompletedCount, x }: Le
 
         const getCurrentLesson = async () => {
             const lastUserLessonData = await UserLessonProgressService.getCurrentByLevelId(id);
-            const lessonId = lastUserLessonData!.id;
+
+            const lessonId = lastUserLessonData!.lessonId;
 
             const lesson = await LessonService.getById(lessonId);
 

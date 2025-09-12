@@ -17,6 +17,7 @@ import { UserPeriodProgressService } from "../services/userProgress/userPeriodPr
 import {
     hideInsightCard,
     hideLeaderboardCard,
+    hideWhatAreLeaderboardsCard,
     showAdBlockerCard,
     showDailyQuestCard,
     showNavbar,
@@ -42,6 +43,7 @@ export default function Profile() {
         dispatch(hideLeaderboardCard());
         dispatch(showDailyQuestCard());
         dispatch(showAdBlockerCard());
+        dispatch(hideWhatAreLeaderboardsCard());
     }, []);
 
     useEffect(() => {

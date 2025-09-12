@@ -9,12 +9,15 @@ import AuthService from "../services/authService";
 import UnitHeaderCard from "../components/cards/unitHeaderCard";
 import type { UnitDTO } from "../DTOs/unitDTO";
 import {
+    hideWhatAreLeaderboardsCard,
     showAdBlockerCard,
     showDailyQuestCard,
+    showInfoCard,
     showInsightCard,
     showLeaderboardCard,
     showNavbar,
     showSidebar,
+    showStatisticCard,
 } from "../slices/menuSlice";
 
 export default function Home() {
@@ -30,10 +33,13 @@ export default function Home() {
     useEffect(() => {
         dispatch(showNavbar());
         dispatch(showSidebar());
+        dispatch(showStatisticCard());
         dispatch(showInsightCard());
         dispatch(showLeaderboardCard());
         dispatch(showDailyQuestCard());
         dispatch(showAdBlockerCard());
+        dispatch(hideWhatAreLeaderboardsCard());
+        dispatch(showInfoCard());
     }, []);
 
     const checkIsTokenValid = async () => {

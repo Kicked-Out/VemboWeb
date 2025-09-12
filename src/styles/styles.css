@@ -216,10 +216,12 @@ button {
 }
 
 .grid-container {
+    --grid-background: none;
     display: grid;
     width: 100%;
     min-height: 100vh;
     grid-template-columns: 320px 5fr 3fr;
+    background: var(--grid-background);
 }
 
 /* =========================================================================================================================================================================== */
@@ -233,6 +235,7 @@ button {
     top: 0;
     height: 100vh;
     border-right: 1px solid var(--ice-white);
+    background-color: var(--polar-navy);
 }
 
 .nav-title {
@@ -503,12 +506,20 @@ button {
 /* ================================================================================== Sidebar ================================================================================ */
 /* =========================================================================================================================================================================== */
 
+.sidebar-top {
+    width: 475px;
+    position: sticky;
+    padding-top: 32px;
+    top: 32px;
+    align-self: flex-start;
+}
+
 .sidebar {
-    align-self: flex-end;
+    width: 100%;
+    height: 100%;
     position: sticky;
     bottom: 0;
-    width: 475px;
-    margin-top: 32px;
+    align-self: flex-end;
 }
 
 /* =========================================================================================================================================================================== */
@@ -557,7 +568,8 @@ button {
 
 .insight-card,
 .leaderboard-card,
-.daily-quests-card {
+.daily-quests-card,
+.what-are-leaderboards-card {
     border: 1px solid var(--glacier-blue);
     border-radius: 20px;
     padding: 25px;
@@ -1735,4 +1747,273 @@ button {
     font-weight: 600;
     color: white;
     text-align: center;
+}
+
+/* =========================================================================================================================================================================== */
+/* ============================================================================ Leaderboards Page ============================================================================ */
+/* =========================================================================================================================================================================== */
+
+.locked-leaderboards {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 85px; */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.locked-leaderboards-title-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.locked-leaderboards-img {
+    width: 346px;
+    height: 215px;
+}
+
+.locked-leaderboards-title {
+    font-size: 30px;
+    font-weight: 500;
+    color: white;
+}
+
+.locked-leaderboards-description {
+    margin-top: 16px;
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
+}
+
+.locked-leaderboards-btn {
+    margin-top: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 79px;
+    padding-right: 79px;
+    border: 2px solid #71b4d4;
+    border-radius: 24px;
+    box-shadow: 0 4px 0 0 #71b4d4;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.leaderboards-user-skeletons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 44px;
+    width: 692px;
+    gap: 24px;
+}
+
+.leaderboards-user-skeleton {
+    --skeleton-background-color: #5c6b76;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-skeleton-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-skeleton-top {
+    width: 20px;
+    height: 20px;
+    margin-right: 31px;
+    border-radius: 50%;
+    background-color: var(--skeleton-background-color);
+}
+
+.user-skeleton-avatar {
+    width: 60px;
+    height: 60px;
+    margin-right: 37px;
+    border-radius: 50%;
+}
+
+.user-skeleton-nickname {
+    height: 14px;
+    border-radius: 14px;
+    background-color: var(--skeleton-background-color);
+}
+
+.user-skeleton-totalxp {
+    width: 62px;
+    height: 14px;
+    border-radius: 14px;
+    background-color: var(--skeleton-background-color);
+}
+
+/* =========================================================================================================================================================================== */
+/* ======================================================================== What Are Leaderboards Card ======================================================================= */
+/* =========================================================================================================================================================================== */
+
+.what-are-leaderboards-card {
+    padding-bottom: 52px;
+}
+
+.what-are-leaderboards-card__title {
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #466984;
+    text-transform: uppercase;
+}
+
+.what-are-leaderboards-card__short-description {
+    width: 264px;
+    margin-bottom: 24px;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: normal;
+    color: white;
+}
+
+.what-are-leaderboards-card__description {
+    width: 312px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+    color: white;
+}
+
+.what-are-leaderboards-card__img {
+    position: absolute;
+    width: 133px;
+    height: 156px;
+    bottom: 27px;
+    right: 20px;
+}
+
+/* =========================================================================================================================================================================== */
+/* =============================================================================== Leaderboards ============================================================================== */
+/* =========================================================================================================================================================================== */
+
+.leaderboards {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 75px;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.leagues-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leagues-block {
+    display: flex;
+    margin: 24px;
+    margin-top: 0px;
+    gap: 11px;
+    align-items: center;
+    justify-content: center;
+}
+
+.current-league {
+    width: 99px;
+    height: 110px;
+}
+
+.locked-league {
+    width: 66px;
+    height: 78px;
+}
+
+.current-league-block {
+    text-align: center;
+}
+
+.current-league-title {
+    margin-bottom: 16px;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--glacier-blue);
+    line-height: normal;
+}
+
+.current-league-description {
+    margin-bottom: 4px;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--ice-white);
+    line-height: normal;
+}
+
+.next-league-time-remaining {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--glacier-blue);
+    line-height: normal;
+}
+
+.users-block {
+    display: flex;
+    width: 692px;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-top-img {
+    width: 26px;
+    height: 35px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.user-top {
+    width: 26px;
+    margin-right: 22px;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--glacier-blue);
+    line-height: normal;
+}
+
+.user-avatar {
+    --user-avatar-background: var(--glacier-blue);
+    width: 60px;
+    height: 60px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: var(--user-avatar-background);
+}
+
+.user-nickname {
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    line-height: normal;
+}
+
+.user-totalxp {
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    line-height: normal;
 }
