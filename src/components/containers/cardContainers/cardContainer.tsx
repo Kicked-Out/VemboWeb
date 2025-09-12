@@ -18,6 +18,7 @@ import {
 } from "../../../slices/menuSlice";
 import WhatAreLeaderboardsCard from "../../cards/sidebar/whatAreLeaderBoards";
 import LockedMonthlyBadgesCard from "../../cards/sidebar/lockedMonthlyBadgesCard";
+import MonthlyBadgesCard from "../../cards/sidebar/monthlyBadgesCard";
 
 export default function CardContainer() {
     const streak = useSelector(selectStreak);
@@ -40,7 +41,13 @@ export default function CardContainer() {
             {!isDailyQuestCardHidden ? <DailyQuestsCard /> : null}
             {!isAdBlockerCardHidden ? <AdBlockerCard /> : null}
             {!isWhatAreLeaderboardCardHidden ? <WhatAreLeaderboardsCard /> : null}
-            {!isMonthlyBadgesCardHidden ? firstLevelStatus === 1 ? <LockedMonthlyBadgesCard /> : null : null}
+            {!isMonthlyBadgesCardHidden ? (
+                firstLevelStatus === 1 ? (
+                    <LockedMonthlyBadgesCard />
+                ) : (
+                    <MonthlyBadgesCard />
+                )
+            ) : null}
 
             {!isInfoCardHidden ? <InfoCard /> : null}
         </div>

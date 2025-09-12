@@ -273,6 +273,11 @@ button {
     border-color: var(--nav-btn-border-color-active);
 }
 
+.nav-btn-selected:hover {
+    border-color: var(--nav-btn-border-color-active);
+    background-color: var(--nav-btn-border-color);
+}
+
 .nav-icon {
     margin-left: 19px;
     margin-right: 24px;
@@ -2191,4 +2196,226 @@ button {
     line-height: normal;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+/* =========================================================================================================================================================================== */
+/* ================================================================================== Quests ================================================================================= */
+/* =========================================================================================================================================================================== */
+
+.quests {
+    width: 741px;
+    margin: 49px;
+}
+
+.monthly-quest-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 24px;
+    padding-bottom: 39px;
+    padding-left: 44px;
+    padding-right: 15px;
+    gap: 88px;
+    border-radius: 20px;
+    background-color: var(--peach);
+}
+
+.monthly-quest-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.month-title-block {
+    width: fit-content;
+    padding: 8px;
+    border-radius: 12px;
+    background-color: var(--ice-white);
+}
+
+.month-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #9c1010;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.monthly-quest-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.monthly-quest-card-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #9c1010;
+    line-height: normal;
+}
+
+.monthly-quest-card-time-remaining {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.monthly-quest-card-time-remaining__icon {
+    width: 22px;
+    height: 22px;
+}
+
+.monthly-quest-card-time-remaining__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #9c1010;
+    line-height: normal;
+}
+
+.monthly-quest-inner-card {
+    display: flex;
+    flex-direction: column;
+    padding-top: 26px;
+    padding-bottom: 26px;
+    padding-left: 30px;
+    padding-right: 48px;
+    gap: 20px;
+    border-radius: 16px;
+    background-color: rgba(77, 14, 14, 0.69);
+}
+
+.monthly-quest-inner-card__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    line-height: normal;
+}
+
+.monthly-quest-inner-card__progress-container {
+    position: relative;
+    height: 30px;
+    border-radius: 30px;
+    background-color: #fc3838;
+}
+
+.monthly-quest-inner-card__progress {
+    position: absolute;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-color: rgba(217, 217, 217, 0.48);
+}
+
+.monthly-quest-inner-card__progress-info {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+}
+
+.daily-quests-block-connected > .daily-quest-card:first-child {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-top-width: 2px;
+    border-bottom-width: 1px;
+}
+
+.daily-quests-block-connected > .daily-quest-card {
+    border-radius: 0;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+}
+
+.daily-quests-block-connected > .daily-quest-card:last-child {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-width: 1px;
+    border-bottom-width: 2px;
+}
+
+/* =========================================================================================================================================================================== */
+/* ============================================================================== Monthly Badges ============================================================================= */
+/* =========================================================================================================================================================================== */
+
+.monthly-badges-card {
+    display: flex;
+    flex-direction: column;
+    width: 466px;
+    margin: 8px;
+    padding-top: 27px;
+    padding-bottom: 59px;
+    padding-left: 33px;
+    padding-right: 33px;
+    gap: 20px;
+    border: 1px solid var(--glacier-blue);
+    border-radius: 29px;
+}
+
+.monthly-badges-card__title-block {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.monthly-badges-card__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    line-height: normal;
+    letter-spacing: 1%;
+}
+
+.monthly-badges-card__link {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--glacier-blue);
+    line-height: normal;
+    letter-spacing: 1%;
+    text-transform: uppercase;
+}
+
+.monthly-badges {
+    display: flex;
+    margin-top: 35px;
+    flex-direction: column;
+    gap: 49px;
+}
+
+.monthly-badge {
+    display: flex;
+    margin-left: 22px;
+    gap: 24px;
+    align-items: center;
+}
+
+.monthly-badge__icon {
+    width: 55px;
+}
+
+.monthly-badge__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.monthly-badge__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    line-height: normal;
+    letter-spacing: 1%;
+}
+
+.monthly-badge__date {
+    font-size: 16px;
+    font-weight: 400;
+    color: #526365;
+    line-height: normal;
+    letter-spacing: 1%;
 }

@@ -27,7 +27,7 @@ export default function NavBar({ isHidden }: NavbarComponent) {
                 Learn
             </Link>
             <Link
-                to="/practice"
+                to="/practice-hub"
                 className={`nav-btn ${selectedPage === 1 ? "nav-btn-selected" : ""}`}
                 onClick={() => updatePage(1)}
             >
