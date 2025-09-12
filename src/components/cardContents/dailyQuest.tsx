@@ -1,9 +1,9 @@
 import type { DailyQuestComponent } from "../../types/componentTypes";
 
-export default function DailyQuest({ title, progress, minValue, maxValue, chestLevel }: DailyQuestComponent) {
+export default function DailyQuest({ icon, title, progress, minValue, maxValue, chestLevel }: DailyQuestComponent) {
     return (
         <div className="daily-quest">
-            <img className="daily-quest__img" src="/src/assets/icons/daily_quests/lightning.png" />
+            <img className="daily-quest__img" src={icon} />
 
             <div className="daily-quest__content">
                 <h3 className="daily-quest__title">{title}</h3>
