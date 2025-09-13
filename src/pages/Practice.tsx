@@ -12,6 +12,7 @@ import {
     showSidebar,
     showStatisticCard,
 } from "../slices/menuSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Practice() {
     const dispatch = useDispatch();
@@ -30,6 +31,12 @@ export default function Practice() {
         dispatch(hideWhatAreLeaderboardsCard());
         dispatch(showInfoCard());
     }, []);
+
+    const navigate = useNavigate();
+
+    const getInsightOnClickHandler = () => {
+        navigate("/get-insight");
+    };
 
     return (
         <div className="practice-container">
@@ -55,7 +62,9 @@ export default function Practice() {
                                 src="/src/assets/icons/practice/cards/insight_card/vembo_img.png"
                             />
 
-                            <button className="practice-insight-card__btn">Unlock</button>
+                            <button className="practice-insight-card__btn" onClick={getInsightOnClickHandler}>
+                                Unlock
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -64,7 +73,7 @@ export default function Practice() {
                     <h2 className="practice-cards-block__title">Podcast</h2>
 
                     <div className="practice-cards">
-                        <div className="practice-card">
+                        <Link to="/get-insight" className="practice-card">
                             <div className="practice-card__info">
                                 <h3 className="practice-card__title">Read</h3>
                                 <h4 className="practice-card__description">
@@ -76,9 +85,9 @@ export default function Practice() {
                                 className="practice-card__img"
                                 src="/src/assets/icons/practice/cards/read_card_img.png"
                             />
-                        </div>
+                        </Link>
 
-                        <div className="practice-card">
+                        <Link to="/get-insight" className="practice-card">
                             <div className="practice-card__info">
                                 <h3 className="practice-card__title">Listen</h3>
                                 <h4 className="practice-card__description">Hear history come alive in every episode</h4>
@@ -88,7 +97,7 @@ export default function Practice() {
                                 className="practice-card__img"
                                 src="/src/assets/icons/practice/cards/listen_card_img.png"
                             />
-                        </div>
+                        </Link>
                     </div>
                 </div>
 
@@ -96,7 +105,7 @@ export default function Practice() {
                     <h2 className="practice-cards-block__title">Your Collections</h2>
 
                     <div className="practice-cards">
-                        <div className="practice-card">
+                        <Link to="/practice" className="practice-card">
                             <div className="practice-card__info">
                                 <h3 className="practice-card__title">Mistakes</h3>
                                 <h4 className="practice-card__description">
@@ -108,9 +117,9 @@ export default function Practice() {
                                 className="practice-card__img"
                                 src="/src/assets/icons/practice/cards/mistakes_card_img.png"
                             />
-                        </div>
+                        </Link>
 
-                        <div className="practice-card">
+                        <Link to="/get-insight" className="practice-card">
                             <div className="practice-card__info">
                                 <h3 className="practice-card__title">Years</h3>
                                 <h4 className="practice-card__description">
@@ -122,7 +131,7 @@ export default function Practice() {
                                 className="practice-card__img"
                                 src="/src/assets/icons/practice/cards/years_card_img.png"
                             />
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>
