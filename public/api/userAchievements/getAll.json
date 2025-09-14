@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "userId": 1,
+        "achievementId": 1,
+        "currentLevel": 1,
+        "progress": 2,
+        "earnedAt": "2023-10-01T12:00:00Z"
+    },
+    {
+        "id": 2,
+        "userId": 1,
+        "achievementId": 2,
+        "currentLevel": 1,
+        "progress": 2,
+        "earnedAt": "2023-10-01T12:00:00Z"
+    },
+    {
+        "id": 3,
+        "userId": 1,
+        "achievementId": 3,
+        "currentLevel": 1,
+        "progress": 2,
+        "earnedAt": "2023-10-01T12:00:00Z"
+    },
+    {
+        "id": 4,
+        "userId": 1,
+        "achievementId": 4,
+        "currentLevel": 1,
+        "progress": 2,
+        "earnedAt": "2023-10-01T12:00:00Z"
+    },
+    {
+        "id": 5,
+        "userId": 1,
+        "achievementId": 5,
+        "currentLevel": 1,
+        "progress": 2,
+        "earnedAt": "2023-10-01T12:00:00Z"
+    },
+    {
+        "id": 6,
+        "userId": 1,
+        "achievementId": 6,
+        "currentLevel": 1,
+        "progress": 2,
+        "earnedAt": "2023-10-01T12:00:00Z"
+    },
+    {
+        "id": 7,
+        "userId": 1,
+        "achievementId": 7,
+        "currentLevel": 1,
+        "progress": 2,
+        "earnedAt": "2023-10-01T12:00:00Z"
+    },
+    {
+        "id": 8,
+        "userId": 1,
+        "achievementId": 8,
+        "currentLevel": 1,
+        "progress": 2,
+        "earnedAt": "2023-10-01T12:00:00Z"
+    },
+    {
+        "id": 9,
+        "userId": 1,
+        "achievementId": 9,
+        "currentLevel": 1,
+        "progress": 2,
+        "earnedAt": "2023-10-01T12:00:00Z"
+    }
+]

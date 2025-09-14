@@ -32,22 +32,29 @@ import AnswerButtonBlock from "../components/buttonBlocks/AnswerButtonBlock";
 import ExerciseButtonBar from "../components/buttonBars/ExerciseButtonBar";
 import HeartsRanOutDialog from "../components/dialogs/HeartsRanOutDialog";
 import KeepLearningDialog from "../components/dialogs/KeepLearningDialog";
+import {
+    hideNavbar,
+    hideSidebar,
+    selectIsLessonTopBottomRowsHidden,
+    showLessonTopBottomRows,
+} from "../slices/menuSlice";
 
 export default function Lesson() {
+    const dispatch = useDispatch();
     const { unitId, levelId, legendaryId } = useParams();
     const [lesson, setLesson] = useState<LessonDTO | null>(null);
     const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
     const [questions, setQuestions] = useState<QuestionDTO[]>([]);
     const [answers, setAnswers] = useState<AnswerDTO[]>([]);
-    const dispatch = useDispatch();
     const currentLessonId = useSelector(selectCurrentLessonId);
     const currentExercise = useSelector(selectCurrentExercise);
     const exerciseAmount = useSelector(selectExerciseAmount);
     const rightAnswers = useSelector(selectRightAnswers);
     const isExercise = useSelector(selectIsNext);
-    const hearts = useSelector(selectHearts);
     const selectedQuestion = useSelector(selectSelectedQuestion);
     const selectedAnswer = useSelector(selectSelectedAnswer);
+    const isLessonTopBottomRowsHidden = useSelector(selectIsLessonTopBottomRowsHidden);
+    const hearts = useSelector(selectHearts);
     const [exercise, setExercise] = useState<ExerciseDTO | null>(null);
     const [repeatExercises, setRepeatExercises] = useState<ExerciseDTO[]>([]);
     const [isVerified, setIsVerified] = useState<boolean>(false);
@@ -58,6 +65,12 @@ export default function Lesson() {
     const [isWrong, setIsWrong] = useState<boolean>(false);
     const [isHeartsRanOutDialogShown, setIsHeartsRanOutDialogShown] = useState<boolean>(false);
     const [isKeepLearningDialogShown, setIsKeepLearningDialogShown] = useState<boolean>(false);
+
+    useEffect(() => {
+        dispatch(hideNavbar());
+        dispatch(hideSidebar());
+        dispatch(showLessonTopBottomRows());
+    }, []);
 
     useEffect(() => {
         dispatch(setStartedTime({ startedAt: new Date().toISOString() }));
@@ -105,7 +118,7 @@ export default function Lesson() {
         if (!exercise) return;
 
         const getQuestionsAndAnswers = async () => {
-            const fetchedQuestions = await QuestionService.getAllFromExercise(exercise.id);
+            const fetchedQuestions = await QuestionService.getAllByExercise(exercise.id);
 
             if (fetchedQuestions.length === 1) {
                 dispatch(selectQuestion({ selectedQuestion: fetchedQuestions[0] }));
@@ -116,7 +129,7 @@ export default function Lesson() {
             const fetchedAnswers = [];
 
             for (const question of fetchedQuestions) {
-                const fetchedAnswer = await AnswerService.getAllFromExerciseAndQuestion(exercise.id, question.id);
+                const fetchedAnswer = await AnswerService.getAllByQuestionId(question.id);
 
                 fetchedAnswers.push(...fetchedAnswer);
             }
@@ -154,14 +167,14 @@ export default function Lesson() {
 
         if (!selectedAnswer.isCorrect || selectedQuestion.id !== selectedAnswer.questionId) {
             dispatch(takeHeart());
-            setResultTitle("Incorrect");
+            setResultTitle("Incorrect answer:");
             setIsWrong(true);
 
-            if (exercise?.exerciseType === "single-choice") {
+            if (exercise?.exerciseTypeId === 1) {
                 setRepeatExercises([...repeatExercises, exercise!]);
                 setExercises([...exercises, exercise!]);
                 dispatch(setExerciseAmount({ exerciseAmount: exercises.length }));
-            } else if (exercise?.exerciseType === "multiple-choice") {
+            } else if (exercise?.exerciseTypeId === 2) {
                 if (
                     questions.length === futureCorrectQuestionsLength &&
                     answers.length === futureCorrectAnswersLength
@@ -172,9 +185,9 @@ export default function Lesson() {
                 }
             }
         } else {
-            if (exercise?.exerciseType === "single-choice") {
+            if (exercise?.exerciseTypeId === 1) {
                 dispatch(addRightAnswer());
-            } else if (exercise?.exerciseType === "multiple-choice") {
+            } else if (exercise?.exerciseTypeId === 2) {
                 if (
                     questions.length === futureCorrectQuestionsLength &&
                     answers.length === futureCorrectAnswersLength
@@ -182,7 +195,7 @@ export default function Lesson() {
                     dispatch(addRightAnswer());
                 }
             }
-            setResultTitle("Great");
+            setResultTitle("Nice job!");
 
             setCorrectAnswers([...correctAnswers, selectedAnswer]);
             setCorrectQuestions([...correctQuestions, selectedQuestion]);
@@ -209,7 +222,7 @@ export default function Lesson() {
 
     useEffect(() => {
         if (!selectedAnswer || !selectedQuestion) return;
-        if (exercise?.exerciseType === "single-choice") return;
+        if (exercise?.exerciseTypeId === 1) return;
 
         checkAnswerHandler();
 
@@ -235,37 +248,47 @@ export default function Lesson() {
         setIsHeartsRanOutDialogShown(!isHeartsRanOutDialogShown);
     };
 
+    const gridTemplateRows = isLessonTopBottomRowsHidden ? "115px 1fr 225px" : "1fr";
+
     return (
-        <div className="container">
+        <div className="lesson-container" style={{ gridTemplateRows: `${gridTemplateRows}` }}>
             {isExercise ? (
                 <>
-                    <div className="header">
-                        <Link to={"/"}>X</Link>
-                        <div className="progress-bar">
-                            <div className="bar"></div>
+                    <div className="lesson-progress-container">
+                        <Link to={"/"}>
+                            <img className="lesson-progress-bar-icon" src="/src/assets/icons/lesson/cross.png" />
+                        </Link>
+
+                        <div className="lesson-progress-bar">
                             <div
-                                className="progress"
+                                className="lesson-progress"
                                 style={{
-                                    width: exerciseAmount ? `${(rightAnswers / exerciseAmount) * 100}%` : "0%",
+                                    // width: exerciseAmount ? `${(rightAnswers / exerciseAmount) * 100}%` : "0%",
+                                    width: "50%",
                                 }}
                             ></div>
                         </div>
 
-                        <div></div>
+                        <div className="heart-container">
+                            <img className="heart-icon" src="/src/assets/icons/heart.png" />
+                            <p className="heart-value">{hearts}</p>
+                        </div>
                     </div>
 
-                    <div className="content">
-                        <h1>{exercise?.title}</h1>
+                    <div className="lesson-content">
+                        {exercise && exercise.exerciseTypeId === 2 ? (
+                            <h1 className="exercise-title">{exercise?.title}</h1>
+                        ) : null}
 
                         <div
                             className="exercise"
                             style={{
-                                flexDirection: exercise && exercise.exerciseType === "single-choice" ? "column" : "row",
+                                flexDirection: exercise && exercise.exerciseTypeId === 1 ? "column" : "row",
                             }}
                         >
                             <div className="questions">
-                                {exercise && exercise.exerciseType === "single-choice" ? (
-                                    <h2>{questions[0]?.title}</h2>
+                                {exercise && exercise.exerciseTypeId === 1 ? (
+                                    <h2 className="question-title">{questions[0]?.title}</h2>
                                 ) : (
                                     <QuestionButtonBlock
                                         questions={questions}
@@ -276,17 +299,23 @@ export default function Lesson() {
                             </div>
 
                             <div
-                                className={
-                                    exercise && exercise.exerciseType === "single-choice"
-                                        ? "answers-row"
-                                        : "answers-column"
-                                }
+                                className={exercise && exercise.exerciseTypeId === 1 ? "answers-row" : "answers-column"}
                             >
-                                <AnswerButtonBlock
-                                    answers={answers}
-                                    correctAnswers={correctAnswers}
-                                    isWrong={isWrong}
-                                />
+                                <div className="answers-line">
+                                    <AnswerButtonBlock
+                                        answers={answers.slice(0, 2)}
+                                        correctAnswers={correctAnswers}
+                                        isWrong={isWrong}
+                                    />
+                                </div>
+
+                                <div className="answers-line">
+                                    <AnswerButtonBlock
+                                        answers={answers.slice(2, 4)}
+                                        correctAnswers={correctAnswers}
+                                        isWrong={isWrong}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -295,6 +324,7 @@ export default function Lesson() {
                         isVerified={isVerified}
                         resultTitle={resultTitle}
                         rightAnswer={rightAnswer}
+                        disabled={!selectedQuestion || !selectedAnswer}
                         checkAnswerHandler={checkAnswerHandler}
                         continueHandler={continueHandler}
                     />

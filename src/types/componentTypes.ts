@@ -1,14 +1,15 @@
 import type { AnswerDTO } from "../DTOs/answerDTO";
 import type { QuestionDTO } from "../DTOs/questionDTO";
 import type { UnitDTO } from "../DTOs/unitDTO";
-import type { UserLevelProgressDTO } from "../DTOs/userProgressDTO/userLevelProgressDTO";
 
 export interface LevelNodeComponent {
     id: number;
     title: string;
+    levelTypeId: number;
     unitCompletedCount: number | undefined;
     currentLevel: number;
     levelAmount: number;
+    x: number;
 }
 
 export interface levelNodesComponent {
@@ -34,11 +35,14 @@ export interface LevelContentDispatcherComponent {
 export interface UnitComponent {
     unit: UnitDTO;
     topicCompletedCount: number | undefined;
+    onUnitInView: (unit: UnitDTO) => void;
 }
 
 export interface UnitContainerComponent {
     periodId: number;
     periodCompletedCount: number | undefined;
+    onUnitInView: (unit: UnitDTO) => void;
+    updateCurrentTopicOrder: (order: number) => void;
 }
 
 export interface Progress {
@@ -61,7 +65,6 @@ export interface ProgressSummaryComponents {
 }
 
 export interface StreakUpdateComponents {
-    streak: number;
     onNext: () => void;
 }
 
@@ -136,6 +139,7 @@ export interface ExerciseButtonBarComponent {
     isVerified: boolean;
     resultTitle: string;
     rightAnswer: AnswerDTO | null | undefined;
+    disabled?: boolean;
     checkAnswerHandler: () => void;
     continueHandler: () => void;
 }
@@ -173,4 +177,49 @@ export interface showPassBtnComponent {
 export interface returnBtnComponent {
     path: string;
     title: string;
+}
+
+export interface unitHeaderCardComponent {
+    currentTopicOrder: number;
+    currentUnit: UnitDTO | null;
+}
+
+export interface NavbarComponent {
+    isHidden: boolean;
+}
+
+export interface SidebarComponent {
+    isHidden: boolean;
+}
+
+export interface LevelButtonComponent {
+    id: number;
+    x: number;
+    levelTypeId: number;
+    levelCompletedCount: number | undefined;
+}
+
+export interface ChestButtonComponent {
+    id: number;
+    x: number;
+    levelTypeId: number;
+    levelCompletedCount: number | undefined;
+}
+
+export interface DailyQuestComponent {
+    icon?: string;
+    title?: string;
+    progress?: number;
+    minValue?: number;
+    maxValue?: number;
+    chestLevel?: number;
+}
+
+export interface DailyQuestCardComponent {
+    icon: string;
+    title: string;
+    progress: number;
+    currentValue: number;
+    targetValue: number;
+    chestLevel: number;
 }

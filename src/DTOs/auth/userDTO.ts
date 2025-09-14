@@ -1,11 +1,12 @@
 export interface UserDTO {
-    id: number;
+    id: string;
     nickName: string;
+    nickNameSlug: string;
     email: string;
     isPremium: boolean;
-    premiumStartedAt: Date;
-    premiumExpiresAt: Date;
-    CreatedAt: Date;
-    NativeLanguage: string;
-    SelectedRegion: string;
+    premiumStartedAt: string;
+    premiumExpiresAt: string;
+    createdAt: string;
+    nativeLanguage: string;
+    selectedRegion: string;
 }
