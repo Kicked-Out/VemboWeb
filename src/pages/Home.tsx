@@ -5,7 +5,7 @@ import { UserPeriodProgressService } from "../services/userProgress/userPeriodPr
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentPeriodId } from "../slices/userStatisticsSlice";
 import { useNavigate } from "react-router-dom";
-import AuthService from "../services/authService";
+// import AuthService from "../services/authService";
 import UnitHeaderCard from "../components/cards/unitHeaderCard";
 import type { UnitDTO } from "../DTOs/unitDTO";
 import {
@@ -45,16 +45,16 @@ export default function Home() {
     }, []);
 
     const checkIsTokenValid = async () => {
-        const isTokenValid = await AuthService.validateToken();
+        // const isTokenValid = await AuthService.validateToken();
 
-        return isTokenValid;
+        return true; // isTokenValid
     };
 
     useEffect(() => {
         const isTokenValid = checkIsTokenValid();
 
         if (!token || !isTokenValid) {
-            navigate("/login");
+            // navigate("/login");
         }
     }, [token]);
 

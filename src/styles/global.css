@@ -1,5 +1,12 @@
 @layer base {
     :root {
+        --polar-navy: #0F2038;
+        --ice-white: #F5FAFF;
+        --frost-blue: #B4DEFF;
+        --glacier-blue: #71B4D4;
+        --steel-blue: #466984;
+        --peach: #FF6B6B;
+
         --active-button: #71b4d4;
         --background: #ffffff;
         --foreground: #0f2038;
@@ -760,86 +767,85 @@ body {
 
 /* Terms Page */
 .terms-page{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 .terms-container{
-  width:1069px;
+    width:1069px;
 }
 
 .terms-title{
-  margin-top:47px;
-  margin-bottom:32px;
-  color:#FFF;
-  font-family:"Rubik";
-  font-size:40px;
-  font-style:normal;
-  font-weight:700;
-  line-height:normal;
-  letter-spacing:-0.4px;
+    margin-top:47px;
+    margin-bottom:32px;
+    color:#FFF;
+    font-family:"Rubik";
+    font-size:40px;
+    font-style:normal;
+    font-weight:700;
+    line-height:normal;
+    letter-spacing:-0.4px;
 }
 
 .terms-title-accent{
-  color:var(--Glacier-Blue, #71B4D4);
-  display:block;
+    color:var(--Glacier-Blue, #71B4D4);
+    display:block;
 }
 
 .terms-subtitle{
-  margin-top:0px;
-  margin-bottom:24px;
-  color:#FFF;
-  font-family:"Rubik";
-  font-size:24px;
-  font-style:normal;
-  font-weight:700;
-  line-height:normal;
-  letter-spacing:-0.24px;
+    margin-top:0px;
+    margin-bottom:24px;
+    color:#FFF;
+    font-family:"Rubik";
+    font-size:24px;
+    font-style:normal;
+    font-weight:700;
+    line-height:normal;
+    letter-spacing:-0.24px;
 }
 
 .terms-item-heading{
-  margin-top:0px;
-  margin-bottom:8px;
-  color:#FFF;
-  font-family:"Rubik";
-  font-size:24px;
-  font-style:normal;
-  font-weight:700;
-  line-height:normal;
-  letter-spacing:-0.24px;
+    margin-top:0px;
+    margin-bottom:8px;
+    color:#FFF;
+    font-family:"Rubik";
+    font-size:24px;
+    font-style:normal;
+    font-weight:700;
+    line-height:normal;
+    letter-spacing:-0.24px;
 }
 
 .terms-item-description{
-  margin-top:0px;
-  margin-bottom:16px;
-  color:#FFF;
-  font-family:"Rubik";
-  font-size:24px;
-  font-style:normal;
-  font-weight:400;
-  line-height:normal;
-  letter-spacing:-0.24px;
+    margin-top:0px;
+    margin-bottom:16px;
+    color:#FFF;
+    font-family:"Rubik";
+    font-size:24px;
+    font-style:normal;
+    font-weight:400;
+    line-height:normal;
+    letter-spacing:-0.24px;
 }
 
 .terms-divider{
-  margin-top:32px;
-  margin-bottom:40px;
-  width:1069px;
-  height:3px;
-  background:#71B4D4;
+    margin-top:32px;
+    margin-bottom:40px;
+    width:1069px;
+    height:3px;
+    background:#71B4D4;
 }
 
 .terms-bottom{
-  margin-top:0px;
-  margin-bottom:102px;
-  color:#FFF;
-  font-family:"Rubik";
-  font-size:24px;
-  font-style:normal;
-  font-weight:400;
-  line-height:normal;
-  letter-spacing:-0.24px;
+    margin-top:0px;
+    margin-bottom:102px;
+    color:#FFF;
+    font-family:"Rubik";
+    font-size:24px;
+    font-style:normal;
+    font-weight:400;
+    line-height:normal;
+    letter-spacing:-0.24px;
 }
-
