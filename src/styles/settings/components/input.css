@@ -1,0 +1,25 @@
+/* Vembo Input */
+.vinput { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+.vinput__label { font-size: 24px; font-weight: 700; color: var(--ice-white); line-height: 20px; }
+
+.vinput__control { position: relative; }
+.vinput__field {
+  width: 100%;
+  height: 50px;
+  padding: 12px;
+  padding-right: 56px;
+  border-radius: 15px;
+  border: 2px solid var(--glacier-blue);
+  background: var(--ice-white);
+  color: var(--steel-blue);
+  font-size: 24px;
+}
+.vinput__field::placeholder { color: rgba(70,105,132,.6); }
+.vinput__field:focus { outline: 2px solid var(--glacier-blue); }
+
+.vinput__icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+
+.vinput__error { color: var(--peach); font-size: 14px; font-weight: 600; }
+
+/* spacing helpers */
+.maxw-3xl { max-width: 727px; }

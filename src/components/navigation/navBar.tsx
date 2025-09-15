@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { selectUserData } from "../../slices/authSlice";
 import { useSelector } from "react-redux";
@@ -8,6 +9,14 @@ export default function NavBar({ isHidden }: NavbarComponent) {
     const user = useSelector(selectUserData);
     const selectedPage = useSelector(selectSelectedPage);
 
+    const [moreOpen, setMoreOpen] = useState(false);
+
+    const openMore = () => setMoreOpen(true);
+    const closeMore = () => setMoreOpen(false);
+    const handleLogout = () => {
+        console.log("Log out clicked");
+    };
+
     return (
         <nav className={`navbar ${isHidden ? "hidden" : ""}`}>
             <Link to="/" className="nav-title">
@@ -17,7 +26,7 @@ export default function NavBar({ isHidden }: NavbarComponent) {
                 <img className="nav-icon" src="/src/assets/icons/glacier.png" />
                 Learn
             </Link>
-            <Link to="/practice-hub" className={`nav-btn ${selectedPage === 1 ? "nav-btn-selected" : ""}`}>
+            <Link to="/practice" className={`nav-btn ${selectedPage === 1 ? "nav-btn-selected" : ""}`}>
                 <img className="nav-icon" src="/src/assets/icons/practice.png" />
                 Practice
             </Link>
@@ -40,9 +49,37 @@ export default function NavBar({ isHidden }: NavbarComponent) {
                 <img className="nav-icon" src="/src/assets/icons/profile_default_icon.png" />
                 Profile
             </Link>
-            <div className="nav-btn">
-                <img className="nav-icon" src="/src/assets/icons/more.png" />
-                More
+
+            <div className="nav-btn more-container" onMouseEnter={openMore} onMouseLeave={closeMore}>
+                <div className="more-toggle">
+                    <img className="nav-icon" src="/src/assets/icons/more.png" />
+                    <span>More</span>
+                </div>
+
+                <div
+                    className={`more-menu ${moreOpen ? "more-menu-open" : "more-menu-closed"}`}
+                    role="menu"
+                    aria-hidden={!moreOpen}
+                >
+                    <Link to="/settings" className="more-menu-item" onClick={closeMore}>
+                        Settings
+                    </Link>
+
+                    <button
+                        type="button"
+                        className="more-menu-item"
+                        onClick={() => {
+                            handleLogout();
+                            closeMore();
+                        }}
+                    >
+                        Log out
+                    </button>
+
+                    <Link to="/help" className="more-menu-item" onClick={closeMore}>
+                        Help
+                    </Link>
+                </div>
             </div>
         </nav>
     );

@@ -1,0 +1,76 @@
+.page-container {
+    margin: 0 100px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-fields label {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.form-fields input {
+    font-size: 18px;
+}
+
+.subtitle {
+    color: var(--ice-white);
+    font-size: 16px;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4px;
+    gap: 20px;
+    align-items: left;
+    justify-content: left;
+}
+
+.delete-link {
+    color: var(--peach);
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    align-items: left;
+    justify-content: left;
+    display: flex;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    border-radius: 0;
+    border-width: 0;
+    border-style: none;
+}
+
+.delete-link:hover {
+    text-decoration: underline;
+}

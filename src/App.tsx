@@ -32,6 +32,9 @@ import Quests from "./pages/Quests";
 import Practice from "./pages/Practice";
 import { giveVBucks, setCurrentPeriodId, setHearts, setStreak } from "./slices/userStatisticsSlice";
 import { getToken } from "./helpers/localStorage.helper";
+import Settings from "./pages/settings/settings";
+import Privacy from "./pages/settings/privacy";
+import Social from "./pages/settings/social";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -194,6 +197,9 @@ function App() {
                     <Route path="/shop" element={<Shop />} />
                     <Route path="/quests" element={<Quests />} />
                     <Route path="/practice-hub" element={<Practice />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/privacy" element={<Privacy />} />
+                    <Route path="/social" element={<Social />} />
                 </Routes>
             </div>
 

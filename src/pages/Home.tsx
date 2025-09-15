@@ -4,8 +4,8 @@ import type { UserPeriodProgressDTO } from "../DTOs/userProgressDTO/userPeriodPr
 import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentPeriodId } from "../slices/userStatisticsSlice";
-import { useNavigate } from "react-router-dom";
-import AuthService from "../services/authService";
+// import { useNavigate } from "react-router-dom";
+// import AuthService from "../services/authService";
 import UnitHeaderCard from "../components/cards/unitHeaderCard";
 import type { UnitDTO } from "../DTOs/unitDTO";
 import {
