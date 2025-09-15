@@ -5,7 +5,7 @@
 //         newPassword: string;
 //         confirmNewPassword: string;
 //     }
-
+    
 //     const {
 //         register,
 //         handleSubmit,
@@ -37,23 +37,18 @@
 //     )
 // }
 
+
+
+
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { PrimaryButton, ShowPasswordButton } from "../../components/ui/primary-button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
 
 export default function ResetPassword() {
-    const dispatch = useDispatch();
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        dispatch(hideNavbar());
-        dispatch(hideSidebar());
-    });
 
     type Inputs = {
         newPassword: string;
@@ -68,7 +63,7 @@ export default function ResetPassword() {
     } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        navigate("/password-updated");
+            navigate("/password-updated");
     };
 
     const newPassword = watch("newPassword");

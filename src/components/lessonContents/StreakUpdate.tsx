@@ -1,12 +1,8 @@
-import { useSelector } from "react-redux";
 import type { StreakUpdateComponents } from "../../types/componentTypes";
-import { selectStreak } from "../../slices/userStatisticsSlice";
 
-export default function StreakUpdate({ onNext }: StreakUpdateComponents) {
+export default function StreakUpdate({ streak, onNext }: StreakUpdateComponents) {
     const calendarDays = ["th", "f", "Sa", "Su", "M"];
     const lastStreak = 3;
-
-    const streak = useSelector(selectStreak);
 
     return (
         <div>

@@ -1,12 +1,11 @@
 {
-    "id": "1",
+    "id": 1,
     "nickName": "Gladan Denis",
-    "nickNameSlug": "gladan-denis",
     "email": "gladandenis@gmail.com",
     "isPremium": true,
-    "premiumStartedAt": "2018-01-18T03:50:22.000Z",
-    "premiumExpiresAt": "2018-01-18T09:57:02.000Z",
-    "createdAt": "2018-01-18T03:50:22.000Z",
+    "premiumStartedAt": 1516239022,
+    "premiumExpiresAt": 1516259022,
+    "createdAt": 1516239022,
     "nativeLanguage": "Ukrainian",
     "selectedRegion": "Ukraine"
 }

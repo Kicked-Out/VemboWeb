@@ -5,14 +5,8 @@ import Unit from "../nodes/unit";
 import type { UnitContainerComponent } from "../../types/componentTypes";
 import type { UserTopicProgressDTO } from "../../DTOs/userProgressDTO/userTopicProgressDTO";
 import { UserTopicProgressService } from "../../services/userProgress/userTopicProgressService";
-import TopicService from "../../services/topicService";
 
-export default function UnitContainer({
-    periodId,
-    periodCompletedCount,
-    onUnitInView,
-    updateCurrentTopicOrder,
-}: UnitContainerComponent) {
+export default function UnitContainer({ periodId, periodCompletedCount }: UnitContainerComponent) {
     const [userTopicProgress, setUserTopicProgress] = useState<UserTopicProgressDTO | null>(null);
 
     useEffect(() => {
@@ -22,15 +16,7 @@ export default function UnitContainer({
         const getUserTopicProgress = async () => {
             const data = await UserTopicProgressService.getCurrentByPeriodId(periodId);
 
-            if (!data) return;
-
             setUserTopicProgress(data);
-
-            const topicData = await TopicService.getById(data.topicId);
-
-            if (!topicData) return;
-
-            updateCurrentTopicOrder(topicData.id);
         };
 
         getUserTopicProgress();
@@ -58,7 +44,7 @@ export default function UnitContainer({
     return (
         <div className="unit-container">
             {units.map((unit) => (
-                <Unit key={unit.id} unit={unit} topicCompletedCount={topicCompletedCount} onUnitInView={onUnitInView} />
+                <Unit key={unit.id} unit={unit} topicCompletedCount={topicCompletedCount} />
             ))}
         </div>
     );

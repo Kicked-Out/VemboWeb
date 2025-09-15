@@ -1,9 +1,12 @@
 export function getToken(): string {
-    return localStorage.getItem("token") || "";
+    const data = localStorage.getItem("token");
+    const token = data ? JSON.parse(data) : "";
+
+    return token;
 }
 
 export function setToken(token: string): void {
-    localStorage.setItem("token", token);
+    localStorage.setItem("token", JSON.stringify(token));
 }
 
 export function removeToken(): void {
