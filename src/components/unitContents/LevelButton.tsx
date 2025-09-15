@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import type { LevelButtonComponent } from "../../types/componentTypes";
 import { useEffect, useRef, useState } from "react";
 
@@ -24,7 +24,6 @@ export default function LevelButton({ id, x, levelTypeId, levelCompletedCount }:
         setBtnActive(!btnActive);
 
         if (levelCompletedCount !== undefined && levelCompletedCount !== 2) {
-            console.log(levelCompletedCount);
             navigate("/lesson");
         }
     };

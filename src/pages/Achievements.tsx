@@ -10,7 +10,7 @@ import { UserService } from "../services/userService";
 import { UserAchievementService } from "../services/userAchievementService";
 import { AchievementService } from "../services/achievementService";
 import { AchievementLevelService } from "../services/achievementLevelService";
-import { hideSidebar, showNavbar, showSidebar } from "../slices/menuSlice";
+import { hideSidebar, showNavbar } from "../slices/menuSlice";
 
 export default function Achievements() {
     const dispatch = useDispatch();
@@ -20,6 +20,7 @@ export default function Achievements() {
     const [userAchievements, setUserAchievements] = useState<UserAchievementDTO[]>([]);
     const [achievements, setAchievements] = useState<AchievementDTO[]>([]);
     const [achievementLevels, setAchievementLevels] = useState<AchievementLevelDTO[]>([]);
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(showNavbar());
@@ -50,6 +51,8 @@ export default function Achievements() {
 
         const getUserAchievements = async () => {
             const data = await UserAchievementService.getByUserId(user.id);
+
+            console.log(data);
 
             setUserAchievements(data);
         };
@@ -86,6 +89,7 @@ export default function Achievements() {
             }
 
             setAchievementLevels(achievementLevelData);
+            setIsLoaded(true);
         };
 
         getAchievementLevels();
@@ -93,7 +97,7 @@ export default function Achievements() {
 
     return (
         <div className="container">
-            <div className="achievements">
+            <div className={`achievements ${isLoaded ? "fade-in" : "fade-out"}`}>
                 <h1 className="achievements-title">All Achievements</h1>
 
                 {userAchievements.map((userAchievement) => {
@@ -105,10 +109,7 @@ export default function Achievements() {
                     return (
                         <div key={userAchievement.id} className="profile-achievement">
                             <div className="achievement-image-container">
-                                <img
-                                    className="achievement-icon"
-                                    src="/src/assets/icons/profile/achievements/historian_ages_icon.png"
-                                />
+                                <img className="achievement-icon" src={achievementData?.iconUrl} />
                                 {/* <p className="achievement-image-title">LEVEL {userAchievement.currentLevel}</p> */}
                             </div>
 
@@ -116,7 +117,9 @@ export default function Achievements() {
                                 <div className="achievement-title-container">
                                     <h2 className="achievement-title">{achievementData?.title}</h2>
                                     <p className="achievement-progress-text">
-                                        {userAchievement.progress}/{achievementLevelData?.targetValue}
+                                        {achievementLevelData
+                                            ? `${userAchievement.progress}/${achievementLevelData?.targetValue}`
+                                            : null}
                                     </p>
                                 </div>
 

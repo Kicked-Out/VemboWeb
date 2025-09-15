@@ -10,6 +10,7 @@ import {
     hideSidebar,
     hideStatisticCard,
     selectFirstLevelStatus,
+    setPage,
     showNavbar,
     showWhatAreLeaderboardsCard,
 } from "../slices/menuSlice";
@@ -26,6 +27,7 @@ export default function Leaderboards() {
 
     useEffect(() => {
         dispatch(showNavbar());
+        dispatch(setPage({ selectedPage: 2 }));
 
         if (isFirstLevelStatus === 1) {
             dispatch(hideStatisticCard());
@@ -53,8 +55,6 @@ export default function Leaderboards() {
             const usersData = await Promise.all(
                 userLeaderboardsData.map((userLeaderboard) => UserService.getById(userLeaderboard.userId))
             );
-
-            console.log(usersData);
 
             setUsers(usersData.filter(Boolean) as UserDTO[]);
         };

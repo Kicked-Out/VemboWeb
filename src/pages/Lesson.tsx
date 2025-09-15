@@ -8,17 +8,21 @@ import { LessonService } from "../services/lessonService";
 import ExerciseService from "../services/exerciseService";
 import {
     addRightAnswer,
+    addWrongAnswer,
     nextExercise,
     selectAnswer,
     selectCurrentExercise,
     selectExerciseAmount,
-    selectIsNext,
+    selectIsNextExercise,
     selectQuestion,
     selectRightAnswers,
     selectSelectedAnswer,
     selectSelectedQuestion,
+    selectWrongAnswers,
     setExerciseAmount,
+    setFinishedTime,
     setIsLastLesson,
+    setLessonProgressToDefault,
     setStartedTime,
     setType,
 } from "../slices/lessonProgressSlice";
@@ -50,12 +54,14 @@ export default function Lesson() {
     const currentExercise = useSelector(selectCurrentExercise);
     const exerciseAmount = useSelector(selectExerciseAmount);
     const rightAnswers = useSelector(selectRightAnswers);
-    const isExercise = useSelector(selectIsNext);
+    const wrongAnswers = useSelector(selectWrongAnswers);
+    const isExercise = useSelector(selectIsNextExercise);
     const selectedQuestion = useSelector(selectSelectedQuestion);
     const selectedAnswer = useSelector(selectSelectedAnswer);
     const isLessonTopBottomRowsHidden = useSelector(selectIsLessonTopBottomRowsHidden);
     const hearts = useSelector(selectHearts);
     const [exercise, setExercise] = useState<ExerciseDTO | null>(null);
+    const [exerciseType, setExerciseType] = useState<number>(0);
     const [repeatExercises, setRepeatExercises] = useState<ExerciseDTO[]>([]);
     const [isVerified, setIsVerified] = useState<boolean>(false);
     const [resultTitle, setResultTitle] = useState<string>("Incorrect");
@@ -65,6 +71,11 @@ export default function Lesson() {
     const [isWrong, setIsWrong] = useState<boolean>(false);
     const [isHeartsRanOutDialogShown, setIsHeartsRanOutDialogShown] = useState<boolean>(false);
     const [isKeepLearningDialogShown, setIsKeepLearningDialogShown] = useState<boolean>(false);
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+
+    useEffect(() => {
+        dispatch(setLessonProgressToDefault());
+    }, []);
 
     useEffect(() => {
         dispatch(hideNavbar());
@@ -107,6 +118,7 @@ export default function Lesson() {
 
             setExercises(data);
             setExercise(data[currentExercise]);
+            setExerciseType(data[currentExercise].exerciseTypeId);
 
             dispatch(setExerciseAmount({ exerciseAmount: data.length }));
         };
@@ -126,15 +138,14 @@ export default function Lesson() {
 
             setQuestions(fetchedQuestions);
 
-            const fetchedAnswers = [];
+            const answersArrays = await Promise.all(
+                fetchedQuestions.map((question) => AnswerService.getAllByQuestionId(question.id))
+            );
 
-            for (const question of fetchedQuestions) {
-                const fetchedAnswer = await AnswerService.getAllByQuestionId(question.id);
-
-                fetchedAnswers.push(...fetchedAnswer);
-            }
+            const fetchedAnswers = answersArrays.flat();
 
             setAnswers(fetchedAnswers);
+            setIsVisible(true);
         };
 
         getQuestionsAndAnswers();
@@ -143,7 +154,8 @@ export default function Lesson() {
     useEffect(() => {
         if (exercises.length === 0) return;
 
-        setExercise(exercises[currentExercise]);
+        setTimeout(() => setExercise(exercises[currentExercise]), 300);
+        setTimeout(() => setExerciseType(exercises[currentExercise].exerciseTypeId), 300);
     }, [currentExercise, exercises]);
 
     useEffect(() => {
@@ -156,14 +168,8 @@ export default function Lesson() {
     const checkAnswerHandler = () => {
         if (!selectedQuestion || !selectedAnswer) return;
 
-        const isAlreadyCorrectQuestion = correctQuestions.includes(selectedQuestion);
-        const isAlreadyCorrectAnswer = correctAnswers.includes(selectedAnswer);
-
-        const futureCorrectQuestionsLength = isAlreadyCorrectQuestion
-            ? correctQuestions.length
-            : correctQuestions.length + 1;
-
-        const futureCorrectAnswersLength = isAlreadyCorrectAnswer ? correctAnswers.length : correctAnswers.length + 1;
+        // const isAlreadyCorrectQuestion = correctQuestions.includes(selectedQuestion);
+        // const isAlreadyCorrectAnswer = correctAnswers.includes(selectedAnswer);
 
         if (!selectedAnswer.isCorrect || selectedQuestion.id !== selectedAnswer.questionId) {
             dispatch(takeHeart());
@@ -172,26 +178,20 @@ export default function Lesson() {
 
             if (exercise?.exerciseTypeId === 1) {
                 setRepeatExercises([...repeatExercises, exercise!]);
-                setExercises([...exercises, exercise!]);
-                dispatch(setExerciseAmount({ exerciseAmount: exercises.length }));
+                setExercises((prev) => [...prev, exercise!]);
+                dispatch(addWrongAnswer());
+
+                dispatch(setExerciseAmount({ exerciseAmount: exercises.length + 1 }));
             } else if (exercise?.exerciseTypeId === 2) {
-                if (
-                    questions.length === futureCorrectQuestionsLength &&
-                    answers.length === futureCorrectAnswersLength
-                ) {
-                    setRepeatExercises([...repeatExercises, exercise!]);
-                    setExercises([...exercises, exercise!]);
-                    dispatch(setExerciseAmount({ exerciseAmount: exercises.length }));
-                }
+                setRepeatExercises([...repeatExercises, exercise!]);
+                setExercises((prev) => [...prev, exercise!]);
+                dispatch(setExerciseAmount({ exerciseAmount: exercises.length + 1 }));
             }
         } else {
             if (exercise?.exerciseTypeId === 1) {
                 dispatch(addRightAnswer());
             } else if (exercise?.exerciseTypeId === 2) {
-                if (
-                    questions.length === futureCorrectQuestionsLength &&
-                    answers.length === futureCorrectAnswersLength
-                ) {
+                if (questions.length === correctQuestions.length + 1 && answers.length === correctAnswers.length + 1) {
                     dispatch(addRightAnswer());
                 }
             }
@@ -210,14 +210,25 @@ export default function Lesson() {
     };
 
     const continueHandler = () => {
-        dispatch(nextExercise());
-        clearSelection();
+        if (
+            (exerciseType === 2 && correctQuestions.length === 4 && correctAnswers.length === 4) ||
+            exerciseType === 1
+        ) {
+            setTimeout(() => {
+                dispatch(nextExercise());
+                clearSelection();
 
-        setCorrectAnswers([]);
-        setCorrectQuestions([]);
+                setCorrectAnswers([]);
+                setCorrectQuestions([]);
 
-        setIsWrong(false);
-        setIsVerified(false);
+                setIsWrong(false);
+                setIsVerified(false);
+
+                if (isExercise) {
+                    setIsVisible(false);
+                }
+            }, 100);
+        }
     };
 
     useEffect(() => {
@@ -263,8 +274,9 @@ export default function Lesson() {
                             <div
                                 className="lesson-progress"
                                 style={{
-                                    // width: exerciseAmount ? `${(rightAnswers / exerciseAmount) * 100}%` : "0%",
-                                    width: "50%",
+                                    width: exerciseAmount
+                                        ? `${(100 / exerciseAmount) * (rightAnswers + wrongAnswers)}%`
+                                        : "0%",
                                 }}
                             ></div>
                         </div>
@@ -275,19 +287,17 @@ export default function Lesson() {
                         </div>
                     </div>
 
-                    <div className="lesson-content">
-                        {exercise && exercise.exerciseTypeId === 2 ? (
-                            <h1 className="exercise-title">{exercise?.title}</h1>
-                        ) : null}
+                    <div className={`lesson-content  ${isVisible ? "fade-in" : "fade-out"}`}>
+                        {exerciseType === 2 ? <h1 className="exercise-title">{exercise?.title}</h1> : null}
 
                         <div
                             className="exercise"
                             style={{
-                                flexDirection: exercise && exercise.exerciseTypeId === 1 ? "column" : "row",
+                                flexDirection: exerciseType === 1 ? "column" : "row",
                             }}
                         >
                             <div className="questions">
-                                {exercise && exercise.exerciseTypeId === 1 ? (
+                                {exerciseType === 1 ? (
                                     <h2 className="question-title">{questions[0]?.title}</h2>
                                 ) : (
                                     <QuestionButtonBlock
@@ -298,9 +308,7 @@ export default function Lesson() {
                                 )}
                             </div>
 
-                            <div
-                                className={exercise && exercise.exerciseTypeId === 1 ? "answers-row" : "answers-column"}
-                            >
+                            <div className={exerciseType === 1 ? "answers-row" : "answers-column"}>
                                 <div className="answers-line">
                                     <AnswerButtonBlock
                                         answers={answers.slice(0, 2)}

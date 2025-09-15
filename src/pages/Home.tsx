@@ -11,6 +11,7 @@ import type { UnitDTO } from "../DTOs/unitDTO";
 import {
     hideMonthlyBadgesCard,
     hideWhatAreLeaderboardsCard,
+    setPage,
     showAdBlockerCard,
     showDailyQuestCard,
     showInfoCard,
@@ -23,8 +24,6 @@ import {
 
 export default function Home() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const token = localStorage.getItem("token");
     const [currentTopicOrder, setCurrentTopicOrder] = useState<number>(1);
     const [currentUnit, setCurrentUnit] = useState<UnitDTO | null>(null);
 
@@ -33,6 +32,7 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(showNavbar());
+        dispatch(setPage({ selectedPage: 0 }));
         dispatch(showSidebar());
         dispatch(showStatisticCard());
         dispatch(showInsightCard());
@@ -43,20 +43,6 @@ export default function Home() {
         dispatch(hideMonthlyBadgesCard());
         dispatch(showInfoCard());
     }, []);
-
-    const checkIsTokenValid = async () => {
-        const isTokenValid = await AuthService.validateToken();
-
-        return isTokenValid;
-    };
-
-    useEffect(() => {
-        const isTokenValid = checkIsTokenValid();
-
-        if (!token || !isTokenValid) {
-            navigate("/login");
-        }
-    }, [token]);
 
     useEffect(() => {
         if (!currentPeriodId) return;

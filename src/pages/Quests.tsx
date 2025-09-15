@@ -6,6 +6,7 @@ import {
     hideLeaderboardCard,
     hideWhatAreLeaderboardsCard,
     selectFirstLevelStatus,
+    setPage,
     showInfoCard,
     showMonthlyBadgesCard,
     showNavbar,
@@ -20,6 +21,7 @@ export default function Quests() {
 
     useEffect(() => {
         dispatch(showNavbar());
+        dispatch(setPage({ selectedPage: 3 }));
         dispatch(showSidebar());
         dispatch(hideInsightCard());
         dispatch(hideLeaderboardCard());

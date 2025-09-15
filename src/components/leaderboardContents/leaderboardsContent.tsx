@@ -7,6 +7,7 @@ import { UserService } from "../../services/userService";
 export default function LeaderboardsContent() {
     const [userLeaderboards, setUserLeaderboards] = useState<UserLeaderboardDTO[]>([]);
     const [users, setUsers] = useState<UserDTO[]>([]);
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     const userColors = [
         "#2EE6C3", // Mint
@@ -36,16 +37,15 @@ export default function LeaderboardsContent() {
                 userLeaderboardsData.map((userLeaderboard) => UserService.getById(userLeaderboard.userId))
             );
 
-            console.log(usersData);
-
             setUsers(usersData.filter(Boolean) as UserDTO[]);
+            setIsLoaded(true);
         };
 
         getUsers();
     }, []);
 
     return (
-        <div className="leaderboards">
+        <div className={`leaderboards ${isLoaded ? "fade-in" : "fade-out"}`}>
             <div className="leagues-container">
                 <div className="leagues-block">
                     <img className="current-league" src="/src/assets/icons/leaderboards/leagues/ice_league.png" />
