@@ -5,21 +5,15 @@ import { LessonService } from "../../services/lessonService";
 import { UserLessonProgressService } from "../../services/userProgress/userLessonProgressService";
 import type { UserLevelProgressDTO } from "../../DTOs/userProgressDTO/userLevelProgressDTO";
 import { UserLevelProgressService } from "../../services/userProgress/userLevelProgressService";
-import { useSelector } from "react-redux";
-import { selectFirstLevelStatus, selectSecondLevelStatus } from "../../slices/menuSlice";
-import ChestButton from "../unitContents/chestButton";
-import LevelButton from "../unitContents/LevelButton";
+import LevelContentDispatcher from "../levelContents/levelContentDispatcher";
 
-export default function LevelNode({ id, levelTypeId, unitCompletedCount, x }: LevelNodeComponent) {
-    const levelTypes: Record<number, string> = {
-        1: "default",
-        2: "practice",
-        3: "review",
-        4: "chest",
-    };
+export default function LevelNode({ id, title, unitCompletedCount }: LevelNodeComponent) {
+    const [btnActive, setBtnActive] = useState<boolean>(false);
+    const [btnActiveId, setBtnActiveId] = useState<number>(0);
 
-    const getLevelImage = () => {
-        return levelTypes[levelTypeId] || "default";
+    const btnPressHandler = (id: number) => {
+        setBtnActiveId(id);
+        setBtnActive(!btnActive);
     };
 
     const [lessons, setLessons] = useState<LessonDTO[]>([]);
@@ -45,8 +39,7 @@ export default function LevelNode({ id, levelTypeId, unitCompletedCount, x }: Le
 
         const getCurrentLesson = async () => {
             const lastUserLessonData = await UserLessonProgressService.getCurrentByLevelId(id);
-
-            const lessonId = lastUserLessonData!.lessonId;
+            const lessonId = lastUserLessonData.id;
 
             const lesson = await LessonService.getById(lessonId);
 
@@ -71,27 +64,31 @@ export default function LevelNode({ id, levelTypeId, unitCompletedCount, x }: Le
         getUserLevelProgress();
     }, [unitCompletedCount]);
 
-    const firstLevelStatus = useSelector(selectFirstLevelStatus);
-    const secondLevelStatus = useSelector(selectSecondLevelStatus);
+    const levelCompletedCount =
+        unitCompletedCount === undefined || unitCompletedCount > 0
+            ? unitCompletedCount
+            : userLevelProgress?.completedCount;
 
-    let levelCompletedCount: number | undefined;
+    return (
+        <div key={id} className="level-container">
+            <div
+                className="start-btn"
+                onClick={() => {
+                    btnPressHandler(id);
+                }}
+            >
+                Level Block
+            </div>
 
-    if (currentLesson) {
-        if (currentLesson.id === 1) {
-            levelCompletedCount = firstLevelStatus === 2 ? 1 : firstLevelStatus === 1 ? 0 : undefined;
-        } else if (currentLesson.id === 3) {
-            levelCompletedCount = secondLevelStatus === 2 ? 1 : secondLevelStatus === 1 ? 0 : undefined;
-        } else {
-            levelCompletedCount =
-                unitCompletedCount === undefined || unitCompletedCount > 0
-                    ? unitCompletedCount
-                    : userLevelProgress?.completedCount;
-        }
-    }
-
-    return getLevelImage() === "chest" ? (
-        <ChestButton id={id} x={x} levelTypeId={levelTypeId} levelCompletedCount={levelCompletedCount} />
-    ) : (
-        <LevelButton id={id} x={x} levelTypeId={levelTypeId} levelCompletedCount={levelCompletedCount} />
+            <LevelContentDispatcher
+                id={id}
+                title={title}
+                btnActive={btnActive}
+                btnActiveId={btnActiveId}
+                levelCompletedCount={levelCompletedCount}
+                currentLessonOrder={currentLesson?.order}
+                lessonAmount={lessons.length}
+            />
+        </div>
     );
 }

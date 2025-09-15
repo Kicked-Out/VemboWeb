@@ -6,7 +6,7 @@ import SecondaryButton from "../buttons/SecondaryButton";
 import type { DialogComponent } from "../../types/componentTypes";
 import { useNavigate } from "react-router-dom";
 import VBucksBlock from "../elementBlocks/VBucksBlock";
-import InsightBigButton from "../bigButtons/InsightBigButton";
+import InsightButton from "../bigButtons/InsightButton";
 import RefillButton from "../bigButtons/RefillButton";
 
 export default function HeartsRanOutDialog({ onClose, isShown }: DialogComponent) {
@@ -45,7 +45,7 @@ export default function HeartsRanOutDialog({ onClose, isShown }: DialogComponent
             <h2 className="modal-title">You ran out of hearts!</h2>
 
             <div className="btn-block">
-                <InsightBigButton />
+                <InsightButton />
                 <RefillButton />
             </div>
 

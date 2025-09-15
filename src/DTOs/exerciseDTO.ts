@@ -1,6 +1,6 @@
 export interface ExerciseDTO {
     id: number;
-    exerciseTypeId: number;
+    exerciseType: string;
     title: string;
     lessonId: number;
     difficulty: string;

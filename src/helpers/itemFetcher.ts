@@ -1,22 +1,14 @@
-import { instance } from "../api/axios.api";
-
 export default class ItemFetcher {
     public static async fetchItem(url: string) {
         try {
-            // const response = await fetch(url);
+            const response = await fetch(url);
 
-            // if (response.ok) {
-            //     const data = await response.json();
+            if (response.ok) {
+                const data = await response.json();
 
-            //     return data;
-            // } else {
-            //     return null;
-            // }
-
-            const response = await instance.get(url);
-
-            if (response.status === 200) {
-                return response.data;
+                return data;
+            } else {
+                return null;
             }
         } catch (error) {
             console.error("Fetch failed:", error);
