@@ -19,6 +19,7 @@ import {
     hideLeaderboardCard,
     hideMonthlyBadgesCard,
     hideWhatAreLeaderboardsCard,
+    setPage,
     showAdBlockerCard,
     showDailyQuestCard,
     showInfoCard,
@@ -38,9 +39,12 @@ export default function Profile() {
     const [userAchievements, setUserAchievements] = useState<UserAchievementDTO[]>([]);
     const [achievements, setAchievements] = useState<AchievementDTO[]>([]);
     const [achievementLevels, setAchievementLevels] = useState<AchievementLevelDTO[]>([]);
+    const [userProfileCreatedAt, setUserProfileCreatedAt] = useState<string>();
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(showNavbar());
+        dispatch(setPage({ selectedPage: 5 }));
         dispatch(showSidebar());
         dispatch(showStatisticCard());
         dispatch(hideInsightCard());
@@ -87,6 +91,31 @@ export default function Profile() {
     useEffect(() => {
         if (!user) return;
 
+        const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "Oktober",
+            "November",
+            "December",
+        ];
+
+        const userProfileCreatedAtDate = new Date(user.createdAt);
+        const userProfileCreatedAtMonth = userProfileCreatedAtDate.getMonth();
+        const userProfileCreatedAtYear = userProfileCreatedAtDate.getFullYear();
+
+        setUserProfileCreatedAt(`${months[userProfileCreatedAtMonth]} ${userProfileCreatedAtYear}`);
+    });
+
+    useEffect(() => {
+        if (!user) return;
+
         const getUserAchievements = async () => {
             const data = await UserAchievementService.getByUserId(user.id);
 
@@ -125,6 +154,7 @@ export default function Profile() {
             }
 
             setAchievementLevels(achievementLevelData);
+            setIsLoaded(true);
         };
 
         getAchievementLevels();
@@ -132,12 +162,13 @@ export default function Profile() {
 
     return (
         <div className="container">
-            <div className="profile-block">
+            <div className={`profile-block ${isLoaded ? "fade-in" : "fade-out"}`}>
                 <img className="profile-image" src="/src/assets/icons/profile/profile_img.png" />
 
                 <div className="profile-content">
-                    <h1 className="profile-nickname">{user?.nickName}</h1>
-                    <h2 className="profile-created-at">Joined March 2024</h2>
+                    <h1 className="profile-username">{user?.userName}</h1>
+                    <h3 className="profile-nickname">{user?.nickName}</h3>
+                    <h2 className="profile-created-at">Joined {userProfileCreatedAt}</h2>
 
                     {/* <div className="flex">
                         <div className="profile-connections">
@@ -278,10 +309,7 @@ export default function Profile() {
                         return (
                             <div key={userAchievement.id} className="profile-achievement">
                                 <div className="achievement-image-container">
-                                    <img
-                                        className="achievement-icon"
-                                        src="/src/assets/icons/profile/achievements/historian_ages_icon.png"
-                                    />
+                                    <img className="achievement-icon" src={achievementData?.iconUrl} />
                                     {/* <p className="achievement-image-title">LEVEL {userAchievement.currentLevel}</p> */}
                                 </div>
 

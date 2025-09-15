@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import type { unitHeaderCardComponent } from "../../types/componentTypes";
 
 export default function UnitHeaderCard({ currentTopicOrder, currentUnit }: unitHeaderCardComponent) {
-    // const [currentUnitOrder, setCurrentUnitOrder] = useState<number>(1);
-    // const [currentUnit, setCurrentUnit] = useState<string>("February Uprising In Ukraine");
     const unitColors = [
         "#2EE6C3", // Mint
         "#A259FF", // Purple
@@ -30,7 +27,7 @@ export default function UnitHeaderCard({ currentTopicOrder, currentUnit }: unitH
     const currentColor = unitColors[currentColorIndex];
 
     return (
-        <div className="unit-header-card__container">
+        <div className={`unit-header-card__container ${currentUnit ? "fade-in" : "fade-out"}`}>
             <div className="unit-header-card__shadow" />
             <div className="unit-header-card" style={{ backgroundColor: currentColor }}>
                 <div className="current-path">

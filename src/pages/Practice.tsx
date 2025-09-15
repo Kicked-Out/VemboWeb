@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {
     hideMonthlyBadgesCard,
     hideWhatAreLeaderboardsCard,
+    setPage,
     showAdBlockerCard,
     showDailyQuestCard,
     showInfoCard,
@@ -19,6 +20,7 @@ export default function Practice() {
 
     useEffect(() => {
         dispatch(showNavbar());
+        dispatch(setPage({ selectedPage: 1 }));
         dispatch(showSidebar());
 
         dispatch(showStatisticCard());

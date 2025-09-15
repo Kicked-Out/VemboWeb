@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 export default function LeaderboardCard() {
+    const navigate = useNavigate();
+
+    const onClickHandler = () => {
+        navigate("/leaderboards");
+    };
+
     return (
         <div className="leaderboard-card">
             <div className="leaderboard-card__block">
@@ -19,7 +27,9 @@ export default function LeaderboardCard() {
                 />
             </div>
 
-            <button className="leaderboard-card__btn">Go To Leaderboards</button>
+            <button className="leaderboard-card__btn" onClick={onClickHandler}>
+                Go To Leaderboards
+            </button>
         </div>
     );
 }

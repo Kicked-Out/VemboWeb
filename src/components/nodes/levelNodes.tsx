@@ -3,22 +3,29 @@ import type { LevelDTO } from "../../DTOs/levelDTO";
 import { LevelService } from "../../services/levelService";
 import type { levelNodesComponent } from "../../types/componentTypes";
 import LevelNode from "./levelNode";
+import { useDispatch } from "react-redux";
+import { addUnitLoaded } from "../../slices/menuSlice";
 
 export default function LevelNodes({ unitId, unitCompletedCount }: levelNodesComponent) {
     const [levels, setLevels] = useState<LevelDTO[]>([]);
     const [total, setTotal] = useState<number>(0);
+    const dispatch = useDispatch();
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
+        if (isLoaded) return;
+
         const getLevels = async () => {
             const data = await LevelService.getAllByUnitId(unitId);
 
+            dispatch(addUnitLoaded());
+            setIsLoaded(true);
             setLevels(data);
-
             setTotal(data.length);
         };
 
         getLevels();
-    }, []);
+    }, [isLoaded]);
 
     const [containerSize, setContainerSize] = useState<{ width: number }>({ width: 0 });
     const containerRef = useRef<HTMLDivElement>(null);

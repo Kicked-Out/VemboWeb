@@ -12,6 +12,7 @@ interface MenuSlice {
     isWhatAreLeaderboardsCardHidden: boolean;
     isInfoCardHidden: boolean;
     isMonthlyBadgesCardHidden: boolean;
+    unitLoaded: number;
     firstLevelStatus: number;
     chestStatus: number;
     secondLevelStatus: number;
@@ -33,6 +34,7 @@ const initialState: MenuSlice = {
     isWhatAreLeaderboardsCardHidden: false,
     isInfoCardHidden: false,
     isMonthlyBadgesCardHidden: false,
+    unitLoaded: 0,
     firstLevelStatus: 1,
     chestStatus: 0,
     secondLevelStatus: 0,
@@ -56,6 +58,14 @@ export const menuSlice = createSlice({
 
         showNavbar: (state) => {
             state.isNavbarHidden = false;
+        },
+
+        addUnitLoaded: (state) => {
+            state.unitLoaded += 1;
+        },
+
+        resetUnitLoaded: (state) => {
+            state.unitLoaded = 0;
         },
 
         hideSidebar: (state) => {
@@ -174,6 +184,7 @@ export const menuSlice = createSlice({
         selectIsWhatAreLeaderboardsCardHidden: (x) => x.isWhatAreLeaderboardsCardHidden,
         selectIsInfoCardHidden: (x) => x.isInfoCardHidden,
         selectIsMonthlyBadgesCardHidden: (x) => x.isMonthlyBadgesCardHidden,
+        selectUnitLoaded: (x) => x.unitLoaded,
         selectFirstLevelStatus: (x) => x.firstLevelStatus,
         selectChestStatus: (x) => x.chestStatus,
         selectSecondLevelStatus: (x) => x.secondLevelStatus,
@@ -206,6 +217,8 @@ export const {
     showInfoCard,
     hideMonthlyBadgesCard,
     showMonthlyBadgesCard,
+    addUnitLoaded,
+    resetUnitLoaded,
     setFirstLevelStatus,
     setChestStatus,
     setSecondLevelStatus,
@@ -228,6 +241,7 @@ export const {
     selectIsWhatAreLeaderboardsCardHidden,
     selectIsInfoCardHidden,
     selectIsMonthlyBadgesCardHidden,
+    selectUnitLoaded,
     selectFirstLevelStatus,
     selectChestStatus,
     selectSecondLevelStatus,

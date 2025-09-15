@@ -96,6 +96,7 @@ body,
     background-color: var(--background);
     color: var(--text-color-light);
     letter-spacing: 0;
+    line-height: normal;
 }
 
 h1,
@@ -108,48 +109,33 @@ h6 {
 }
 
 button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px 0px;
     padding: 10px 60px;
     font-size: 24px;
     border-radius: 15px;
     border-width: 2px 2px 5px 2px;
     border-style: solid;
+    user-select: none;
 }
 
-/* .progress-bar {
-    display: flex;
-    position: relative;
-    width: 50%;
-    height: 20px;
+button:enabled:hover {
+    filter: brightness(1.1);
 }
 
-.bar {
-    display: inline;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(204, 217, 221);
-    border-radius: 50px;
+button:not(:disabled):active {
+    box-shadow: none;
+    margin-top: 4px;
+    margin-bottom: -4px;
 }
 
-.progress {
-    display: inline;
-    position: absolute;
-    height: 100%;
-    background-color: lightblue;
-    border-radius: 50px;
-    transition: width 0.3s ease-in-out;
-} */
+.fade-in {
+    opacity: 1 !important;
+    transform: translateY(0);
+}
 
-/* .footer {
-    display: flex;
-    width: 80%;
-    height: 20%;
-    justify-content: space-between;
-} */
+.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+}
 
 .secondary-btn {
     background-color: #ffffff;
@@ -380,6 +366,7 @@ body.settings-page .container {
     position: sticky;
     top: 0px;
     z-index: 2;
+    transition: all 0.4s ease-in-out 0.4s;
 }
 
 .unit-header-card__shadow {
@@ -462,6 +449,8 @@ body.settings-page .container {
 .unit-container {
     position: relative;
     top: -82px;
+    opacity: 0;
+    transition: all 0.5s ease-in-out 0.6s;
 }
 
 .unit-title-container {
@@ -607,7 +596,6 @@ body.settings-page .container {
     width: 475px;
     position: sticky;
     padding-top: 32px;
-    top: 32px;
     align-self: flex-start;
 }
 
@@ -715,13 +703,17 @@ body.hide-sidebar .sidebar-top {
     margin-top: 5px;
     background-color: #3c4dff;
     border: none;
-    border-bottom: 4px solid #3f22ec;
+    box-shadow: 0 4px 0 0 #3f22ec;
     border-radius: 13px;
     color: var(--ice-white);
     font-size: 20px;
     font-weight: 800;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.insight-btn:not(:disabled):active {
+    margin-top: 9px;
 }
 
 /* =========================================================================================================================================================================== */
@@ -780,13 +772,21 @@ body.hide-sidebar .sidebar-top {
     height: 84px;
     margin-bottom: 32px;
     border: 1px solid #71b4d4;
-    border-bottom-width: 5px;
+    box-shadow: 0 4px 0 0 #71b4d4;
     border-radius: 13px;
     color: #71b4d4;
     font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.leaderboard-card__btn:not(:disabled):hover {
+    filter: brightness(0.9);
+}
+
+.leaderboard-card__btn:not(:disabled):active {
+    margin-bottom: 28px;
 }
 
 /* =========================================================================================================================================================================== */
@@ -946,11 +946,15 @@ body.hide-sidebar .sidebar-top {
     font-weight: 700;
     color: var(--polar-navy);
     border: none;
-    border-bottom: 4px solid #b4deff;
+    box-shadow: 0 4px 0 0 #b4deff;
     border-radius: 13px;
     background-color: var(--ice-white);
     margin-bottom: 28px;
     cursor: pointer;
+}
+
+.insight-primary-btn:not(:disabled):active {
+    margin-bottom: 24px;
 }
 
 .insight-secondary-btn {
@@ -962,6 +966,11 @@ body.hide-sidebar .sidebar-top {
     color: var(--white);
     border: none;
     cursor: pointer;
+}
+
+.insight-secondary-btn:not(:disabled):active {
+    margin: 0;
+    margin-bottom: 6px;
 }
 
 /* =========================================================================================================================================================================== */
@@ -991,6 +1000,7 @@ body.hide-sidebar .sidebar-top {
 .profile-block {
     margin-top: 48px;
     width: 598px;
+    transition: all 0.3s ease-in-out;
 }
 
 .profile-image {
@@ -1003,15 +1013,22 @@ body.hide-sidebar .sidebar-top {
     margin-top: 24px;
 }
 
-.profile-nickname {
-    margin-bottom: 6px;
+.profile-username {
+    margin-bottom: 4px;
     font-size: 24px;
     font-weight: 700;
     color: white;
 }
 
+.profile-nickname {
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--steel-blue);
+}
+
 .profile-created-at {
-    margin-top: 6px;
+    margin-top: 4px;
     font-size: 18px;
     font-weight: 500;
     color: white;
@@ -1019,8 +1036,8 @@ body.hide-sidebar .sidebar-top {
 
 .profile-divider {
     height: 2px;
-    margin-top: 24px;
-    margin-bottom: 24px;
+    margin-top: 12px;
+    margin-bottom: 12px;
     border: none;
     border-radius: 4px;
     background-color: var(--glacier-blue);
@@ -1239,6 +1256,7 @@ body.hide-sidebar .sidebar-top {
     gap: 27px;
     border: 1px solid var(--glacier-blue);
     border-radius: 16px;
+    transition: all 0.3s ease-in-out;
 }
 
 .achievements {
@@ -1315,7 +1333,6 @@ body.hide-sidebar .sidebar-top {
 
 .lesson-container {
     display: grid;
-    /* grid-template-rows: 115px 1fr 225px; */
     width: 100%;
     height: 100%;
     justify-items: center;
@@ -1347,6 +1364,7 @@ body.hide-sidebar .sidebar-top {
     height: 100%;
     border-radius: 22px;
     background-color: var(--glacier-blue);
+    transition: all 0.2s ease-out;
 }
 
 .heart-container {
@@ -1372,6 +1390,7 @@ body.hide-sidebar .sidebar-top {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s ease, opacity 0.3s ease-in-out;
 }
 
 .exercise {
@@ -1440,7 +1459,7 @@ body.hide-sidebar .sidebar-top {
     color: white;
     font-size: 36px;
     font-weight: 700;
-    border-bottom: 5px solid #374f62;
+    box-shadow: 0 5px 0 0 #374f62;
     background-color: var(--steel-blue);
     cursor: pointer;
 }
@@ -1460,7 +1479,7 @@ body.hide-sidebar .sidebar-top {
     color: white;
     font-size: 36px;
     font-weight: 700;
-    border-bottom: 5px solid #085980;
+    box-shadow: 0 5px #085980;
     background-color: #71b4d4;
     cursor: pointer;
 }
@@ -1480,7 +1499,7 @@ body.hide-sidebar .sidebar-top {
     color: white;
     font-size: 36px;
     font-weight: 700;
-    border-bottom: 5px solid #0e5e85;
+    box-shadow: 0 5px 0 0 #0e5e85;
     background-color: #0085c5;
 }
 
@@ -1499,10 +1518,8 @@ body.hide-sidebar .sidebar-top {
     color: white;
     font-size: 36px;
     font-weight: 700;
-    border-bottom: 5px solid #0e5e85;
-    background-color: #0085c5;
     background-color: #ff6b6b;
-    border-color: #d14141;
+    box-shadow: 0 5px 0 0 #d14141;
     color: white;
 }
 
@@ -1612,8 +1629,10 @@ body.hide-sidebar .sidebar-top {
 
 .check-btn,
 .continue-btn {
+    padding-top: 13px;
+    padding-bottom: 13px;
     border: none;
-    border-bottom: 5px solid #0e73a4;
+    box-shadow: 0 5px 0 0 #0e73a4;
     border-radius: 15px;
     background-color: var(--glacier-blue);
     font-size: 32px;
@@ -1624,7 +1643,7 @@ body.hide-sidebar .sidebar-top {
 }
 
 .check-btn:disabled {
-    border-bottom: 5px solid #3b566b;
+    box-shadow: 0 5px 0 0 #3b566b;
     background-color: var(--steel-blue);
     color: #273846;
     cursor: auto;
@@ -1632,13 +1651,13 @@ body.hide-sidebar .sidebar-top {
 
 .continue-btn-right-colors {
     background-color: #6cb500;
-    border-bottom-color: #2f950a;
+    box-shadow: 0 5px 0 0 #2f950a;
     color: var(--ice-white);
 }
 
 .continue-btn-wrong-colors {
     background-color: #ff4945;
-    border-bottom-color: #950a28;
+    box-shadow: 0 5px 0 0 #950a28;
     color: var(--ice-white);
 }
 
@@ -1743,7 +1762,7 @@ body.hide-sidebar .sidebar-top {
     height: 76px;
     margin: 0;
     border: none;
-    border-bottom: 7px solid #008269;
+    box-shadow: 0 7px 0 0 #008269;
     border-radius: 15px;
     background-color: var(--mint);
     font-size: 24px;
@@ -1753,12 +1772,9 @@ body.hide-sidebar .sidebar-top {
     cursor: pointer;
 }
 
-.lesson-complete-btn:hover {
-    border-bottom-width: 5px;
-}
-
-.lesson-complete-btn:active {
-    border-bottom: 7px solid #2ee6c3;
+.lesson-complete-btn:not(:disabled):active {
+    margin: 0;
+    box-shadow: 0 7px 0 0 #2ee6c3;
     background-color: #008269;
     color: var(--ice-white);
 }
@@ -1861,7 +1877,6 @@ body.hide-sidebar .sidebar-top {
 .locked-leaderboards {
     display: flex;
     flex-direction: column;
-    /* margin-top: 85px; */
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -1905,7 +1920,16 @@ body.hide-sidebar .sidebar-top {
     font-weight: 500;
     color: white;
     text-transform: uppercase;
+    background-color: var(--polar-navy);
     cursor: pointer;
+}
+
+.locked-leaderboards-btn:not(:disabled):hover {
+    filter: brightness(0.9);
+}
+
+.locked-leaderboards-btn:not(:disabled):active {
+    margin-top: 28px;
 }
 
 .leaderboards-user-skeletons {
@@ -2012,6 +2036,7 @@ body.hide-sidebar .sidebar-top {
     align-items: center;
     justify-content: center;
     background: linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%);
+    transition: all 0.3s ease-in-out;
 }
 
 .leagues-container {
@@ -2287,7 +2312,7 @@ body.hide-sidebar .sidebar-top {
     padding-right: 39px;
     align-self: center;
     border: 2px solid var(--glacier-blue);
-    border-bottom-width: 6px;
+    box-shadow: 0 4px 0 0 var(--glacier-blue);
     border-radius: 24px;
     background-color: var(--polar-navy);
     font-size: 20px;
@@ -2296,6 +2321,10 @@ body.hide-sidebar .sidebar-top {
     line-height: normal;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.locked-monthly-badges-btn:not(:disabled):hover {
+    filter: brightness(0.9);
 }
 
 /* =========================================================================================================================================================================== */
@@ -2602,8 +2631,10 @@ body.hide-sidebar .sidebar-top {
 }
 
 .practice-insight-card__btn {
-    width: 115px;
-    height: 49px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 21px;
+    padding-right: 21px;
     margin: 0;
     border: none;
     border-radius: 17px;

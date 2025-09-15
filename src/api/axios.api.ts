@@ -31,6 +31,11 @@ instance.interceptors.response.use(
     (error) => {
         if (error.response?.status === 401) {
             localStorage.removeItem("token");
+            return Promise.resolve({ data: null, status: 401 });
+        }
+
+        if (error.response?.status === 404) {
+            return Promise.resolve({ data: null, status: 404 });
         }
 
         return Promise.reject(error);

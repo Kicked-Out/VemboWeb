@@ -36,7 +36,7 @@ export default function Unit({ unit, topicCompletedCount, onUnitInView }: UnitCo
             },
             {
                 threshold: 0,
-                root: null, // viewport
+                root: null,
                 rootMargin: margin,
             }
         );

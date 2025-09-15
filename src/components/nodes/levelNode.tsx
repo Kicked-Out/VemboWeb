@@ -46,7 +46,9 @@ export default function LevelNode({ id, levelTypeId, unitCompletedCount, x }: Le
         const getCurrentLesson = async () => {
             const lastUserLessonData = await UserLessonProgressService.getCurrentByLevelId(id);
 
-            const lessonId = lastUserLessonData!.lessonId;
+            if (!lastUserLessonData) return;
+
+            const lessonId = lastUserLessonData.lessonId;
 
             const lesson = await LessonService.getById(lessonId);
 
@@ -63,9 +65,13 @@ export default function LevelNode({ id, levelTypeId, unitCompletedCount, x }: Le
         if (unitCompletedCount > 0) return;
 
         const getUserLevelProgress = async () => {
-            const data = await UserLevelProgressService.getByLevelId(id);
+            try {
+                const data = await UserLevelProgressService.getByLevelId(id);
 
-            setUserLevelProgress(data);
+                setUserLevelProgress(data);
+            } catch {
+                return;
+            }
         };
 
         getUserLevelProgress();

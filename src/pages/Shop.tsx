@@ -1,10 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import insightIcon from "../assets/icons/insight/insight_icon.svg";
-import bearImg from "../assets/icons/bear.svg";
-import heartIcon from "../assets/icons/heart.svg";
-import unlimitedHeartIcon from "../assets/icons/heart_infinite.svg";
-import coinIcon from "../assets/icons/vembo_coin.svg";
 import { selectVBucks, setHearts, takeVBucks } from "../slices/userStatisticsSlice";
 import "../styles/shop.css";
 import { useEffect } from "react";
@@ -12,6 +7,7 @@ import {
     hideInsightCard,
     hideMonthlyBadgesCard,
     hideWhatAreLeaderboardsCard,
+    setPage,
     showAdBlockerCard,
     showDailyQuestCard,
     showInfoCard,
@@ -28,6 +24,7 @@ export default function Shop() {
 
     useEffect(() => {
         dispatch(showNavbar());
+        dispatch(setPage({ selectedPage: 4 }));
         dispatch(showSidebar());
         dispatch(showStatisticCard());
         dispatch(hideInsightCard());
@@ -67,17 +64,22 @@ export default function Shop() {
             <div className="offers-container">
                 <h3>Hearts</h3>
 
+                <div className="offers-divider"></div>
+
                 <div className="offer-item">
                     <div className="offer-info">
                         <img src="/src/assets/icons/shop/heart.png" alt="Refill Hearts" className="icon" />
                         <div className="offer-text">
                             <p>Refill Hearts</p>
-                            <p>Get fully hearts so you can worry less about making mistakes in lesson</p>
+                            <p className="offer-description">
+                                Get fully hearts so you can worry less about making mistakes in lesson
+                            </p>
                         </div>
                     </div>
                     <button className="offer-btn" disabled={!hasEnough} onClick={refillHearts}>
-                        <img src={coinIcon} alt="" className="coin-icon" />
-                        GET FOR: {heartsPrice}
+                        GET FOR:
+                        <img src="/src/assets/icons/vembo_coin.png" alt="" className="coin-icon" />
+                        {heartsPrice}
                     </button>
                 </div>
 
@@ -91,7 +93,7 @@ export default function Shop() {
                             <p>Never run out of hearts with Insight!</p>
                         </div>
                     </div>
-                    <button className="offer-btn" onClick={goToInsight}>
+                    <button className="offer-insight-btn" onClick={goToInsight}>
                         Try it
                     </button>
                 </div>

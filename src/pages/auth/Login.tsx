@@ -6,6 +6,7 @@ import AuthService from "../../services/authService";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
+import { setToken } from "../../slices/authSlice";
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -23,6 +24,8 @@ export default function Login() {
     const { register, handleSubmit } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        if (data.emailOrName === undefined || data.password === undefined) return;
+
         const loginDTO: LoginDTO = {
             email: data.emailOrName,
             password: data.password,
@@ -31,7 +34,7 @@ export default function Login() {
         const result = await AuthService.login(loginDTO);
 
         if (result) {
-            localStorage.setItem("token", result);
+            dispatch(setToken(result));
 
             navigate("/");
         }

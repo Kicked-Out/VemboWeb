@@ -3,10 +3,11 @@ import type { QuestionDTO } from "../DTOs/questionDTO";
 import type { AnswerDTO } from "../DTOs/answerDTO";
 
 interface LessonProgressSlice {
-    startedAt: string;
-    finishedAt: string;
+    startedAt: string | null;
+    finishedAt: string | null;
     currentExercise: number;
     rightAnswers: number;
+    wrongAnswers: number;
     exerciseAmount: number;
     isNextExercise: boolean;
     type: string;
@@ -21,6 +22,7 @@ const initialState: LessonProgressSlice = {
     finishedAt: new Date().toISOString(),
     currentExercise: 0,
     rightAnswers: 0,
+    wrongAnswers: 0,
     exerciseAmount: 0,
     isNextExercise: true,
     type: "lesson",
@@ -34,6 +36,20 @@ export const LessonProgressSlice = createSlice({
     name: "lessonProgress",
     initialState,
     reducers: {
+        setLessonProgressToDefault: (state) => {
+            state.startedAt = null;
+            state.finishedAt = null;
+            state.currentExercise = 0;
+            state.rightAnswers = 0;
+            state.wrongAnswers = 0;
+            state.exerciseAmount = 0;
+            state.isNextExercise = true;
+            (state.type = "lesson"), (state.isLastLesson = false);
+            state.selectedQuestion = null;
+            state.selectedAnswer = null;
+            state.isLessonProgress = false;
+        },
+
         setStartedTime: (state, action) => {
             state.startedAt = action.payload.startedAt;
         },
@@ -43,7 +59,7 @@ export const LessonProgressSlice = createSlice({
         },
 
         nextExercise: (state) => {
-            if (state.currentExercise + 2 == state.exerciseAmount) {
+            if (state.currentExercise + 1 == state.exerciseAmount) {
                 state.isNextExercise = false;
             } else {
                 state.currentExercise += 1;
@@ -53,6 +69,10 @@ export const LessonProgressSlice = createSlice({
 
         addRightAnswer: (state) => {
             state.rightAnswers += 1;
+        },
+
+        addWrongAnswer: (state) => {
+            state.wrongAnswers += 1;
         },
 
         setExerciseAmount: (state, action) => {
@@ -84,8 +104,9 @@ export const LessonProgressSlice = createSlice({
         selectFinishedAt: (x) => x.finishedAt,
         selectCurrentExercise: (x) => x.currentExercise,
         selectRightAnswers: (x) => x.rightAnswers,
+        selectWrongAnswers: (x) => x.wrongAnswers,
         selectExerciseAmount: (x) => x.exerciseAmount,
-        selectIsNext: (x) => x.isNextExercise,
+        selectIsNextExercise: (x) => x.isNextExercise,
         selectType: (x) => x.type,
         selectIsLastLesson: (x) => x.isLastLesson,
         selectSelectedQuestion: (x) => x.selectedQuestion,
@@ -95,10 +116,12 @@ export const LessonProgressSlice = createSlice({
 });
 
 export const {
+    setLessonProgressToDefault,
     setStartedTime,
     setFinishedTime,
     nextExercise,
     addRightAnswer,
+    addWrongAnswer,
     setExerciseAmount,
     setType,
     setIsLastLesson,
@@ -111,8 +134,9 @@ export const {
     selectFinishedAt,
     selectCurrentExercise,
     selectRightAnswers,
+    selectWrongAnswers,
     selectExerciseAmount,
-    selectIsNext,
+    selectIsNextExercise,
     selectType,
     selectIsLastLesson,
     selectSelectedQuestion,

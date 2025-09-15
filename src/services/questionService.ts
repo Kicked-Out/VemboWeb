@@ -7,8 +7,6 @@ export class QuestionService {
     public static async getAllByExercise(exerciseId: number): Promise<QuestionDTO[]> {
         const data = await ItemFetcher.fetchItems(`${this.baseUrl}/Exercise/${exerciseId}`);
 
-        console.log(data);
-
         return data;
     }
 

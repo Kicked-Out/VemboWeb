@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
 import "./styles/styles.css";
 import "./styles/global.css";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Lesson from "./pages/Lesson";
 import NotFound from "./pages/NotFound";
@@ -12,7 +12,7 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "./slices/store";
 import { useEffect, useState } from "react";
-import { initSlice } from "./slices/authSlice";
+import { initSlice, selectToken, setToken } from "./slices/authSlice";
 import UserStatisticService from "./services/userStatisticService";
 import type { UserDTO } from "./DTOs/auth/userDTO";
 import type { UserStatisticDTO } from "./DTOs/userStatisticDTO";
@@ -30,6 +30,8 @@ import Leaderboards from "./pages/Leaderboards";
 import Shop from "./pages/Shop";
 import Quests from "./pages/Quests";
 import Practice from "./pages/Practice";
+import { giveVBucks, setCurrentPeriodId, setHearts, setStreak } from "./slices/userStatisticsSlice";
+import { getToken } from "./helpers/localStorage.helper";
 import Settings from "./pages/settings/settings";
 import Privacy from "./pages/settings/privacy";
 import Social from "./pages/settings/social";
@@ -44,6 +46,31 @@ function App() {
     const [gridTemplateThirdColumn, setGridTemplateThirdColumn] = useState("3fr");
     const gridTemplateColumns = `${gridTemplateFirstColumn} ${gridTemplateThirdColumn}`;
     const isWhatAreLeaderboardsCard = useSelector(selectIsWhatAreLeaderboardsCardHidden);
+    const navigate = useNavigate();
+    const token = useSelector(selectToken);
+    const [isTokenChecked, setIsTokenChecked] = useState<boolean>(false);
+
+    useEffect(() => {
+        const handleStorage = () => {
+            const newToken = getToken();
+            dispatch(setToken(newToken));
+            setIsTokenChecked(true);
+        };
+
+        window.addEventListener("storage", handleStorage);
+
+        return () => window.removeEventListener("storage", handleStorage);
+    }, []);
+
+    useEffect(() => {
+        const savedToken = getToken();
+
+        if (savedToken) {
+            dispatch(setToken(savedToken));
+        } else {
+            setIsTokenChecked(true);
+        }
+    }, [dispatch]);
 
     useEffect(() => {
         if (isNavbarHidden) {
@@ -59,23 +86,60 @@ function App() {
         }
     });
 
+    const checkIsTokenValid = async () => {
+        if (!token) return false;
+
+        const isTokenValid = await AuthService.validateToken();
+
+        return isTokenValid;
+    };
+
     useEffect(() => {
-        dispatch(initSlice());
-    }, [dispatch]);
+        if (!isTokenChecked) return;
+
+        const validate = async () => {
+            const isTokenValid = await checkIsTokenValid();
+
+            if (!token || !isTokenValid) {
+                navigate("/login");
+            }
+        };
+
+        validate();
+    }, [token, isTokenChecked]);
+
+    useEffect(() => {
+        const validate = async () => {
+            const isTokenValid = await checkIsTokenValid();
+
+            if (!token || !isTokenValid) return;
+
+            dispatch(initSlice());
+        };
+
+        validate();
+    }, [token]);
 
     useEffect(() => {
         const getUser = async () => {
+            const isTokenValid = await checkIsTokenValid();
+
+            if (!token || !isTokenValid) return;
+
             const data = await AuthService.get();
 
             setUser(data);
         };
 
         getUser();
-    }, []);
+    }, [token]);
 
     useEffect(() => {
         const getUserStatistic = async () => {
             if (!user) return;
+            const isTokenValid = await checkIsTokenValid();
+
+            if (!token || !isTokenValid) return;
 
             const data = await UserStatisticService.getByUserId(user.id);
 
@@ -85,13 +149,22 @@ function App() {
         getUserStatistic();
     }, [user]);
 
+    useEffect(() => {
+        if (userStatistic) {
+            dispatch(setHearts({ hearts: userStatistic.hearts }));
+            dispatch(setStreak({ streak: userStatistic.streak }));
+            dispatch(giveVBucks({ vBucks: userStatistic.vBucks }));
+            dispatch(setCurrentPeriodId({ currentPeriodId: userStatistic.currentPeriodId }));
+        }
+    }, [userStatistic]);
+
     return (
         <div
             className="grid-container"
             style={{
                 gridTemplateColumns: `${gridTemplateColumns}`,
                 ["--grid-background" as any]: `${
-                    !isWhatAreLeaderboardsCard
+                    !isWhatAreLeaderboardsCard && !isSidebarHidden
                         ? "linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%)"
                         : "none"
                 }`,

@@ -57,7 +57,11 @@ export default class AuthService {
 
     public static async validateToken(): Promise<boolean> {
         try {
-            await instance.get("validate-token");
+            const result = await instance.get("validate-token");
+
+            if (result.status === 401) {
+                return false;
+            }
 
             return true;
         } catch (error: any) {

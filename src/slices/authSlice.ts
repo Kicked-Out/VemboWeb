@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { UserDTO } from "../DTOs/auth/userDTO";
 import { UserService } from "../services/userService";
+import { getToken, removeToken, setTokenToLocalStorage } from "../helpers/localStorage.helper";
 
 interface AuthSlice {
     user: UserDTO | null;
+    token: string | null;
     loading: boolean;
     error: string | null;
 }
 
 const initialState: AuthSlice = {
     user: null,
+    token: getToken() || null,
     loading: false,
     error: null,
 };
@@ -26,8 +29,19 @@ export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+        setToken: (state, action) => {
+            state.token = action.payload;
+
+            if (action.payload) {
+                setTokenToLocalStorage(action.payload);
+            } else {
+                removeToken();
+            }
+        },
+
         logout: (state) => {
             state.user = null;
+            state.token = null;
         },
     },
     extraReducers: (builder) => {
@@ -50,7 +64,8 @@ export const authSlice = createSlice({
 
 export const selectUserData = (state: { auth: AuthSlice }) => state.auth.user;
 export const selectUserLoading = (state: { auth: AuthSlice }) => state.auth.loading;
+export const selectToken = (state: { auth: AuthSlice }) => state.auth.token;
 
-export const { logout } = authSlice.actions;
+export const { setToken, logout } = authSlice.actions;
 
 export default authSlice.reducer;
