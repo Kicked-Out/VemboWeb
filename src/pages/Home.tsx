@@ -4,7 +4,7 @@ import type { UserPeriodProgressDTO } from "../DTOs/userProgressDTO/userPeriodPr
 import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentPeriodId } from "../slices/userStatisticsSlice";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // import AuthService from "../services/authService";
 import UnitHeaderCard from "../components/cards/unitHeaderCard";
 import type { UnitDTO } from "../DTOs/unitDTO";
@@ -23,7 +23,7 @@ import {
 
 export default function Home() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const [currentTopicOrder, setCurrentTopicOrder] = useState<number>(1);
     const [currentUnit, setCurrentUnit] = useState<UnitDTO | null>(null);

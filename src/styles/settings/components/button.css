@@ -1,0 +1,38 @@
+/* Vembo Button */
+.vbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  border: none;
+  cursor: pointer;
+  transition: background-color .15s ease, opacity .15s ease;
+}
+
+.vbtn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Variants */
+.vbtn--primary { background: var(--steel-blue); color: var(--polar-navy); }
+.vbtn--primary:hover { background: var(--glacier-blue); }
+
+.vbtn--secondary { background: var(--glacier-blue); color: var(--polar-navy); }
+.vbtn--secondary:hover { background: var(--frost-blue); }
+
+.vbtn--danger { background: var(--peach); color: var(--ice-white); }
+.vbtn--danger:hover { background: #ff4c4c; }
+
+/* Sizes */
+.vbtn--sm { padding: 8px 16px; font-size: 14px; border-radius: 12px; }
+.vbtn--md { padding: 20px; font-size: 16px; border-radius: 20px; }
+.vbtn--lg { font-size: 24px; font-weight: 500; border-radius: 16px; }
+
+/* Width helpers */
+.w-49 {
+  width: 200px;
+  height: 60px;
+  /* font-size: 16px; */
+}
