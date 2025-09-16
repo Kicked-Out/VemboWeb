@@ -22,21 +22,6 @@ export default function LevelNode({ id, levelTypeId, unitCompletedCount, x }: Le
         return levelTypes[levelTypeId] || "default";
     };
 
-    const [lessons, setLessons] = useState<LessonDTO[]>([]);
-
-    useEffect(() => {
-        if (unitCompletedCount === undefined) return;
-        if (unitCompletedCount > 0) return;
-
-        const getLessons = async () => {
-            const data = await LessonService.getAllByLevelId(id);
-
-            setLessons(data);
-        };
-
-        getLessons();
-    }, [unitCompletedCount]);
-
     const [currentLesson, setCurrentLesson] = useState<LessonDTO | null>(null);
 
     useEffect(() => {

@@ -53,21 +53,16 @@ export default function ResetPassword() {
     useEffect(() => {
         dispatch(hideNavbar());
         dispatch(hideSidebar());
-    });
+    }, [dispatch]);
 
     type Inputs = {
         newPassword: string;
         confirmNewPassword: string;
     };
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        watch,
-    } = useForm<Inputs>();
+    const { register, handleSubmit, watch } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<Inputs> = () => {
         navigate("/password-updated");
     };
 

@@ -1,12 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import type { LevelButtonComponent } from "../../types/componentTypes";
-import { useEffect, useRef, useState } from "react";
 
-export default function LevelButton({ id, x, levelTypeId, levelCompletedCount }: LevelButtonComponent) {
-    const [btnActive, setBtnActive] = useState<boolean>(false);
-    const [btnActiveId, setBtnActiveId] = useState<number>(0);
-    const [btnSize, setBtnSize] = useState<{ width: number }>({ width: 0 });
-    const btnRef = useRef<HTMLDivElement>(null);
+export default function LevelButton({ id: _id, x, levelTypeId, levelCompletedCount }: LevelButtonComponent) {
     const levelTypes: Record<number, string> = {
         1: "default",
         2: "practice",
@@ -19,36 +14,17 @@ export default function LevelButton({ id, x, levelTypeId, levelCompletedCount }:
         return levelTypes[levelTypeId] || "default";
     };
 
-    const btnPressHandler = (id: number) => {
-        setBtnActiveId(id);
-        setBtnActive(!btnActive);
-
+    const btnPressHandler = () => {
         if (levelCompletedCount !== undefined && levelCompletedCount !== 2) {
             navigate("/lesson");
         }
     };
 
-    useEffect(() => {
-        if (!btnRef.current) return;
-
-        const resizeObserver = new ResizeObserver((entries) => {
-            const rect = entries[0].contentRect;
-            setBtnSize({ width: rect.width });
-        });
-
-        resizeObserver.observe(btnRef.current);
-
-        return () => resizeObserver.disconnect();
-    }, []);
-
     return (
-        <div key={id} className="level-item">
+        <div className="level-item" data-level-id={_id}>
             <div
-                ref={btnRef}
                 className="level-btn"
-                onClick={() => {
-                    btnPressHandler(id);
-                }}
+                onClick={btnPressHandler}
                 style={{ left: `${x}px` }}
             >
                 <div className={`level-btn-top ${levelCompletedCount! >= 0 ? "level-btn-top-active" : ""}`}>

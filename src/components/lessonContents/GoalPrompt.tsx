@@ -1,8 +1,7 @@
-import { useState } from "react";
 import type { GoalPromptComponents } from "../../types/componentTypes";
 
 export default function GoalPrompt({ onNext }: GoalPromptComponents) {
-    const [chance, setChance] = useState<number>(1);
+    const chance = 1;
 
     return (
         <div>

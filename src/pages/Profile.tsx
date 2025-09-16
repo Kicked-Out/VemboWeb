@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserStatistics } from "../slices/selectors";
-import type { PeriodDTO } from "../DTOs/periodDTO";
-import { PeriodService } from "../services/periodService";
 import type { AchievementDTO } from "../DTOs/achievementDTO";
 import type { AchievementLevelDTO } from "../DTOs/achievementLevel";
 import { UserAchievementService } from "../services/userAchievementService";
@@ -13,7 +11,6 @@ import { Link, useParams } from "react-router-dom";
 import { UserService } from "../services/userService";
 import type { UserDTO } from "../DTOs/auth/userDTO";
 import { selectUserData } from "../slices/authSlice";
-import { UserPeriodProgressService } from "../services/userProgress/userPeriodProgressService";
 import {
     hideInsightCard,
     hideLeaderboardCard,
@@ -35,7 +32,6 @@ export default function Profile() {
     const authStats = useSelector(selectUserStatistics);
     const [user, setUser] = useState<UserDTO | null>(null);
     const userStats = useSelector(selectUserStatistics);
-    const [period, setPeriod] = useState<PeriodDTO | null>(null);
     const [userAchievements, setUserAchievements] = useState<UserAchievementDTO[]>([]);
     const [achievements, setAchievements] = useState<AchievementDTO[]>([]);
     const [achievementLevels, setAchievementLevels] = useState<AchievementLevelDTO[]>([]);
@@ -74,19 +70,6 @@ export default function Profile() {
 
         load();
     }, [nickName, authUser, authStats]);
-
-    useEffect(() => {
-        if (!user) return;
-
-        const getPeriodWithMostXP = async () => {
-            const userPeriodData = await UserPeriodProgressService.getWithMostXPByUserId(user.id);
-            const periodData = await PeriodService.getById(userPeriodData?.periodId || 0);
-
-            setPeriod(periodData);
-        };
-
-        getPeriodWithMostXP();
-    }, [user]);
 
     useEffect(() => {
         if (!user) return;

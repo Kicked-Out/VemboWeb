@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import ProgressSummary from "../components/lessonContents/ProgressSumary";
 import type { Progress, Quest } from "../types/componentTypes";
-import StreakUpdate from "../components/lessonContents/StreakUpdate";
-import GoalPrompt from "../components/lessonContents/GoalPrompt";
 import QuestResults from "../components/lessonContents/QuestResults";
-import LegendaryOffer from "../components/lessonContents/LegendaryOffer";
 import Reward from "../components/lessonContents/Reward";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { selectStreak } from "../slices/userStatisticsSlice";
+import { useDispatch } from "react-redux";
 import { hideLessonTopBottomRows, hideNavbar, hideSidebar } from "../slices/menuSlice";
 
 export default function LessonComplete() {
@@ -25,9 +21,6 @@ export default function LessonComplete() {
         totalXP: 30,
         accuracy: 100,
     };
-    const isStreakNotUpdated = true;
-    let streak = useSelector(selectStreak);
-    const isLastLevel = true;
     const completedQuests: Quest[] = [
         {
             id: 1,

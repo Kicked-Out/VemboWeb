@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     hideAdBlockerCard,
@@ -14,10 +14,6 @@ import {
     showNavbar,
     showWhatAreLeaderboardsCard,
 } from "../slices/menuSlice";
-import type { UserLeaderboardDTO } from "../DTOs/userLeaderboardDTO";
-import type { UserDTO } from "../DTOs/auth/userDTO";
-import UserLeaderboardService from "../services/userLeaderboardService";
-import { UserService } from "../services/userService";
 import LeaderboardsContent from "../components/leaderboardContents/leaderboardsContent";
 import LockedLeaderboards from "../components/leaderboardContents/lockedLeaderboards";
 
@@ -42,25 +38,6 @@ export default function Leaderboards() {
             dispatch(hideSidebar());
         }
     }, [isFirstLevelStatus]);
-
-    const [userLeaderboards, setUserLeaderboards] = useState<UserLeaderboardDTO[]>([]);
-    const [users, setUsers] = useState<UserDTO[]>([]);
-
-    useEffect(() => {
-        const getUsers = async () => {
-            const userLeaderboardsData = await UserLeaderboardService.getAll();
-
-            setUserLeaderboards(userLeaderboardsData);
-
-            const usersData = await Promise.all(
-                userLeaderboardsData.map((userLeaderboard) => UserService.getById(userLeaderboard.userId))
-            );
-
-            setUsers(usersData.filter(Boolean) as UserDTO[]);
-        };
-
-        getUsers();
-    }, []);
 
     return isFirstLevelStatus === 1 ? <LockedLeaderboards /> : <LeaderboardsContent />;
 }

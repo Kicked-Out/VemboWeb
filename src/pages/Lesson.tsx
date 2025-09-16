@@ -20,7 +20,6 @@ import {
     selectSelectedQuestion,
     selectWrongAnswers,
     setExerciseAmount,
-    setFinishedTime,
     setIsLastLesson,
     setLessonProgressToDefault,
     setStartedTime,

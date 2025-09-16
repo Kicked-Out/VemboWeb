@@ -27,26 +27,12 @@ export default function LevelNodes({ unitId, unitCompletedCount }: levelNodesCom
         getLevels();
     }, [isLoaded]);
 
-    const [containerSize, setContainerSize] = useState<{ width: number }>({ width: 0 });
     const containerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (!containerRef.current) return;
-
-        const resizeObserver = new ResizeObserver((entries) => {
-            const rect = entries[0].contentRect;
-            setContainerSize({ width: rect.width });
-        });
-
-        resizeObserver.observe(containerRef.current);
-
-        return () => resizeObserver.disconnect();
-    }, []);
-
-    let direction = unitId % 2 === 0 ? 1 : -1;
+    const direction = unitId % 2 === 0 ? 1 : -1;
 
     let radius = 63 * direction;
-    let centerX = 0;
+    const centerX = 0;
     let iterator = 0;
 
     const startAngle = -90;
