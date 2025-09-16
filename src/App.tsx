@@ -35,6 +35,7 @@ import { getToken } from "./helpers/localStorage.helper";
 import Settings from "./pages/settings/settings";
 import Privacy from "./pages/settings/privacy";
 import Social from "./pages/settings/social";
+import Premium from "./pages/Premium";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -200,6 +201,7 @@ function App() {
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/privacy" element={<Privacy />} />
                     <Route path="/social" element={<Social />} />
+                    <Route path="/premium" element={<Premium />} />
                 </Routes>
             </div>
 
