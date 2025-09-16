@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { selectUserData } from "../../slices/authSlice";
-import { useSelector } from "react-redux";
+import { logout, selectUserData } from "../../slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 import type { NavbarComponent } from "../../types/componentTypes";
 import { selectSelectedPage } from "../../slices/menuSlice";
 
@@ -10,15 +10,41 @@ export default function NavBar({ isHidden }: NavbarComponent) {
     const selectedPage = useSelector(selectSelectedPage);
 
     const [moreOpen, setMoreOpen] = useState(false);
+    const hideTimeoutRef = useRef<any>(null);
+    const dispatch = useDispatch();
 
-    const openMore = () => setMoreOpen(true);
-    const closeMore = () => setMoreOpen(false);
+    const openMore = () => {
+        if (hideTimeoutRef.current) {
+            clearTimeout(hideTimeoutRef.current);
+            hideTimeoutRef.current = null;
+        }
+
+        setMoreOpen(true);
+    };
+
+    const blockHide = () => {
+        if (hideTimeoutRef.current) {
+            clearTimeout(hideTimeoutRef.current);
+            hideTimeoutRef.current = null;
+        }
+    };
+
+    const closeMore = () => {
+        hideTimeoutRef.current = setTimeout(() => {
+            setMoreOpen(false);
+        }, 1000);
+    };
+
+    const closeMoreImmediately = () => {
+        setMoreOpen(false);
+    };
+
     const handleLogout = () => {
-        console.log("Log out clicked");
+        dispatch(logout());
     };
 
     return (
-        <nav className={`navbar ${isHidden ? "hidden" : ""}`}>
+        <nav className={`navbar ${isHidden ? "hidden" : ""}`} onClick={closeMoreImmediately}>
             <Link to="/" className="nav-title">
                 Vembo
             </Link>
@@ -26,7 +52,7 @@ export default function NavBar({ isHidden }: NavbarComponent) {
                 <img className="nav-icon" src="/src/assets/icons/glacier.png" />
                 Learn
             </Link>
-            <Link to="/practice" className={`nav-btn ${selectedPage === 1 ? "nav-btn-selected" : ""}`}>
+            <Link to="/practice-hub" className={`nav-btn ${selectedPage === 1 ? "nav-btn-selected" : ""}`}>
                 <img className="nav-icon" src="/src/assets/icons/practice.png" />
                 Practice
             </Link>
@@ -43,10 +69,13 @@ export default function NavBar({ isHidden }: NavbarComponent) {
                 Shop
             </Link>
             <Link
-                to={`/profile/${user?.nickNameSlug}`}
+                to={`/profile/${user?.nickName}`}
                 className={`nav-btn ${selectedPage === 5 ? "nav-btn-selected" : ""}`}
             >
-                <img className="nav-icon" src="/src/assets/icons/profile_default_icon.png" />
+                <img
+                    className="nav-profile-icon"
+                    src={user?.avatarUrl ? user?.avatarUrl : "/src/assets/icons/profile_default_icon.png"}
+                />
                 Profile
             </Link>
 
@@ -58,25 +87,25 @@ export default function NavBar({ isHidden }: NavbarComponent) {
 
                 <div
                     className={`more-menu ${moreOpen ? "more-menu-open" : "more-menu-closed"}`}
+                    onMouseEnter={blockHide}
                     role="menu"
                     aria-hidden={!moreOpen}
                 >
-                    <Link to="/settings" className="more-menu-item" onClick={closeMore}>
+                    <Link to="/settings" className="more-menu-item" onClick={closeMoreImmediately}>
                         Settings
                     </Link>
 
-                    <button
-                        type="button"
+                    <div
                         className="more-menu-item"
                         onClick={() => {
                             handleLogout();
-                            closeMore();
+                            closeMoreImmediately();
                         }}
                     >
                         Log out
-                    </button>
+                    </div>
 
-                    <Link to="/help" className="more-menu-item" onClick={closeMore}>
+                    <Link to="/help" className="more-menu-item" onClick={closeMoreImmediately}>
                         Help
                     </Link>
                 </div>

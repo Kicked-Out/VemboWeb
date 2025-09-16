@@ -60,12 +60,16 @@ export default function Profile() {
         if (authUser === null) return;
 
         const load = async () => {
-            if (authUser.nickNameSlug === nickName) {
+            console.log(user);
+
+            if (authUser.nickName === nickName) {
                 setUser(authUser);
                 return;
             }
 
-            const data = await UserService.getByNickNameSlug(nickName!);
+            const nickNameSlug = nickName?.replace(" ", "-");
+
+            const data = await UserService.getByNickNameSlug(nickNameSlug!);
 
             if (!data) return;
 
@@ -163,7 +167,10 @@ export default function Profile() {
     return (
         <div className="container">
             <div className={`profile-block ${isLoaded ? "fade-in" : "fade-out"}`}>
-                <img className="profile-image" src="/src/assets/icons/profile/profile_img.png" />
+                <img
+                    className="profile-image"
+                    src={user?.avatarUrl ? user?.avatarUrl : "/src/assets/icons/profile/profile_img.png"}
+                />
 
                 <div className="profile-content">
                     <h1 className="profile-username">{user?.userName}</h1>

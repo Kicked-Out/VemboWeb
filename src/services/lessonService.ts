@@ -21,12 +21,4 @@ export class LessonService {
 
         return data;
     }
-
-    // public static async getByLevelAndLessonIds(levelId: number, lessonId: number): Promise<LessonDTO | null> {
-    //     const data: LessonDTO | null = await ItemFetcher.fetchItem(
-    //         `${this.baseUrl}/Level/${levelId}/Lesson/${lessonId}.json`
-    //     );
-
-    //     return data;
-    // }
 }

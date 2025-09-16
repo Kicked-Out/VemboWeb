@@ -1,5 +1,6 @@
 export interface UserDTO {
     id: string;
+    avatarUrl?: string;
     userName: string;
     nickName: string;
     nickNameSlug: string;

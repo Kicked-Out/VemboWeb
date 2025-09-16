@@ -23,4 +23,16 @@ export class UserService {
 
         return data;
     }
+
+    public static async update(data: FormData) {
+        const response = await ItemFetcher.updateItem(`${this.baseUrl}/me`, data);
+
+        return response;
+    }
+
+    public static async delete(id: string) {
+        const response = await ItemFetcher.deleteItem(`${this.baseUrl}../${id}`);
+
+        return response;
+    }
 }
