@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import type { ExerciseDTO } from "../DTOs/exerciseDTO";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentLessonId, selectHearts, takeHeart } from "../slices/userStatisticsSlice";
@@ -20,7 +20,6 @@ import {
     selectSelectedQuestion,
     selectWrongAnswers,
     setExerciseAmount,
-    setFinishedTime,
     setIsLastLesson,
     setLessonProgressToDefault,
     setStartedTime,
@@ -42,12 +41,21 @@ import {
     selectIsLessonTopBottomRowsHidden,
     showLessonTopBottomRows,
 } from "../slices/menuSlice";
+import { UserExerciseMistakeService } from "../services/userProgress/userExerciseMistakeService";
+import type {
+    CreateUserExerciseMistakeDTO,
+    UserExerciseMistakeDTO,
+} from "../DTOs/userProgressDTO/userExerciseMistakeDTO";
+import { selectUserData } from "../slices/authSlice";
 
 export default function Lesson() {
     const dispatch = useDispatch();
-    const { unitId, levelId, legendaryId } = useParams();
+    const { unitId, legendaryId } = useParams();
+    const location = useLocation();
+    const isPractice = location.pathname.includes("practice");
     const [lesson, setLesson] = useState<LessonDTO | null>(null);
     const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
+    const [userExerciseMistakes, setUserExerciseMistakes] = useState<UserExerciseMistakeDTO[]>([]);
     const [questions, setQuestions] = useState<QuestionDTO[]>([]);
     const [answers, setAnswers] = useState<AnswerDTO[]>([]);
     const currentLessonId = useSelector(selectCurrentLessonId);
@@ -72,6 +80,7 @@ export default function Lesson() {
     const [isHeartsRanOutDialogShown, setIsHeartsRanOutDialogShown] = useState<boolean>(false);
     const [isKeepLearningDialogShown, setIsKeepLearningDialogShown] = useState<boolean>(false);
     const [isVisible, setIsVisible] = useState<boolean>(false);
+    const user = useSelector(selectUserData);
 
     useEffect(() => {
         dispatch(setLessonProgressToDefault());
@@ -100,17 +109,19 @@ export default function Lesson() {
 
             getLesson();
         }
+
+        if (isPractice) {
+            dispatch(setType({ type: "practice" }));
+        }
+
+        if (unitId && legendaryId) {
+            dispatch(setType({ type: "legendary" }));
+        }
     }, []);
 
-    if (unitId && levelId) {
-        dispatch(setType({ type: "practice" }));
-    }
-
-    if (unitId && legendaryId) {
-        dispatch(setType({ type: "legendary" }));
-    }
-
     useEffect(() => {
+        if (isPractice) return;
+
         const getExercises = async () => {
             if (!lesson) return;
 
@@ -124,7 +135,33 @@ export default function Lesson() {
         };
 
         getExercises();
-    }, [lesson]);
+    }, [lesson, isPractice]);
+
+    useEffect(() => {
+        if (!isPractice) return;
+
+        const getExerciseMistakesAndExercises = async () => {
+            const exerciseMistakesData = await UserExerciseMistakeService.getAll();
+
+            if (!exerciseMistakesData) return;
+
+            const exercisesData = await Promise.all(
+                exerciseMistakesData.map((exerciseMistake) => ExerciseService.getById(exerciseMistake.exerciseId))
+            );
+
+            setUserExerciseMistakes(exerciseMistakesData);
+
+            const data = exercisesData.filter((e): e is ExerciseDTO => e !== null);
+
+            setExercises(data);
+            setExercise(data[currentExercise]);
+            setExerciseType(data[currentExercise].exerciseTypeId);
+
+            dispatch(setExerciseAmount({ exerciseAmount: data.length }));
+        };
+
+        getExerciseMistakesAndExercises();
+    }, []);
 
     useEffect(() => {
         if (!exercise) return;
@@ -165,16 +202,21 @@ export default function Lesson() {
         }
     }, [answers]);
 
-    const checkAnswerHandler = () => {
+    const checkAnswerHandler = async () => {
         if (!selectedQuestion || !selectedAnswer) return;
-
-        // const isAlreadyCorrectQuestion = correctQuestions.includes(selectedQuestion);
-        // const isAlreadyCorrectAnswer = correctAnswers.includes(selectedAnswer);
 
         if (!selectedAnswer.isCorrect || selectedQuestion.id !== selectedAnswer.questionId) {
             dispatch(takeHeart());
             setResultTitle("Incorrect answer:");
             setIsWrong(true);
+
+            const exerciseMistake: CreateUserExerciseMistakeDTO = {
+                userId: user!.id,
+                exerciseId: exercise!.id,
+                userAnswer: selectedAnswer.title,
+            };
+
+            await UserExerciseMistakeService.addMistake(exerciseMistake);
 
             if (exercise?.exerciseTypeId === 1) {
                 setRepeatExercises([...repeatExercises, exercise!]);
@@ -190,9 +232,17 @@ export default function Lesson() {
         } else {
             if (exercise?.exerciseTypeId === 1) {
                 dispatch(addRightAnswer());
+
+                if (isPractice) {
+                    await UserExerciseMistakeService.removeMistake(userExerciseMistakes[currentExercise].id);
+                }
             } else if (exercise?.exerciseTypeId === 2) {
                 if (questions.length === correctQuestions.length + 1 && answers.length === correctAnswers.length + 1) {
                     dispatch(addRightAnswer());
+
+                    if (isPractice) {
+                        await UserExerciseMistakeService.removeMistake(userExerciseMistakes[currentExercise].id);
+                    }
                 }
             }
             setResultTitle("Nice job!");

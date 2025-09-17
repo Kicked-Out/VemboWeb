@@ -1,6 +1,12 @@
 export interface UserExerciseMistakeDTO {
     id: number;
-    userId: number;
+    userId: string;
+    exerciseId: number;
+    userAnswer: string;
+}
+
+export interface CreateUserExerciseMistakeDTO {
+    userId: string;
     exerciseId: number;
     userAnswer: string;
 }

@@ -15,4 +15,16 @@ export class UserExerciseMistakeService {
 
         return data;
     }
+
+    public static async addMistake(body: any) {
+        const response = await ItemFetcher.createItem(`${this.baseUrl}`, body);
+
+        return response;
+    }
+
+    public static async removeMistake(id: number): Promise<boolean> {
+        const response = await ItemFetcher.deleteItem(`${this.baseUrl}/${id}`);
+
+        return response;
+    }
 }

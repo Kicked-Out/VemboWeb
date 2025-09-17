@@ -10,15 +10,17 @@
 
 .premium-content {
     width: 100%;
-    max-width: 1046px;
+    max-width: 1326px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0;
 }
 
-.premium-close-button {
-    align-self: flex-start;
+.premium-close-btn {
+    position: absolute;
+    top: 23px;
+    left: 29px;
     width: 22px;
     height: 22px;
     margin-top: 23px;
@@ -43,17 +45,12 @@
 .premium-insight-card {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 30px;
-    width: min(832px, 100%);
-    min-height: 908px;
-    padding: 60px 37px 62px;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(24px);
-    box-shadow: 0 30px 68px rgba(15, 32, 56, 0.3);
 }
 
 .premium-insight-title {
+    width: 557px;
     font-size: 32px;
     font-weight: 700;
     color: #ffffff;
@@ -65,17 +62,16 @@
 .premium-insight-table-card {
     flex: 1;
     display: flex;
+    position: relative;
+    width: 832px;
+    padding-top: 33px;
+    padding-bottom: 38px;
+    padding-left: 37px;
+    padding-right: 37px;
+    border-radius: 24px;
+    background-color: rgba(180, 223, 255, 0.144);
     justify-content: center;
     align-items: center;
-}
-
-.premium-table-wrapper {
-    position: relative;
-    width: 100%;
-    padding: 28px 20px 38px;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.08);
-    overflow: hidden;
 }
 
 .premium-table-highlight {
@@ -91,29 +87,40 @@
 
 .premium-table {
     width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
     position: relative;
-    z-index: 2;
+}
+
+.premium-table > thead tr {
+    height: 69px !important;
 }
 
 .premium-table thead th {
+    padding: 0;
+    padding-top: 17px;
+    padding-bottom: 17px;
     font-size: 32px;
     font-weight: 700;
     color: #ffffff;
     text-transform: uppercase;
-    padding: 0 16px 24px;
 }
 
 .premium-table thead th:first-child {
-    width: calc(100% - 422px);
+    width: calc(100% - 372px);
 }
 
 .premium-table thead th:nth-child(2),
 .premium-table thead th:nth-child(3),
 .premium-table tbody td {
-    width: 211px;
+    width: 186px;
+    height: 75px;
     text-align: center;
+}
+
+.insight-icon {
+    width: 120px;
+    height: 33px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .premium-table tbody tr {
@@ -126,6 +133,7 @@
 }
 
 .premium-feature-label {
+    width: calc(100% - 372px);
     font-size: 24px;
     font-weight: 400;
     color: #ffffff;
@@ -133,13 +141,16 @@
     padding: 0 16px;
 }
 
-.premium-table tbody td {
-    padding: 0 12px;
+.insight-feature-availability-icon {
+    width: 54px;
+    height: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
 }
 
-.premium-check-icon,
-.premium-dash-icon {
-    z-index: 2;
+.premium-table tbody td {
+    padding: 0 12px;
 }
 
 .premium-actions {
@@ -198,15 +209,11 @@
 }
 
 .premium-payment-card {
-    display: flex;
     width: 100%;
-    max-width: 1046px;
-    height: 691px;
-    margin-top: 82px;
-    border-radius: 22px;
-    overflow: hidden;
-    background: rgba(245, 250, 255, 0.92);
-    box-shadow: 0 38px 80px rgba(15, 32, 56, 0.35);
+}
+
+.insight-payment-card {
+    display: flex;
 }
 
 .premium-plan-panel {
@@ -216,8 +223,7 @@
     align-items: flex-start;
     gap: 10px;
     width: 50%;
-    height: 100%;
-    border-radius: 24px 0 0 24px;
+    border-radius: 22px 0 0 22px;
     border-top: 4px solid #71b4d4;
     border-right: 5px solid #71b4d4;
     border-bottom: 4px solid #71b4d4;
@@ -494,6 +500,9 @@
     height: 100%;
     padding: 32px 65px 182px 45px;
     gap: 22px;
+    background-color: white;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
     box-sizing: border-box;
     color: #466984;
 }
@@ -509,12 +518,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 337px;
     padding: 24px 21px;
-    border-radius: 24px;
-    border: 2px solid rgba(113, 180, 212, 0.6);
+    border-radius: 20px;
+    border: 3px solid #71b4d4;
     background: rgba(255, 255, 255, 0.92);
-    gap: 20px;
+    gap: 12px;
     box-sizing: border-box;
 }
 
@@ -527,8 +535,6 @@
 .premium-card-icon {
     width: 36px;
     height: 36px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #71b4d4, #8a38f5);
 }
 
 .premium-card-header-text {
@@ -541,45 +547,46 @@
 .premium-card-title {
     font-size: 20px;
     font-weight: 700;
-    color: #0f2038;
-    text-transform: capitalize;
+    color: #466984;
 }
 
-.premium-card-brands {
+.premium-card-icons {
+    position: absolute;
     display: flex;
-    gap: 12px;
+    bottom: 8px;
+    right: 16px;
+    gap: 20px;
     align-items: center;
 }
 
-.premium-card-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 54px;
-    padding: 6px 12px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #ffffff;
+.premium-card-icon-visa {
+    width: 56px;
+    height: 18px;
 }
 
-.premium-card-badge-visa {
-    background: #1a4ab9;
-}
-
-.premium-card-badge-mastercard {
-    background: #ff5f3d;
+.premium-card-icon-mastercard {
+    width: 46px;
+    height: 28px;
 }
 
 .premium-card-fields {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 12px;
+}
+
+.premium-field-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #466984;
+    line-height: normal;
+    text-transform: uppercase;
 }
 
 .premium-field-group {
     display: flex;
     flex-direction: column;
+    position: relative;
     gap: 8px;
     font-size: 16px;
     font-weight: 700;
@@ -590,7 +597,6 @@
     position: relative;
     width: 100%;
     height: 44px;
-    margin-top: 12px;
     border: 2px solid #71b4d4;
     border-radius: 15px;
     font-size: 16px;
@@ -602,7 +608,7 @@
 }
 
 .premium-input::placeholder {
-    color: #466984;
+    color: rgba(70, 105, 132, 0.58);
 }
 
 .premium-input:focus {
@@ -626,11 +632,9 @@
 .premium-payment-button {
     display: flex;
     height: 68px;
-    padding: 25px 181px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    align-self: stretch;
+    border: none;
     border-radius: 20px;
     background: #0f2038;
     box-shadow: 0 9px 0 0 #71b4d4;
@@ -638,13 +642,19 @@
     font-family: "Rubik", sans-serif;
     font-size: 24px;
     font-weight: 700;
+    line-height: normal;
     text-transform: uppercase;
-    border: none;
     cursor: pointer;
 }
 
 .premium-payment-button:hover {
-    filter: brightness(1.05);
+    filter: brightness(1.1);
+}
+
+.premium-payment-button:active {
+    box-shadow: none;
+    margin-top: 9px !important;
+    margin-bottom: -9px !important;
 }
 
 .premium-payment-status {
@@ -655,102 +665,14 @@
 }
 
 .premium-disclaimer {
-    width: 100%;
-    max-width: 1046px;
+    width: 1046px;
     margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
     color: #0f2038;
     text-align: center;
     font-size: 16px;
     font-weight: 700;
+    text-align: center;
     text-transform: uppercase;
-    background: rgba(245, 250, 255, 0.72);
-    padding: 16px 24px;
-    border-radius: 18px;
-    box-shadow: 0 22px 54px rgba(15, 32, 56, 0.25);
-}
-
-@media (max-width: 1100px) {
-    .premium-payment-card {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .premium-plan-panel,
-    .premium-billing-panel {
-        width: 100%;
-        border-radius: 0;
-    }
-
-    .premium-plan-panel {
-        border-radius: 24px 24px 0 0;
-    }
-
-    .premium-billing-panel {
-        padding-bottom: 64px;
-    }
-
-    .premium-switch-card {
-        position: static;
-        margin: 0 auto;
-    }
-
-    .premium-payment-button {
-        padding: 25px;
-    }
-
-    .premium-disclaimer {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 768px) {
-    .premium-page {
-        padding: 32px 12px;
-    }
-
-    .premium-insight-card {
-        min-height: unset;
-    }
-
-    .premium-insight-title {
-        font-size: 28px;
-    }
-
-    .premium-table thead th {
-        font-size: 24px;
-    }
-
-    .premium-feature-label {
-        font-size: 20px;
-    }
-
-    .premium-primary-button {
-        font-size: 30px;
-    }
-
-    .premium-secondary-button {
-        font-size: 24px;
-    }
-
-    .premium-plan-header,
-    .premium-plan-billing,
-    .premium-plan-summary {
-        padding: 24px;
-    }
-
-    .premium-plan-billing {
-        gap: 40px;
-    }
-
-    .premium-billing-panel {
-        padding: 32px 32px 64px;
-    }
-
-    .premium-field-row {
-        flex-direction: column;
-    }
-
-    .premium-payment-button {
-        height: 64px;
-    }
 }

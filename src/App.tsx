@@ -201,7 +201,7 @@ function App() {
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/privacy" element={<Privacy />} />
                     <Route path="/social" element={<Social />} />
-                    <Route path="/premium" element={<Premium />} />
+                    <Route path="/get-insight" element={<Premium />} />
                 </Routes>
             </div>
 
