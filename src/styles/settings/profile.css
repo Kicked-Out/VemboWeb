@@ -1,0 +1,94 @@
+.page-container {
+    margin: 0 100px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.avatar-block {
+    position: relative;
+    width: 82px;
+}
+
+.avatar-label {
+    position: absolute;
+    right: 0;
+}
+
+.avatar-label-img {
+    width: 30px;
+    height: 30px;
+}
+
+.avatar-input {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.avatar-viewer {
+    width: 73px;
+    height: 73px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #d9d9d9;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-fields label {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.form-fields input {
+    font-size: 18px;
+}
+
+.subtitle {
+    color: var(--ice-white);
+    font-size: 16px;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4px;
+    gap: 20px;
+    align-items: left;
+    justify-content: left;
+}
+
+.delete-link {
+    color: var(--peach);
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    align-items: left;
+    justify-content: left;
+    display: flex;
+}
+
+.delete-link:hover {
+    text-decoration: underline;
+}

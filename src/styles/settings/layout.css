@@ -1,0 +1,142 @@
+:root {
+    --sidebar-width: 320px;
+    --rightbar-width: 716px;
+    --radius-lg: 20px;
+}
+
+.logo-wrap {
+    padding: 24px;
+    padding-bottom: 16px;
+}
+.logo {
+    font-family: "Atma", cursive;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: -0.48px;
+    color: var(--frost-blue);
+    margin: 0;
+}
+
+.nav {
+    flex: 1;
+    padding: 16px 24px;
+}
+
+.nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.nav-item:hover {
+    background-color: rgba(113, 180, 212, 0.08);
+}
+
+.nav-item.active {
+    background-color: rgba(113, 180, 212, 0.12);
+}
+
+.nav-item .label {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.content {
+    flex: 1;
+    padding: 48px;
+}
+
+.sidebar-right {
+    width: var(--rightbar-width);
+    padding: 100px 70px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    z-index: 40;
+}
+
+.settings-card {
+    border: 1px solid var(--glacier-blue);
+    border-radius: 20px;
+    padding: 26px 24px 20px;
+}
+
+.settings-link {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ice-white);
+    margin-bottom: 6px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.settings-link.active,
+.settings-link:hover {
+    color: var(--glacier-blue);
+}
+
+.logout-btn {
+    width: 100%;
+    border: 1px solid var(--glacier-blue);
+    border-radius: 16px;
+    background: var(--polar-navy);
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.logout-btn span {
+    color: var(--ice-white);
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.grid-container {
+    background: none;
+}
+
+@media (max-width: 1024px) {
+    .sidebar-right {
+        display: none;
+    }
+    .content {
+        padding: 32px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-left {
+        width: 72px;
+    }
+    .logo-wrap {
+        padding: 16px;
+    }
+    .logo {
+        font-size: 28px;
+    }
+    .nav-item .label {
+        display: none;
+    }
+    .content {
+        padding: 20px;
+    }
+}

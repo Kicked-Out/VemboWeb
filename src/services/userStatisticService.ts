@@ -1,23 +1,23 @@
-import type { userStatisticDTO } from "../DTOs/userStatisticDTO";
+import type { UserStatisticDTO } from "../DTOs/userStatisticDTO";
 import ItemFetcher from "../helpers/itemFetcher";
 
 export default class UserStatisticService {
-    private static baseUrl = "/api";
+    private static baseUrl = "https://localhost:7213/api/user-statistics";
 
-    public static async getAll(): Promise<userStatisticDTO[]> {
-        const data = await ItemFetcher.fetchItems(`${this.baseUrl}/userStatistics/getAll.json`);
-
-        return data;
-    }
-
-    public static async getByUserId(userId: number): Promise<userStatisticDTO | null> {
-        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/users/get/${userId}/userStatistic/get.json`);
+    public static async getAll(): Promise<UserStatisticDTO[]> {
+        const data = await ItemFetcher.fetchItems(`${this.baseUrl}`);
 
         return data;
     }
 
-    public static async getById(id: number): Promise<userStatisticDTO | null> {
-        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/userStatistics/get/${id}.json`);
+    public static async getByUserId(userId: string): Promise<UserStatisticDTO | null> {
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/User/${userId}`);
+
+        return data;
+    }
+
+    public static async getById(id: number): Promise<UserStatisticDTO | null> {
+        const data = await ItemFetcher.fetchItem(`${this.baseUrl}/${id}`);
 
         return data;
     }

@@ -1,0 +1,26 @@
+/* Social Accounts Page */
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+}
+
+.platforms {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+}
+
+.platform-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.platform-name {
+    font-size: 24px;
+    font-weight: 700;
+}
