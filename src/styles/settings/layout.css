@@ -58,8 +58,9 @@
 }
 
 .sidebar-right {
-    width: var(--rightbar-width);
-    padding: 100px 70px 0px;
+    width: min(var(--rightbar-width), 100%);
+    box-sizing: border-box;
+    padding: 100px clamp(24px, 5vw, 70px) 32px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -68,7 +69,15 @@
     top: 0;
     bottom: 0;
     height: 100vh;
+    overflow-y: auto;
     z-index: 40;
+}
+
+@media (max-width: 1440px) {
+    .sidebar-right {
+        padding-top: 80px;
+        padding-bottom: 32px;
+    }
 }
 
 .settings-card {
