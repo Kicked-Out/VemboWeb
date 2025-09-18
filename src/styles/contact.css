@@ -50,3 +50,47 @@
   bottom: 0;
   right: 0;
 }
+
+@media (max-width: 1024px) {
+  .contact-page {
+    padding: 96px 40px 40px;
+  }
+
+  .contact-title {
+    font-size: 48px;
+  }
+
+  .contact-text,
+  .contact-email {
+    font-size: 28px;
+  }
+
+  .contact-bear {
+    width: 420px;
+    height: auto;
+    right: -40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-page {
+    padding: 96px 20px 40px;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-size: 36px;
+  }
+
+  .contact-text,
+  .contact-email {
+    font-size: 22px;
+  }
+
+  .contact-bear {
+    position: static;
+    width: min(80%, 320px);
+    height: auto;
+    margin: 32px auto 0;
+  }
+}

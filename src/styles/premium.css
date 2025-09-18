@@ -63,7 +63,8 @@
     flex: 1;
     display: flex;
     position: relative;
-    width: 832px;
+    width: 100%;
+    max-width: 832px;
     padding-top: 33px;
     padding-bottom: 38px;
     padding-left: 37px;
@@ -72,6 +73,8 @@
     background-color: rgba(180, 223, 255, 0.144);
     justify-content: center;
     align-items: center;
+    overflow-x: auto;
+    box-sizing: border-box;
 }
 
 .premium-table-highlight {
@@ -87,6 +90,7 @@
 
 .premium-table {
     width: 100%;
+    min-width: 540px;
     position: relative;
 }
 
@@ -155,7 +159,8 @@
 
 .premium-actions {
     display: flex;
-    width: 350px;
+    width: 100%;
+    max-width: 350px;
     flex-direction: column;
     align-items: center;
     gap: 28px;
@@ -392,6 +397,71 @@
     padding: 0;
     cursor: pointer;
     color: inherit;
+}
+
+@media (max-width: 1024px) {
+    .premium-page {
+        padding: 32px 24px 56px;
+    }
+
+    .premium-insight-card {
+        gap: 24px;
+    }
+
+    .premium-insight-title {
+        width: 100%;
+        font-size: 28px;
+    }
+
+    .premium-table thead th {
+        font-size: 24px;
+    }
+
+    .premium-feature-label {
+        font-size: 20px;
+    }
+
+    .premium-primary-button,
+    .premium-secondary-button {
+        height: 64px;
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .premium-page {
+        padding: 24px 16px 48px;
+    }
+
+    .premium-content {
+        align-items: stretch;
+        gap: 32px;
+    }
+
+    .premium-insight-card {
+        align-items: stretch;
+    }
+
+    .premium-insight-table-card {
+        padding: 24px 16px;
+    }
+
+    .premium-table {
+        min-width: 420px;
+    }
+
+    .premium-table thead th {
+        font-size: 18px;
+    }
+
+    .premium-feature-label {
+        font-size: 16px;
+    }
+
+    .premium-primary-button,
+    .premium-secondary-button {
+        font-size: 22px;
+    }
 }
 
 .premium-switch-option-info {
