@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
+import { useTranslation } from "react-i18next";
 
 export default function ForgotPassword() {
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(hideNavbar());
@@ -26,10 +28,8 @@ export default function ForgotPassword() {
                 <div className="section-wide">
                     {/* Header Text */}
                     <div className="header-block">
-                        <h1 className="page-title-lg">Forgot password</h1>
-                        <p className="page-subtitle-lg">
-                            We will send you instructions on how to reset your password by email.
-                        </p>
+                        <h1 className="page-title-lg">{t("auth.forgotPassword.title")}</h1>
+                        <p className="page-subtitle-lg">{t("auth.forgotPassword.subtitle")}</p>
                     </div>
 
                     {/* Form Section */}
@@ -44,13 +44,13 @@ export default function ForgotPassword() {
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         className="input"
-                                        placeholder="E-mail or Username"
+                                        placeholder={t("auth.forgotPassword.emailPlaceholder")}
                                     />
                                 </div>
                             </div>
 
                             {/* Submit Button */}
-                            <PrimaryButton title="SUBMIT" onClick={handleSubmit} />
+                            <PrimaryButton title={t("auth.forgotPassword.submit")} onClick={handleSubmit} />
                         </div>
                     </div>
 
@@ -71,10 +71,10 @@ export default function ForgotPassword() {
                                     fill="#F5FAFF"
                                 />
                             </svg>
-                            <span>Go back</span>
+                            <span>{t("auth.forgotPassword.goBack")}</span>
                         </Link>
 
-                        <button className="btn-text">Resend letter</button>
+                        <button className="btn-text">{t("auth.forgotPassword.resend")}</button>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { hideSidebar, showNavbar } from "../slices/menuSlice";
+import { useTranslation } from "react-i18next";
 
 export default function About() {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(showNavbar());
@@ -12,36 +14,23 @@ export default function About() {
 
     return (
         <div className="about-page">
-            <h1 className="about-title">About us</h1>
+            <h1 className="about-title">{t("pages.about.title")}</h1>
             <div className="about-divider" />
             <div className="about-grid">
                 <div className="about-column">
                     <div className="about-row">
-                        <h2 className="about-subtitle">Personalized education.</h2>
-                        <p className="about-description">
-                            Everyone learns in different ways. For the first time in history, we can analyze how
-                            millions of people learn at once to create the most effective educational system possible
-                            and tailor it to each student. Our ultimate goal is to give everyone access to a private
-                            tutor experience through technology.
-                        </p>
+                        <h2 className="about-subtitle">{t("pages.about.personalized.title")}</h2>
+                        <p className="about-description">{t("pages.about.personalized.description")}</p>
                     </div>
                     <div className="about-row">
-                        <h2 className="about-subtitle">Making learning fun.</h2>
-                        <p className="about-description">
-                            It's hard to stay motivated when learning online, so we made Vembo so fun, some people would
-                            prefer picking up new skills over playing a game.
-                        </p>
+                        <h2 className="about-subtitle">{t("pages.about.fun.title")}</h2>
+                        <p className="about-description">{t("pages.about.fun.description")}</p>
                     </div>
                 </div>
                 <div className="about-column">
                     <div className="about-row">
-                        <h2 className="about-subtitle">Universally accessible.</h2>
-                        <p className="about-description">
-                            We created Vembo so that everyone could have a chance to learn history. Free education – no
-                            hidden fees, no premium content, just free. Vembo is used by the richest man in the world
-                            and many Hollywood stars, and at the same time by public school students in developing
-                            countries. We believe true equality is when spending more can't buy you a better education.
-                        </p>
+                        <h2 className="about-subtitle">{t("pages.about.accessible.title")}</h2>
+                        <p className="about-description">{t("pages.about.accessible.description")}</p>
                     </div>
                 </div>
             </div>

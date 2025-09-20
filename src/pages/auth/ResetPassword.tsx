@@ -43,12 +43,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
+import { useTranslation } from "react-i18next";
 
 export default function ResetPassword() {
     const dispatch = useDispatch();
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(hideNavbar());
@@ -60,14 +62,9 @@ export default function ResetPassword() {
         confirmNewPassword: string;
     };
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        watch,
-    } = useForm<Inputs>();
+    const { register, handleSubmit, watch } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<Inputs> = () => {
         navigate("/password-updated");
     };
 
@@ -77,7 +74,7 @@ export default function ResetPassword() {
         <div className="auth-overlay">
             <div className="content-narrow">
                 {/* Title */}
-                <h1 className="page-title-lg">Reset password</h1>
+                <h1 className="page-title-lg">{t("auth.resetPassword.title")}</h1>
 
                 {/* Form section */}
                 <div className="form-section-left" style={{ width: "100%" }}>
@@ -89,9 +86,12 @@ export default function ResetPassword() {
                                 <input
                                     {...register("newPassword", {
                                         required: true,
-                                        minLength: { value: 8, message: "Password must be at least 8 characters" },
+                                        minLength: {
+                                            value: 8,
+                                            message: t("auth.register.passwordMinLength"),
+                                        },
                                     })}
-                                    placeholder="New Password"
+                                    placeholder={t("auth.resetPassword.newPassword")}
                                     type={showNewPassword ? "text" : "password"}
                                     className="input input--with-toggle"
                                 />
@@ -108,10 +108,14 @@ export default function ResetPassword() {
                                 <input
                                     {...register("confirmNewPassword", {
                                         required: true,
-                                        minLength: { value: 8, message: "Password must be at least 8 characters" },
-                                        validate: (value: string) => value === newPassword || "Passwords do not match",
+                                        minLength: {
+                                            value: 8,
+                                            message: t("auth.register.passwordMinLength"),
+                                        },
+                                        validate: (value: string) =>
+                                            value === newPassword || t("auth.register.passwordMismatch"),
                                     })}
-                                    placeholder="Confirm New Password"
+                                    placeholder={t("auth.resetPassword.confirmNewPassword")}
                                     type={showConfirmPassword ? "text" : "password"}
                                     className="input input--with-toggle"
                                 />
@@ -122,7 +126,7 @@ export default function ResetPassword() {
                         </div>
 
                         {/* Submit */}
-                        <PrimaryButton title="SUBMIT" onClick={handleSubmit(onSubmit)} />
+                        <PrimaryButton title={t("auth.resetPassword.submit")} onClick={handleSubmit(onSubmit)} />
                     </form>
                 </div>
             </div>

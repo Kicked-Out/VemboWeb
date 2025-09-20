@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { hideSidebar, showNavbar } from "../slices/menuSlice";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function Terms() {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(showNavbar());
@@ -14,69 +16,51 @@ export default function Terms() {
         <div className="terms-page">
             <div className="terms-container">
                 <h1 className="terms-title">
-                    Terms and Conditions of Service for <span className="terms-title-accent">Young Explorers</span>
+                    <Trans i18nKey="pages.terms.title">
+                        <span>Terms and Conditions of Service for </span>
+                        <span className="terms-title-accent">Young Explorers</span>
+                    </Trans>
                 </h1>
-                <p className="terms-subtitle">
-                    Please note that these Terms and Conditions of Service were last revised on July 21st, 2025.
-                </p>
+                <p className="terms-subtitle">{t("pages.terms.subtitle")}</p>
 
                 <div className="terms-item">
-                    <h2 className="terms-item-heading">1. Who can use Vembo?</h2>
-                    <p className="terms-item-description">
-                        You need to be at least 13 years old, or have permission from your parent or guardian.
-                    </p>
+                    <h2 className="terms-item-heading">{t("pages.terms.sections.who.heading")}</h2>
+                    <p className="terms-item-description">{t("pages.terms.sections.who.description")}</p>
                 </div>
 
                 <div className="terms-item">
-                    <h2 className="terms-item-heading">2. Using Vembo</h2>
-                    <p className="terms-item-description">
-                        Vembo is made for learning history and having fun. Please use it only for yourself and don't try
-                        to copy or sell it. Be kind and respectful if you chat or share with others.
-                    </p>
+                    <h2 className="terms-item-heading">{t("pages.terms.sections.using.heading")}</h2>
+                    <p className="terms-item-description">{t("pages.terms.sections.using.description")}</p>
                 </div>
 
                 <div className="terms-item">
-                    <h2 className="terms-item-heading">3. Premium Access</h2>
-                    <p className="terms-item-description">
-                        Some parts of Vembo are free, and some are Premium. Premium gives you extra stories, animations,
-                        and special journeys. Payments are handled safely through the app store.
-                    </p>
+                    <h2 className="terms-item-heading">{t("pages.terms.sections.premium.heading")}</h2>
+                    <p className="terms-item-description">{t("pages.terms.sections.premium.description")}</p>
                 </div>
 
                 <div className="terms-item">
-                    <h2 className="terms-item-heading">4. Learning Materials</h2>
-                    <p className="terms-item-description">
-                        Vembo tells you facts about history, so you can learn. Vembo tries its best to be accurate, but
-                        remember that it's not the same as learning in school.
-                    </p>
+                    <h2 className="terms-item-heading">{t("pages.terms.sections.learning.heading")}</h2>
+                    <p className="terms-item-description">{t("pages.terms.sections.learning.description")}</p>
                 </div>
 
                 <div className="terms-item">
-                    <h2 className="terms-item-heading">5. Privacy</h2>
-                    <p className="terms-item-description">
-                        We collect only a little information to help run the program and serve you better. We never sell
-                        your information and we keep your personal details safe.
-                    </p>
+                    <h2 className="terms-item-heading">{t("pages.terms.sections.privacy.heading")}</h2>
+                    <p className="terms-item-description">{t("pages.terms.sections.privacy.description")}</p>
                 </div>
 
                 <div className="terms-item">
-                    <h2 className="terms-item-heading">6. Changes</h2>
-                    <p className="terms-item-description">
-                        Sometimes we will update these rules. If you keep using Vembo after changes, it means you agree
-                        to them.
-                    </p>
+                    <h2 className="terms-item-heading">{t("pages.terms.sections.changes.heading")}</h2>
+                    <p className="terms-item-description">{t("pages.terms.sections.changes.description")}</p>
                 </div>
 
                 <div className="terms-item">
-                    <h2 className="terms-item-heading">7. Questions</h2>
-                    <p className="terms-item-description">
-                        If you or your parent/guardian have questions, email us at: support@vembo.app
-                    </p>
+                    <h2 className="terms-item-heading">{t("pages.terms.sections.questions.heading")}</h2>
+                    <p className="terms-item-description">{t("pages.terms.sections.questions.description")}</p>
                 </div>
 
                 <div className="terms-divider" />
 
-                <p className="terms-bottom">By creating an account or using Vembo, you agree to follow these rules.</p>
+                <p className="terms-bottom">{t("pages.terms.bottom", { brand: t("brand") })}</p>
             </div>
         </div>
     );

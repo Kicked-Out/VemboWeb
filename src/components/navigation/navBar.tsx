@@ -4,14 +4,17 @@ import { logout, selectUserData } from "../../slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import type { NavbarComponent } from "../../types/componentTypes";
 import { selectSelectedPage } from "../../slices/menuSlice";
+import { useTranslation } from "react-i18next";
 
 export default function NavBar({ isHidden }: NavbarComponent) {
     const user = useSelector(selectUserData);
     const selectedPage = useSelector(selectSelectedPage);
 
     const [moreOpen, setMoreOpen] = useState(false);
-    const hideTimeoutRef = useRef<any>(null);
+    const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const dispatch = useDispatch();
+    const { t, i18n } = useTranslation();
+    const currentLanguage = (i18n.resolvedLanguage ?? i18n.language).toLowerCase();
 
     const openMore = () => {
         if (hideTimeoutRef.current) {
@@ -43,30 +46,38 @@ export default function NavBar({ isHidden }: NavbarComponent) {
         dispatch(logout());
     };
 
+    const changeLanguage = (lng: "en" | "uk") => {
+        const resolved = i18n.resolvedLanguage ?? i18n.language;
+
+        if (resolved.startsWith(lng)) return;
+
+        void i18n.changeLanguage(lng);
+    };
+
     return (
         <nav className={`navbar ${isHidden ? "hidden" : ""}`} onClick={closeMoreImmediately}>
             <Link to="/" className="nav-title">
-                Vembo
+                {t("brand")}
             </Link>
             <Link to="/" className={`nav-btn ${selectedPage === 0 ? "nav-btn-selected" : ""}`}>
                 <img className="nav-icon" src="/src/assets/icons/glacier.png" />
-                Learn
+                {t("nav.learn")}
             </Link>
             <Link to="/practice-hub" className={`nav-btn ${selectedPage === 1 ? "nav-btn-selected" : ""}`}>
                 <img className="nav-icon" src="/src/assets/icons/practice.png" />
-                Practice
+                {t("nav.practice")}
             </Link>
             <Link to="/leaderboards" className={`nav-btn ${selectedPage === 2 ? "nav-btn-selected" : ""}`}>
                 <img className="nav-icon" src="/src/assets/icons/leaderboards.png" />
-                Leaderboards
+                {t("nav.leaderboards")}
             </Link>
             <Link to="/quests" className={`nav-btn ${selectedPage === 3 ? "nav-btn-selected" : ""}`}>
                 <img className="nav-icon" src="/src/assets/icons/chest.png" />
-                Quests
+                {t("nav.quests")}
             </Link>
             <Link to="/shop" className={`nav-btn ${selectedPage === 4 ? "nav-btn-selected" : ""}`}>
                 <img className="nav-icon" src="/src/assets/icons/shop.png" />
-                Shop
+                {t("nav.shop")}
             </Link>
             <Link
                 to={`/profile/${user?.nickName}`}
@@ -76,13 +87,13 @@ export default function NavBar({ isHidden }: NavbarComponent) {
                     className="nav-profile-icon"
                     src={user?.avatarUrl ? user?.avatarUrl : "/src/assets/icons/profile_default_icon.png"}
                 />
-                Profile
+                {t("nav.profile")}
             </Link>
 
             <div className="nav-btn more-container" onMouseEnter={openMore} onMouseLeave={closeMore}>
                 <div className="more-toggle">
                     <img className="nav-icon" src="/src/assets/icons/more.png" />
-                    <span>More</span>
+                    <span>{t("nav.more")}</span>
                 </div>
 
                 <div
@@ -92,7 +103,7 @@ export default function NavBar({ isHidden }: NavbarComponent) {
                     aria-hidden={!moreOpen}
                 >
                     <Link to="/settings" className="more-menu-item" onClick={closeMoreImmediately}>
-                        Settings
+                        {t("nav.settings")}
                     </Link>
 
                     <div
@@ -102,12 +113,31 @@ export default function NavBar({ isHidden }: NavbarComponent) {
                             closeMoreImmediately();
                         }}
                     >
-                        Log out
+                        {t("nav.logout")}
                     </div>
 
                     <Link to="/help" className="more-menu-item" onClick={closeMoreImmediately}>
-                        Help
+                        {t("nav.help")}
                     </Link>
+                    <div className="more-menu-language">
+                        <span className="more-menu-language__label">{t("nav.language.label")}</span>
+                        <div className="more-menu-language__options">
+                            <button
+                                type="button"
+                                className={`more-menu-language__option ${currentLanguage.startsWith("en") ? "selected" : ""}`}
+                                onClick={() => changeLanguage("en")}
+                            >
+                                {t("nav.language.english")}
+                            </button>
+                            <button
+                                type="button"
+                                className={`more-menu-language__option ${currentLanguage.startsWith("uk") ? "selected" : ""}`}
+                                onClick={() => changeLanguage("uk")}
+                            >
+                                {t("nav.language.ukrainian")}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

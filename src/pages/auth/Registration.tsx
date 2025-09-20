@@ -7,11 +7,13 @@ import AuthService from "../../services/authService";
 import { useDispatch } from "react-redux";
 import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
 import { setToken } from "../../slices/authSlice";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function SignUp() {
     const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(hideNavbar());
@@ -55,7 +57,7 @@ export default function SignUp() {
     return (
         <div className="auth-page">
             {/* Log In Button - Top Right */}
-            <AuthButton path="/login" title="Log in" />
+            <AuthButton path="/login" title={t("auth.register.loginCta")} />
 
             {/* Main Content Container */}
             <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
@@ -63,16 +65,20 @@ export default function SignUp() {
                 <div className="signup-hero">
                     {/* Welcome Text */}
                     <h1 className="signup-title">
-                        <span className="text-white">Ready to </span>
-                        <span className="text-light-blue">roam</span>
-                        <span className="text-white">?</span>
+                        <Trans i18nKey="auth.register.welcome">
+                            <span className="text-white">Ready to </span>
+                            <span className="text-light-blue">roam</span>
+                            <span className="text-white">?</span>
+                        </Trans>
                     </h1>
 
                     {/* Subtitle */}
                     <p className="signup-subtitle">
-                        <span className="text-white">Create your passport to the past and future — </span>
-                        <span className="text-light-blue">Vembo</span>
-                        <span className="text-white"> will be your guide!</span>
+                        <Trans i18nKey="auth.register.subtitle" values={{ brand: t("brand") }}>
+                            <span className="text-white">Create your passport to the past and future — </span>
+                            <span className="text-light-blue">Vembo</span>
+                            <span className="text-white"> will be your guide!</span>
+                        </Trans>
                     </p>
 
                     {/* Form Container */}
@@ -85,7 +91,7 @@ export default function SignUp() {
                                     <div className="input-box" />
                                     <input
                                         {...register("name", { required: true })}
-                                        placeholder="Name"
+                                        placeholder={t("auth.register.name")}
                                         className="input"
                                     />
                                 </div>
@@ -97,7 +103,7 @@ export default function SignUp() {
                                     <div className="input-box" />
                                     <input
                                         {...register("email", { required: true })}
-                                        placeholder="Email"
+                                        placeholder={t("auth.register.email")}
                                         type="email"
                                         className="input"
                                     />
@@ -111,9 +117,12 @@ export default function SignUp() {
                                     <input
                                         {...register("password", {
                                             required: true,
-                                            minLength: { value: 8, message: "Password must be at least 8 characters" },
+                                            minLength: {
+                                                value: 8,
+                                                message: t("auth.register.passwordMinLength"),
+                                            },
                                         })}
-                                        placeholder="Password"
+                                        placeholder={t("auth.common.password")}
                                         type={showPassword ? "text" : "password"}
                                         className="input input--with-toggle"
                                     />
@@ -130,9 +139,10 @@ export default function SignUp() {
                                     <input
                                         {...register("confirmPassword", {
                                             required: true,
-                                            validate: (value: string) => value === password || "Passwords do not match",
+                                            validate: (value: string) =>
+                                                value === password || t("auth.register.passwordMismatch"),
                                         })}
-                                        placeholder="Confirm Password"
+                                        placeholder={t("auth.register.confirmPassword")}
                                         type={showConfirmPassword ? "text" : "password"}
                                         className="input input--with-toggle"
                                     />
@@ -145,7 +155,7 @@ export default function SignUp() {
                             </div>
 
                             {/* Create Account Button */}
-                            <PrimaryButton title="CREATE ACCOUNT" onClick={onSubmit} />
+                            <PrimaryButton title={t("auth.register.createAccount")} onClick={onSubmit} />
                         </div>
 
                         {/* Social Login Section */}
@@ -153,7 +163,7 @@ export default function SignUp() {
                             {/* OR Divider */}
                             <div className="or">
                                 <div className="or-line" />
-                                <div className="or-text">OR</div>
+                                <div className="or-text">{t("auth.common.or")}</div>
                                 <div className="or-line" />
                             </div>
 
@@ -161,14 +171,14 @@ export default function SignUp() {
                             <div className="social-row">
                                 {/* Google Button */}
                                 <SocialButton
-                                    title="GOOGLE"
+                                    title={t("auth.common.google")}
                                     social="https://img.icons8.com/?size=28&id=17949&format=png&color=000000"
                                     alt="Google"
                                 />
 
                                 {/* Facebook Button */}
                                 <SocialButton
-                                    title="FACEBOOK"
+                                    title={t("auth.common.facebook")}
                                     social="https://img.icons8.com/?size=28&id=118467&format=png&color=1768D2"
                                     alt="Facebook"
                                 />
@@ -179,10 +189,9 @@ export default function SignUp() {
 
                 {/* Terms and Policy */}
                 <div className="terms">
-                    <p className="p-1line">By signing up to Vembo, you agree to our Terms and Privacy Policy.</p>
+                    <p className="p-1line">{t("auth.register.terms", { brand: t("brand") })}</p>
                     <p className="p-2lines">
-                        This site is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of
-                        Service apply.
+                        {t("auth.common.recaptcha")}
                     </p>
                 </div>
             </form>

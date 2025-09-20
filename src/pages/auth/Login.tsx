@@ -7,10 +7,12 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
 import { setToken } from "../../slices/authSlice";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { t } = useTranslation();
     type Inputs = {
         emailOrName: string;
         password: string;
@@ -43,7 +45,7 @@ export default function Login() {
     return (
         <div className="auth-page">
             {/* Sign Up Button - Top Right */}
-            <AuthButton path="/register" title="Sign Up" />
+            <AuthButton path="/register" title={t("auth.common.signUp")} />
 
             {/* Main Content Container */}
             <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
@@ -51,16 +53,20 @@ export default function Login() {
                 <div className="signup-hero">
                     {/* Welcome Text */}
                     <h1 className="signup-title">
-                        <span className="text-white">Welcome back </span>
-                        <span className="text-light-blue">explorer</span>
-                        <span className="text-white">!</span>
+                        <Trans i18nKey="auth.login.welcome">
+                            <span className="text-white">Welcome back </span>
+                            <span className="text-light-blue">explorer</span>
+                            <span className="text-white">!</span>
+                        </Trans>
                     </h1>
 
                     {/* Subtitle */}
                     <p className="signup-subtitle" style={{ maxWidth: 476 }}>
-                        <span className="text-white">History's calling, and the globe's spinning — hop on, </span>
-                        <span className="text-light-blue">Vembo's</span>
-                        <span className="text-white"> taking off!</span>
+                        <Trans i18nKey="auth.login.tagline" values={{ brand: t("brand") }}>
+                            <span className="text-white">History's calling, and the globe's spinning — hop on, </span>
+                            <span className="text-light-blue">Vembo's</span>
+                            <span className="text-white"> taking off!</span>
+                        </Trans>
                     </p>
 
                     {/* Form Container */}
@@ -73,7 +79,7 @@ export default function Login() {
                                     <div className="input-box" />
                                     <input
                                         {...register("emailOrName", { required: true })}
-                                        placeholder="Email or Name"
+                                        placeholder={t("auth.common.emailOrName")}
                                         className="input"
                                     />
                                 </div>
@@ -85,18 +91,18 @@ export default function Login() {
                                     <div className="input-box" />
                                     <input
                                         {...register("password", { required: true })}
-                                        placeholder="Password"
+                                        placeholder={t("auth.common.password")}
                                         type="password"
                                         className="input"
                                     />
                                     <Link to="/forgot-password" className="forgot-link">
-                                        FORGOT?
+                                        {t("auth.common.forgot")}
                                     </Link>
                                 </div>
                             </div>
 
                             {/* Login Button */}
-                            <PrimaryButton title="LOG IN" onClick={onSubmit} />
+                            <PrimaryButton title={t("auth.common.logIn")} onClick={onSubmit} />
                         </div>
 
                         {/* Social Login Section */}
@@ -104,19 +110,19 @@ export default function Login() {
                             {/* OR Divider */}
                             <div className="or">
                                 <div className="or-line" />
-                                <div className="or-text">OR</div>
+                                <div className="or-text">{t("auth.common.or")}</div>
                                 <div className="or-line" />
                             </div>
 
                             {/* Social Login Buttons */}
                             <div className="social-row">
                                 <SocialButton
-                                    title="GOOGLE"
+                                    title={t("auth.common.google")}
                                     social="https://img.icons8.com/?size=28&id=17949&format=png&color=000000"
                                     alt="Google"
                                 />
                                 <SocialButton
-                                    title="FACEBOOK"
+                                    title={t("auth.common.facebook")}
                                     social="https://img.icons8.com/?size=28&id=118467&format=png&color=1768D2"
                                     alt="Facebook"
                                 />
@@ -127,10 +133,9 @@ export default function Login() {
 
                 {/* Terms and Policy */}
                 <div className="terms">
-                    <p className="p-1line">By signing in to Vembo, you agree to our Terms and Privacy Policy.</p>
+                    <p className="p-1line">{t("auth.common.termsSignIn", { brand: t("brand") })}</p>
                     <p className="p-2lines">
-                        This site is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of
-                        Service apply.
+                        {t("auth.common.recaptcha")}
                     </p>
                 </div>
             </form>
