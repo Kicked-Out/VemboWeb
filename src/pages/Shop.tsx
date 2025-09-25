@@ -7,6 +7,7 @@ import {
     hideInsightCard,
     hideMonthlyBadgesCard,
     hideWhatAreLeaderboardsCard,
+    setIsSidebarLoaded,
     setPage,
     showAdBlockerCard,
     showDailyQuestCard,
@@ -26,6 +27,7 @@ export default function Shop() {
         dispatch(showNavbar());
         dispatch(setPage({ selectedPage: 4 }));
         dispatch(showSidebar());
+        dispatch(setIsSidebarLoaded(false));
         dispatch(showStatisticCard());
         dispatch(hideInsightCard());
         dispatch(showLeaderboardCard());

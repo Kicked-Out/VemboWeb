@@ -1,7 +1,7 @@
 import type { DailyQuestCardComponent } from "../../../types/componentTypes";
 
 export default function DailyQuestCard({
-    icon,
+    type,
     title,
     progress,
     currentValue,
@@ -10,7 +10,7 @@ export default function DailyQuestCard({
 }: DailyQuestCardComponent) {
     return (
         <div className="daily-quest-card">
-            <img className="daily-quest-card__img" src={icon} />
+            <img className="daily-quest-card__img" src={`src/assets/icons/daily_quests/${type}.png`} />
 
             <div className="daily-quest-card__content">
                 <h3 className="daily-quest-card__title">{title}</h3>

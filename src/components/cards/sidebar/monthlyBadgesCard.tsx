@@ -1,6 +1,66 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import type { QuestDTO } from "../../../DTOs/questDTO";
+import type { QuestDefinitionDTO } from "../../../DTOs/questDefinitionDTO";
+import { QuestService } from "../../../services/questService";
+import { QuestDefinitionService } from "../../../services/questDefinitionService";
+import type { MedalDTO } from "../../../DTOs/medalDTO";
+import { MedalService } from "../../../services/medalService";
+import { UserQuestProgressService } from "../../../services/userProgress/userQuestProgressService";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsSidebarLoaded, setIsSidebarLoaded } from "../../../slices/menuSlice";
 
 export default function MonthlyBadgesCard() {
+    const [monthlyQuests, setMonthlyQuests] = useState<QuestDTO[]>([]);
+    const [monthlyQuestsDefinitions, setMonthlyQuestDefinitions] = useState<QuestDefinitionDTO[]>([]);
+    const [monthlyQuestMedals, setMonthlyQuestMedals] = useState<MedalDTO[]>([]);
+    const dispatch = useDispatch();
+    const isLoaded = useSelector(selectIsSidebarLoaded);
+
+    useEffect(() => {
+        if (isLoaded) return;
+
+        const getMonthlyQuestQuestDefinitionsAndMedals = async () => {
+            const monthlyQuestData = await QuestService.getAllMonthly();
+
+            if (!monthlyQuestData) return;
+
+            const userMonthlyQuestProgressData = await Promise.all(
+                monthlyQuestData.map((monthlyQuest) => UserQuestProgressService.getByQuestId(monthlyQuest.id))
+            );
+
+            const completedUserMonthlyQuests = monthlyQuestData.filter((monthlyQuest) =>
+                userMonthlyQuestProgressData.some(
+                    (userMonthlyQuestProgress) =>
+                        userMonthlyQuestProgress?.questId === monthlyQuest.id &&
+                        userMonthlyQuestProgress?.isCompleted === true
+                )
+            );
+
+            setMonthlyQuests(completedUserMonthlyQuests);
+
+            const monthlyQuestDefinitionsData = await Promise.all(
+                completedUserMonthlyQuests.map((monthlyQuest) => QuestDefinitionService.getById(monthlyQuest.id))
+            );
+
+            if (!monthlyQuestDefinitionsData) return;
+
+            setMonthlyQuestDefinitions(monthlyQuestDefinitionsData.filter(Boolean) as QuestDefinitionDTO[]);
+
+            const monthlyQuestMedalsData = await Promise.all(
+                completedUserMonthlyQuests.map((monthlyQuest) => MedalService.getById(monthlyQuest.medalId))
+            );
+
+            if (!monthlyQuestMedalsData) return;
+
+            setMonthlyQuestMedals(monthlyQuestMedalsData.filter(Boolean) as MedalDTO[]);
+
+            dispatch(setIsSidebarLoaded(true));
+        };
+
+        getMonthlyQuestQuestDefinitionsAndMedals();
+    }, [isLoaded]);
+
     return (
         <div className="monthly-badges-card">
             <div className="monthly-badges-card__title-block">
@@ -12,53 +72,47 @@ export default function MonthlyBadgesCard() {
             </div>
 
             <div className="monthly-badges">
-                <div className="monthly-badge">
-                    <img
-                        className="monthly-badge__icon"
-                        src={`/src/assets/icons/quests/monthly_badges/monthly_badge${1}_icon.png`}
-                    />
+                {monthlyQuests.map((monthlyQuest) => {
+                    const monthlyQuestDefinition = monthlyQuestsDefinitions.find(
+                        (monthlyQuestDefinition) => monthlyQuestDefinition.id === monthlyQuest.questDefinitionId
+                    );
+                    const monthlyQuestMedal = monthlyQuestMedals.find(
+                        (monthlyQuestMedal) => monthlyQuestMedal.id === monthlyQuest.medalId
+                    );
 
-                    <div className="monthly-badge__info">
-                        <h4 className="monthly-badge__title">Vembo's Spring Holidays</h4>
-                        <p className="monthly-badge__date">April 2025</p>
-                    </div>
-                </div>
+                    const months = [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December",
+                    ];
 
-                <div className="monthly-badge">
-                    <img
-                        className="monthly-badge__icon"
-                        src={`/src/assets/icons/quests/monthly_badges/monthly_badge${2}_icon.png`}
-                    />
+                    const monthlyQuestDate = new Date(monthlyQuest.startDate);
+                    const monthlyQuestMonthIndex = monthlyQuestDate.getMonth();
+                    const monthlyQuestMonth = months[monthlyQuestMonthIndex];
+                    const monthlyQuestYear = monthlyQuestDate.getFullYear();
 
-                    <div className="monthly-badge__info">
-                        <h4 className="monthly-badge__title">Vembo's Frozen Winter</h4>
-                        <p className="monthly-badge__date">December 2024</p>
-                    </div>
-                </div>
+                    return (
+                        <div className="monthly-badge">
+                            <img className="monthly-badge__icon" src={monthlyQuestMedal?.imageUrl} />
 
-                <div className="monthly-badge">
-                    <img
-                        className="monthly-badge__icon"
-                        src={`/src/assets/icons/quests/monthly_badges/monthly_badge${3}_icon.png`}
-                    />
-
-                    <div className="monthly-badge__info">
-                        <h4 className="monthly-badge__title">Halloween Adventures</h4>
-                        <p className="monthly-badge__date">October 2024</p>
-                    </div>
-                </div>
-
-                <div className="monthly-badge">
-                    <img
-                        className="monthly-badge__icon"
-                        src={`/src/assets/icons/quests/monthly_badges/monthly_badge${4}_icon.png`}
-                    />
-
-                    <div className="monthly-badge__info">
-                        <h4 className="monthly-badge__title">2024 Summer Olympics</h4>
-                        <p className="monthly-badge__date">August 2024</p>
-                    </div>
-                </div>
+                            <div className="monthly-badge__info">
+                                <h4 className="monthly-badge__title">{monthlyQuestDefinition?.title}</h4>
+                                <p className="monthly-badge__date">
+                                    {monthlyQuestMonth} {monthlyQuestYear}
+                                </p>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

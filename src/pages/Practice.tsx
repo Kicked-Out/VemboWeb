@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {
     hideMonthlyBadgesCard,
     hideWhatAreLeaderboardsCard,
+    setIsSidebarLoaded,
     setPage,
     showAdBlockerCard,
     showDailyQuestCard,
@@ -22,6 +23,7 @@ export default function Practice() {
         dispatch(showNavbar());
         dispatch(setPage({ selectedPage: 1 }));
         dispatch(showSidebar());
+        dispatch(setIsSidebarLoaded(false));
 
         dispatch(showStatisticCard());
         dispatch(showInsightCard());

@@ -19,6 +19,7 @@ import {
     hideLeaderboardCard,
     hideMonthlyBadgesCard,
     hideWhatAreLeaderboardsCard,
+    setIsSidebarLoaded,
     setPage,
     showAdBlockerCard,
     showDailyQuestCard,
@@ -46,6 +47,7 @@ export default function Profile() {
         dispatch(showNavbar());
         dispatch(setPage({ selectedPage: 5 }));
         dispatch(showSidebar());
+        dispatch(setIsSidebarLoaded(false));
         dispatch(showStatisticCard());
         dispatch(hideInsightCard());
         dispatch(hideLeaderboardCard());
@@ -60,8 +62,6 @@ export default function Profile() {
         if (authUser === null) return;
 
         const load = async () => {
-            console.log(user);
-
             if (authUser.nickName === nickName) {
                 setUser(authUser);
                 return;

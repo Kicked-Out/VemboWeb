@@ -1,48 +1,83 @@
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import DailyQuest from "../../cardContents/dailyQuest";
-import { selectFirstQuestInfo, selectSecondQuestInfo, selectThirdQuestInfo } from "../../../slices/menuSlice";
+import type { QuestDefinitionDTO } from "../../../DTOs/questDefinitionDTO";
+import type { UserQuestProgressDTO } from "../../../DTOs/userProgressDTO/userQuestProgressDTO";
+import { QuestService } from "../../../services/questService";
+import { QuestDefinitionService } from "../../../services/questDefinitionService";
+import { UserQuestProgressService } from "../../../services/userProgress/userQuestProgressService";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsSidebarLoaded, setIsSidebarLoaded } from "../../../slices/menuSlice";
+import { selectUserData } from "../../../slices/authSlice";
 
 export default function DailyQuestsContainer() {
-    const firstQuestIcon = "/src/assets/icons/daily_quests/lightning.png";
-    const secondQuestIcon = "/src/assets/icons/daily_quests/time.png";
-    const thirdQuestIcon = "/src/assets/icons/daily_quests/goal.png";
+    const isLoaded = useSelector(selectIsSidebarLoaded);
+    const userData = useSelector(selectUserData);
+    const totalXp = userData?.totalXP;
+    const [dailyQuestDefinitions, setDailyQuestDefinitions] = useState<QuestDefinitionDTO[]>([]);
+    const [userDailyQuestProgresses, setUserDailyQuestProgresses] = useState<UserQuestProgressDTO[]>([]);
+    const dispatch = useDispatch();
 
-    const firstQuestInfo = useSelector(selectFirstQuestInfo);
-    const secondQuestInfo = useSelector(selectSecondQuestInfo);
-    const thirdQuestInfo = useSelector(selectThirdQuestInfo);
+    useEffect(() => {
+        if (isLoaded) return;
 
-    const firstTargetValue = 10;
-    const secondTargetValue = 5;
-    const thirdTargetValue = 3;
+        const getDailyQuestsData = async () => {
+            const dailyQuestsData = await QuestService.getCurrentDaily();
+
+            if (!dailyQuestsData) return;
+
+            const dailyQuestsDefinitionData = await Promise.all(
+                dailyQuestsData.map((dailyQuestData) =>
+                    QuestDefinitionService.getById(dailyQuestData.questDefinitionId)
+                )
+            );
+
+            const dailyQuestsDefinitionList =
+                totalXp !== undefined && totalXp !== 0
+                    ? dailyQuestsDefinitionData
+                    : dailyQuestsDefinitionData.slice(0, 1);
+
+            if (!dailyQuestsDefinitionList) return;
+
+            setDailyQuestDefinitions(dailyQuestsDefinitionList.filter(Boolean) as QuestDefinitionDTO[]);
+
+            const userDailyQuestProgressData = await Promise.all(
+                dailyQuestsData.map((dailyQuestData) => UserQuestProgressService.getByQuestId(dailyQuestData.id))
+            );
+
+            if (!userDailyQuestProgressData) return;
+
+            setUserDailyQuestProgresses(userDailyQuestProgressData.filter(Boolean) as UserQuestProgressDTO[]);
+
+            dispatch(setIsSidebarLoaded(true));
+        };
+
+        getDailyQuestsData();
+    }, [isLoaded]);
 
     return (
         <div className="daily-quests-container">
-            <DailyQuest
-                icon={firstQuestIcon}
-                title="Earn 10 XP"
-                progress={(100 / firstTargetValue) * firstQuestInfo}
-                minValue={firstQuestInfo}
-                maxValue={firstTargetValue}
-                chestLevel={1}
-            />
+            {dailyQuestDefinitions.map((dailyQuestDefinition, index) => {
+                const userDailyQuestProgress = userDailyQuestProgresses[index];
+                let dailyQuestProgress =
+                    (100 / dailyQuestDefinition.requirement) *
+                    (userDailyQuestProgress ? userDailyQuestProgress.progress : 0);
 
-            <DailyQuest
-                icon={secondQuestIcon}
-                title="Spend 5 minutes learning"
-                progress={(100 / secondTargetValue) * secondQuestInfo}
-                minValue={secondQuestInfo}
-                maxValue={secondTargetValue}
-                chestLevel={2}
-            />
+                if (dailyQuestProgress === 100) {
+                    dailyQuestProgress = 104;
+                }
 
-            <DailyQuest
-                icon={thirdQuestIcon}
-                title="Complete 3 perfect lessons"
-                progress={(100 / thirdTargetValue) * thirdQuestInfo}
-                minValue={thirdQuestInfo}
-                maxValue={thirdTargetValue}
-                chestLevel={3}
-            />
+                return (
+                    <DailyQuest
+                        key={index}
+                        type={dailyQuestDefinition.requirementType}
+                        title={dailyQuestDefinition.title}
+                        progress={dailyQuestProgress}
+                        minValue={userDailyQuestProgress?.progress}
+                        maxValue={dailyQuestDefinition.requirement}
+                        chestLevel={index + 1}
+                    />
+                );
+            })}
         </div>
     );
 }

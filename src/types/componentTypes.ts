@@ -207,7 +207,7 @@ export interface ChestButtonComponent {
 }
 
 export interface DailyQuestComponent {
-    icon?: string;
+    type?: string;
     title?: string;
     progress?: number;
     minValue?: number;
@@ -216,10 +216,14 @@ export interface DailyQuestComponent {
 }
 
 export interface DailyQuestCardComponent {
-    icon: string;
+    type: string;
     title: string;
     progress: number;
     currentValue: number;
     targetValue: number;
     chestLevel: number;
+}
+
+export interface DailyQuestCardBlocksContainerComponent {
+    setIsLoaded: (isLoaded: boolean) => void;
 }
