@@ -4,4 +4,5 @@ export interface AchievementDTO {
     title: string;
     description: string;
     iconUrl: string;
+    completedIconUrl: string;
 }

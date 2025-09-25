@@ -11,6 +11,7 @@ import type { UnitDTO } from "../DTOs/unitDTO";
 import {
     hideMonthlyBadgesCard,
     hideWhatAreLeaderboardsCard,
+    setIsSidebarLoaded,
     setPage,
     showAdBlockerCard,
     showDailyQuestCard,
@@ -34,6 +35,7 @@ export default function Home() {
         dispatch(showNavbar());
         dispatch(setPage({ selectedPage: 0 }));
         dispatch(showSidebar());
+        dispatch(setIsSidebarLoaded(false));
         dispatch(showStatisticCard());
         dispatch(showInsightCard());
         dispatch(showLeaderboardCard());

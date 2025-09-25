@@ -181,7 +181,9 @@ export default function Lesson() {
 
             const fetchedAnswers = answersArrays.flat();
 
-            setAnswers(fetchedAnswers);
+            const sortedFetchedAnswers = fetchedAnswers.sort((a, b) => a.id - b.id);
+
+            setAnswers(sortedFetchedAnswers);
             setIsVisible(true);
         };
 

@@ -4,6 +4,7 @@ interface MenuSlice {
     selectedPage: number;
     isNavbarHidden: boolean;
     isSidebarHidden: boolean;
+    isSidebarLoaded: boolean;
     isStatisticCardHidden: boolean;
     isInsightCardHidden: boolean;
     isLeaderboardCardHidden: boolean;
@@ -26,6 +27,7 @@ const initialState: MenuSlice = {
     selectedPage: 0,
     isNavbarHidden: false,
     isSidebarHidden: false,
+    isSidebarLoaded: false,
     isStatisticCardHidden: false,
     isInsightCardHidden: false,
     isLeaderboardCardHidden: false,
@@ -74,6 +76,10 @@ export const menuSlice = createSlice({
 
         showSidebar: (state) => {
             state.isSidebarHidden = false;
+        },
+
+        setIsSidebarLoaded: (state, action) => {
+            state.isSidebarLoaded = action.payload;
         },
 
         hideStatisticCard: (state) => {
@@ -176,6 +182,7 @@ export const menuSlice = createSlice({
         selectSelectedPage: (x) => x.selectedPage,
         selectIsNavbarHidden: (x) => x.isNavbarHidden,
         selectIsSidebarHidden: (x) => x.isSidebarHidden,
+        selectIsSidebarLoaded: (x) => x.isSidebarLoaded,
         selectIsStatisticCardHidden: (x) => x.isStatisticCardHidden,
         selectIsInsightCardHidden: (x) => x.isInsightCardHidden,
         selectIsLeaderboardCardHidden: (x) => x.isLeaderboardCardHidden,
@@ -201,6 +208,7 @@ export const {
     showNavbar,
     hideSidebar,
     showSidebar,
+    setIsSidebarLoaded,
     hideStatisticCard,
     showStatisticCard,
     hideInsightCard,
@@ -233,6 +241,7 @@ export const {
     selectSelectedPage,
     selectIsNavbarHidden,
     selectIsSidebarHidden,
+    selectIsSidebarLoaded,
     selectIsStatisticCardHidden,
     selectIsInsightCardHidden,
     selectIsLeaderboardCardHidden,
