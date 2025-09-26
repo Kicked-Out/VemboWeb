@@ -12,17 +12,27 @@ export default function SignUp() {
     const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [isMobile, setIsMobile] = useState<boolean>(typeof window !== "undefined" ? window.innerWidth <= 480 : false);
 
     useEffect(() => {
         dispatch(hideNavbar());
         dispatch(hideSidebar());
-    });
+
+        const handleResize = () => setIsMobile(window.innerWidth <= 480);
+        window.addEventListener("resize", handleResize);
+        // встановити початкове значення (на випадок, якщо компонент змонтовано до resize)
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [dispatch]);
 
     type Inputs = {
         name: string;
         email: string;
         password: string;
-        confirmPassword: string;
+        confirmPassword?: string; // зроблено опціональним
     };
 
     const navigate = useNavigate();
@@ -42,7 +52,6 @@ export default function SignUp() {
 
             if (result) {
                 dispatch(setToken(result));
-
                 navigate("/");
             }
         } catch (err) {
@@ -85,7 +94,7 @@ export default function SignUp() {
                                     <div className="input-box" />
                                     <input
                                         {...register("name", { required: true })}
-                                        placeholder="Name"
+                                        placeholder={isMobile ? "Name (optional)" : "Name"}
                                         className="input"
                                     />
                                 </div>
@@ -123,26 +132,28 @@ export default function SignUp() {
                                 </div>
                             </div>
 
-                            {/* Confirm Password Input */}
-                            <div className="input-group">
-                                <div className="input-container">
-                                    <div className="input-box" />
-                                    <input
-                                        {...register("confirmPassword", {
-                                            required: true,
-                                            validate: (value: string) => value === password || "Passwords do not match",
-                                        })}
-                                        placeholder="Confirm Password"
-                                        type={showConfirmPassword ? "text" : "password"}
-                                        className="input input--with-toggle"
-                                    />
-                                    <div className="password-toggle">
-                                        <ShowPasswordButton
-                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            {!isMobile && (
+                                <div className="input-group">
+                                    <div className="input-container">
+                                        <div className="input-box" />
+                                        <input
+                                            {...register("confirmPassword", {
+                                                required: !isMobile,
+                                                validate: (value: string | undefined) =>
+                                                    !(!value && isMobile) && (value === password || "Passwords do not match"),
+                                            })}
+                                            placeholder="Confirm Password"
+                                            type={showConfirmPassword ? "text" : "password"}
+                                            className="input input--with-toggle"
                                         />
+                                        <div className="password-toggle">
+                                            <ShowPasswordButton
+                                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
 
                             {/* Create Account Button */}
                             <PrimaryButton title="CREATE ACCOUNT" onClick={onSubmit} />
