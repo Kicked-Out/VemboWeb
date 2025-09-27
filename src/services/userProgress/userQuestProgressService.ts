@@ -1,4 +1,4 @@
-import type { QuestDTO } from "../../DTOs/questDTO";
+import type { UpdateQuestProgressDTO } from "../../DTOs/updateQuestProgress";
 import type { UserQuestProgressDTO } from "../../DTOs/userProgressDTO/userQuestProgressDTO";
 import ItemFetcher from "../../helpers/itemFetcher";
 
@@ -29,8 +29,8 @@ export class UserQuestProgressService {
         return data;
     }
 
-    public static async updateProgress(quest: QuestDTO) {
-        const response = await ItemFetcher.updateItem(`${this.baseUrl}`, quest);
+    public static async updateProgress(questId: number, data: UpdateQuestProgressDTO) {
+        const response = await ItemFetcher.updateItem(`${this.baseUrl}/${questId}`, data);
 
         return response;
     }

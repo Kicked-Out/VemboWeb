@@ -1,3 +1,5 @@
+import type { UpdateCoinsDTO } from "../DTOs/updateCoinsDTO";
+import type { UpdateUserTotalXPDTO } from "../DTOs/updateUserTotalXP";
 import type { UserStatisticDTO } from "../DTOs/userStatisticDTO";
 import ItemFetcher from "../helpers/itemFetcher";
 
@@ -20,5 +22,17 @@ export default class UserStatisticService {
         const data = await ItemFetcher.fetchItem(`${this.baseUrl}/${id}`);
 
         return data;
+    }
+
+    public static async updateTotalXP(data: UpdateUserTotalXPDTO) {
+        const response = await ItemFetcher.updateItem(`${this.baseUrl}/Current/TotalXP/`, data);
+
+        return response;
+    }
+
+    public static async updateVBucks(data: UpdateCoinsDTO) {
+        const response = await ItemFetcher.updateItem(`${this.baseUrl}/Current/Coins/`, data);
+
+        return response;
     }
 }

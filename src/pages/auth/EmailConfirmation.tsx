@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { ReturnButton } from "../../components/ui/primary-button";
 import { useEffect } from "react";
-import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
+import { hideNavbar, hideSidebar, setIsSidebarLoaded } from "../../slices/menuSlice";
 
 export default function EmailConfirmation() {
     const dispatch = useDispatch();
@@ -9,6 +9,7 @@ export default function EmailConfirmation() {
     useEffect(() => {
         dispatch(hideNavbar());
         dispatch(hideSidebar());
+        dispatch(setIsSidebarLoaded(true));
     });
 
     return (

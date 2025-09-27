@@ -5,7 +5,7 @@ import type { LoginDTO } from "../../DTOs/auth/loginDTO";
 import AuthService from "../../services/authService";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
+import { hideNavbar, hideSidebar, setIsSidebarLoaded } from "../../slices/menuSlice";
 import { setToken } from "../../slices/authSlice";
 
 export default function Login() {
@@ -19,6 +19,7 @@ export default function Login() {
     useEffect(() => {
         dispatch(hideNavbar());
         dispatch(hideSidebar());
+        dispatch(setIsSidebarLoaded(true));
     });
 
     const { register, handleSubmit } = useForm<Inputs>();

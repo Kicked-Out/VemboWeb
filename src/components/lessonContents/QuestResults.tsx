@@ -62,6 +62,7 @@ export default function QuestResults({ questsCompleted, onNext }: QuestResultsCo
 
                     return (
                         <DailyQuestCard
+                            key={index}
                             type={dailyQuestDefinition.requirementType}
                             title={dailyQuestDefinition.title}
                             progress={dailyQuestProgress}

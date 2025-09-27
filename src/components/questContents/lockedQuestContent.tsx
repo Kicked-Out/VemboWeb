@@ -14,8 +14,10 @@ export default function LockedQuestContent() {
     const [dailyQuestTimeRemainingInterval, setDailyQuestTimeRemainingInterval] = useState<string>("Hours");
 
     useEffect(() => {
+        if (!isLoaded) return;
+
         dispatch(setIsSidebarLoaded(true));
-    }, []);
+    }, [isLoaded]);
 
     useEffect(() => {
         const calculateTimeRemaining = () => {
