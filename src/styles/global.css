@@ -137,12 +137,14 @@ body {
     font-weight: 600;
     line-height: 1.2;
     width: 100%;
-    font-size: 2.25rem;
+    /* font-size: 2.25rem; */
+    font-size: 2rem; /* трохи зменшено */
     margin: 0;
 }
 @media (max-width: 767.98px) {
     .signup-title {
-        font-size: 2.25rem;
+        /* font-size: 2.25rem; */
+        font-size: 1.9rem; /* трохи зменшено для мобільних */
     }
 }
 
@@ -160,12 +162,14 @@ body {
     text-align: center;
     font-weight: 600;
     line-height: 1.2;
-    font-size: 1.25rem;
+    /* font-size: 1.25rem; */
+    font-size: 1.125rem; /* трохи зменшено */
     margin: 0;
 }
 @media (min-width: 768px) {
     .signup-subtitle {
-        font-size: 1.5rem;
+        /* font-size: 1.5rem; */
+        font-size: 1.375rem; /* трохи зменшено */
     }
 }
 
@@ -226,12 +230,14 @@ body {
     outline: none;
     padding: 0 12px;
     font-family: inherit;
-    font-size: 1.25rem;
+    /* font-size: 1.25rem; */
+    font-size: 1.125rem; /* трохи зменшено */
     color: var(--medium-blue);
 }
 
 .input::placeholder {
-    color: var(--medium-blue);
+    /* color: var(--medium-blue); */
+    color: var(--gray-blue); /* більш нейтральний сіро-блакитний плейсхолдер як на фото */
 }
 
 .input--with-toggle {
@@ -294,8 +300,10 @@ body {
 }
 
 .terms p {
+    /* font-weight: 600;
+    font-size: 1rem; */
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem; /* трохи зменшено */
     color: var(--gray-blue);
     text-align: center;
     line-height: 1.25rem;
@@ -344,7 +352,8 @@ body {
     border-bottom-width: 3px;
     font-family: inherit;
     font-weight: 600;
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
+    font-size: 1.125rem; /* трохи зменшено */
     color: var(--medium-blue);
     text-transform: uppercase;
     text-decoration: none;
@@ -380,7 +389,8 @@ body {
     border-radius: 15px;
     border-bottom-width: 6px;
     font-weight: 600;
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
+    font-size: 1.25rem; /* трохи зменшено */
     color: var(--dark);
     transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -486,11 +496,7 @@ body {
     transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
     box-sizing: border-box;
 }
-@media (min-width: 768px) {
-    .btn-return {
-        font-size: 2rem;
-    }
-}
+
 .btn-return:hover {
     background: var(--active-button);
     border-color: #466984;
@@ -558,11 +564,6 @@ body {
     font-size: 2.25rem;
     margin: 0;
 }
-@media (min-width: 768px) {
-    .page-title-lg {
-        font-size: 3rem;
-    }
-}
 
 .page-subtitle-lg {
     width: 100%;
@@ -575,8 +576,16 @@ body {
     margin: 0;
 }
 @media (min-width: 768px) {
+    .page-title-lg {
+        font-size: 3rem;
+    }
+
     .page-subtitle-lg {
         font-size: 2.25rem;
+    }
+
+    .btn-return {
+        font-size: 2rem;
     }
 }
 
@@ -593,13 +602,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 12px;
 }
 
 /* Bottom Links */
 .bottom-links {
     width: 100%;
-    max-width: 776px;
+    max-width: 976px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -848,4 +857,217 @@ body {
     font-weight:400;
     line-height:normal;
     letter-spacing:-0.24px;
+}
+
+/* ====================================================================================================
+    Mobile (phones) adjustments
+    Target: improve layout, reduce sizes and spacing for small screens (<= 480px)
+   ==================================================================================================== */
+@media (max-width: 480px) {
+    .signup-form {
+        max-width: 360px;
+        padding: 0 0;
+        gap: 24px;
+    }
+
+    .signup-hero {
+        gap: 20px;
+        padding: 0;
+    }
+
+    .signup-title {
+        font-size: 1.75rem;
+        line-height: 1.15;
+    }
+
+    .signup-subtitle {
+        font-size: 1rem;
+    }
+
+    .input-group {
+        height: 40px;
+        gap: 4px;
+    }
+
+    .input-box {
+        height: 40px;
+        border-radius: 12px;
+    }
+
+    .input {
+        height: 40px;
+        font-size: 1rem !important;
+        padding: 0 10px;
+    }
+
+    .input--with-toggle {
+        padding-right: 44px;
+    }
+
+    .password-toggle {
+        right: 8px;
+    }
+
+    .forgot-link {
+        height: 40px;
+    }
+
+    .form-fields {
+        gap: 12px !important;
+    }
+
+    .form-block {
+        gap: 22px;
+    }
+
+    .btn-primary,
+    .btn-social,
+    .btn-return {
+        height: 44px;
+        font-size: 1.125rem !important;
+        border-radius: 12px;
+    }
+
+    .btn-social {
+        width: 100% !important;
+        height: 49px;
+    }
+
+    .auth-btn {
+        top: 35px;
+        right: 35px;
+        width: 110px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .or-line {
+        width: 200px;
+        height: 3px;
+    }
+
+    .or-text {
+        font-size: 1rem;
+    }
+
+    .social-row {
+        gap: 40px;
+        flex-direction: row; /* змінено: кнопки в один рядок на мобільних */
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .social-row .btn-social {
+        width: 50% !important; /* дві кнопки поруч з невеликим простором між ними */
+        min-width: 120px;
+        box-sizing: border-box;
+    }
+
+    .social-text {
+        font-size: 0.95rem;
+    }
+
+    .terms p {
+        font-size: 0.87rem;
+    }
+
+    .terms .p-2lines {
+        max-width: 320px;
+        height: auto;
+    }
+
+    .confirm-illustration {
+        width: 220px;
+    }
+
+    .content-narrow {
+        max-width: 340px;
+    }
+
+    .content-wide,
+    .section-wide,
+    .terms-container {
+        width: 100%;
+        padding: 0 8px;
+        box-sizing: border-box;
+    }
+
+
+
+
+    .page-title-lg {
+        width: 100%;
+        color: var(--white);
+        text-align: center;
+        font-weight: 600;
+        line-height: 1.4;
+        font-size: 1.75rem;
+        margin: 0;
+    }
+
+    .page-subtitle-lg {
+        font-size: 1rem !important;
+    }
+
+    .btn-text {
+        font-size: 1rem;
+        font-family: inherit;
+        font-weight: 400;
+        line-height: 1.25rem;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5px 0;
+    }
+    
+    .link-white {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: var(--white);
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.25rem;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .content-wide {
+        width: 100%;
+        max-width: 780px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px !important;
+    }
+
+    .section-wide {
+        width: 100%;
+        max-width: 772px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* Title/Subtitle */
+    .header-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .page-subtitle-lg {
+        width: 100%;
+        max-width: 772px;
+        color: var(--white);
+        text-align: center;
+        font-weight: 600;
+        line-height: 1.4;
+        font-size: 1.5rem;
+        margin: 0;
+    }
 }
