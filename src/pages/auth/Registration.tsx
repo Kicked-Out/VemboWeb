@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import type { RegisterDTO } from "../../DTOs/auth/registerDTO";
 import AuthService from "../../services/authService";
 import { useDispatch } from "react-redux";
-import { hideNavbar, hideSidebar } from "../../slices/menuSlice";
+import { hideNavbar, hideSidebar, setIsSidebarLoaded } from "../../slices/menuSlice";
 import { setToken } from "../../slices/authSlice";
 
 export default function SignUp() {
@@ -17,6 +17,7 @@ export default function SignUp() {
     useEffect(() => {
         dispatch(hideNavbar());
         dispatch(hideSidebar());
+        dispatch(setIsSidebarLoaded(true));
 
         const handleResize = () => setIsMobile(window.innerWidth <= 480);
         window.addEventListener("resize", handleResize);
@@ -140,7 +141,8 @@ export default function SignUp() {
                                             {...register("confirmPassword", {
                                                 required: !isMobile,
                                                 validate: (value: string | undefined) =>
-                                                    !(!value && isMobile) && (value === password || "Passwords do not match"),
+                                                    !(!value && isMobile) &&
+                                                    (value === password || "Passwords do not match"),
                                             })}
                                             placeholder="Confirm Password"
                                             type={showConfirmPassword ? "text" : "password"}

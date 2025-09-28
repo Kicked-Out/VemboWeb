@@ -13,6 +13,7 @@ import {
     setIsSidebarLoaded,
     setPage,
     showNavbar,
+    showSidebar,
     showWhatAreLeaderboardsCard,
 } from "../slices/menuSlice";
 import LeaderboardsContent from "../components/leaderboardContents/leaderboardsContent";
@@ -27,7 +28,8 @@ export default function Leaderboards() {
         dispatch(setPage({ selectedPage: 2 }));
 
         if (isFirstLevelStatus === 1) {
-            dispatch(setIsSidebarLoaded(true));
+            dispatch(showSidebar());
+            dispatch(setIsSidebarLoaded(false));
             dispatch(hideStatisticCard());
             dispatch(hideInsightCard());
             dispatch(hideLeaderboardCard());

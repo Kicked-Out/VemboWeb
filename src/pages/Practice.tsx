@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
     hideMonthlyBadgesCard,
@@ -18,6 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Practice() {
     const dispatch = useDispatch();
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(showNavbar());
@@ -36,6 +37,14 @@ export default function Practice() {
         dispatch(showInfoCard());
     }, []);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoaded(true);
+        }, 50);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     const navigate = useNavigate();
 
     const getInsightOnClickHandler = () => {
@@ -43,7 +52,7 @@ export default function Practice() {
     };
 
     return (
-        <div className="practice-container">
+        <div className={`practice-container ${isLoaded ? "fade-in" : "fade-out"}`}>
             <div className="practice-cards-block-container">
                 <div className="practice-cards-block">
                     <h2 className="practice-cards-block__title">Today's Rewind</h2>

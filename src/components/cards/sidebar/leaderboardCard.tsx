@@ -1,11 +1,44 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import type { UserLeaderboardDTO } from "../../../DTOs/userLeaderboardDTO";
+import UserLeaderboardService from "../../../services/userLeaderboardService";
+import { useSelector } from "react-redux";
+import { selectUserData } from "../../../slices/authSlice";
 
 export default function LeaderboardCard() {
     const navigate = useNavigate();
+    const user = useSelector(selectUserData);
+    const [leaderboardEntry, setLeaderboardEntry] = useState<UserLeaderboardDTO>();
+    const [rank, setRank] = useState<number>(1);
 
     const onClickHandler = () => {
         navigate("/leaderboards");
     };
+
+    useEffect(() => {
+        const getLeaderboardEntry = async () => {
+            const leaderboardEntriesData = await UserLeaderboardService.getAll();
+
+            if (!leaderboardEntriesData) return;
+
+            const userId = user?.id;
+
+            if (!userId) return;
+
+            const leaderboardEntryData = leaderboardEntriesData.filter(
+                (leaderboardEntry) => leaderboardEntry.userId === userId
+            )[0];
+
+            if (!leaderboardEntryData) return;
+
+            setLeaderboardEntry(leaderboardEntryData);
+
+            const leaderboardEntryIndex = leaderboardEntriesData.indexOf(leaderboardEntryData);
+            setRank(leaderboardEntryIndex + 1);
+        };
+
+        getLeaderboardEntry();
+    }, []);
 
     return (
         <div className="leaderboard-card">
@@ -15,10 +48,10 @@ export default function LeaderboardCard() {
 
                     <h2 className="leaderboard-card__title">
                         You're Ranked
-                        <span className="leaderboard-card__rank"> #12</span>
+                        <span className="leaderboard-card__rank"> #{rank}</span>
                     </h2>
 
-                    <p className="leaderboard-card__info">You've earned 113 XP this week so far</p>
+                    <p className="leaderboard-card__info">You've earned {leaderboardEntry?.xp} XP this week so far</p>
                 </div>
 
                 <img

@@ -1,14 +1,27 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { selectIsSidebarLoaded, setIsSidebarLoaded } from "../../slices/menuSlice";
+import { useEffect } from "react";
 
 export default function LockedLeaderboards() {
+    const dispatch = useDispatch();
+    const isLoaded = useSelector(selectIsSidebarLoaded);
     const navigate = useNavigate();
 
     const onClickHandler = () => {
         navigate("/practice");
     };
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            dispatch(setIsSidebarLoaded(true));
+        }, 50);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
-        <div className="locked-leaderboards">
+        <div className={`locked-leaderboards ${isLoaded ? "fade-in" : "fade-out"}`}>
             <div className="locked-leaderboards-title-block">
                 <img className="locked-leaderboards-img" src="/src/assets/icons/leaderboards/locked/title-img.png" />
 

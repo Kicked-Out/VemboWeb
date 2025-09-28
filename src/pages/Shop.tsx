@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectVBucks, setHearts, takeVBucks } from "../slices/userStatisticsSlice";
 import "../styles/shop.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
     hideInsightCard,
     hideMonthlyBadgesCard,
@@ -22,6 +22,7 @@ export default function Shop() {
     const vBucks = useSelector(selectVBucks);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(showNavbar());
@@ -38,6 +39,14 @@ export default function Shop() {
         dispatch(showInfoCard());
     }, []);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoaded(true);
+        }, 50);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     const heartsPrice = 350;
     const hasEnough = vBucks >= heartsPrice;
 
@@ -52,7 +61,7 @@ export default function Shop() {
     };
 
     return (
-        <div className="shop-page">
+        <div className={`shop-page ${isLoaded ? "fade-in" : "fade-out"}`}>
             <div className="big-insight-card">
                 <img src="/src/assets/icons/insight/insight_icon.png" alt="Insight" className="insight-tag" />
                 <h2>Not Just History...</h2>

@@ -6,5 +6,5 @@ export interface QuestDefinitionDTO {
     requirementType: string;
     requirement: number;
     rewardType: string;
-    rewardAmound: number;
+    rewardAmount: number;
 }
