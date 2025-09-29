@@ -11,7 +11,7 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "./slices/store";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { initSlice, selectToken, setToken } from "./slices/authSlice";
 import UserStatisticService from "./services/userStatisticService";
 import type { UserDTO } from "./DTOs/auth/userDTO";
@@ -36,6 +36,7 @@ import Settings from "./pages/settings/settings";
 import Privacy from "./pages/settings/privacy";
 import Social from "./pages/settings/social";
 import Premium from "./pages/Premium";
+import type { CSSProperties } from "react";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -43,9 +44,9 @@ function App() {
     const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
     const isNavbarHidden = useSelector(selectIsNavbarHidden);
     const isSidebarHidden = useSelector(selectIsSidebarHidden);
-    const [gridTemplateFirstColumn, setGridTemplateFirstColumn] = useState("320px");
-    const [gridTemplateThirdColumn, setGridTemplateThirdColumn] = useState("3fr");
-    const gridTemplateColumns = `${gridTemplateFirstColumn} ${gridTemplateThirdColumn}`;
+    const [gridTemplateColumns, setGridTemplateColumns] = useState(
+        "minmax(260px, 320px) minmax(0, 1fr) minmax(320px, 400px)",
+    );
     const isWhatAreLeaderboardsCard = useSelector(selectIsWhatAreLeaderboardsCardHidden);
     const navigate = useNavigate();
     const token = useSelector(selectToken);
@@ -74,18 +75,11 @@ function App() {
     }, [dispatch]);
 
     useEffect(() => {
-        if (isNavbarHidden) {
-            setGridTemplateFirstColumn("1fr");
-        } else {
-            setGridTemplateFirstColumn("320px 5fr");
-        }
+        const navColumn = isNavbarHidden ? "0px" : "minmax(260px, 320px)";
+        const sidebarColumn = isSidebarHidden ? "0px" : "minmax(320px, 400px)";
 
-        if (isSidebarHidden) {
-            setGridTemplateThirdColumn("auto");
-        } else {
-            setGridTemplateThirdColumn("3fr");
-        }
-    });
+        setGridTemplateColumns(`${navColumn} minmax(0, 1fr) ${sidebarColumn}`);
+    }, [isNavbarHidden, isSidebarHidden]);
 
     const checkIsTokenValid = async () => {
         if (!token) return false;
@@ -159,18 +153,19 @@ function App() {
         }
     }, [userStatistic]);
 
+    const gridContainerStyle = useMemo(
+        () =>
+            ({
+                "--layout-grid-columns": gridTemplateColumns,
+                "--grid-background": !isWhatAreLeaderboardsCard && !isSidebarHidden
+                    ? "linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%)"
+                    : "none",
+            }) as CSSProperties,
+        [gridTemplateColumns, isWhatAreLeaderboardsCard, isSidebarHidden],
+    );
+
     return (
-        <div
-            className="grid-container"
-            style={{
-                gridTemplateColumns: `${gridTemplateColumns}`,
-                ["--grid-background" as any]: `${
-                    !isWhatAreLeaderboardsCard && !isSidebarHidden
-                        ? "linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%)"
-                        : "none"
-                }`,
-            }}
-        >
+        <div className="grid-container" style={gridContainerStyle}>
             <NavBar isHidden={isNavbarHidden} />
 
             <div className="container">
