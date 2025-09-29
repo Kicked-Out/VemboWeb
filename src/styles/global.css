@@ -111,6 +111,10 @@ body {
     }
 }
 
+.auth-page {
+    padding: clamp(1.5rem, 6vw, 3.5rem);
+}
+
 /* ===== Form ===== */
 .signup-form {
     display: flex;
@@ -140,6 +144,11 @@ body {
     /* font-size: 2.25rem; */
     font-size: 2rem; /* трохи зменшено */
     margin: 0;
+}
+
+.signup-title {
+    font-size: var(--step-3);
+    margin-block: var(--space-2);
 }
 @media (max-width: 767.98px) {
     .signup-title {
@@ -173,6 +182,11 @@ body {
     }
 }
 
+.signup-subtitle {
+    font-size: var(--step-0);
+    margin-block: var(--space-1);
+}
+
 .text-medium-blue {
     color: var(--medium-blue);
 }
@@ -185,6 +199,10 @@ body {
     width: 100%;
 }
 
+.form-block {
+    gap: var(--space-4);
+}
+
 /* ===== Form Fields ===== */
 .form-fields {
     display: flex;
@@ -193,12 +211,22 @@ body {
     width: 100%;
 }
 
+.form-fields {
+    gap: var(--space-3);
+}
+
 .input-group {
     display: flex;
     flex-direction: column;
     gap: 4px;
     height: 60px;
     width: 100%;
+}
+
+.input-group {
+    gap: var(--space-1);
+    min-block-size: auto;
+    height: auto;
 }
 
 /* ===== Container (Input with border) ===== */
@@ -219,6 +247,11 @@ body {
     border-radius: 15px;
 }
 
+.input-box {
+    min-block-size: clamp(2.75rem, 6vh, 3.5rem);
+    border-radius: var(--radius-lg);
+}
+
 /* ===== Input ===== */
 .input {
     position: relative;
@@ -233,6 +266,13 @@ body {
     /* font-size: 1.25rem; */
     font-size: 1.125rem; /* трохи зменшено */
     color: var(--medium-blue);
+}
+
+.input {
+    min-block-size: clamp(2.75rem, 6vh, 3.5rem);
+    padding-inline: var(--space-3);
+    font-size: var(--step-0);
+    border-radius: var(--radius-lg);
 }
 
 .input::placeholder {

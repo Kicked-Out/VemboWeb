@@ -43,9 +43,15 @@ function App() {
     const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
     const isNavbarHidden = useSelector(selectIsNavbarHidden);
     const isSidebarHidden = useSelector(selectIsSidebarHidden);
-    const [gridTemplateFirstColumn, setGridTemplateFirstColumn] = useState("320px");
-    const [gridTemplateThirdColumn, setGridTemplateThirdColumn] = useState("3fr");
-    const gridTemplateColumns = `${gridTemplateFirstColumn} ${gridTemplateThirdColumn}`;
+    const [gridTemplateFirstColumn, setGridTemplateFirstColumn] = useState(
+        "minmax(clamp(14rem, 24vw, 18rem), 1fr)"
+    );
+    const [gridTemplateThirdColumn, setGridTemplateThirdColumn] = useState(
+        "minmax(clamp(17rem, 28vw, 22rem), 1fr)"
+    );
+    const gridTemplateColumns = [gridTemplateFirstColumn, "minmax(0, 5fr)", gridTemplateThirdColumn]
+        .filter(Boolean)
+        .join(" ");
     const isWhatAreLeaderboardsCard = useSelector(selectIsWhatAreLeaderboardsCardHidden);
     const navigate = useNavigate();
     const token = useSelector(selectToken);
@@ -75,15 +81,15 @@ function App() {
 
     useEffect(() => {
         if (isNavbarHidden) {
-            setGridTemplateFirstColumn("1fr");
+            setGridTemplateFirstColumn("");
         } else {
-            setGridTemplateFirstColumn("320px 5fr");
+            setGridTemplateFirstColumn("minmax(clamp(14rem, 24vw, 18rem), 1fr)");
         }
 
         if (isSidebarHidden) {
-            setGridTemplateThirdColumn("auto");
+            setGridTemplateThirdColumn("");
         } else {
-            setGridTemplateThirdColumn("3fr");
+            setGridTemplateThirdColumn("minmax(clamp(17rem, 28vw, 22rem), 1fr)");
         }
     });
 
@@ -162,8 +168,10 @@ function App() {
     return (
         <div
             className="grid-container"
+            data-sidebar-hidden={isSidebarHidden}
+            data-nav-hidden={isNavbarHidden}
             style={{
-                gridTemplateColumns: `${gridTemplateColumns}`,
+                ["--app-grid-template" as any]: gridTemplateColumns || undefined,
                 ["--grid-background" as any]: `${
                     !isWhatAreLeaderboardsCard && !isSidebarHidden
                         ? "linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%)"
