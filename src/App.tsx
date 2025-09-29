@@ -43,9 +43,12 @@ function App() {
     const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
     const isNavbarHidden = useSelector(selectIsNavbarHidden);
     const isSidebarHidden = useSelector(selectIsSidebarHidden);
-    const [gridTemplateFirstColumn, setGridTemplateFirstColumn] = useState("320px");
+    const [gridTemplateFirstColumn, setGridTemplateFirstColumn] = useState("320px 5fr");
     const [gridTemplateThirdColumn, setGridTemplateThirdColumn] = useState("3fr");
-    const gridTemplateColumns = `${gridTemplateFirstColumn} ${gridTemplateThirdColumn}`;
+    const [isMobileLayout, setIsMobileLayout] = useState<boolean>(false);
+    const gridTemplateColumns = isMobileLayout
+        ? "minmax(0, 1fr)"
+        : `${gridTemplateFirstColumn} ${gridTemplateThirdColumn}`;
     const isWhatAreLeaderboardsCard = useSelector(selectIsWhatAreLeaderboardsCardHidden);
     const navigate = useNavigate();
     const token = useSelector(selectToken);
@@ -74,6 +77,27 @@ function App() {
     }, [dispatch]);
 
     useEffect(() => {
+        const updateLayoutMode = () => {
+            if (typeof window === "undefined") return;
+
+            setIsMobileLayout(window.innerWidth <= 1024);
+        };
+
+        updateLayoutMode();
+
+        window.addEventListener("resize", updateLayoutMode);
+
+        return () => window.removeEventListener("resize", updateLayoutMode);
+    }, []);
+
+    useEffect(() => {
+        if (isMobileLayout) {
+            setGridTemplateFirstColumn("1fr");
+            setGridTemplateThirdColumn("auto");
+
+            return;
+        }
+
         if (isNavbarHidden) {
             setGridTemplateFirstColumn("1fr");
         } else {
@@ -85,7 +109,7 @@ function App() {
         } else {
             setGridTemplateThirdColumn("3fr");
         }
-    });
+    }, [isNavbarHidden, isSidebarHidden, isMobileLayout]);
 
     const checkIsTokenValid = async () => {
         if (!token) return false;
@@ -161,19 +185,19 @@ function App() {
 
     return (
         <div
-            className="grid-container"
+            className={`grid-container ${isMobileLayout ? "grid-container-mobile" : ""}`}
             style={{
                 gridTemplateColumns: `${gridTemplateColumns}`,
                 ["--grid-background" as any]: `${
-                    !isWhatAreLeaderboardsCard && !isSidebarHidden
+                    !isMobileLayout && !isWhatAreLeaderboardsCard && !isSidebarHidden
                         ? "linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%)"
                         : "none"
                 }`,
             }}
         >
-            <NavBar isHidden={isNavbarHidden} />
+            <NavBar isHidden={isNavbarHidden} isMobileLayout={isMobileLayout} />
 
-            <div className="container">
+            <div className={`container ${isMobileLayout ? "container-mobile" : ""}`}>
                 <Routes>
                     <Route path="*" element={<NotFound />} />
                     <Route path="/" element={<Home />} />
@@ -204,8 +228,8 @@ function App() {
                     <Route path="/get-insight" element={<Premium />} />
                 </Routes>
             </div>
-
-            <Sidebar isHidden={isSidebarHidden} />
+            {isMobileLayout ? null : <Sidebar isHidden={isSidebarHidden} />}
+            {isMobileLayout ? <Sidebar isHidden={isSidebarHidden} /> : null}
         </div>
     );
 }

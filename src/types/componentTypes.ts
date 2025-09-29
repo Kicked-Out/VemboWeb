@@ -186,6 +186,7 @@ export interface unitHeaderCardComponent {
 
 export interface NavbarComponent {
     isHidden: boolean;
+    isMobileLayout?: boolean;
 }
 
 export interface SidebarComponent {
