@@ -4,4 +4,5 @@ export interface AchievementLevelDTO {
     level: number;
     targetValue: number;
     rewardXP: number;
+    isCompleted: boolean;
 }

@@ -4,6 +4,7 @@ export interface UserStatisticDTO {
     streak: number;
     vBucks: number;
     hearts: number;
+    totalXP: number;
     currentPeriodId: number;
     currentLessonId: number;
 }

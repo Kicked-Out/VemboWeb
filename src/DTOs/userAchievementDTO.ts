@@ -4,5 +4,6 @@ export interface UserAchievementDTO {
     achievementId: number;
     currentLevel: number;
     progress: number;
-    earnedAt: Date;
+    isCompleted: boolean;
+    earnedAt: string;
 }
