@@ -43,9 +43,7 @@ function App() {
     const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
     const isNavbarHidden = useSelector(selectIsNavbarHidden);
     const isSidebarHidden = useSelector(selectIsSidebarHidden);
-    const [gridTemplateFirstColumn, setGridTemplateFirstColumn] = useState("320px");
-    const [gridTemplateThirdColumn, setGridTemplateThirdColumn] = useState("3fr");
-    const gridTemplateColumns = `${gridTemplateFirstColumn} ${gridTemplateThirdColumn}`;
+    const [gridTemplateColumnsValue, setGridTemplateColumnsValue] = useState("320px 5fr 3fr");
     const isWhatAreLeaderboardsCard = useSelector(selectIsWhatAreLeaderboardsCardHidden);
     const navigate = useNavigate();
     const token = useSelector(selectToken);
@@ -74,18 +72,51 @@ function App() {
     }, [dispatch]);
 
     useEffect(() => {
-        if (isNavbarHidden) {
-            setGridTemplateFirstColumn("1fr");
-        } else {
-            setGridTemplateFirstColumn("320px 5fr");
-        }
+        const computeGridTemplate = (width: number) => {
+            if (width <= 1024) {
+                return "1fr";
+            }
 
-        if (isSidebarHidden) {
-            setGridTemplateThirdColumn("auto");
-        } else {
-            setGridTemplateThirdColumn("3fr");
-        }
-    });
+            if (width <= 1200) {
+                const columns: string[] = [];
+
+                if (!isNavbarHidden) {
+                    columns.push("260px");
+                }
+
+                columns.push("1fr");
+
+                return columns.join(" ");
+            }
+
+            const columns: string[] = [];
+
+            if (!isNavbarHidden) {
+                columns.push("320px");
+            }
+
+            columns.push("5fr");
+
+            if (!isSidebarHidden) {
+                columns.push("3fr");
+            }
+
+            return columns.join(" ");
+        };
+
+        const handleResize = () => {
+            if (typeof window === "undefined") return;
+            setGridTemplateColumnsValue(computeGridTemplate(window.innerWidth));
+        };
+
+        handleResize();
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [isNavbarHidden, isSidebarHidden]);
 
     const checkIsTokenValid = async () => {
         if (!token) return false;
@@ -163,7 +194,7 @@ function App() {
         <div
             className="grid-container"
             style={{
-                gridTemplateColumns: `${gridTemplateColumns}`,
+                gridTemplateColumns: `${gridTemplateColumnsValue}`,
                 ["--grid-background" as any]: `${
                     !isWhatAreLeaderboardsCard && !isSidebarHidden
                         ? "linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%)"

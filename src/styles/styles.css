@@ -211,7 +211,7 @@ body.settings-page .container {
     display: grid;
     width: 100%;
     min-height: 100vh;
-    grid-template-columns: 320px 5fr 3fr;
+    grid-template-columns: minmax(280px, 320px) minmax(0, 5fr) minmax(260px, 3fr);
     background: var(--grid-background);
 }
 
@@ -226,8 +226,13 @@ body.settings-page .container {
     top: 0;
     z-index: 3;
     height: 100vh;
+    width: 100%;
     border-right: 1px solid var(--ice-white);
     background-color: var(--polar-navy);
+}
+
+.navbar-header {
+    display: none;
 }
 
 .nav-title {
@@ -239,9 +244,61 @@ body.settings-page .container {
     color: var(--nav-title-color);
 }
 
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.navbar-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.navbar-toggle-bar {
+    width: 24px;
+    height: 2px;
+    background-color: var(--ice-white);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.navbar-toggle-open .navbar-toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-toggle-open .navbar-toggle-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggle-open .navbar-toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 0;
+}
+
+.nav-links-open {
+    display: flex;
+}
+
 .nav-btn {
     display: flex;
-    width: 277px;
+    width: 100%;
+    max-width: 277px;
     height: 63px;
     margin: 4px;
     align-self: center;
@@ -296,6 +353,13 @@ body.settings-page .container {
     align-items: center;
     gap: 8px;
     width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
 }
 
 .more-menu {
@@ -338,6 +402,7 @@ body.settings-page .container {
     text-align: center;
     font-size: 20px;
     font-weight: 700;
+    background: transparent;
 }
 
 .more-menu-item[type="button"] {
@@ -634,6 +699,121 @@ body.hide-sidebar .sidebar-top {
     margin-top: 32px;
     flex-direction: column;
     gap: 24px;
+}
+
+@media (max-width: 1440px) {
+    .grid-container {
+        grid-template-columns: minmax(240px, 280px) minmax(0, 5fr) minmax(220px, 2.5fr);
+    }
+}
+
+@media (max-width: 1200px) {
+    .grid-container {
+        grid-template-columns: minmax(220px, 260px) minmax(0, 5fr);
+    }
+
+    .sidebar-top {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+    }
+
+    .navbar {
+        position: sticky;
+        top: 0;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--ice-white);
+        padding: 0 16px;
+        box-sizing: border-box;
+        background-color: rgba(15, 32, 56, 0.95);
+        backdrop-filter: blur(8px);
+    }
+
+    .navbar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 16px 0;
+    }
+
+    .nav-title {
+        margin: 0;
+        font-size: 36px;
+    }
+
+    .navbar-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        align-items: stretch;
+        padding: 0 0 24px 0;
+        gap: 12px;
+    }
+
+    .nav-links-open {
+        display: flex;
+    }
+
+    .nav-btn {
+        max-width: none;
+        width: 100%;
+        margin: 0;
+    }
+
+    .nav-icon,
+    .nav-profile-icon {
+        margin-left: 0;
+        margin-right: 16px;
+    }
+
+    .more-container {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .more-menu {
+        position: static;
+        margin-top: 12px;
+        width: 100%;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        border: 1px solid var(--nav-btn-border-color-active);
+    }
+
+    .more-menu-closed {
+        display: none;
+    }
+
+    .more-menu-item {
+        padding: 12px;
+        text-align: left;
+    }
+
+    .sidebar-top {
+        position: static;
+        padding-top: 16px;
+    }
+
+    .sidebar {
+        position: static;
+    }
+
+    .container {
+        width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+    }
 }
 
 /* =========================================================================================================================================================================== */
