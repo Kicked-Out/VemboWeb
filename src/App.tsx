@@ -1,5 +1,6 @@
 import "./styles/styles.css";
 import "./styles/global.css";
+import type { CSSProperties } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Lesson from "./pages/Lesson";
@@ -162,14 +163,14 @@ function App() {
     return (
         <div
             className="grid-container"
-            style={{
-                gridTemplateColumns: `${gridTemplateColumns}`,
-                ["--grid-background" as any]: `${
-                    !isWhatAreLeaderboardsCard && !isSidebarHidden
+            style={
+                {
+                    "--layout-columns": gridTemplateColumns,
+                    "--grid-background": !isWhatAreLeaderboardsCard && !isSidebarHidden
                         ? "linear-gradient(to bottom, transparent 75%, rgba(0, 0, 0, 0.4) 100%)"
-                        : "none"
-                }`,
-            }}
+                        : "none",
+                } as CSSProperties
+            }
         >
             <NavBar isHidden={isNavbarHidden} />
 

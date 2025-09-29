@@ -94,58 +94,44 @@ body {
 }
 
 .auth-page {
-    width: 100%;
-    min-height: 100vh;
+    inline-size: 100%;
+    min-block-size: min(100svh, 100%);
     background: var(--dark);
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    gap: var(--space-4);
 }
 
-@media (min-width: 768px) {
-    .auth-page {
-        padding: 40px;
-    }
-}
-
-/* ===== Form ===== */
 .signup-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 44px;
-    width: 100%;
-    max-width: 500px;
+    gap: var(--space-4);
+    inline-size: 100%;
+    max-inline-size: clamp(18rem, 92vw, 32rem);
     position: relative;
 }
 
-/* ===== Text Section ===== */
 .signup-hero {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
-    width: 100%;
+    gap: var(--space-3);
+    inline-size: 100%;
+    text-align: center;
 }
 
-/* ===== Title ===== */
 .signup-title {
-    text-align: center;
-    font-weight: 600;
-    line-height: 1.2;
-    width: 100%;
-    /* font-size: 2.25rem; */
-    font-size: 2rem; /* трохи зменшено */
+    inline-size: 100%;
     margin: 0;
-}
-@media (max-width: 767.98px) {
-    .signup-title {
-        /* font-size: 2.25rem; */
-        font-size: 1.9rem; /* трохи зменшено для мобільних */
-    }
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+    font-size: var(--step-3);
 }
 
 .text-white {
@@ -156,172 +142,144 @@ body {
     color: var(--light-blue);
 }
 
-/* ===== Subtitle ===== */
 .signup-subtitle {
-    width: 100%;
-    text-align: center;
-    font-weight: 600;
-    line-height: 1.2;
-    /* font-size: 1.25rem; */
-    font-size: 1.125rem; /* трохи зменшено */
+    inline-size: 100%;
     margin: 0;
-}
-@media (min-width: 768px) {
-    .signup-subtitle {
-        /* font-size: 1.5rem; */
-        font-size: 1.375rem; /* трохи зменшено */
-    }
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+    font-size: var(--step-1);
 }
 
 .text-medium-blue {
     color: var(--medium-blue);
 }
 
-/* ===== Form Container ===== */
 .form-block {
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    width: 100%;
+    gap: var(--space-3);
+    inline-size: 100%;
 }
 
-/* ===== Form Fields ===== */
 .form-fields {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    width: 100%;
+    gap: var(--space-2);
+    inline-size: 100%;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    height: 60px;
-    width: 100%;
+    gap: var(--space-1);
+    inline-size: 100%;
 }
 
-/* ===== Container (Input with border) ===== */
 .input-container {
     position: relative;
-    flex: 1;
-    width: 100%;
+    inline-size: 100%;
 }
 
 .input-box {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 60px;
-    background: #fff;
+    inset: 0;
+    inline-size: 100%;
+    min-block-size: var(--touch-target);
     border: 2px solid var(--color-border);
-    border-radius: 15px;
+    border-radius: var(--radius-lg);
+    background: var(--white);
 }
 
-/* ===== Input ===== */
 .input {
     position: relative;
     z-index: 10;
-    width: 100%;
-    height: 60px;
-    background: transparent;
+    inline-size: 100%;
+    min-block-size: var(--touch-target);
     border: none;
-    outline: none;
-    padding: 0 12px;
-    font-family: inherit;
-    /* font-size: 1.25rem; */
-    font-size: 1.125rem; /* трохи зменшено */
+    background: transparent;
+    padding-inline: var(--space-2);
+    font-size: var(--step-0);
     color: var(--medium-blue);
 }
 
 .input::placeholder {
-    /* color: var(--medium-blue); */
-    color: var(--gray-blue); /* більш нейтральний сіро-блакитний плейсхолдер як на фото */
+    color: var(--gray-blue);
 }
 
 .input--with-toggle {
-    padding-right: 48px;
+    padding-inline-end: calc(var(--space-4) + 2.5rem);
 }
 
-/* ===== Button ShowPassword ===== */
 .password-toggle {
     position: absolute;
-    right: 12px;
-    top: 50%;
+    inset-inline-end: var(--space-2);
+    inset-block-start: 50%;
     transform: translateY(-50%);
     z-index: 11;
 }
 
-/* ===== --- "OR" --- ===== */
 .or {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: var(--space-2);
     align-items: center;
-    gap: 12px;
-    width: 100%;
+    inline-size: 100%;
 }
 
 .or-line {
-    width: 224px;
-    height: 5px;
+    block-size: 0.25rem;
     background: var(--medium-blue);
+    border-radius: 999px;
 }
 
 .or-text {
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: var(--step-0);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--medium-blue);
 }
 
-/* ===== Social Button ===== */
 .social-row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+    inline-size: 100%;
 }
-@media (min-width: 768px) {
+
+@media (min-width: 48rem) {
     .social-row {
-        flex-direction: row;
-        gap: 40px;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
     }
 }
 
-/* ===== Terms & Policy ===== */
 .terms {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-    width: 100%;
-    max-width: 482px;
+    gap: var(--space-2);
+    inline-size: 100%;
+    max-inline-size: clamp(20rem, 85vw, 30rem);
+    text-align: center;
 }
 
 .terms p {
-    /* font-weight: 600;
-    font-size: 1rem; */
     font-weight: 600;
-    font-size: 0.95rem; /* трохи зменшено */
+    font-size: var(--step--1);
     color: var(--gray-blue);
-    text-align: center;
-    line-height: 1.25rem;
-    display: flex;
-    align-items: center;
+    line-height: 1.5;
     margin: 0;
 }
 
 .terms .p-1line {
-    height: 40px;
+    max-inline-size: clamp(18rem, 82vw, 26rem);
 }
 
 .terms .p-2lines {
-    max-width: 398px;
-    height: 65px;
+    max-inline-size: clamp(18rem, 80vw, 24rem);
 }
 
-/* ===== Утиліти, які використано у розмітці ===== */
 .relative {
     position: relative;
 }
@@ -333,136 +291,134 @@ body {
 }
 
 .rounded-15 {
-    border-radius: 15px;
+    border-radius: var(--radius-lg);
 }
 
-/* ===== AuthButton ===== */
 .auth-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
+    inset-block-start: clamp(1rem, 4vw, 2.5rem);
+    inset-inline-end: clamp(1rem, 4vw, 2.5rem);
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 140px;
-    height: 45px;
+    gap: var(--space-1);
+    inline-size: clamp(8rem, 38vw, 10rem);
+    min-block-size: var(--touch-target);
     border: 2px solid var(--color-border);
-    background: #fff;
-    border-radius: 15px;
-    border-bottom-width: 3px;
-    font-family: inherit;
+    border-radius: var(--radius-lg);
+    background: var(--white);
     font-weight: 600;
-    /* font-size: 1.5rem; */
-    font-size: 1.125rem; /* трохи зменшено */
-    color: var(--medium-blue);
+    font-size: var(--step-0);
     text-transform: uppercase;
     text-decoration: none;
+    color: var(--medium-blue);
     transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-@media (min-width: 768px) {
-    .auth-btn {
-        top: 40px;
-        right: 40px;
-    }
+    box-shadow: 0 6px 0 rgba(113, 180, 212, 0.35);
 }
 
 .auth-btn:hover {
     background: var(--active-button);
     color: var(--white);
-    border-color: #466984;
-    border-bottom-width: 3px;
+    border-color: var(--steel-blue);
+    box-shadow: 0 4px 0 var(--steel-blue);
 }
 
 .auth-btn:active {
-    transform: scale(0.95);
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 var(--steel-blue);
 }
 
-/* ===== PrimaryButton ===== */
-.btn-primary {
-    display: flex;
+.btn-primary,
+.btn-social,
+.btn-return {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
-    width: 100%;
+    gap: var(--space-2);
+    inline-size: 100%;
+    min-block-size: var(--touch-target);
+    border-radius: var(--radius-lg);
     border: 2px solid var(--color-border);
-    background: var(--light-blue);
-    border-radius: 15px;
-    border-bottom-width: 6px;
     font-weight: 600;
-    /* font-size: 1.5rem; */
-    font-size: 1.25rem; /* трохи зменшено */
+    font-size: var(--step-0);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 6px 0 rgba(113, 180, 212, 0.35);
+}
+
+.btn-primary,
+.btn-return {
+    background: var(--light-blue);
     color: var(--dark);
-    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-return:hover {
     background: var(--active-button);
-    border-color: #466984;
-    border-bottom-width: 6px;
+    border-color: var(--steel-blue);
+    box-shadow: 0 4px 0 var(--steel-blue);
+    transform: translateY(-1px);
 }
 
-.btn-primary:active {
-    transform: scale(0.95);
+.btn-primary:active,
+.btn-return:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 var(--steel-blue);
 }
 
-/* ===== SocialButton ===== */
 .btn-social {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    height: 60px;
-    border: 2px solid var(--color-border);
-    background: #fff;
+    background: var(--white);
     color: var(--medium-blue);
-    border-radius: 15px;
-    border-bottom-width: 6px;
-    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-@media (min-width: 768px) {
-    .btn-social {
-        width: 230px;
-    }
+    box-shadow: 0 6px 0 rgba(113, 180, 212, 0.25);
 }
 
 .btn-social:hover {
     background: var(--active-button);
     color: var(--white);
-    border-color: #466984;
-    border-bottom-width: 6px;
+    border-color: var(--steel-blue);
+    box-shadow: 0 4px 0 var(--steel-blue);
+    transform: translateY(-1px);
 }
 
 .btn-social:active {
-    transform: scale(0.95);
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 var(--steel-blue);
+}
+
+@media (min-width: 48rem) {
+    .btn-social {
+        max-inline-size: clamp(13rem, 30vw, 15rem);
+        justify-self: center;
+    }
 }
 
 .social-icon {
-    width: 24px;
-    height: 24px;
+    inline-size: clamp(1.5rem, 1.2rem + 0.8vw, 2rem);
+    block-size: clamp(1.5rem, 1.2rem + 0.8vw, 2rem);
 }
 
 .social-text {
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: var(--step-0);
     font-family: inherit;
 }
 
-/* ===== ShowPasswordButton ===== */
 .password-toggle-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    /* height:60px; */
+    inline-size: 44px;
+    block-size: 44px;
     background: transparent;
     border: none;
     padding: 0;
-    cursor: pointer;
+    color: var(--medium-blue);
     transition: transform 0.2s ease;
 }
 
 .password-toggle-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .password-toggle-btn:active {
@@ -471,59 +427,36 @@ body {
 
 .eye-active,
 .eye-inactive {
-    display: block;
-    width: 32px;
-    height: 32px;
+    inline-size: clamp(1.5rem, 1.2rem + 0.6vw, 2rem);
+    block-size: clamp(1.5rem, 1.2rem + 0.6vw, 2rem);
 }
 
 .btn-return {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    max-width: 455px;
-    height: 60px;
-    border: 2px solid var(--color-border);
-    background: var(--light-blue);
-    color: var(--dark);
-    border-radius: 15px;
-    box-shadow: 1px 4px 1px 0 var(--color-border);
-    font-weight: 600;
-    font-size: 1.5rem;
-    line-height: 1.25rem;
+    max-inline-size: clamp(18rem, 85vw, 28rem);
     text-decoration: none;
-    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
-    box-sizing: border-box;
-}
-
-.btn-return:hover {
-    background: var(--active-button);
-    border-color: #466984;
-    box-shadow: 1px 4px 1px 0 #466984;
-    color: var(--white);
-}
-.btn-return:active {
-    transform: scale(0.95);
 }
 
 .forgot-link {
     position: absolute;
-    right: 12px;
-    top: 0;
-    height: 60px;
+    inset-inline-end: var(--space-2);
+    inset-block-start: 0;
+    min-block-size: var(--touch-target);
     display: flex;
     align-items: center;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: var(--step--1);
     color: var(--medium-blue);
     text-decoration: none;
     z-index: 10;
-    transition: transform 0.2s ease, text-decoration-color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.forgot-link:hover {
+    color: var(--light-blue);
 }
 
 .forgot-link:active {
-    transform: scale(0.95);
+    transform: translateY(1px);
 }
 
 /* Forgot Password Section */
