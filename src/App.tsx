@@ -43,9 +43,7 @@ function App() {
     const [userStatistic, setUserStatistic] = useState<UserStatisticDTO | null>();
     const isNavbarHidden = useSelector(selectIsNavbarHidden);
     const isSidebarHidden = useSelector(selectIsSidebarHidden);
-    const [gridTemplateFirstColumn, setGridTemplateFirstColumn] = useState("320px");
-    const [gridTemplateThirdColumn, setGridTemplateThirdColumn] = useState("3fr");
-    const gridTemplateColumns = `${gridTemplateFirstColumn} ${gridTemplateThirdColumn}`;
+    const [gridTemplateColumns, setGridTemplateColumns] = useState("minmax(0, 1fr)");
     const isWhatAreLeaderboardsCard = useSelector(selectIsWhatAreLeaderboardsCardHidden);
     const navigate = useNavigate();
     const token = useSelector(selectToken);
@@ -74,18 +72,23 @@ function App() {
     }, [dispatch]);
 
     useEffect(() => {
-        if (isNavbarHidden) {
-            setGridTemplateFirstColumn("1fr");
-        } else {
-            setGridTemplateFirstColumn("320px 5fr");
+        if (isNavbarHidden && isSidebarHidden) {
+            setGridTemplateColumns("minmax(0, 1fr)");
+            return;
         }
 
-        if (isSidebarHidden) {
-            setGridTemplateThirdColumn("auto");
-        } else {
-            setGridTemplateThirdColumn("3fr");
+        if (isNavbarHidden && !isSidebarHidden) {
+            setGridTemplateColumns("minmax(0, 2.4fr) minmax(0, 1.35fr)");
+            return;
         }
-    });
+
+        if (!isNavbarHidden && isSidebarHidden) {
+            setGridTemplateColumns("minmax(0, 18rem) minmax(0, 1fr)");
+            return;
+        }
+
+        setGridTemplateColumns("minmax(0, 18rem) minmax(0, 2.4fr) minmax(0, 1.35fr)");
+    }, [isNavbarHidden, isSidebarHidden]);
 
     const checkIsTokenValid = async () => {
         if (!token) return false;
