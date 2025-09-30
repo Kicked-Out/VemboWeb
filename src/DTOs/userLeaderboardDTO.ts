@@ -1,5 +1,5 @@
 export interface UserLeaderboardDTO {
     userId: string;
-    xp: number;
+    totalXP: number;
     rank: number;
 }

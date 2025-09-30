@@ -274,8 +274,6 @@ export default function LessonComplete() {
         if (completedQuests.length === 0) return;
         if (isAlredyRewarded) return;
 
-        console.log(completedQuests);
-
         const updateReward = async () => {
             completedQuests.forEach(async (completedQuest) => {
                 const rewardAmount = completedQuest.rewardAmount;
