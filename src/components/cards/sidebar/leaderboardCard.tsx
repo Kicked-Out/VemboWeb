@@ -51,7 +51,9 @@ export default function LeaderboardCard() {
                         <span className="leaderboard-card__rank"> #{rank}</span>
                     </h2>
 
-                    <p className="leaderboard-card__info">You've earned {leaderboardEntry?.xp} XP this week so far</p>
+                    <p className="leaderboard-card__info">
+                        You've earned {leaderboardEntry?.totalXP} XP this week so far
+                    </p>
                 </div>
 
                 <img

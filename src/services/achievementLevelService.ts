@@ -24,4 +24,12 @@ export class AchievementLevelService {
 
         return data;
     }
+
+    public static async checkIsNextLevel(achievementId: number, currentLevel: number): Promise<boolean> {
+        const data = await ItemFetcher.fetchItem(
+            `${this.baseUrl}/Achievement/${achievementId}/Level/${currentLevel}/IsNextLevel`
+        );
+
+        return data;
+    }
 }

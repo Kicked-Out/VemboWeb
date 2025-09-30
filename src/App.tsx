@@ -30,7 +30,7 @@ import Leaderboards from "./pages/Leaderboards";
 import Shop from "./pages/Shop";
 import Quests from "./pages/Quests";
 import Practice from "./pages/Practice";
-import { giveVBucks, setCurrentPeriodId, setHearts, setStreak } from "./slices/userStatisticsSlice";
+import { giveVBucks, setCurrentPeriodId, setHearts, setStreak, setTotalXP } from "./slices/userStatisticsSlice";
 import { getToken } from "./helpers/localStorage.helper";
 import Settings from "./pages/settings/settings";
 import Privacy from "./pages/settings/privacy";
@@ -155,6 +155,7 @@ function App() {
             dispatch(setHearts({ hearts: userStatistic.hearts }));
             dispatch(setStreak({ streak: userStatistic.streak }));
             dispatch(giveVBucks({ vBucks: userStatistic.vBucks }));
+            dispatch(setTotalXP({ totalXP: userStatistic.totalXP }));
             dispatch(setCurrentPeriodId({ currentPeriodId: userStatistic.currentPeriodId }));
         }
     }, [userStatistic]);

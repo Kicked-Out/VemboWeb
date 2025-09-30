@@ -11,5 +11,4 @@ export interface UserDTO {
     createdAt: string;
     nativeLanguage: string;
     selectedRegion: string;
-    totalXP: number;
 }

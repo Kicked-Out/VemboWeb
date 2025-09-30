@@ -85,7 +85,7 @@ export default function LeaderboardsContent() {
                         </div>
 
                         <p className="user-totalxp">
-                            {userLeaderboards.find((userLeaderboards) => userLeaderboards.userId === user.id)?.xp}
+                            {userLeaderboards.find((userLeaderboards) => userLeaderboards.userId === user.id)?.totalXP}
                         </p>
                     </a>
                 ))}

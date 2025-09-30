@@ -7,6 +7,7 @@ const initialState: UserStatisticDTO = {
     streak: 0,
     vBucks: 0,
     hearts: 5,
+    totalXP: 0,
     currentPeriodId: 0,
     currentLessonId: 1,
 };
@@ -50,6 +51,16 @@ export const userStatisticsSlice = createSlice({
             }
         },
 
+        setTotalXP: (state, action) => {
+            state.totalXP = action.payload.totalXP;
+        },
+
+        giveTotalXP: (state, action) => {
+            if (state.totalXP >= 0) {
+                state.totalXP += action.payload.totalXP;
+            }
+        },
+
         setCurrentPeriodId: (state, action) => {
             state.currentPeriodId = action.payload.currentPeriodId;
         },
@@ -76,6 +87,8 @@ export const {
     addStreak,
     giveVBucks,
     takeVBucks,
+    setTotalXP,
+    giveTotalXP,
     setCurrentPeriodId,
     setCurrentLessonId,
 } = userStatisticsSlice.actions;

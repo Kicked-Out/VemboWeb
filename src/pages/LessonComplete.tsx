@@ -17,6 +17,12 @@ import { UserQuestProgressService } from "../services/userProgress/userQuestProg
 import type { QuestDefinitionDTO } from "../DTOs/questDefinitionDTO";
 import { giveVBucks } from "../slices/userStatisticsSlice";
 import type { UpdateCoinsDTO } from "../DTOs/updateCoinsDTO";
+import { UserAchievementService } from "../services/userAchievementService";
+import { selectUserData } from "../slices/authSlice";
+import { AchievementLevelService } from "../services/achievementLevelService";
+import type { UpdateLevelDTO } from "../DTOs/updateUserAchievementDTO";
+import { AchievementService } from "../services/achievementService";
+import { selectUserStatistics } from "../slices/selectors";
 
 export default function LessonComplete() {
     const [step, setStep] = useState<number>(0);
@@ -26,12 +32,95 @@ export default function LessonComplete() {
     let completedCount = 0;
     const [completedQuestsCount, setCompletedQuestsCount] = useState<number>(0);
     const [completedQuests, setCompletedQuests] = useState<QuestDefinitionDTO[]>([]);
+    const user = useSelector(selectUserData);
+    const userStats = useSelector(selectUserStatistics);
 
     useEffect(() => {
         dispatch(hideNavbar());
         dispatch(hideSidebar());
         dispatch(hideLessonTopBottomRows());
     }, []);
+
+    useEffect(() => {
+        const getAchievements = async () => {
+            const achievementsData = await AchievementService.getAll();
+
+            if (!achievementsData) return;
+
+            if (!user) return;
+            if (!userStats) return;
+
+            const userAchievementsData = await UserAchievementService.getAllByUserId(user.id);
+
+            if (!userAchievementsData) return;
+
+            const achievementLevelsData = await Promise.all(
+                userAchievementsData.map((userAchievementLevelData) =>
+                    AchievementLevelService.getByAchievementIdAndLevel(
+                        userAchievementLevelData.achievementId,
+                        userAchievementLevelData.currentLevel
+                    )
+                )
+            );
+
+            if (!achievementLevelsData) return;
+
+            for (let index in achievementLevelsData) {
+                if (!achievementLevelsData[index]) return;
+
+                if (
+                    userAchievementsData[index].progress === achievementLevelsData[index].targetValue &&
+                    userAchievementsData[index].isCompleted
+                ) {
+                    continue;
+                }
+
+                const data: UpdateLevelDTO = {
+                    currentLevel: achievementLevelsData[index].level,
+                    progress: 0,
+                    isCompleted: false,
+                    earnedAt: new Date().toISOString(),
+                };
+
+                if (achievementsData[index].targetType === "levels") {
+                    const userAchievementProgress = userAchievementsData[index].progress + 1;
+
+                    if (userAchievementProgress < achievementLevelsData[index].targetValue) {
+                        data.progress = userAchievementProgress;
+                    } else {
+                        data.progress = achievementLevelsData[index].targetValue;
+                    }
+                } else if (achievementsData[index].targetType === "leagues") {
+                    // Leagues are not implemented yet
+                } else if (achievementsData[index].targetType === "first-answer") {
+                    if (userStats.totalXP > 0) {
+                        data.progress = 1;
+                    }
+                } else if (achievementsData[index].targetType === "first-lesson") {
+                    if (userStats.totalXP > 0) {
+                        data.progress = 1;
+                    }
+                }
+
+                if (data.progress === achievementLevelsData[index].targetValue) {
+                    const isNextLevel = await AchievementLevelService.checkIsNextLevel(
+                        achievementLevelsData[index].achievementId,
+                        achievementLevelsData[index].level
+                    );
+
+                    if (isNextLevel) {
+                        data.currentLevel = achievementLevelsData[index].level + 1;
+                    } else {
+                        data.isCompleted = true;
+                    }
+                }
+
+                await UserAchievementService.update(userAchievementsData[index].id, data);
+            }
+        };
+
+        getAchievements();
+    }, [user]);
 
     useEffect(() => {
         const getDailyQuests = async () => {
@@ -68,13 +157,14 @@ export default function LessonComplete() {
 
                 if (dailyQuestDefinitionsData[index].requirement === dailyUserQuestProgressesData[index].progress) {
                     setIsLoaded(true);
-                    return;
+
+                    continue;
                 }
 
                 if (dailyQuestDefinitionsData[index].requirementType === "xp") {
                     userQuestProgress = dailyUserQuestProgressesData[index].progress + totalXP;
 
-                    if (userQuestProgress <= dailyQuestDefinitionsData[index].requirement) {
+                    if (userQuestProgress < dailyQuestDefinitionsData[index].requirement) {
                         data.progress = userQuestProgress;
                     } else {
                         data.progress = dailyQuestDefinitionsData[index].requirement;
@@ -84,7 +174,7 @@ export default function LessonComplete() {
                         completedQuestsLocal.push(dailyQuestDefinitionsData[index]);
                     }
 
-                    // await UserQuestProgressService.updateProgress(dailyUserQuestProgressesData[index].id, data);
+                    await UserQuestProgressService.updateProgress(dailyUserQuestProgressesData[index].id, data);
                 } else if (dailyQuestDefinitionsData[index].requirementType === "time") {
                     const startedAt = new Date(startedAtString!);
                     const finishedAt = new Date();
@@ -97,7 +187,7 @@ export default function LessonComplete() {
 
                         userQuestProgress = dailyUserQuestProgressesData[index].progress + totalMinutes;
 
-                        if (userQuestProgress <= dailyQuestDefinitionsData[index].requirement) {
+                        if (userQuestProgress < dailyQuestDefinitionsData[index].requirement) {
                             data.progress = userQuestProgress;
                         } else {
                             data.progress = dailyQuestDefinitionsData[index].requirement;
@@ -107,14 +197,14 @@ export default function LessonComplete() {
                             completedQuestsLocal.push(dailyQuestDefinitionsData[index]);
                         }
 
-                        // await UserQuestProgressService.updateProgress(dailyUserQuestProgressesData[index].id, data);
+                        await UserQuestProgressService.updateProgress(dailyUserQuestProgressesData[index].id, data);
                     }
                 } else if (dailyQuestDefinitionsData[index].requirementType === "perfect-lessons") {
                     if (accuracy === 100) {
-                        userQuestProgress = dailyUserQuestProgressesData[index].progress;
+                        userQuestProgress = dailyUserQuestProgressesData[index].progress + 1;
 
-                        if (userQuestProgress + 1 <= dailyQuestDefinitionsData[index].requirement) {
-                            data.progress = userQuestProgress + 1;
+                        if (userQuestProgress < dailyQuestDefinitionsData[index].requirement) {
+                            data.progress = userQuestProgress;
                         } else {
                             data.progress = dailyQuestDefinitionsData[index].requirement;
                             data.isCompleted = true;
@@ -123,7 +213,7 @@ export default function LessonComplete() {
                             completedQuestsLocal.push(dailyQuestDefinitionsData[index]);
                         }
 
-                        // await UserQuestProgressService.updateProgress(dailyUserQuestProgressesData[index].id, data);
+                        await UserQuestProgressService.updateProgress(dailyUserQuestProgressesData[index].id, data);
                     }
                 }
             }
@@ -183,8 +273,6 @@ export default function LessonComplete() {
     useEffect(() => {
         if (completedQuests.length === 0) return;
         if (isAlredyRewarded) return;
-
-        console.log(completedQuests);
 
         const updateReward = async () => {
             completedQuests.forEach(async (completedQuest) => {

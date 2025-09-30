@@ -7,20 +7,28 @@ import { QuestDefinitionService } from "../../../services/questDefinitionService
 import { UserQuestProgressService } from "../../../services/userProgress/userQuestProgressService";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsSidebarLoaded, setIsSidebarLoaded } from "../../../slices/menuSlice";
-import { selectUserData } from "../../../slices/authSlice";
+import { selectUserStatistics } from "../../../slices/selectors";
+import { UserPeriodProgressService } from "../../../services/userProgress/userPeriodProgressService";
 
 export default function DailyQuestsContainer() {
     const isLoaded = useSelector(selectIsSidebarLoaded);
-    const userData = useSelector(selectUserData);
-    const totalXp = userData?.totalXP;
+    const userStats = useSelector(selectUserStatistics);
     const [dailyQuestDefinitions, setDailyQuestDefinitions] = useState<QuestDefinitionDTO[]>([]);
     const [userDailyQuestProgresses, setUserDailyQuestProgresses] = useState<UserQuestProgressDTO[]>([]);
     const dispatch = useDispatch();
 
     useEffect(() => {
+        if (!userStats) return;
+        if (userStats.currentPeriodId === 0) return;
         if (isLoaded) return;
 
         const getDailyQuestsData = async () => {
+            const userPeriodProgress = await UserPeriodProgressService.getByPeriodId(userStats.currentPeriodId);
+
+            if (!userPeriodProgress) return;
+
+            const totalXp = userPeriodProgress.xp;
+
             const dailyQuestsData = await QuestService.getCurrentDaily();
 
             if (!dailyQuestsData) return;
@@ -32,9 +40,7 @@ export default function DailyQuestsContainer() {
             );
 
             const dailyQuestsDefinitionList =
-                totalXp !== undefined && totalXp !== 0
-                    ? dailyQuestsDefinitionData
-                    : dailyQuestsDefinitionData.slice(0, 1);
+                totalXp > 0 ? dailyQuestsDefinitionData : dailyQuestsDefinitionData.slice(0, 1);
 
             if (!dailyQuestsDefinitionList) return;
 
@@ -52,7 +58,7 @@ export default function DailyQuestsContainer() {
         };
 
         getDailyQuestsData();
-    }, [isLoaded]);
+    }, [isLoaded, userStats]);
 
     return (
         <div className="daily-quests-container">

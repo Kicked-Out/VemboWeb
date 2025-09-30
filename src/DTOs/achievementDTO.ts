@@ -3,6 +3,7 @@ export interface AchievementDTO {
     code: string;
     title: string;
     description: string;
+    targetType: string;
     iconUrl: string;
     completedIconUrl: string;
 }
