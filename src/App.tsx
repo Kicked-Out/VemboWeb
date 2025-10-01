@@ -102,6 +102,14 @@ function App() {
             const isTokenValid = await checkIsTokenValid();
 
             if (!token || !isTokenValid) {
+                if (
+                    window.location.pathname === "/register" ||
+                    window.location.pathname === "/forgot-password" ||
+                    window.location.pathname === "/email-confirmation" ||
+                    window.location.pathname === "/reset-password"
+                ) {
+                    return;
+                }
                 navigate("/login");
             }
         };

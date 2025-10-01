@@ -50,7 +50,7 @@ export default function Achievements() {
         if (!user) return;
 
         const getUserAchievements = async () => {
-            const data = await UserAchievementService.getAllByUserId(user.id);
+            const data = await UserAchievementService.getByUserId(user.id);
 
             setUserAchievements(data);
         };

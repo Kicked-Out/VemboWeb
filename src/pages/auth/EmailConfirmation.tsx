@@ -25,7 +25,7 @@ export default function EmailConfirmation() {
                 </div>
 
                 {/* Reset Password Button */}
-                <ReturnButton title="Return to Log in" path="/reset-password" />
+                <ReturnButton title="Return to Log in" path="/login" />
             </div>
         </div>
     );

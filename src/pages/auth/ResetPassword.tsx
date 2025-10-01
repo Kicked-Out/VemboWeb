@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { hideNavbar, hideSidebar, setIsSidebarLoaded } from "../../slices/menuSlice";
+import type { resetPasswordDTO } from "../../DTOs/auth/resetPasswordDTO";
+import AuthService from "../../services/authService";
 
 export default function ResetPassword() {
     const dispatch = useDispatch();
@@ -22,14 +24,19 @@ export default function ResetPassword() {
         confirmNewPassword: string;
     };
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        watch,
-    } = useForm<Inputs>();
+    const { register, handleSubmit, watch } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
+        const params = new URLSearchParams(window.location.search);
+        const resetPasswordData: resetPasswordDTO = {
+            token: params.get("token") || "",
+            email: params.get("email") || "",
+            password: data.newPassword,
+            confirmPassword: data.confirmNewPassword,
+        };
+
+        AuthService.resetPassword(resetPasswordData);
+
         navigate("/password-updated");
     };
 

@@ -13,6 +13,7 @@ import { UserPeriodProgressService } from "../../../services/userProgress/userPe
 export default function DailyQuestsContainer() {
     const isLoaded = useSelector(selectIsSidebarLoaded);
     const userStats = useSelector(selectUserStatistics);
+    const totalXp = userStats?.totalXP;
     const [dailyQuestDefinitions, setDailyQuestDefinitions] = useState<QuestDefinitionDTO[]>([]);
     const [userDailyQuestProgresses, setUserDailyQuestProgresses] = useState<UserQuestProgressDTO[]>([]);
     const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export default function DailyQuestsContainer() {
         if (!userStats) return;
         if (userStats.currentPeriodId === 0) return;
         if (isLoaded) return;
+        if (!userStats.currentPeriodId) return;
 
         const getDailyQuestsData = async () => {
             const userPeriodProgress = await UserPeriodProgressService.getByPeriodId(userStats.currentPeriodId);

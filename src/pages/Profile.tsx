@@ -105,7 +105,7 @@ export default function Profile() {
             "July",
             "August",
             "September",
-            "Oktober",
+            "October",
             "November",
             "December",
         ];

@@ -1,5 +1,6 @@
 export interface resetPasswordDTO {
     token: string;
-    newPassword: string;
-    newPasswordConfirmation: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
 }
