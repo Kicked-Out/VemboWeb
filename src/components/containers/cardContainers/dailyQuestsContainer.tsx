@@ -7,18 +7,19 @@ import { QuestDefinitionService } from "../../../services/questDefinitionService
 import { UserQuestProgressService } from "../../../services/userProgress/userQuestProgressService";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsSidebarLoaded, setIsSidebarLoaded } from "../../../slices/menuSlice";
-import { selectUserData } from "../../../slices/authSlice";
+import { selectUserStatistics } from "../../../slices/selectors";
 
 export default function DailyQuestsContainer() {
     const isLoaded = useSelector(selectIsSidebarLoaded);
-    const userData = useSelector(selectUserData);
-    const totalXp = userData?.totalXP;
+    const userStats = useSelector(selectUserStatistics);
+    const totalXp = userStats?.totalXP;
     const [dailyQuestDefinitions, setDailyQuestDefinitions] = useState<QuestDefinitionDTO[]>([]);
     const [userDailyQuestProgresses, setUserDailyQuestProgresses] = useState<UserQuestProgressDTO[]>([]);
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (isLoaded) return;
+        if (!userStats.currentPeriodId) return;
 
         const getDailyQuestsData = async () => {
             const dailyQuestsData = await QuestService.getCurrentDaily();
@@ -52,7 +53,7 @@ export default function DailyQuestsContainer() {
         };
 
         getDailyQuestsData();
-    }, [isLoaded]);
+    }, [isLoaded, userStats]);
 
     return (
         <div className="daily-quests-container">

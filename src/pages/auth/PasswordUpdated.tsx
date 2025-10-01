@@ -32,7 +32,7 @@ export default function PasswordUpdated() {
                 </div>
 
                 {/* Return to Login Button */}
-                <ReturnButton title="Return to Log in" path="/" />
+                <ReturnButton title="Return to Log in" path="/login" />
             </div>
         </div>
     );

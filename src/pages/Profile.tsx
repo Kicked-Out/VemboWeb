@@ -105,7 +105,7 @@ export default function Profile() {
             "July",
             "August",
             "September",
-            "Oktober",
+            "October",
             "November",
             "December",
         ];
@@ -323,13 +323,28 @@ export default function Profile() {
                                 <div className="achievement-block">
                                     <div className="achievement-title-container">
                                         <h2 className="achievement-title">{achievementData?.title}</h2>
-                                        <p className="achievement-progress-text">
+                                        <p
+                                            className={`achievement-progress-text ${
+                                                userAchievement.isCompleted ? "hidden" : ""
+                                            }`}
+                                        >
                                             {userAchievement.progress}/{achievementLevelData?.targetValue}
                                         </p>
                                     </div>
 
                                     <div className="achievement-progress-bar">
-                                        <div className="achievement-progress"></div>
+                                        <div
+                                            className="achievement-progress"
+                                            style={{
+                                                width: `${
+                                                    userAchievement.isCompleted
+                                                        ? "100"
+                                                        : achievementLevelData &&
+                                                          (100 / achievementLevelData.targetValue) *
+                                                              userAchievement.progress
+                                                }%`,
+                                            }}
+                                        ></div>
                                     </div>
 
                                     <p className="achievement-description">

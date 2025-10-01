@@ -52,8 +52,6 @@ export default function Achievements() {
         const getUserAchievements = async () => {
             const data = await UserAchievementService.getByUserId(user.id);
 
-            console.log(data);
-
             setUserAchievements(data);
         };
 
@@ -116,7 +114,11 @@ export default function Achievements() {
                             <div className="achievement-block">
                                 <div className="achievement-title-container">
                                     <h2 className="achievement-title">{achievementData?.title}</h2>
-                                    <p className="achievement-progress-text">
+                                    <p
+                                        className={`achievement-progress-text ${
+                                            userAchievement.isCompleted ? "hidden" : ""
+                                        }`}
+                                    >
                                         {achievementLevelData
                                             ? `${userAchievement.progress}/${achievementLevelData?.targetValue}`
                                             : null}
@@ -124,7 +126,18 @@ export default function Achievements() {
                                 </div>
 
                                 <div className="achievement-progress-bar">
-                                    <div className="achievement-progress"></div>
+                                    <div
+                                        className="achievement-progress"
+                                        style={{
+                                            width: `${
+                                                userAchievement.isCompleted
+                                                    ? "100"
+                                                    : achievementLevelData &&
+                                                      (100 / achievementLevelData.targetValue) *
+                                                          userAchievement.progress
+                                            }%`,
+                                        }}
+                                    ></div>
                                 </div>
 
                                 <p className="achievement-description">

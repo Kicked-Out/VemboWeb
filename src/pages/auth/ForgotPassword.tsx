@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { hideNavbar, hideSidebar, setIsSidebarLoaded } from "../../slices/menuSlice";
+import AuthService from "../../services/authService";
+import type { ForgotPasswordDTO } from "../../DTOs/auth/forgotPasswordDTO";
 
 export default function ForgotPassword() {
     const dispatch = useDispatch();
@@ -17,6 +19,11 @@ export default function ForgotPassword() {
 
     const handleSubmit = () => {
         if (email.trim()) {
+            const forgotPasswordData: ForgotPasswordDTO = {
+                email: email,
+            };
+
+            AuthService.forgotPassword(forgotPasswordData);
             navigate("/email-confirmation");
         }
     };
