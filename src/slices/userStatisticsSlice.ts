@@ -55,6 +55,12 @@ export const userStatisticsSlice = createSlice({
             state.totalXP = action.payload.totalXP;
         },
 
+        giveTotalXP: (state, action) => {
+            if (state.totalXP >= 0) {
+                state.totalXP += action.payload.totalXP;
+            }
+        },
+
         setCurrentPeriodId: (state, action) => {
             state.currentPeriodId = action.payload.currentPeriodId;
         },
@@ -82,6 +88,7 @@ export const {
     giveVBucks,
     takeVBucks,
     setTotalXP,
+    giveTotalXP,
     setCurrentPeriodId,
     setCurrentLessonId,
 } = userStatisticsSlice.actions;

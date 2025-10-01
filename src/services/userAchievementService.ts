@@ -1,3 +1,4 @@
+import type { UpdateLevelDTO } from "../DTOs/updateUserAchievementDTO";
 import type { UserAchievementDTO } from "../DTOs/userAchievementDTO";
 import ItemFetcher from "../helpers/itemFetcher";
 
@@ -10,9 +11,15 @@ export class UserAchievementService {
         return data;
     }
 
-    public static async getByUserId(userId: string): Promise<UserAchievementDTO[]> {
+    public static async getAllByUserId(userId: string): Promise<UserAchievementDTO[]> {
         const data = await ItemFetcher.fetchItems(`${this.baseUrl}/User/${userId}/`);
 
         return data;
+    }
+
+    public static async update(userAchievementProgressId: number, data: UpdateLevelDTO) {
+        const response = await ItemFetcher.updateItem(`${this.baseUrl}/${userAchievementProgressId}`, data);
+
+        return response;
     }
 }

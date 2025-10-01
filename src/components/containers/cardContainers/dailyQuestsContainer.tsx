@@ -8,6 +8,7 @@ import { UserQuestProgressService } from "../../../services/userProgress/userQue
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsSidebarLoaded, setIsSidebarLoaded } from "../../../slices/menuSlice";
 import { selectUserStatistics } from "../../../slices/selectors";
+import { UserPeriodProgressService } from "../../../services/userProgress/userPeriodProgressService";
 
 export default function DailyQuestsContainer() {
     const isLoaded = useSelector(selectIsSidebarLoaded);
@@ -18,10 +19,18 @@ export default function DailyQuestsContainer() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        if (!userStats) return;
+        if (userStats.currentPeriodId === 0) return;
         if (isLoaded) return;
         if (!userStats.currentPeriodId) return;
 
         const getDailyQuestsData = async () => {
+            const userPeriodProgress = await UserPeriodProgressService.getByPeriodId(userStats.currentPeriodId);
+
+            if (!userPeriodProgress) return;
+
+            const totalXp = userPeriodProgress.xp;
+
             const dailyQuestsData = await QuestService.getCurrentDaily();
 
             if (!dailyQuestsData) return;
@@ -33,9 +42,7 @@ export default function DailyQuestsContainer() {
             );
 
             const dailyQuestsDefinitionList =
-                totalXp !== undefined && totalXp !== 0
-                    ? dailyQuestsDefinitionData
-                    : dailyQuestsDefinitionData.slice(0, 1);
+                totalXp > 0 ? dailyQuestsDefinitionData : dailyQuestsDefinitionData.slice(0, 1);
 
             if (!dailyQuestsDefinitionList) return;
 

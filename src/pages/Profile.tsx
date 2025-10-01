@@ -121,7 +121,7 @@ export default function Profile() {
         if (!user) return;
 
         const getUserAchievements = async () => {
-            const data = await UserAchievementService.getByUserId(user.id);
+            const data = await UserAchievementService.getAllByUserId(user.id);
 
             setUserAchievements(data.slice(0, 2));
         };
@@ -265,7 +265,7 @@ export default function Profile() {
                         <img className="statistic-icon" src="/src/assets/icons/profile/statistics/total_xp.png" />
 
                         <div className="statistic-info">
-                            <p className="statistic-title">{userStats ? userStats.vBucks : 0}</p>
+                            <p className="statistic-title">{userStats ? userStats.totalXP : 0}</p>
                             <p className="statistic-subtitle">Total XP</p>
                         </div>
                     </div>
@@ -338,10 +338,11 @@ export default function Profile() {
                                             style={{
                                                 width: `${
                                                     userAchievement.isCompleted
-                                                        ? "100"
-                                                        : achievementLevelData &&
-                                                          (100 / achievementLevelData.targetValue) *
-                                                              userAchievement.progress
+                                                        ? 100
+                                                        : achievementLevelData
+                                                        ? (100 / achievementLevelData.targetValue) *
+                                                          userAchievement.progress
+                                                        : 0
                                                 }%`,
                                             }}
                                         ></div>

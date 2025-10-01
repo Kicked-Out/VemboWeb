@@ -131,10 +131,11 @@ export default function Achievements() {
                                         style={{
                                             width: `${
                                                 userAchievement.isCompleted
-                                                    ? "100"
-                                                    : achievementLevelData &&
-                                                      (100 / achievementLevelData.targetValue) *
-                                                          userAchievement.progress
+                                                    ? 100
+                                                    : achievementLevelData
+                                                    ? (100 / achievementLevelData.targetValue) *
+                                                      userAchievement.progress
+                                                    : 0
                                             }%`,
                                         }}
                                     ></div>
